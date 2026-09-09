@@ -827,7 +827,7 @@ const CFG = {
        GET  {API_BASE}/api/public/schedule/{SLUG}
        POST {API_BASE}/api/public/schedule/{SLUG}/book
        POST {API_BASE}/api/public/schedule/{SLUG}/vip                     */
-  API_BASE   : '',
+  API_BASE   : 'https://dashboard.boyerscales.com',
   SLUG       : 'valleydetails',
   SLOT_MIN   : 120,
   HORIZON    : 14,
@@ -1029,18 +1029,37 @@ const pad = n => String(n).padStart(2,'0');
     daysEl.scrollIntoView({behavior:'smooth', block:'center'});
   });
 
+  /* The server returns busy blocks as {start:"YYYY-MM-DDTHH:MM", minutes:N};
+     demo mode returns bare start strings. Normalise both to millisecond
+     intervals so a two hour job blocks every slot it overlaps, not just the
+     one it starts on. Matching on the start key alone silently freed up
+     every slot underneath a long job. */
+  function busyBlocks(){
+    return (cfg.booked || []).map(b => {
+      const s = typeof b === 'string' ? b : (b && b.start);
+      if (!s) return null;
+      const from = new Date(s).getTime();          // no offset in the string, so local
+      if (!Number.isFinite(from)) return null;
+      const mins = (b && typeof b === 'object' && Number(b.minutes)) || cfg.slotMinutes;
+      return { from, to: from + mins * 60000 };
+    }).filter(Boolean);
+  }
+
   function slotsFor(date){
     const span = cfg.hours[date.getDay()];
     if (!span) return [];
     const step = cfg.slotMinutes, open = hm2m(span[0]), close = hm2m(span[1]);
     const floor = Date.now() + cfg.leadHours*3600*1000;
-    const taken = new Set(cfg.booked || []);
+    const busy = busyBlocks();
     const out = [];
     for (let m = open; m + step <= close; m += step){
       const start = new Date(date); start.setHours(Math.floor(m/60), m%60, 0, 0);
-      if (start.getTime() < floor) continue;
+      const from = start.getTime();
+      if (from < floor) continue;
+      const to = from + step * 60000;
+      if (busy.some(b => b.from < to && from < b.to)) continue;
       const key = ymd(start)+'T'+pad(start.getHours())+':'+pad(start.getMinutes());
-      if (!taken.has(key)) out.push({ key, text: label(m), date: new Date(start) });
+      out.push({ key, text: label(m), date: new Date(start) });
     }
     return out;
   }
