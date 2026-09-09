@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050506">
+<title>Valley Details | Mobile Car Detailing in Elk Grove</title>
+<meta name="description" content="Full interior and exterior detail at your house. Half off this week, $75 instead of $149. Elk Grove and south Sacramento. Book online or call (916) 249-0631.">
+<link rel="canonical" href="https://valleydetails.site/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Valley Details | Half Off Full Detail, Elk Grove">
+<meta property="og:description" content="$75 full interior and exterior detail at your house. Book online or call (916) 249-0631.">
+<meta property="og:image" content="https://valleydetails.site/assets/logo-social.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --black:#050506; --panel:#0d0d11; --panel2:#141419;
+  --line:#242429; --line2:#31313a;
+  --ink:#fff; --muted:#a0a0ab; --faint:#6d6d78;
+  --red:#ED1C24; --red-hot:#FF2E36; --red-wash:rgba(237,28,36,.12);
+  --ok:#2ED573;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --disp:"Barlow Condensed",var(--font);
+  --wrap:1120px;
+  --shadow:0 28px 70px rgba(0,0,0,.62);
+  --glow:0 14px 40px rgba(237,28,36,.34);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;min-width:320px;background:var(--black);color:var(--ink);font-family:var(--font);
+  font-size:16px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit}
+:focus-visible{outline:2px solid var(--red-hot);outline-offset:3px;border-radius:4px}
+.wrap{width:min(100% - 36px,var(--wrap));margin-inline:auto}
+/* grid children default to min-width:auto, which lets the inner day-scroller
+   blow out the page width instead of scrolling. */
+.hero-grid>*,.book>*,.vip>*,.incl>*,.steps>*,.tiers>*,.saves>*,.revs>*,.foot>*,.row2>*,.seg>*{min-width:0}
+.days,.slots,.panel,.callcard{min-width:0;max-width:100%}
+
+.h1,.h2,.h3,.kicker{font-family:var(--disp);text-transform:uppercase;font-style:italic;font-weight:800;
+  letter-spacing:-.005em;line-height:.92}
+.h1{font-size:clamp(46px,10.5vw,100px)}
+.h2{font-size:clamp(32px,6vw,56px);margin:0 0 14px}
+.h3{font-size:clamp(22px,3.2vw,29px);margin:0 0 10px}
+.kicker{font-style:normal;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--red);
+  line-height:1;margin:0 0 15px;display:flex;align-items:center;gap:11px}
+.kicker::before{content:"";width:24px;height:3px;background:var(--red);flex:0 0 auto;transform:skewX(-20deg)}
+.lede{color:var(--muted);font-size:clamp(16px,2vw,18px);line-height:1.6;margin:0 0 26px;max-width:56ch}
+section{padding:clamp(58px,8vw,100px) 0;position:relative}
+.sec-alt{background:linear-gradient(180deg,#0a0a0d,#050506)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:19px;letter-spacing:.02em;line-height:1;padding:19px 30px;border:2px solid transparent;
+  border-radius:3px;cursor:pointer;white-space:nowrap;
+  transition:transform .14s ease,box-shadow .14s ease,background .14s ease,border-color .14s ease;
+  clip-path:polygon(9px 0,100% 0,calc(100% - 9px) 100%,0 100%)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn-red{background:var(--red);color:#fff;box-shadow:var(--glow)}
+.btn-red:hover{background:var(--red-hot)}
+.btn-red:disabled{opacity:.45;box-shadow:none;cursor:default;transform:none}
+.btn-ghost{background:transparent;color:#fff;border-color:var(--line2);clip-path:none}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.05)}
+.btn-sm{font-size:15.5px;padding:13px 20px}
+.btn-lg{font-size:22px;padding:22px 36px}
+.btn-block{width:100%}
+.btn svg{width:1.05em;height:1.05em;flex:0 0 auto}
+.linkbtn{background:none;border:0;color:var(--muted);font-size:13.5px;font-weight:600;cursor:pointer;
+  padding:8px 0;text-decoration:underline;text-underline-offset:3px}
+.linkbtn:hover{color:#fff}
+
+/* ---------- promo strip + header ---------- */
+.topstrip{position:sticky;top:0;z-index:70;background:var(--red);color:#fff;font-weight:700;font-size:13.5px}
+.topstrip.ended{background:var(--panel2);border-bottom:1px solid var(--line)}
+.topstrip-in{display:flex;align-items:center;justify-content:center;gap:13px;flex-wrap:wrap;
+  padding:9px 18px;text-align:center}
+.topstrip b{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:17px}
+.cd-mini{display:inline-flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums;font-weight:700;
+  background:rgba(0,0,0,.28);padding:4px 10px;border-radius:3px;font-size:13.5px}
+header.site{position:sticky;top:0;z-index:60;background:rgba(5,5,6,.85);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)}
+.hdr{display:flex;align-items:center;gap:18px;height:84px}
+.brand{display:flex;align-items:center;gap:11px;margin-right:auto;min-width:0}
+.brand img{height:66px;width:auto}
+#bmark{display:contents}
+#bmark[hidden]{display:none}
+.brand .mark{height:42px;width:42px;flex:0 0 auto;display:grid;place-items:center;background:#000;
+  border:2px solid var(--red);font-family:var(--disp);font-style:italic;font-weight:800;font-size:19px;
+  color:#fff;letter-spacing:-.03em;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.brand .wordmark{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
+  line-height:.86;font-size:22px}
+.brand .wordmark span{display:block;font-size:13px;color:var(--red);letter-spacing:.12em}
+nav.main{display:flex;gap:26px;align-items:center}
+nav.main a{font-weight:600;font-size:14.5px;color:var(--muted);transition:color .14s}
+nav.main a:hover{color:#fff}
+.hdr-cta{display:flex;gap:10px;align-items:center}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:clamp(46px,6vw,84px) 0 clamp(52px,7vw,88px);overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;z-index:-2;
+  background:radial-gradient(56% 44% at 50% 6%,rgba(237,28,36,.20),transparent 66%),
+             radial-gradient(38% 32% at 12% 84%,rgba(237,28,36,.09),transparent 70%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:58px 58px;mask-image:radial-gradient(70% 60% at 50% 34%,#000,transparent 78%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4.4vw,56px);align-items:center}
+.hero h1{margin:0 0 18px}
+.hero h1 em{font-style:italic;color:var(--red);display:block}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.trustrow{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.trustrow li{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--muted);
+  background:var(--panel2);border:1px solid var(--line);border-radius:100px;padding:7px 14px}
+.trustrow li svg{width:14px;height:14px;color:var(--red);flex:0 0 auto}
+
+/* ---------- price slab ---------- */
+.slab{background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line2);
+  border-radius:5px;padding:28px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.slab::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--red)}
+.slab-tag{position:absolute;top:0;right:0;background:var(--red);color:#fff;font-family:var(--disp);
+  font-style:italic;font-weight:800;text-transform:uppercase;font-size:15px;padding:8px 16px 8px 22px;
+  letter-spacing:.04em;clip-path:polygon(14px 0,100% 0,100% 100%,0 100%)}
+.slab h3{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:26px;
+  margin:6px 0 3px;line-height:1}
+.slab .sub{color:var(--faint);font-size:13px;font-weight:600;margin:0 0 16px;letter-spacing:.05em;
+  text-transform:uppercase}
+.priceline{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.price-was{font-family:var(--disp);font-style:italic;font-weight:700;font-size:32px;color:var(--faint);
+  position:relative;line-height:1}
+.price-was::after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:3px;background:var(--red);
+  transform:rotate(-9deg)}
+.price-now{font-family:var(--disp);font-style:italic;font-weight:800;font-size:clamp(58px,8.5vw,82px);
+  line-height:.82;letter-spacing:-.02em}
+.price-sizes{color:var(--muted);font-size:13.5px;margin:12px 0 0;font-weight:500}
+.slab-list{list-style:none;padding:0;margin:18px 0 20px;display:grid;gap:8px}
+.slab-list li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#dcdce2}
+.slab-list li svg{width:16px;height:16px;color:var(--red);flex:0 0 auto;margin-top:3px}
+
+/* inline one-line countdown */
+.cd{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  margin-top:16px;padding:13px 16px;border:1px solid rgba(237,28,36,.32);border-radius:4px;
+  background:var(--red-wash)}
+.cd-lab{display:inline-flex;align-items:center;gap:9px;font-family:var(--disp);font-style:italic;
+  font-weight:800;text-transform:uppercase;font-size:15px;letter-spacing:.03em}
+.cd-dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex:0 0 auto;
+  box-shadow:0 0 0 0 rgba(237,28,36,.75);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 11px rgba(237,28,36,0)}100%{box-shadow:0 0 0 0 rgba(237,28,36,0)}}
+.cd-val{font-family:var(--disp);font-style:italic;font-weight:800;font-size:26px;line-height:1;
+  font-variant-numeric:tabular-nums;color:#fff}
+.cd.ended{border-color:var(--line2);background:var(--panel2)}
+.cd.ended .cd-dot{animation:none;background:var(--faint)}
+
+/* ---------- price tiers ---------- */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.tier{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:22px;text-align:center;
+  transition:border-color .16s}
+.tier:hover{border-color:var(--line2)}
+.tier .who{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:18px;
+  margin-bottom:4px;line-height:1.05}
+.tier .eg{color:var(--faint);font-size:12.5px;margin-bottom:14px}
+.tier .amt{font-family:var(--disp);font-style:italic;font-weight:800;font-size:44px;line-height:1;color:var(--red)}
+.tier .old{color:var(--faint);font-size:14px;margin-top:6px;text-decoration:line-through}
+
+/* ---------- save more ---------- */
+.saves{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.save{display:flex;gap:13px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+  border-radius:5px;padding:20px}
+.save .ico{width:36px;height:36px;flex:0 0 auto;display:grid;place-items:center;border-radius:4px;
+  background:var(--red-wash);border:1px solid rgba(237,28,36,.3);color:var(--red)}
+.save .ico svg{width:18px;height:18px}
+.save b{display:block;font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:17px;line-height:1.05;margin-bottom:3px}
+.save p{margin:0;color:var(--muted);font-size:13.8px;line-height:1.5}
+
+/* ---------- included ---------- */
+.incl{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.incl-col{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:24px}
+.incl-col h4{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:19px;
+  margin:0 0 15px;padding-bottom:12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px}
+.incl-col h4 svg{width:18px;height:18px;color:var(--red)}
+.incl-col ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.incl-col li{display:flex;gap:10px;font-size:14.6px;color:#d6d6dd;align-items:flex-start}
+.incl-col li svg{width:15px;height:15px;color:var(--red);flex:0 0 auto;margin-top:3.5px}
+.addons{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;margin-top:16px}
+.addon{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--panel);
+  border:1px solid var(--line);border-radius:4px;padding:14px 17px}
+.addon span{font-size:14.4px;font-weight:500}
+.addon b{font-family:var(--disp);font-style:italic;font-weight:800;font-size:19px;color:var(--red);line-height:1}
+
+/* ---------- before / after ---------- */
+.ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.ba{position:relative;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--panel2);
+  aspect-ratio:4/3;user-select:none;touch-action:pan-y;cursor:ew-resize}
+.ba-layer{position:absolute;inset:0}
+.ba-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-after{clip-path:inset(0 0 0 var(--pos,50%))}
+.ba-tag{position:absolute;bottom:12px;font-family:var(--disp);font-style:italic;font-weight:800;
+  text-transform:uppercase;font-size:12.5px;letter-spacing:.09em;padding:6px 12px;background:rgba(0,0,0,.72);
+  backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.14);border-radius:3px;pointer-events:none}
+.ba-tag.l{left:12px}
+.ba-tag.r{right:12px;background:var(--red);border-color:var(--red)}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;background:#fff;
+  transform:translateX(-50%);pointer-events:none;box-shadow:0 0 18px rgba(0,0,0,.65)}
+.ba-handle::after{content:"";position:absolute;top:50%;left:50%;width:42px;height:42px;
+  transform:translate(-50%,-50%);border-radius:50%;background:#fff;border:3px solid var(--red);
+  box-shadow:0 6px 20px rgba(0,0,0,.55)}
+.ba-handle::before{content:"‹ ›";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+  color:#000;font-size:16px;font-weight:800;letter-spacing:1px;line-height:1}
+.ba-cap{font-size:13.4px;color:var(--faint);margin:9px 0 0;font-weight:500}
+.ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;
+  background:repeating-linear-gradient(45deg,#111116,#111116 12px,#0c0c10 12px,#0c0c10 24px);color:var(--faint)}
+.ph b{display:block;font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:18px;color:#3d3d47;margin-bottom:5px}
+.ph small{font-size:11.5px;letter-spacing:.06em}
+.shots{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+.shot{aspect-ratio:4/3;border:1px solid var(--line);border-radius:4px;overflow:hidden;position:relative;
+  background:var(--panel2)}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.shot:hover img{transform:scale(1.06)}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:28px 24px;
+  position:relative;overflow:hidden}
+.step .n{display:inline-grid;place-items:center;width:32px;height:32px;background:var(--red);color:#fff;
+  font-family:var(--disp);font-style:italic;font-weight:800;font-size:17px;margin-bottom:13px;
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.step h4{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:21px;
+  margin:0 0 8px;line-height:1}
+.step p{margin:0;color:var(--muted);font-size:14.6px}
+
+/* ---------- valley club ---------- */
+.vip{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.2vw,40px);align-items:start}
+.vip-card{background:linear-gradient(165deg,#17171d,#0c0c10);border:1px solid var(--line2);border-radius:5px;
+  padding:clamp(24px,3vw,32px);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.vip-card::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(70% 60% at 100% 0,var(--red-wash),transparent 66%);pointer-events:none}
+.vip-perks{list-style:none;padding:0;margin:0;display:grid;gap:17px;position:relative}
+.vip-perks li{display:flex;gap:14px;align-items:flex-start}
+.vip-perks .ico{width:38px;height:38px;flex:0 0 auto;display:grid;place-items:center;border-radius:4px;
+  background:var(--red-wash);border:1px solid rgba(237,28,36,.34);color:var(--red)}
+.vip-perks .ico svg{width:18px;height:18px}
+.vip-perks strong{display:block;font-family:var(--disp);font-style:italic;font-weight:800;
+  text-transform:uppercase;font-size:18px;line-height:1.05;margin-bottom:4px}
+.vip-perks p{margin:0;color:var(--muted);font-size:14.2px;line-height:1.5}
+.guest{display:flex;gap:11px;align-items:flex-start;margin-top:22px;padding:15px 17px;border-radius:4px;
+  background:rgba(46,213,115,.07);border:1px solid rgba(46,213,115,.25);font-size:14.2px;color:#c9e9d5}
+.guest svg{width:17px;height:17px;color:var(--ok);flex:0 0 auto;margin-top:3px}
+
+/* ---------- forms ---------- */
+.field{margin-bottom:13px}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:7px}
+input,select{width:100%;background:#000;border:1px solid var(--line2);border-radius:4px;color:#fff;
+  padding:14px 15px;font-size:16px;outline:none;transition:border-color .14s}
+input::placeholder{color:#4c4c56}
+input:focus,select:focus{border-color:var(--red)}
+select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.4'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat:no-repeat;background-position:right 13px center;background-size:17px;padding-right:40px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.formnote{font-size:12.6px;color:var(--faint);margin-top:12px;text-align:center;line-height:1.5}
+
+/* ---------- booking ---------- */
+.book{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(18px,2.6vw,30px);align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:clamp(20px,2.6vw,28px)}
+.panel h4{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:20px;
+  margin:0 0 4px}
+.panel .ph-sub{color:var(--faint);font-size:13.5px;margin:0 0 18px}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.days::-webkit-scrollbar{display:none}
+.day{flex:0 0 auto;min-width:60px;text-align:center;border:1px solid var(--line2);border-radius:4px;
+  padding:11px 7px;background:#000;cursor:pointer;transition:.13s;color:#fff}
+.day:hover:not(.off){border-color:var(--red)}
+.day.sel{background:var(--red);border-color:var(--red)}
+.day.off{opacity:.24;pointer-events:none}
+.day .dow{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
+.day.sel .dow,.day.sel .mon{color:rgba(255,255,255,.85)}
+.day .num{font-family:var(--disp);font-style:italic;font-weight:800;font-size:21px;margin-top:3px;line-height:1}
+.day .mon{font-size:10px;color:var(--faint);margin-top:2px;text-transform:uppercase;letter-spacing:.07em}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.slot{border:1px solid var(--line2);border-radius:4px;padding:14px 6px;background:#000;color:#fff;
+  font-size:15px;font-weight:600;cursor:pointer;transition:.13s;font-variant-numeric:tabular-nums}
+.slot:hover{border-color:var(--red)}
+.slot.sel{background:var(--red);border-color:var(--red)}
+.slots-empty{grid-column:1/-1;text-align:center;color:var(--faint);font-size:14px;padding:24px 8px}
+
+/* step 2 stays out of the way until a time is picked */
+#step2[hidden]{display:none}
+#step2{margin-top:22px;padding-top:22px;border-top:1px solid var(--line);animation:reveal .28s ease}
+@keyframes reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.picked{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  background:var(--red-wash);border:1px solid rgba(237,28,36,.32);border-radius:4px;padding:13px 16px;
+  margin-bottom:18px}
+.picked b{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:18px;
+  line-height:1.1}
+.picked .linkbtn{color:#fff;flex:0 0 auto}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.seg button{padding:13px 10px;border:1px solid var(--line2);background:#000;color:var(--muted);border-radius:4px;
+  cursor:pointer;font-weight:600;font-size:14.2px;transition:.13s;display:flex;flex-direction:column;
+  align-items:center;gap:3px;text-align:center}
+.seg button small{font-size:11.5px;color:var(--faint);font-weight:500}
+.seg button.sel{border-color:var(--red);background:var(--red-wash);color:#fff}
+.seg button.sel small{color:#e8b8ba}
+.callcard{background:linear-gradient(165deg,var(--panel2),#000);border:1px solid var(--line2);border-radius:5px;
+  padding:clamp(22px,2.8vw,30px);text-align:center}
+.callcard .big{font-family:var(--disp);font-style:italic;font-weight:800;font-size:clamp(29px,4.2vw,38px);
+  line-height:1;margin:10px 0 8px;display:block}
+.hoursline{margin-top:14px;color:var(--faint);font-size:13.2px;text-align:center}
+.ok-msg{background:rgba(46,213,115,.09);border:1px solid rgba(46,213,115,.3);border-radius:4px;padding:20px;
+  color:#cdebd8;font-size:14.6px;display:none}
+.ok-msg.on{display:block}
+.err-msg{color:#ff8a8f;font-size:13.6px;margin-top:10px}
+
+/* ---------- reviews (hidden until real ones exist) ---------- */
+#reviews[hidden],#work[hidden],#shotGrid[hidden]{display:none}
+.rev-agg{display:inline-flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line);
+  border-radius:100px;padding:11px 20px;margin-bottom:24px}
+.stars{display:inline-flex;gap:2px;color:var(--red)}
+.stars svg{width:16px;height:16px}
+.rev-agg b{font-family:var(--disp);font-style:italic;font-weight:800;font-size:19px;line-height:1}
+.rev-agg span{color:var(--muted);font-size:13.6px}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rev{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:22px;display:flex;
+  flex-direction:column}
+.rev .stars{margin-bottom:12px}
+.rev p{margin:0 0 16px;font-size:14.8px;line-height:1.6;color:#dcdce2;flex:1}
+.rev .who{font-size:13.4px;color:var(--faint);border-top:1px solid var(--line);padding-top:13px}
+.rev .who b{color:#fff;font-weight:600;display:block;font-size:14.2px;margin-bottom:2px}
+
+/* ---------- faq / area / finale / footer ---------- */
+.faq{display:grid;gap:9px;max-width:840px}
+details.q{background:var(--panel);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+details.q[open]{border-color:var(--line2)}
+details.q summary{list-style:none;cursor:pointer;padding:18px 21px;font-weight:600;font-size:15.6px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::after{content:"+";font-family:var(--disp);font-weight:800;font-size:25px;color:var(--red);
+  line-height:1;flex:0 0 auto;transition:transform .18s}
+details.q[open] summary::after{transform:rotate(45deg)}
+details.q .a{padding:0 21px 19px;color:var(--muted);font-size:14.6px;line-height:1.65}
+.area{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.area span{background:var(--panel);border:1px solid var(--line);border-radius:100px;padding:9px 16px;
+  font-size:13.6px;font-weight:600;color:#cfcfd8}
+.area span.hub{background:var(--red);border-color:var(--red);color:#fff}
+.finale{background:linear-gradient(160deg,#1a0709,#050506 62%);border-top:1px solid var(--line);
+  text-align:center;position:relative;overflow:hidden}
+.finale::before{content:"";position:absolute;inset:auto 0 -40% 0;height:80%;
+  background:radial-gradient(50% 60% at 50% 100%,rgba(237,28,36,.22),transparent 70%)}
+.finale .wrap{position:relative}
+.finale .lede{margin-inline:auto}
+.finale .hero-actions{justify-content:center}
+footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 124px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+.foot h5{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:15px;
+  letter-spacing:.05em;margin:0 0 13px;color:var(--faint)}
+.foot a,.foot p{color:var(--muted);font-size:14.2px;margin:0 0 9px;display:block;transition:color .14s}
+.foot a:hover{color:var(--red)}
+.foot-bot{margin-top:34px;padding-top:21px;border-top:1px solid var(--line);display:flex;
+  justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--faint);font-size:12.6px}
+.mobar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;gap:9px;
+  padding:11px 14px calc(11px + env(safe-area-inset-bottom));background:rgba(5,5,6,.94);
+  backdrop-filter:blur(18px);border-top:1px solid var(--line2)}
+.mobar .btn{flex:1;font-size:17px;padding:16px 10px}
+
+/* ---------- responsive ---------- */
+@media (max-width:960px){
+  .hero-grid,.vip,.book,.incl{grid-template-columns:1fr}
+  .steps,.saves{grid-template-columns:1fr 1fr}
+  .ba-grid{grid-template-columns:1fr}
+  .shots{grid-template-columns:repeat(2,1fr)}
+  .revs,.foot{grid-template-columns:1fr 1fr}
+  nav.main{display:none}
+}
+@media (max-width:640px){
+  html{scroll-padding-top:86px}
+  body{font-size:15.5px}
+  .topstrip{position:static}
+  .topstrip-in{gap:8px;font-size:12.4px;padding:9px 14px}
+  #promoTail{display:none}
+  .hdr{height:70px}
+  .brand img{height:56px}
+  .hdr-cta .btn span{display:none}
+  .steps,.saves,.tiers,.row2,.revs,.foot,.seg{grid-template-columns:1fr}
+  .slots{grid-template-columns:repeat(2,1fr)}
+  .mobar{display:flex}
+  .btn-lg{font-size:19px;padding:19px 24px}
+  .slab{padding:22px}
+  .hero-actions .btn{flex:1 1 100%}
+  .tier{display:flex;align-items:center;justify-content:space-between;text-align:left;padding:16px 20px}
+  .tier .eg{margin-bottom:0}
+  .tier .amt{font-size:34px}
+  .tier .old{margin-top:2px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+<symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M3 13l2-6a2 2 0 0 1 2-1.4h10A2 2 0 0 1 19 7l2 6v4a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="13.5" r="1"/><circle cx="16.5" cy="13.5" r="1"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.1 6.3L20.5 10l-6.4 1.7L12 18l-2.1-6.3L3.5 10l6.4-1.7z"/><path d="M19 15l.9 2.6L22.5 18.5l-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.8"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18h18M3 18l-1-11 5.5 4L12 4l4.5 7L22 7l-1 11z"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 13h18M12 9v12M12 9S9.5 3.5 7 5.5 9 9 12 9zM12 9s2.5-5.5 5-3.5S15 9 12 9z"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0l-8-8V3.2h9.4l8.6 8.6a2 2 0 0 1 0 1.6z"/><circle cx="7.5" cy="7.5" r="1.4"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2l-5-4.9 6.9-1z"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></symbol>
+</defs></svg>
+
+<div class="topstrip" id="promoStrip">
+  <div class="topstrip-in">
+    <b id="promoHead">Half Off Every Detail</b>
+    <span id="promoTail">Ends Monday, Sept 14</span>
+    <span class="cd-mini" id="cdMini">&nbsp;</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap hdr">
+    <a class="brand" href="#top" aria-label="Valley Details home">
+      <img src="assets/logo.png" alt="Valley Details" onerror="this.remove();document.getElementById('bmark').hidden=false">
+      <span id="bmark" hidden>
+        <span class="mark">VD</span>
+        <span class="wordmark">Valley<span>Details</span></span>
+      </span>
+    </a>
+    <nav class="main">
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Our Work</a>
+      <a href="#how">How It Works</a>
+      <a href="#vip">Club</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="btn btn-ghost btn-sm" href="tel:+19162490631"><svg><use href="#i-phone"/></svg><span>(916) 249-0631</span></a>
+      <a class="btn btn-red btn-sm" href="#book">Book</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker">Mobile Detailing · Elk Grove</p>
+      <h1 class="h1">Like the day<em>you bought it.</em></h1>
+      <p class="lede">A full interior and exterior detail in your own driveway. About two hours, and half off all week.</p>
+      <div class="hero-actions">
+        <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
+        <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
+      </div>
+      <ul class="trustrow">
+        <li><svg><use href="#i-car"/></svg>We come to you</li>
+        <li><svg><use href="#i-clock"/></svg>About 2 hours</li>
+        <li><svg><use href="#i-check"/></svg>No deposit</li>
+      </ul>
+    </div>
+
+    <div class="slab">
+      <span class="slab-tag" id="slabTag">Half Off</span>
+      <h3>The Full Detail</h3>
+      <p class="sub">Inside and out</p>
+      <div class="priceline">
+        <span class="price-was" id="priceWas">$149</span>
+        <span class="price-now" id="priceNow">$75</span>
+      </div>
+      <p class="price-sizes" id="priceSizes">SUV $85 &nbsp;·&nbsp; Truck or 3-row $95</p>
+
+      <div class="cd" id="cdBox">
+        <span class="cd-lab"><span class="cd-dot" id="cdDot"></span><span id="cdLab">Ends in</span></span>
+        <span class="cd-val" id="cdVal">&nbsp;</span>
+      </div>
+
+      <ul class="slab-list">
+        <li><svg><use href="#i-check"/></svg>Deep vacuum, pet hair pulled out</li>
+        <li><svg><use href="#i-check"/></svg>Hand wash, wheels and tires</li>
+        <li><svg><use href="#i-check"/></svg>Spray wax, tire shine, glass</li>
+      </ul>
+      <a class="btn btn-red btn-block" href="#book" id="slabCta">Claim Half Off</a>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="sec-alt">
+  <div class="wrap">
+    <p class="kicker">Pricing</p>
+    <h2 class="h2">One price. The whole car.</h2>
+    <p class="lede">There is no basic package that skips half the job. Every detail is the full interior and exterior. Find your size, and that is what you pay.</p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div><div class="who">Sedan or Coupe</div><div class="eg">Civic, Camry, Challenger</div></div>
+        <div><div class="amt" data-promo="$75" data-reg="$149">$75</div><div class="old" data-was="$149">$149</div></div>
+      </div>
+      <div class="tier">
+        <div><div class="who">SUV or Crossover</div><div class="eg">RAV4, Equinox, Explorer</div></div>
+        <div><div class="amt" data-promo="$85" data-reg="$169">$85</div><div class="old" data-was="$169">$169</div></div>
+      </div>
+      <div class="tier">
+        <div><div class="who">Truck or 3-Row</div><div class="eg">Silverado, Tahoe, Odyssey</div></div>
+        <div><div class="amt" data-promo="$95" data-reg="$189">$95</div><div class="old" data-was="$189">$189</div></div>
+      </div>
+    </div>
+
+    <h3 class="h3" style="margin-top:44px">Ways to pay less</h3>
+    <div class="saves">
+      <div class="save">
+        <span class="ico"><svg><use href="#i-car"/></svg></span>
+        <div><b>Two cars, one stop</b><p>Take $25 off the second car when we do both at the same address.</p></div>
+      </div>
+      <div class="save">
+        <span class="ico"><svg><use href="#i-users"/></svg></span>
+        <div><b>Send a friend</b><p>They get $20 off their first detail and you get $20 off your next one.</p></div>
+      </div>
+      <div class="save">
+        <span class="ico"><svg><use href="#i-crown"/></svg></span>
+        <div><b>Join the Club</b><p>Members pay $119 for the same sedan detail every single time. <a href="#vip" style="color:var(--red);font-weight:600">See how it works</a></p></div>
+      </div>
+    </div>
+
+    <h3 class="h3" style="margin-top:44px">What you get</h3>
+    <div class="incl">
+      <div class="incl-col">
+        <h4><svg><use href="#i-car"/></svg>Inside</h4>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Vacuumed from the seats to the trunk</li>
+          <li><svg><use href="#i-check"/></svg>Pet hair and ground-in grit lifted out</li>
+          <li><svg><use href="#i-check"/></svg>Leather cleaned and conditioned</li>
+          <li><svg><use href="#i-check"/></svg>Dash, console, doors and vents wiped down</li>
+          <li><svg><use href="#i-check"/></svg>Interior glass and mirrors streak free</li>
+        </ul>
+      </div>
+      <div class="incl-col">
+        <h4><svg><use href="#i-spark"/></svg>Outside</h4>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Two bucket hand wash, roof to rockers</li>
+          <li><svg><use href="#i-check"/></svg>Wheels, wheel wells and tires degreased</li>
+          <li><svg><use href="#i-check"/></svg>Bugs and tar taken off</li>
+          <li><svg><use href="#i-check"/></svg>Spray wax for real gloss and beading</li>
+          <li><svg><use href="#i-check"/></svg>Glass, mirrors, trim and door jambs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="addons">
+      <div class="addon"><span>Carpet &amp; seat shampoo + steam</span><b>+$45</b></div>
+      <div class="addon"><span>Engine bay cleaning</span><b>+$35</b></div>
+      <div class="addon"><span>Odor removal treatment</span><b>+$40</b></div>
+      <div class="addon"><span>Headlight restoration</span><b>+$50</b></div>
+      <div class="addon"><span>Ceramic spray sealant</span><b>+$85</b></div>
+    </div>
+    <p class="formnote" style="text-align:left">Not sure what yours needs? Call and describe it. We will tell you if you can skip the add-on.</p>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <p class="kicker">Our Work</p>
+    <h2 class="h2" id="workTitle">Drag the slider.</h2>
+    <p class="lede" id="workLede">Same car, same day. The left side is what we walked up to.</p>
+    <div class="ba-grid" id="baGrid"></div>
+    <div class="shots" id="shotGrid"></div>
+    <p class="formnote" style="text-align:left">More on Instagram at <a href="https://www.instagram.com/valleydetailsca/" target="_blank" rel="noopener" style="color:var(--red);font-weight:600">@valleydetailsca</a></p>
+  </div>
+</section>
+
+<section id="reviews" hidden>
+  <div class="wrap">
+    <p class="kicker">Reviews</p>
+    <h2 class="h2">Straight from the driveway.</h2>
+    <div class="rev-agg" id="revAgg" hidden><span class="stars" id="revStars"></span><b id="revAvg">5.0</b><span id="revCount"></span></div>
+    <div class="revs" id="revGrid"></div>
+    <p class="formnote" style="text-align:left" id="revAsk" hidden></p>
+  </div>
+</section>
+
+<section id="how" class="sec-alt">
+  <div class="wrap">
+    <p class="kicker">How It Works</p>
+    <h2 class="h2">Book, park, done.</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><h4>Pick a time</h4>
+        <p>Tap a day and a time below. It takes about thirty seconds and there is no account to make.</p></div>
+      <div class="step"><span class="n">2</span><h4>We show up</h4>
+        <p>Your house, your apartment lot, or your work. We need a parking spot, an outside spigot and an outdoor outlet. We take $5 off for using them.</p></div>
+      <div class="step"><span class="n">3</span><h4>Get it back clean</h4>
+        <p>About two hours later it looks the way it did on the lot. You pay when you see it, not before.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="vip">
+  <div class="wrap">
+    <p class="kicker">Optional</p>
+    <h2 class="h2">The Valley Club</h2>
+    <p class="lede">For people who would rather their car never got dirty in the first place. Members keep a standing spot on the calendar and pay less every time.</p>
+    <div class="vip">
+      <ul class="vip-perks">
+        <li><span class="ico"><svg><use href="#i-repeat"/></svg></span>
+          <div><strong>A standing spot on the calendar</strong><p>Same day, same time, every month or every other week. Your car never gets far enough gone to need rescuing.</p></div></li>
+        <li><span class="ico"><svg><use href="#i-bolt"/></svg></span>
+          <div><strong>Member pricing and first pick</strong><p>$119 on a sedan detail every time, and weekend slots open to members before anyone else sees them.</p></div></li>
+        <li><span class="ico"><svg><use href="#i-gift"/></svg></span>
+          <div><strong>Free add-ons every visit</strong><p>Tire shine and interior protectant always, plus a rotating extra like engine bay or headlights.</p></div></li>
+        <li><span class="ico"><svg><use href="#i-tag"/></svg></span>
+          <div><strong>Deals reach you first</strong><p>Promos like this one go out to members days before they hit Instagram. Some never leave the list.</p></div></li>
+      </ul>
+
+      <div class="vip-card">
+        <h3 class="h3" style="position:relative"><svg style="width:21px;height:21px;color:var(--red);vertical-align:-2px;margin-right:6px"><use href="#i-crown"/></svg>Claim a founding spot</h3>
+        <p style="color:var(--muted);font-size:14.4px;margin:0 0 20px;position:relative">The Club opens soon and founding members keep launch pricing for good. It is free to join and nothing is charged today. We text you when spots open and you decide then.</p>
+        <form id="vipForm" style="position:relative" novalidate>
+          <div class="row2">
+            <div class="field"><label for="vName">Name</label><input id="vName" autocomplete="name" placeholder="Your name"></div>
+            <div class="field"><label for="vPhone">Mobile</label><input id="vPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(916) 555-0123"></div>
+          </div>
+          <div class="field"><label for="vPlan">How often?</label>
+            <select id="vPlan">
+              <option value="monthly">Once a month</option>
+              <option value="biweekly">Every two weeks</option>
+              <option value="quarterly">Every few months</option>
+              <option value="unsure">Not sure yet, just keep me posted</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-red btn-block" style="margin-top:6px">Save My Spot</button>
+          <p class="err-msg" id="vipErr"></p>
+          <p class="formnote">Texts about the Club only. Reply STOP any time.</p>
+        </form>
+        <div class="ok-msg" id="vipOk"><strong>You are on the list.</strong><br>We will text you the moment founding spots open. Want a detail before then? Book below. Members and guests use the same calendar.</div>
+      </div>
+    </div>
+    <div class="guest"><svg><use href="#i-check"/></svg>
+      <div><strong>Browsing as a guest is completely fine.</strong> You never need an account to see prices or book. The Club is an extra for regulars, and nothing on this site is hidden behind it.</div></div>
+  </div>
+</section>
+
+<section id="book" class="sec-alt">
+  <div class="wrap">
+    <p class="kicker">Book</p>
+    <h2 class="h2">Pick a time.</h2>
+    <p class="lede">Tap a day, tap a time. That is the whole thing. Or call and we will find you one.</p>
+
+    <div class="book">
+      <div class="panel">
+        <h4>Book online</h4>
+        <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
+
+        <div class="days" id="days"></div>
+        <div class="slots" id="slots"></div>
+
+        <form id="bookForm" novalidate>
+          <div id="step2" hidden>
+            <div class="picked">
+              <b id="pickedText"></b>
+              <button type="button" class="linkbtn" id="changeTime">Change</button>
+            </div>
+
+            <label>Where should we do it?</label>
+            <div class="seg" id="segMode">
+              <button type="button" data-mode="mobile" class="sel">We come to you<small>Your driveway or lot</small></button>
+              <button type="button" data-mode="dropoff">I will drop it off<small>We text the address</small></button>
+            </div>
+
+            <div class="row2">
+              <div class="field"><label for="bName">Name</label><input id="bName" autocomplete="name" placeholder="Your name"></div>
+              <div class="field"><label for="bPhone">Mobile</label><input id="bPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(916) 555-0123"></div>
+            </div>
+            <div class="field"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger"></div>
+            <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street address, Elk Grove"></div>
+
+            <button type="button" class="linkbtn" id="noteToggle">Add a note</button>
+            <div class="field" id="noteField" hidden style="margin-top:6px">
+              <input id="bNotes" placeholder="Spilled coffee, tight driveway, second car">
+            </div>
+
+            <button type="submit" class="btn btn-red btn-block btn-lg" id="bookBtn" style="margin-top:14px">Hold This Spot</button>
+            <p class="err-msg" id="bookErr"></p>
+            <p class="formnote">Nothing is charged online. You pay when the car is done.</p>
+          </div>
+        </form>
+        <div class="ok-msg" id="bookOk"></div>
+      </div>
+
+      <div>
+        <div class="callcard">
+          <svg style="width:32px;height:32px;color:var(--red)"><use href="#i-phone"/></svg>
+          <span class="big">(916) 249-0631</span>
+          <p style="color:var(--muted);font-size:14.4px;margin:0 0 18px">Rather just talk? Call or text and we will find you a time on the spot.</p>
+          <a class="btn btn-red btn-block btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>Call Now</a>
+          <a class="btn btn-ghost btn-block" style="margin-top:10px" href="sms:+19162490631?&body=Hi%20Valley%20Details%2C%20I%27d%20like%20to%20book%20a%20detail.">Text Us</a>
+        </div>
+        <p class="hoursline">Monday to Saturday, 8am to 6pm. Closed Sunday.</p>
+      </div>
+    </div>
+
+    <h3 class="h3" style="margin-top:48px">Where we go</h3>
+    <p style="color:var(--muted);font-size:15px;margin:0;max-width:60ch">We stay close to home, about 15 miles around Elk Grove. Right on the edge of that? Call and we will tell you if we can make the drive.</p>
+    <div class="area">
+      <span class="hub">Elk Grove</span><span class="hub">South Sacramento</span><span>Laguna West</span>
+      <span>Vineyard</span><span>Sheldon</span><span>Florin</span><span>Pocket</span>
+      <span>Delta Shores</span><span>Wilton</span><span>Galt</span>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="kicker">FAQ</p>
+    <h2 class="h2">Questions people ask.</h2>
+    <div class="faq">
+      <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 15 miles of Elk Grove. If you would rather drop the car off, pick that option when you book and we will text you the address.</div></details>
+      <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we knock <b style="color:#fff">$5 off the price</b> for it. We run off an outside spigot and an outdoor outlet. To be straight with you about what that actually costs: a two hour job pulls roughly 30 gallons and a couple of kilowatt-hours, which lands under a dollar on your bill. The $5 is not us breaking even, it is us not wanting to nickel you over a hose. If you are not sure you have an outdoor spigot or outlet, or your complex is tight on space, say so when you book and we will sort it out before we drive over.</div></details>
+      <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full inside and outside on a normal car. If we look at yours and think it needs longer, because of matted pet hair or a bad spill, we tell you before we start rather than after. You do not have to stand around either. We text you when we are wrapping up.</div></details>
+      <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Pick your size on the pricing list and that is what you pay, half off through Monday the 14th. Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
+      <details class="q"><summary>What happens when the promo ends?</summary><div class="a">Prices go back to normal on September 15th. Anything booked before the deadline stays at the half off price even if the appointment itself lands later, so grabbing a slot now locks it in.</div></details>
+      <details class="q"><summary>How do I pay?</summary><div class="a">When the job is done, not before. We take just about anything: cash, Zelle, Cash App, Venmo, Apple Pay or card. There is no deposit and nothing is charged through this website.</div></details>
+      <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain does not matter and we come as planned. Need to move it yourself, just call or text. No fee, no penalty.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="finale">
+  <div class="wrap">
+    <p class="kicker" style="justify-content:center" id="finaleKicker">Half off ends Monday</p>
+    <h2 class="h2">Stop looking at the mess.</h2>
+    <p class="lede" id="finaleLede">A full interior and exterior detail at your house, from <b style="color:#fff">$75</b>, this week. Thirty seconds to book and no deposit.</p>
+    <div class="hero-actions">
+      <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
+      <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h5>Valley Details</h5>
+        <p style="max-width:36ch">Mobile and drop-off car detailing around Elk Grove, California. Owner operated since 2024.</p>
+        <a href="https://www.instagram.com/valleydetailsca/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-weight:600"><svg style="width:17px;height:17px"><use href="#i-ig"/></svg>@valleydetailsca</a>
+      </div>
+      <div>
+        <h5>Book</h5>
+        <a href="tel:+19162490631">(916) 249-0631</a>
+        <a href="sms:+19162490631">Text us</a>
+        <a href="#book">Online calendar</a>
+        <a href="#vip">The Valley Club</a>
+      </div>
+      <div>
+        <h5>Info</h5>
+        <a href="#pricing">Pricing</a>
+        <a href="#work">Our work</a>
+        <a href="#faq">FAQ</a>
+        <p>Mon to Sat, 8am to 6pm</p>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="yr">2026</span> Valley Details · Elk Grove, CA</span>
+      <span>No deposit · Pay after the job</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobar">
+  <a class="btn btn-ghost" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>Call</a>
+  <a class="btn btn-red" href="#book" id="mobarCta"><svg><use href="#i-cal"/></svg>Book a Detail</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"AutoDetailing",
+  "name":"Valley Details",
+  "description":"Mobile and drop-off car detailing around Elk Grove and south Sacramento.",
+  "telephone":"+1-916-249-0631",
+  "url":"https://valleydetails.site/",
+  "image":"https://valleydetails.site/assets/logo-social.png",
+  "priceRange":"$$",
+  "foundingDate":"2024",
+  "sameAs":["https://www.instagram.com/valleydetailsca/"],
+  "address":{"@type":"PostalAddress","addressLocality":"Elk Grove","addressRegion":"CA","addressCountry":"US"},
+  "areaServed":{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":38.4088,"longitude":-121.3716},"geoRadius":"24140"},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"18:00"}]
+}
+</script>
+
+<script>
+/* =====================================================================
+   VALLEY DETAILS site config. Everything tweakable lives here.
+   ===================================================================== */
+const CFG = {
+  PHONE_E164 : '+19162490631',
+  PHONE_TEXT : '(916) 249-0631',
+
+  /* --- promo -----------------------------------------------------------
+     Ends the moment it becomes Sept 15, Pacific (-07:00 is PDT).
+     When it lapses the page reprices itself with no deploy needed.       */
+  PROMO_END  : '2026-09-15T00:00:00-07:00',
+  PRICE: {
+    headlineReg:'$149', headlinePromo:'$75',
+    sizesReg  : 'SUV $169  ·  Truck or 3-row $189',
+    sizesPromo: 'SUV $85  ·  Truck or 3-row $95'
+  },
+
+  /* --- booking backend -------------------------------------------------
+     Empty API_BASE = demo mode (invents believable availability so the
+     calendar is usable today). Point it at the Blue SMS dashboard origin
+     to go live; nothing else changes.
+       GET  {API_BASE}/api/public/schedule/{SLUG}
+       POST {API_BASE}/api/public/schedule/{SLUG}/book
+       POST {API_BASE}/api/public/schedule/{SLUG}/vip                     */
+  API_BASE   : '',
+  SLUG       : 'valleydetails',
+  SLOT_MIN   : 120,
+  HORIZON    : 14,
+  LEAD_HOURS : 3,
+  HOURS      : {0:null, 1:['08:00','18:00'], 2:['08:00','18:00'], 3:['08:00','18:00'],
+                4:['08:00','18:00'], 5:['08:00','18:00'], 6:['08:00','18:00']},
+
+  /* --- reviews ---------------------------------------------------------
+     Section stays hidden while this is empty. Never invent entries.
+       {stars:5, text:'their words', name:'Marcus T.', vehicle:'2018 Civic', where:'Google'} */
+  REVIEWS: [],
+  GOOGLE_REVIEW_URL: '',
+
+  /* --- photos ----------------------------------------------------------
+     Drop files in ./assets with these names and they appear. Missing files
+     render as a labelled placeholder rather than a broken image.          */
+  // Before/after sliders. Empty for now. Add a pair here the moment you shoot
+  // one from the same spot twice, and the sliders appear above the grid:
+  //   {before:'assets/ba1-before.jpg', after:'assets/ba1-after.jpg', cap:'Interior'}
+  BA: [],
+
+  // Finished work. Real photos, real jobs.
+  SHOTS: [
+    {src:'assets/shot1.jpg', alt:'Porsche Taycan detailed by Valley Details in Elk Grove'},
+    {src:'assets/shot2.jpg', alt:'Audi S4 after a full interior and exterior detail'},
+    {src:'assets/shot3.jpg', alt:'Mercedes-Benz E-Class detailed in Sacramento'},
+    {src:'assets/shot4.jpg', alt:'BMW 5 Series after a full detail'}
+  ]
+};
+
+const $  = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const pad = n => String(n).padStart(2,'0');
+
+/* --------------- sticky header sits under the promo strip -------------- */
+(function stack(){
+  const strip = $('#promoStrip'), hdr = $('header.site');
+  const fit = () => {
+    const h = getComputedStyle(strip).position === 'sticky' ? strip.offsetHeight : 0;
+    hdr.style.top = h + 'px';
+    document.documentElement.style.scrollPaddingTop = (h + hdr.offsetHeight + 12) + 'px';
+  };
+  fit();
+  addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+
+/* ------------------------- promo countdown ---------------------------- */
+(function promo(){
+  const end = new Date(CFG.PROMO_END).getTime();
+  let done = false;
+
+  function expire(){
+    if (done) return; done = true;
+    $('#promoStrip').classList.add('ended');
+    $('#promoHead').textContent = 'Promo has ended';
+    $('#promoTail').textContent = 'Back to normal pricing. Call for what we are running now.';
+    $('#cdMini').hidden = true;
+    $('#slabTag').hidden = true;
+    $('#priceWas').hidden = true;
+    $('#priceNow').textContent = CFG.PRICE.headlineReg;
+    $('#priceSizes').innerHTML = CFG.PRICE.sizesReg;
+    const box = $('#cdBox');
+    box.classList.add('ended');
+    $('#cdLab').textContent = 'Regular pricing';
+    $('#cdVal').textContent = 'Ask about specials';
+    $('#slabCta').textContent = 'Book a Detail';
+    $('#finaleKicker').textContent = 'Book a detail';
+    $('#finaleLede').innerHTML = 'A full interior and exterior detail at your house, from <b style="color:#fff">' +
+      CFG.PRICE.headlineReg + '</b>. Thirty seconds to book and no deposit.';
+    $$('.tier .amt').forEach(a => a.textContent = a.dataset.reg);
+    $$('.tier .old').forEach(o => o.hidden = true);
+  }
+
+  function tick(){
+    const left = end - Date.now();
+    if (left <= 0) return expire();
+    const s = Math.floor(left/1000);
+    const d = Math.floor(s/86400), h = Math.floor(s%86400/3600),
+          m = Math.floor(s%3600/60), sec = s%60;
+    const txt = (d > 0 ? d + 'd ' : '') + pad(h)+':'+pad(m)+':'+pad(sec);
+    $('#cdVal').textContent = txt;
+    $('#cdMini').textContent = txt + ' left';
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ---------------------- before / after sliders ------------------------ */
+(function gallery(){
+  const grid = $('#baGrid');
+  if (!CFG.BA.length && !CFG.SHOTS.length){ $('#work').hidden = true; return; }
+  if (!CFG.BA.length){
+    $('#workTitle').textContent = 'Recent work.';
+    $('#workLede').textContent  = 'Cars we finished around Elk Grove. Every one of these was somebody\'s daily driver.';
+  }
+  const ph = (label, file) => `<div class="ph"><div><b>${label}</b><small>${file}</small></div></div>`;
+
+  CFG.BA.forEach((item, i) => {
+    const cell = document.createElement('div');
+    cell.innerHTML =
+      `<div class="ba" style="--pos:50%" role="slider" tabindex="0" aria-label="${item.cap}, before and after"
+            aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+         <div class="ba-layer">${ph('Before', item.before.replace('assets/',''))}<img src="${item.before}" alt="" onerror="this.style.display='none'"></div>
+         <div class="ba-layer ba-after">${ph('After', item.after.replace('assets/',''))}<img src="${item.after}" alt="" onerror="this.style.display='none'"></div>
+         <span class="ba-tag l">Before</span><span class="ba-tag r">After</span>
+         <span class="ba-handle"></span>
+       </div>
+       <p class="ba-cap">${item.cap}</p>`;
+    const ba = cell.firstElementChild;
+    const set = p => {
+      p = Math.max(0, Math.min(100, p));
+      ba.style.setProperty('--pos', p + '%');
+      ba.setAttribute('aria-valuenow', Math.round(p));
+    };
+    const at = e => { const r = ba.getBoundingClientRect(); set(((e.clientX - r.left) / r.width) * 100); };
+    let drag = false;
+    ba.addEventListener('pointerdown', e => { drag = true; ba.setPointerCapture(e.pointerId); at(e); });
+    ba.addEventListener('pointermove', e => { if (drag) at(e); });
+    ba.addEventListener('pointerup',   () => drag = false);
+    ba.addEventListener('pointercancel', () => drag = false);
+    ba.addEventListener('keydown', e => {
+      const cur = parseFloat(ba.style.getPropertyValue('--pos')) || 50;
+      if (e.key === 'ArrowLeft')  { set(cur - 4); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { set(cur + 4); e.preventDefault(); }
+    });
+    grid.append(cell);                       // slider + caption as ONE grid item
+  });
+
+  const shots = $('#shotGrid');
+  if (!CFG.SHOTS.length) shots.hidden = true;
+  CFG.SHOTS.forEach((item, i) => {
+    const src = typeof item === 'string' ? item : item.src;
+    const alt = typeof item === 'string' ? 'Detailing work by Valley Details' : (item.alt || '');
+    const d = document.createElement('div');
+    d.className = 'shot';
+    d.innerHTML = `<div class="ph"><div><b>${i+1}</b><small>/assets</small></div></div>
+                   <img src="${src}" alt="${alt}" loading="lazy" onerror="this.style.display='none'">`;
+    shots.append(d);
+  });
+})();
+
+/* ------------------------------ reviews ------------------------------- */
+(function reviews(){
+  const list = CFG.REVIEWS || [];
+  if (!list.length) return;                  // stays hidden, nothing invented
+  const star = '<svg><use href="#i-star"/></svg>';
+  $('#reviews').hidden = false;
+  list.forEach(r => {
+    const d = document.createElement('div');
+    d.className = 'rev';
+    const s = Math.max(1, Math.min(5, r.stars || 5));
+    d.innerHTML = `<span class="stars">${star.repeat(s)}</span><p>"${r.text}"</p>
+      <div class="who"><b>${r.name || 'Verified customer'}</b>${[r.vehicle, r.where].filter(Boolean).join(' · ')}</div>`;
+    $('#revGrid').append(d);
+  });
+  if (list.length >= 3){
+    const avg = list.reduce((a,r) => a + (r.stars || 5), 0) / list.length;
+    $('#revStars').innerHTML = star.repeat(Math.round(avg));
+    $('#revAvg').textContent = avg.toFixed(1);
+    $('#revCount').textContent = 'from ' + list.length + ' customers';
+    $('#revAgg').hidden = false;
+  }
+  if (CFG.GOOGLE_REVIEW_URL){
+    $('#revAsk').innerHTML = 'Had us out? <a href="' + CFG.GOOGLE_REVIEW_URL +
+      '" target="_blank" rel="noopener" style="color:var(--red);font-weight:600">Leave a Google review.</a>';
+    $('#revAsk').hidden = false;
+  }
+})();
+
+/* ------------------------- booking, two steps -------------------------- */
+(function booking(){
+  const daysEl = $('#days'), slotsEl = $('#slots'), form = $('#bookForm'), step2 = $('#step2');
+  let cfg = { hours:CFG.HOURS, booked:[], slotMinutes:CFG.SLOT_MIN,
+              horizonDays:CFG.HORIZON, leadHours:CFG.LEAD_HOURS };
+  let mode = 'mobile', pickedDay = null, picked = null;
+
+  const ymd  = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+  const hm2m = s => (+s.slice(0,2))*60 + (+s.slice(3,5));
+  const label = m => { const h=Math.floor(m/60), mm=m%60, ap=h>=12?'PM':'AM', hh=h%12||12;
+                       return hh + (mm ? ':'+pad(mm) : '') + ' ' + ap; };
+  const digits = s => (s||'').replace(/\D/g,'');
+
+  $$('#segMode button').forEach(b => b.addEventListener('click', () => {
+    $$('#segMode button').forEach(x => x.classList.remove('sel'));
+    b.classList.add('sel');
+    mode = b.dataset.mode;
+    $('#addrField').hidden = mode !== 'mobile';
+    if (mode !== 'mobile') $('#bAddr').value = '';
+  }));
+
+  $('#noteToggle').addEventListener('click', function(){
+    $('#noteField').hidden = false; this.hidden = true; $('#bNotes').focus();
+  });
+
+  $('#changeTime').addEventListener('click', () => {
+    picked = null;
+    $$('.slot', slotsEl).forEach(x => x.classList.remove('sel'));
+    step2.hidden = true;
+    daysEl.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  function slotsFor(date){
+    const span = cfg.hours[date.getDay()];
+    if (!span) return [];
+    const step = cfg.slotMinutes, open = hm2m(span[0]), close = hm2m(span[1]);
+    const floor = Date.now() + cfg.leadHours*3600*1000;
+    const taken = new Set(cfg.booked || []);
+    const out = [];
+    for (let m = open; m + step <= close; m += step){
+      const start = new Date(date); start.setHours(Math.floor(m/60), m%60, 0, 0);
+      if (start.getTime() < floor) continue;
+      const key = ymd(start)+'T'+pad(start.getHours())+':'+pad(start.getMinutes());
+      if (!taken.has(key)) out.push({ key, text: label(m), date: new Date(start) });
+    }
+    return out;
+  }
+
+  function seedDemo(){
+    if (CFG.API_BASE) return;
+    const booked = [];
+    for (let i = 0; i < cfg.horizonDays; i++){
+      const d = new Date(); d.setDate(d.getDate()+i); d.setHours(0,0,0,0);
+      const span = cfg.hours[d.getDay()];
+      if (!span) continue;
+      const all = [];
+      for (let m = hm2m(span[0]); m + cfg.slotMinutes <= hm2m(span[1]); m += cfg.slotMinutes)
+        all.push(ymd(d)+'T'+pad(Math.floor(m/60))+':'+pad(m%60));
+      const take = (i*7 + 3) % all.length;
+      for (let k = 0; k <= take % 3; k++) booked.push(all[(take + k*2) % all.length]);
+    }
+    cfg.booked = booked;
+  }
+
+  function renderDays(){
+    const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    daysEl.innerHTML = '';
+    let first = null;
+    for (let i = 0; i < cfg.horizonDays; i++){
+      const d = new Date(); d.setDate(d.getDate()+i); d.setHours(0,0,0,0);
+      const open = slotsFor(d).length > 0;
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'day' + (open ? '' : ' off');
+      b.innerHTML = `<div class="dow">${i===0?'Today':DOW[d.getDay()]}</div>
+                     <div class="num">${d.getDate()}</div><div class="mon">${MON[d.getMonth()]}</div>`;
+      b.addEventListener('click', () => pickDay(d, b));
+      daysEl.append(b);
+      if (open && !first) first = [d, b];
+    }
+    if (first) pickDay(first[0], first[1]);
+  }
+
+  function pickDay(d, btn){
+    pickedDay = d; picked = null; step2.hidden = true;
+    $$('.day', daysEl).forEach(x => x.classList.remove('sel'));
+    btn.classList.add('sel');
+    renderSlots();
+  }
+
+  function renderSlots(){
+    const list = pickedDay ? slotsFor(pickedDay) : [];
+    slotsEl.innerHTML = '';
+    if (!list.length){
+      slotsEl.innerHTML = `<div class="slots-empty">Nothing open that day. Try another, or call ${CFG.PHONE_TEXT}.</div>`;
+      return;
+    }
+    list.forEach(s => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'slot'; b.textContent = s.text;
+      b.addEventListener('click', () => {
+        $$('.slot', slotsEl).forEach(x => x.classList.remove('sel'));
+        b.classList.add('sel');
+        picked = s;
+        $('#pickedText').textContent =
+          s.date.toLocaleDateString('en-US',{weekday:'short', month:'short', day:'numeric'}) + ' at ' + s.text;
+        step2.hidden = false;
+        requestAnimationFrame(() => step2.scrollIntoView({behavior:'smooth', block:'nearest'}));
+      });
+      slotsEl.append(b);
+    });
+  }
+
+  async function load(){
+    if (CFG.API_BASE){
+      try {
+        const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}`);
+        if (r.ok){
+          const j = await r.json();
+          cfg = { hours:j.hours || cfg.hours, booked:j.booked || [],
+                  slotMinutes:j.slotMinutes || cfg.slotMinutes,
+                  horizonDays:j.horizonDays || cfg.horizonDays,
+                  leadHours:j.leadHours ?? cfg.leadHours };
+        }
+      } catch (_) {}
+    } else seedDemo();
+    renderDays();
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const err = $('#bookErr'); err.textContent = '';
+    const name = $('#bName').value.trim(), phone = $('#bPhone').value.trim(),
+          vehicle = $('#bVehicle').value.trim(), addr = $('#bAddr').value.trim(),
+          notes = $('#bNotes').value.trim();
+
+    if (!picked)                    return err.textContent = 'Pick a time first.';
+    if (!name)                      return err.textContent = 'We need a name for the appointment.';
+    if (digits(phone).length < 10)  return err.textContent = 'That number looks short. We text the confirmation there.';
+    if (!vehicle)                   return err.textContent = 'Tell us the vehicle so we bring the right stuff.';
+    if (mode === 'mobile' && !addr) return err.textContent = 'We need an address to come to you, or switch to drop off.';
+
+    const btn = $('#bookBtn');
+    btn.disabled = true; btn.textContent = 'Sending';
+
+    let ok = true;
+    if (CFG.API_BASE){
+      try {
+        const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ name, phone, start:picked.key, vehicle, mode, address:addr, notes,
+                                 promo:'HALFOFF', service:'Full Interior + Exterior Detail' })
+        });
+        const j = await r.json().catch(()=>({}));
+        ok = r.ok && j.ok !== false;
+        if (!ok) err.textContent = j.error || 'That slot just got taken. Pick another, or call us.';
+      } catch (_) {
+        ok = false;
+        err.textContent = 'Could not reach the calendar. Please call ' + CFG.PHONE_TEXT + '.';
+      }
+    }
+    btn.disabled = false; btn.textContent = 'Hold This Spot';
+    if (!ok) return;
+
+    const pretty = picked.date.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'}) +
+                   ' at ' + picked.text;
+    daysEl.hidden = true; slotsEl.hidden = true; form.hidden = true;
+    $('.panel .ph-sub').hidden = true;
+    $('.panel h4').textContent = 'You are booked';
+    const box = $('#bookOk');
+    box.innerHTML = `<strong style="font-size:17px">Got it, ${name.split(' ')[0]}.</strong><br><br>
+      <b>${pretty}</b><br>${mode === 'mobile' ? 'We come to you' : 'Drop off'} · ${vehicle}<br><br>
+      We will text ${phone} shortly to confirm. Nothing has been charged.<br><br>
+      Need to change it? Call or text <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a>.`;
+    box.classList.add('on');
+    box.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+
+  load();
+})();
+
+/* --------------------------- club signup ------------------------------ */
+(function vip(){
+  const form = $('#vipForm');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const err = $('#vipErr'); err.textContent = '';
+    const name = $('#vName').value.trim(), phone = $('#vPhone').value.trim(), plan = $('#vPlan').value;
+    if (!name) return err.textContent = 'What should we call you?';
+    if (phone.replace(/\D/g,'').length < 10) return err.textContent = 'We need a mobile number to text you.';
+    if (CFG.API_BASE){
+      try {
+        await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/vip`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ name, phone, plan, source:'website-vip' })
+        });
+      } catch (_) {}
+    }
+    form.hidden = true;
+    $('#vipOk').classList.add('on');
+  });
+})();
+
+$('#yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
