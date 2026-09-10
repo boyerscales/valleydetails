@@ -323,6 +323,8 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
   color:#cdebd8;font-size:14.6px;display:none}
 .ok-msg.on{display:block}
 .err-msg{color:#ff8a8f;font-size:13.6px;margin-top:10px}
+.delay-note{background:rgba(255,196,0,.08);border:1px solid rgba(255,196,0,.32);border-radius:4px;
+  color:#f3dfa6;font-size:13.4px;line-height:1.5;padding:11px 14px;margin:-4px 0 18px}
 
 /* ---------- reviews (hidden until real ones exist) ---------- */
 #reviews[hidden],#work[hidden],#shotGrid[hidden]{display:none}
@@ -664,6 +666,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <div class="panel">
         <h4>Book online</h4>
         <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
+        <p class="delay-note" id="textDelay" hidden><strong>Heads up:</strong> right now our confirmation text can take up to 30 minutes to arrive after you book. Your spot is saved the moment this page says you are booked, so there is no need to book twice.</p>
 
         <div class="days" id="days"></div>
         <div class="slots" id="slots"></div>
@@ -817,6 +820,11 @@ const CFG = {
      Ends the moment it becomes Sept 15, Pacific (-07:00 is PDT).
      When it lapses the page reprices itself with no deploy needed.       */
   PROMO_END  : '2026-09-15T00:00:00-07:00',
+
+  /* --- slow confirmation texts -----------------------------------------
+     Warns bookers that the confirmation text can lag up to 30 minutes.
+     Disappears on its own at midnight ending Friday Sept 11, Pacific.     */
+  TEXT_DELAY_UNTIL: '2026-09-12T00:00:00-07:00',
   PRICE: {
     headlineReg:'$149', headlinePromo:'$75',
     sizesReg  : 'SUV $169  ·  Truck or 3-row $189',
@@ -864,6 +872,7 @@ const CFG = {
 const $  = (s,r=document)=>r.querySelector(s);
 const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
 const pad = n => String(n).padStart(2,'0');
+const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
 
 /* --------------- sticky header sits under the promo strip -------------- */
 (function stack(){
@@ -1199,16 +1208,21 @@ const pad = n => String(n).padStart(2,'0');
                    ' at ' + picked.text;
     daysEl.hidden = true; slotsEl.hidden = true; form.hidden = true;
     $('.panel .ph-sub').hidden = true;
+    $('#textDelay').hidden = true;
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
+    const textLine = textDelayed()
+      ? `We will text ${phone} to confirm. Right now that text can take up to 30 minutes to arrive, so do not worry if it is not instant. Nothing has been charged.`
+      : `We will text ${phone} shortly to confirm. Nothing has been charged.`;
     box.innerHTML = `<strong style="font-size:17px">Got it, ${name.split(' ')[0]}.</strong><br><br>
       <b>${pretty}</b><br>${mode === 'mobile' ? 'We come to you' : 'Drop off'} · ${vehicle}<br><br>
-      We will text ${phone} shortly to confirm. Nothing has been charged.<br><br>
+      ${textLine}<br><br>
       Need to change it? Call or text <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a>.`;
     box.classList.add('on');
     box.scrollIntoView({behavior:'smooth', block:'center'});
   });
 
+  $('#textDelay').hidden = !textDelayed();
   load();
 })();
 
@@ -1221,13 +1235,26 @@ const pad = n => String(n).padStart(2,'0');
     const name = $('#vName').value.trim(), phone = $('#vPhone').value.trim(), plan = $('#vPlan').value;
     if (!name) return err.textContent = 'What should we call you?';
     if (phone.replace(/\D/g,'').length < 10) return err.textContent = 'We need a mobile number to text you.';
+    // Only say "you are on the list" once the server has actually saved them.
+    // This used to swallow every failure, so signups vanished while the page
+    // told people they were in.
     if (CFG.API_BASE){
+      const btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Saving';
+      let ok = false;
       try {
-        await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/vip`, {
+        const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/vip`, {
           method:'POST', headers:{'Content-Type':'application/json'},
           body: JSON.stringify({ name, phone, plan, source:'website-vip' })
         });
-      } catch (_) {}
+        const j = await r.json().catch(()=>({}));
+        ok = r.ok && j.ok !== false;
+        if (!ok) err.textContent = j.error || 'That did not save. Try again, or call ' + CFG.PHONE_TEXT + '.';
+      } catch (_) {
+        err.textContent = 'Could not reach us. Try again, or call ' + CFG.PHONE_TEXT + '.';
+      }
+      btn.disabled = false; btn.textContent = 'Save My Spot';
+      if (!ok) return;
     }
     form.hidden = true;
     $('#vipOk').classList.add('on');
