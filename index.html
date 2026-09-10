@@ -292,6 +292,9 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
   font-size:15px;font-weight:600;cursor:pointer;transition:.13s;font-variant-numeric:tabular-nums}
 .slot:hover{border-color:var(--red)}
 .slot.sel{background:var(--red);border-color:var(--red)}
+.slot.taken{opacity:.4;cursor:not-allowed;text-decoration:line-through;
+  background:#0a0a0d;border-color:var(--line);color:var(--faint)}
+.slot.taken:hover{border-color:var(--line)}
 .slots-empty{grid-column:1/-1;text-align:center;color:var(--faint);font-size:14px;padding:24px 8px}
 
 /* step 2 stays out of the way until a time is picked */
@@ -1055,11 +1058,14 @@ const pad = n => String(n).padStart(2,'0');
     for (let m = open; m + step <= close; m += step){
       const start = new Date(date); start.setHours(Math.floor(m/60), m%60, 0, 0);
       const from = start.getTime();
+      // Times already gone (past, or inside the lead time) are noise, so they stay
+      // hidden. Times that are TAKEN are shown greyed out: an empty-looking day
+      // reads as "they don't work Fridays", a struck-through one reads as "busy".
       if (from < floor) continue;
       const to = from + step * 60000;
-      if (busy.some(b => b.from < to && from < b.to)) continue;
+      const taken = busy.some(b => b.from < to && from < b.to);
       const key = ymd(start)+'T'+pad(start.getHours())+':'+pad(start.getMinutes());
-      out.push({ key, text: label(m), date: new Date(start) });
+      out.push({ key, text: label(m), date: new Date(start), taken });
     }
     return out;
   }
@@ -1087,7 +1093,7 @@ const pad = n => String(n).padStart(2,'0');
     let first = null;
     for (let i = 0; i < cfg.horizonDays; i++){
       const d = new Date(); d.setDate(d.getDate()+i); d.setHours(0,0,0,0);
-      const open = slotsFor(d).length > 0;
+      const open = slotsFor(d).some(s => !s.taken);
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'day' + (open ? '' : ' off');
@@ -1110,13 +1116,21 @@ const pad = n => String(n).padStart(2,'0');
   function renderSlots(){
     const list = pickedDay ? slotsFor(pickedDay) : [];
     slotsEl.innerHTML = '';
-    if (!list.length){
+    if (!list.some(s => !s.taken)){
       slotsEl.innerHTML = `<div class="slots-empty">Nothing open that day. Try another, or call ${CFG.PHONE_TEXT}.</div>`;
       return;
     }
     list.forEach(s => {
       const b = document.createElement('button');
-      b.type = 'button'; b.className = 'slot'; b.textContent = s.text;
+      b.type = 'button';
+      b.className = 'slot' + (s.taken ? ' taken' : '');
+      b.textContent = s.text;
+      if (s.taken){
+        b.disabled = true;
+        b.setAttribute('aria-label', s.text + ' - already booked');
+        slotsEl.append(b);
+        return;
+      }
       b.addEventListener('click', () => {
         $$('.slot', slotsEl).forEach(x => x.classList.remove('sel'));
         b.classList.add('sel');
