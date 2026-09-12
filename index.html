@@ -407,6 +407,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .tier .old{margin-top:2px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  .fieldnote{color:var(--faint);font-size:12.6px;line-height:1.45;margin:6px 0 0}
 </style>
 </head>
 <body>
@@ -689,7 +690,8 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
               <div class="field"><label for="bPhone">Mobile</label><input id="bPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(916) 555-0123"></div>
             </div>
             <div class="field"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger"></div>
-            <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street address, Elk Grove"></div>
+            <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street address, Elk Grove">
+              <p class="fieldnote">Free travel within 15 miles of Elk Grove. Farther out is a $25 travel charge, and past 25 miles we will call you before we commit.</p></div>
 
             <button type="button" class="linkbtn" id="noteToggle">Add a note</button>
             <div class="field" id="noteField" hidden style="margin-top:6px">
@@ -712,12 +714,12 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
           <a class="btn btn-red btn-block btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>Call Now</a>
           <a class="btn btn-ghost btn-block" style="margin-top:10px" href="sms:+19162490631?&body=Hi%20Valley%20Details%2C%20I%27d%20like%20to%20book%20a%20detail.">Text Us</a>
         </div>
-        <p class="hoursline">Monday to Saturday, 8am to 6pm. Closed Sunday.</p>
+        <p class="hoursline">Seven days a week, 8am to 6pm. The last detail of the day starts at 6 and we finish it.</p>
       </div>
     </div>
 
     <h3 class="h3" style="margin-top:48px">Where we go</h3>
-    <p style="color:var(--muted);font-size:15px;margin:0;max-width:60ch">We stay close to home, about 15 miles around Elk Grove. Right on the edge of that? Call and we will tell you if we can make the drive.</p>
+    <p style="color:var(--muted);font-size:15px;margin:0;max-width:60ch">Anywhere within 15 miles of Elk Grove, no travel charge. Between 15 and 25 miles we can still come out, it is a flat <b style="color:#fff">$25</b> on top of the detail. Past 25 miles, book it anyway and we will call you to work it out before we drive.</p>
     <div class="area">
       <span class="hub">Elk Grove</span><span class="hub">South Sacramento</span><span>Laguna West</span>
       <span>Vineyard</span><span>Sheldon</span><span>Florin</span><span>Pocket</span>
@@ -731,7 +733,8 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <p class="kicker">FAQ</p>
     <h2 class="h2">Questions people ask.</h2>
     <div class="faq">
-      <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 15 miles of Elk Grove. If you would rather drop the car off, pick that option when you book and we will text you the address.</div></details>
+      <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 15 miles of Elk Grove with no travel charge. If you would rather drop the car off, pick that option when you book and we will text you the address.</div></details>
+      <details class="q"><summary>What if I am outside Elk Grove?</summary><div class="a">Inside 15 miles of Elk Grove there is no travel charge at all, and that covers most of south Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket and Delta Shores. Between 15 and 25 miles out, the detail is the same price plus a flat <b style="color:#fff">$25</b> for the drive. Past 25 miles, go ahead and book and we will call you first — some days we can make it work and some days we cannot, and we would rather tell you straight than no-show you.</div></details>
       <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we knock <b style="color:#fff">$5 off the price</b> for it. We run off an outside spigot and an outdoor outlet. To be straight with you about what that actually costs: a two hour job pulls roughly 30 gallons and a couple of kilowatt-hours, which lands under a dollar on your bill. The $5 is not us breaking even, it is us not wanting to nickel you over a hose. If you are not sure you have an outdoor spigot or outlet, or your complex is tight on space, say so when you book and we will sort it out before we drive over.</div></details>
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full inside and outside on a normal car. If we look at yours and think it needs longer, because of matted pet hair or a bad spill, we tell you before we start rather than after. You do not have to stand around either. We text you when we are wrapping up.</div></details>
       <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Pick your size on the pricing list and that is what you pay, half off through Monday the 14th. Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
@@ -775,7 +778,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <a href="#pricing">Pricing</a>
         <a href="#work">Our work</a>
         <a href="#faq">FAQ</a>
-        <p>Mon to Sat, 8am to 6pm</p>
+        <p>Seven days, 8am to 6pm</p>
       </div>
     </div>
     <div class="foot-bot">
@@ -804,7 +807,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   "sameAs":["https://www.instagram.com/valleydetailsca/"],
   "address":{"@type":"PostalAddress","addressLocality":"Elk Grove","addressRegion":"CA","addressCountry":"US"},
   "areaServed":{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":38.4088,"longitude":-121.3716},"geoRadius":"24140"},
-  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"18:00"}]
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"20:00"}]
 }
 </script>
 
@@ -840,11 +843,21 @@ const CFG = {
        POST {API_BASE}/api/public/schedule/{SLUG}/vip                     */
   API_BASE   : 'https://dashboard.boyerscales.com',
   SLUG       : 'valleydetails',
-  SLOT_MIN   : 120,
+  SLOT_MIN   : 120,   /* a detail blocks two hours */
+  STEP_MIN   : 60,    /* ...but start times are offered every hour: 8, 9, 10 … */
   HORIZON    : 14,
   LEAD_HOURS : 3,
-  HOURS      : {0:null, 1:['08:00','18:00'], 2:['08:00','18:00'], 3:['08:00','18:00'],
-                4:['08:00','18:00'], 5:['08:00','18:00'], 6:['08:00','18:00']},
+  /* [first start, hard stop]. The picker keeps a whole job inside the span,
+     so a 20:00 stop means the last start offered is 6pm, finishing at 8. */
+  HOURS      : {0:['08:00','20:00'], 1:['08:00','20:00'], 2:['08:00','20:00'], 3:['08:00','20:00'],
+                4:['08:00','20:00'], 5:['08:00','20:00'], 6:['08:00','20:00']},
+
+  /* --- how far we drive ------------------------------------------------
+     Inside RADIUS_MI of Elk Grove there is no travel charge. Past it there
+     is, and past FAR_MI we call first instead of quoting.                */
+  RADIUS_MI  : 15,
+  FAR_MI     : 25,
+  TRAVEL_FEE : 25,
 
   /* --- reviews ---------------------------------------------------------
      Section stays hidden while this is empty. Never invent entries.
@@ -1012,7 +1025,7 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
 /* ------------------------- booking, two steps -------------------------- */
 (function booking(){
   const daysEl = $('#days'), slotsEl = $('#slots'), form = $('#bookForm'), step2 = $('#step2');
-  let cfg = { hours:CFG.HOURS, booked:[], slotMinutes:CFG.SLOT_MIN,
+  let cfg = { hours:CFG.HOURS, booked:[], slotMinutes:CFG.SLOT_MIN, stepMinutes:CFG.STEP_MIN,
               horizonDays:CFG.HORIZON, leadHours:CFG.LEAD_HOURS };
   let mode = 'mobile', pickedDay = null, picked = null;
 
@@ -1060,18 +1073,23 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
   function slotsFor(date){
     const span = cfg.hours[date.getDay()];
     if (!span) return [];
-    const step = cfg.slotMinutes, open = hm2m(span[0]), close = hm2m(span[1]);
+    // Two separate numbers: how long the job runs (slotMinutes, which decides
+    // what a booking blocks) and how far apart the offered start times sit
+    // (stepMinutes). Stepping by the job length is what only ever offered
+    // 8, 10, 12 — an hourly step offers 8, 9, 10 and still blocks two hours.
+    const job = cfg.slotMinutes, step = cfg.stepMinutes || cfg.slotMinutes;
+    const open = hm2m(span[0]), close = hm2m(span[1]);
     const floor = Date.now() + cfg.leadHours*3600*1000;
     const busy = busyBlocks();
     const out = [];
-    for (let m = open; m + step <= close; m += step){
+    for (let m = open; m + job <= close; m += step){
       const start = new Date(date); start.setHours(Math.floor(m/60), m%60, 0, 0);
       const from = start.getTime();
       // Times already gone (past, or inside the lead time) are noise, so they stay
       // hidden. Times that are TAKEN are shown greyed out: an empty-looking day
       // reads as "they don't work Fridays", a struck-through one reads as "busy".
       if (from < floor) continue;
-      const to = from + step * 60000;
+      const to = from + job * 60000;
       const taken = busy.some(b => b.from < to && from < b.to);
       const key = ymd(start)+'T'+pad(start.getHours())+':'+pad(start.getMinutes());
       out.push({ key, text: label(m), date: new Date(start), taken });
@@ -1087,7 +1105,7 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
       const span = cfg.hours[d.getDay()];
       if (!span) continue;
       const all = [];
-      for (let m = hm2m(span[0]); m + cfg.slotMinutes <= hm2m(span[1]); m += cfg.slotMinutes)
+      for (let m = hm2m(span[0]); m + cfg.slotMinutes <= hm2m(span[1]); m += (cfg.stepMinutes || cfg.slotMinutes))
         all.push(ymd(d)+'T'+pad(Math.floor(m/60))+':'+pad(m%60));
       const take = (i*7 + 3) % all.length;
       for (let k = 0; k <= take % 3; k++) booked.push(all[(take + k*2) % all.length]);
@@ -1161,6 +1179,7 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
           const j = await r.json();
           cfg = { hours:j.hours || cfg.hours, booked:j.booked || [],
                   slotMinutes:j.slotMinutes || cfg.slotMinutes,
+                  stepMinutes:j.stepMinutes || cfg.stepMinutes,
                   horizonDays:j.horizonDays || cfg.horizonDays,
                   leadHours:j.leadHours ?? cfg.leadHours };
         }
