@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050506">
 <title>Valley Details | Mobile Car Detailing in Elk Grove</title>
-<meta name="description" content="Full interior and exterior detail at your house, $95. Your first one is $75. Elk Grove and south Sacramento. Book online or call (916) 249-0631.">
+<meta name="description" content="Full interior and exterior detail at your house, $100. Your first one is $75. Elk Grove and south Sacramento. Book online or call (916) 249-0631.">
 <link rel="canonical" href="https://valleydetails.site/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Valley Details | $95 Full Detail in Elk Grove">
-<meta property="og:description" content="$95 full interior and exterior detail at your house, and your first one is $75. Book online or call (916) 249-0631.">
+<meta property="og:title" content="Valley Details | $100 Full Detail in Elk Grove">
+<meta property="og:description" content="$100 full interior and exterior detail at your house, and your first one is $75. Book online or call (916) 249-0631.">
 <meta property="og:image" content="https://valleydetails.site/assets/logo-social.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/icon.png">
@@ -324,12 +324,17 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .callcard .big{font-family:var(--disp);font-style:italic;font-weight:800;font-size:clamp(29px,4.2vw,38px);
   line-height:1;margin:10px 0 8px;display:block}
 .hoursline{margin-top:14px;color:var(--faint);font-size:13.2px;text-align:center}
-.ok-msg{background:rgba(46,213,115,.09);border:1px solid rgba(46,213,115,.3);border-radius:4px;padding:20px;
-  color:#cdebd8;font-size:14.6px;display:none}
+.ok-msg{background:rgba(46,213,115,.09);border:1px solid rgba(46,213,115,.3);border-radius:4px;
+  padding:24px 26px;margin-top:20px;color:#cdebd8;font-size:14.8px;line-height:1.62;display:none}
 .ok-msg.on{display:block}
+.ok-msg strong{display:block;margin-bottom:14px;color:#fff}
+.ok-msg .ok-when{display:block;color:#fff;font-weight:700;margin-bottom:2px}
+.ok-msg .ok-sub{display:block;margin-bottom:16px}
+.ok-msg .ok-note{display:block;margin-bottom:16px}
+/* An element told to hide must hide. .days and .slots set their own display and
+   sit later in this sheet, so without this they outrank [hidden] and stay put. */
+[hidden]{display:none !important}
 .err-msg{color:#ff8a8f;font-size:13.6px;margin-top:10px}
-.delay-note{background:rgba(255,196,0,.08);border:1px solid rgba(255,196,0,.32);border-radius:4px;
-  color:#f3dfa6;font-size:13.4px;line-height:1.5;padding:11px 14px;margin:-4px 0 18px}
 
 /* ---------- reviews (hidden until real ones exist) ---------- */
 #reviews[hidden],#work[hidden],#shotGrid[hidden]{display:none}
@@ -412,6 +417,12 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .tier .old{margin-top:2px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  .mission{padding:clamp(46px,6vw,74px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(237,28,36,.055),transparent)}
+  .mission .wrap{max-width:52ch;text-align:center}
+  .mission .mission-line{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
+    font-size:clamp(25px,4.4vw,42px);line-height:1.07;letter-spacing:-.01em;margin:0 0 18px;color:#fff}
+  .mission span{display:block;color:var(--muted);font-size:15.4px;line-height:1.62}
   .svc-label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:0 0 9px}
   #segService{margin-bottom:18px}
   .tiernote{color:var(--faint);font-size:13px;margin:14px 0 0;max-width:62ch}
@@ -466,7 +477,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <a href="#pricing">Pricing</a>
       <a href="#work">Our Work</a>
       <a href="#how">How It Works</a>
-      <a href="#vip">Club</a>
+      <a href="#vip">Membership</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="hdr-cta">
@@ -482,7 +493,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <div>
       <p class="kicker">Mobile Detailing · Elk Grove</p>
       <h1 class="h1">Like the day<em>you bought it.</em></h1>
-      <p class="lede">A full interior and exterior detail in your own driveway. About two hours, $95. Your first one is $75 through Monday.</p>
+      <p class="lede">A full interior and exterior detail in your own driveway. About two hours, $100. Your first one is $75 through Monday.</p>
       <div class="hero-actions">
         <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
         <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
@@ -499,7 +510,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <h3>The Full Detail</h3>
       <p class="sub">Inside and out</p>
       <div class="priceline">
-        <span class="price-was" id="priceWas">$95</span>
+        <span class="price-was" id="priceWas">$100</span>
         <span class="price-now" id="priceNow">$75</span>
       </div>
       <p class="price-sizes" id="priceSizes">SUV $85 &nbsp;·&nbsp; Truck or 3-row $95</p>
@@ -519,24 +530,32 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   </div>
 </section>
 
+<section class="mission">
+  <div class="wrap">
+    <p class="kicker" style="justify-content:center">Our Mission</p>
+    <p class="mission-line">Keeping your vehicle clean shouldn’t empty your pockets.</p>
+    <span>Our mission is to provide high-quality, professional detailing at an affordable price. We believe everyone deserves to drive a vehicle they’re proud of without having to pay an unreasonable premium.</span>
+  </div>
+</section>
+
 <section id="pricing" class="sec-alt">
   <div class="wrap">
     <p class="kicker">Pricing</p>
     <h2 class="h2">One price. The whole car.</h2>
-    <p class="lede">There is no basic package that skips half the job. Every detail is the full interior and exterior. Find your size, and that is what you pay.</p>
+    <p class="lede">The full detail is exactly that, inside and out, with nothing held back for an upsell. If you want something quicker there is an express below, and we tell you plainly what it leaves out. Find your size, and that is what you pay.</p>
 
     <div class="tiers">
       <div class="tier">
         <div><div class="who">Sedan or Coupe</div><div class="eg">Civic, Camry, Challenger</div></div>
-        <div><div class="amt" data-promo="$75" data-reg="$95">$75</div><div class="old" data-was="$95">$95</div></div>
+        <div><div class="amt" data-promo="$75" data-reg="$100">$75</div><div class="old" data-was="$100">$100</div></div>
       </div>
       <div class="tier">
         <div><div class="who">SUV or Crossover</div><div class="eg">RAV4, Equinox, Explorer</div></div>
-        <div><div class="amt" data-promo="$85" data-reg="$110">$85</div><div class="old" data-was="$110">$110</div></div>
+        <div><div class="amt" data-promo="$85" data-reg="$115">$85</div><div class="old" data-was="$115">$115</div></div>
       </div>
       <div class="tier">
         <div><div class="who">Truck or 3-Row</div><div class="eg">Silverado, Tahoe, Odyssey</div></div>
-        <div><div class="amt" data-promo="$95" data-reg="$125">$95</div><div class="old" data-was="$125">$125</div></div>
+        <div><div class="amt" data-promo="$95" data-reg="$130">$95</div><div class="old" data-was="$130">$130</div></div>
       </div>
     </div>
     <p class="tiernote" id="tierNote">Crossed-out price is what a detail costs every day. The lower one is your first detail with us, through Monday the 14th.</p>
@@ -546,15 +565,15 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <div class="tiers">
       <div class="tier">
         <div><div class="who">Sedan or Coupe</div><div class="eg">Civic, Camry, Challenger</div></div>
-        <div><div class="amt">$55</div></div>
+        <div><div class="amt">$50</div></div>
       </div>
       <div class="tier">
         <div><div class="who">SUV or Crossover</div><div class="eg">RAV4, Equinox, Explorer</div></div>
-        <div><div class="amt">$65</div></div>
+        <div><div class="amt">$60</div></div>
       </div>
       <div class="tier">
         <div><div class="who">Truck or 3-Row</div><div class="eg">Silverado, Tahoe, Odyssey</div></div>
-        <div><div class="amt">$75</div></div>
+        <div><div class="amt">$70</div></div>
       </div>
     </div>
     <p class="tiernote">Same price every day. The first-detail intro is for the full detail only. Add-ons below work on either one.</p>
@@ -654,19 +673,19 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <div class="vip">
       <ul class="vip-perks">
         <li><span class="ico"><svg><use href="#i-repeat"/></svg></span>
-          <div><strong>Two full details a month</strong><p>Not a wash, not a cut-down version. The whole $95 job, twice, on a standing slot. Same day, same time, so you never have to think about booking it.</p></div></li>
+          <div><strong>Two full details a month</strong><p>Not a wash, not a cut-down version. The whole $100 job, twice, on a standing slot. Same day, same time, so you never have to think about booking it.</p></div></li>
         <li><span class="ico"><svg><use href="#i-bolt"/></svg></span>
           <div><strong>Use them on two different cars</strong><p>Both of yours, yours and your partner's, whatever you like. Two details a month is two details a month. We do not care whose driveway they are parked in, as long as it is the same address.</p></div></li>
         <li><span class="ico"><svg><use href="#i-gift"/></svg></span>
           <div><strong>Free add-ons every single visit</strong><p>Tire shine and interior protectant always, plus a rotating extra like engine bay or headlight restoration. Everything else on the add-on list is 20% off.</p></div></li>
         <li><span class="ico"><svg><use href="#i-tag"/></svg></span>
-          <div><strong>More cars, still cheaper</strong><p>Past the two that are included, any other car at the same address is $65 a detail instead of $95. Members also get weekend slots and promos before anyone else sees them.</p></div></li>
+          <div><strong>More cars, still cheaper</strong><p>Past the two that are included, any other car at the same address is $65 a detail instead of $100. Members also get weekend slots and promos before anyone else sees them.</p></div></li>
       </ul>
 
       <div class="vip-card">
         <h3 class="h3" style="position:relative"><svg style="width:21px;height:21px;color:var(--red);vertical-align:-2px;margin-right:6px"><use href="#i-crown"/></svg>Founding membership</h3>
         <div class="club-price"><b id="clubPrice">$120</b><span>/month</span></div>
-        <p class="club-math" id="clubMath">Two full details a month, about $75 each against $95 apiece. Cancel any time, no contract and no cancellation fee.</p>
+        <p class="club-math" id="clubMath">Two full details a month, about $75 each against $100 apiece. Cancel any time, no contract and no cancellation fee.</p>
         <p class="club-spots" id="clubSpots" hidden></p>
         <form id="vipForm" style="position:relative" novalidate>
           <div class="row2">
@@ -701,7 +720,6 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <div class="panel">
         <h4>Book online</h4>
         <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
-        <p class="delay-note" id="textDelay" hidden><strong>Heads up:</strong> right now our confirmation text can take up to 30 minutes to arrive after you book. Your spot is saved the moment this page says you are booked, so there is no need to book twice.</p>
 
         <label class="svc-label">What are we doing?</label>
         <div class="seg" id="segService"></div>
@@ -774,8 +792,8 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <details class="q"><summary>What if I am outside Elk Grove?</summary><div class="a">Inside 15 miles of Elk Grove there is no travel charge at all, and that covers most of south Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket and Delta Shores. Past fifteen it is <b style="color:#fff">$1 a mile</b>, and only for the miles over fifteen. At 20 miles that is $5, at 25 it is $10. Past 25 miles, go ahead and book and we will call you first. Some days we can make it work and some days we cannot, and we would rather tell you straight than no-show you.</div></details>
       <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we knock <b style="color:#fff">$5 off the price</b> for it. We run off an outside spigot and an outdoor outlet. To be straight with you about what that actually costs: a two hour job pulls roughly 30 gallons and a couple of kilowatt-hours, which lands under a dollar on your bill. The $5 is not us breaking even, it is us not wanting to nickel you over a hose. If you are not sure you have an outdoor spigot or outlet, or your complex is tight on space, say so when you book and we will sort it out before we drive over.</div></details>
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full inside and outside on a normal car. If we look at yours and think it needs longer, because of matted pet hair or a bad spill, we tell you before we start rather than after. You do not have to stand around either. We text you when we are wrapping up.</div></details>
-      <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Pick your size on the pricing list and that is what you pay. A full sedan detail is $95, and your first one with us is $75 if you book by Monday the 14th. Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
-      <details class="q"><summary>What happens after Monday?</summary><div class="a">The $75 first-detail price ends September 15th. After that a full sedan detail is $95, and that is what it stays at. No going back up to some other number. Anything booked before the deadline keeps the $75 even if the appointment itself lands later, so grabbing a slot now locks it in.</div></details>
+      <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Pick your size on the pricing list and that is what you pay. A full sedan detail is $100, and your first one with us is $75 if you book by Monday the 14th. Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
+      <details class="q"><summary>What happens after Monday?</summary><div class="a">The $75 first-detail price ends September 15th. After that a full sedan detail is $100, and that is what it stays at. No going back up to some other number. Anything booked before the deadline keeps the $75 even if the appointment itself lands later, so grabbing a slot now locks it in.</div></details>
       <details class="q"><summary>How do I pay?</summary><div class="a">When the job is done, not before. We take just about anything: cash, Zelle, Cash App, Venmo, Apple Pay or card. There is no deposit and nothing is charged through this website.</div></details>
       <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain does not matter and we come as planned. Need to move it yourself, just call or text. No fee, no penalty.</div></details>
     </div>
@@ -786,7 +804,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   <div class="wrap">
     <p class="kicker" style="justify-content:center" id="finaleKicker">First detail $75, through Monday</p>
     <h2 class="h2">Stop looking at the mess.</h2>
-    <p class="lede" id="finaleLede">A full interior and exterior detail at your house. <b style="color:#fff">$75</b> for your first one, <b style="color:#fff">$95</b> after. Thirty seconds to book and no deposit.</p>
+    <p class="lede" id="finaleLede">A full interior and exterior detail at your house. <b style="color:#fff">$75</b> for your first one, <b style="color:#fff">$100</b> after. Thirty seconds to book and no deposit.</p>
     <div class="hero-actions">
       <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
       <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
@@ -861,13 +879,9 @@ const CFG = {
      When it lapses the page reprices itself with no deploy needed.       */
   PROMO_END  : '2026-09-15T00:00:00-07:00',
 
-  /* --- slow confirmation texts -----------------------------------------
-     Warns bookers that the confirmation text can lag up to 30 minutes.
-     Disappears on its own at midnight ending Friday Sept 11, Pacific.     */
-  TEXT_DELAY_UNTIL: '2026-09-12T00:00:00-07:00',
   PRICE: {
-    headlineReg:'$95', headlinePromo:'$75',
-    sizesReg  : 'SUV $110  ·  Truck or 3-row $125',
+    headlineReg:'$100', headlinePromo:'$75',
+    sizesReg  : 'SUV $115  ·  Truck or 3-row $130',
     sizesPromo: 'SUV $85  ·  Truck or 3-row $95'
   },
 
@@ -877,9 +891,9 @@ const CFG = {
      only — the express is already the cheap one.                          */
   SERVICES: [
     { id:'full',    label:'Full Detail',    minutes:120, blurb:'About two hours. The works, inside and out.',
-      prices:{ sedan:95, suv:110, truck:125 } },
+      prices:{ sedan:100, suv:115, truck:130 } },
     { id:'express', label:'Express Detail', minutes:60,  blurb:'About an hour. Inside and out, less thorough.',
-      prices:{ sedan:55, suv:65,  truck:75  } },
+      prices:{ sedan:50, suv:60,  truck:70  } },
   ],
 
   /* --- booking backend -------------------------------------------------
@@ -944,7 +958,6 @@ const CFG = {
 const $  = (s,r=document)=>r.querySelector(s);
 const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
 const pad = n => String(n).padStart(2,'0');
-const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
 
 /* --------------- sticky header sits under the promo strip -------------- */
 (function stack(){
@@ -1329,23 +1342,26 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
 
     const pretty = picked.date.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'}) +
                    ' at ' + picked.text;
+    // Everything used to pick the appointment goes away, or the confirmation
+    // reads as one more step rather than the end of it.
     daysEl.hidden = true; slotsEl.hidden = true; form.hidden = true;
     $('.panel .ph-sub').hidden = true;
-    $('#textDelay').hidden = true;
+    $('#segService').hidden = true;
+    $('.svc-label').hidden = true;
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
-    const textLine = textDelayed()
-      ? `We will text ${phone} to confirm. Right now that text can take up to 30 minutes to arrive, so do not worry if it is not instant. Nothing has been charged.`
-      : `We will text ${phone} shortly to confirm. Nothing has been charged.`;
-    box.innerHTML = `<strong style="font-size:17px">Got it, ${name.split(' ')[0]}.</strong><br><br>
-      <b>${pretty}</b><br>${mode === 'mobile' ? 'We come to you' : 'Drop off'} · ${vehicle}<br><br>
-      ${textLine}<br><br>
+    const textLine = `We will text ${phone} shortly to confirm. Nothing has been charged.`;
+    const first = name.split(' ')[0];
+    const shown = first.charAt(0).toUpperCase() + first.slice(1);
+    box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
+      <span class="ok-when">${pretty}</span>
+      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off'} · ${vehicle}</span>
+      <span class="ok-note">${textLine}</span>
       Need to change it? Call or text <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a>.`;
     box.classList.add('on');
     box.scrollIntoView({behavior:'smooth', block:'center'});
   });
 
-  $('#textDelay').hidden = !textDelayed();
   load();
 })();
 
