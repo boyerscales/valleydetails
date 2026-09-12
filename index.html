@@ -240,7 +240,12 @@ nav.main a:hover{color:#fff}
 .step p{margin:0;color:var(--muted);font-size:14.6px}
 
 /* ---------- valley club ---------- */
-.vip{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.2vw,40px);align-items:start}
+.vip{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.2vw,40px);align-items:stretch}
+/* The perk list is shorter than the signup card, so left it alone the two
+   columns ended at different heights and the card hung off the bottom.
+   Spreading the perks over the full row height lands both on the same line. */
+.vip-perks{height:100%;align-content:space-between}
+@media (max-width:960px){.vip-perks{height:auto;align-content:start}}
 .vip-card{background:linear-gradient(165deg,#17171d,#0c0c10);border:1px solid var(--line2);border-radius:5px;
   padding:clamp(24px,3vw,32px);position:relative;overflow:hidden;box-shadow:var(--shadow)}
 .vip-card::before{content:"";position:absolute;inset:0;
@@ -407,6 +412,8 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .tier .old{margin-top:2px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  .svc-label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:0 0 9px}
+  #segService{margin-bottom:18px}
   .tiernote{color:var(--faint);font-size:13px;margin:14px 0 0;max-width:62ch}
   .club-price{display:flex;align-items:baseline;gap:6px;margin:0 0 6px}
   .club-price b{font-family:var(--disp);font-style:italic;font-weight:800;font-size:46px;line-height:1;color:#fff}
@@ -534,6 +541,24 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     </div>
     <p class="tiernote" id="tierNote">Crossed-out price is what a detail costs every day. The lower one is your first detail with us, through Monday the 14th.</p>
 
+    <h3 class="h3" style="margin-top:44px">In a hurry? The Express Detail</h3>
+    <p style="color:var(--muted);font-size:15px;margin:0 0 18px;max-width:62ch">Not everybody needs the full two hours. The express is an hour: hand wash outside, vacuum and wipe-down inside. Honest work, just not as deep — we are not pulling ground-in grit out of the carpet or conditioning the leather.</p>
+    <div class="tiers">
+      <div class="tier">
+        <div><div class="who">Sedan or Coupe</div><div class="eg">Civic, Camry, Challenger</div></div>
+        <div><div class="amt">$55</div></div>
+      </div>
+      <div class="tier">
+        <div><div class="who">SUV or Crossover</div><div class="eg">RAV4, Equinox, Explorer</div></div>
+        <div><div class="amt">$65</div></div>
+      </div>
+      <div class="tier">
+        <div><div class="who">Truck or 3-Row</div><div class="eg">Silverado, Tahoe, Odyssey</div></div>
+        <div><div class="amt">$75</div></div>
+      </div>
+    </div>
+    <p class="tiernote">Same price every day — the first-detail intro is for the full detail. Add-ons below work on either one.</p>
+
     <h3 class="h3" style="margin-top:44px">Ways to pay less</h3>
     <div class="saves">
       <div class="save">
@@ -546,7 +571,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       </div>
       <div class="save">
         <span class="ico"><svg><use href="#i-crown"/></svg></span>
-        <div><b>Join the Club</b><p>$135 a month keeps your car spectacular — three visits, every month. <a href="#vip" style="color:var(--red);font-weight:600">See how it works</a></p></div>
+        <div><b>Join the Club</b><p>$149 a month gets two full details, and they can be two different cars. <a href="#vip" style="color:var(--red);font-weight:600">See how it works</a></p></div>
       </div>
     </div>
 
@@ -625,23 +650,23 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   <div class="wrap">
     <p class="kicker">Membership</p>
     <h2 class="h2">The Valley Club</h2>
-    <p class="lede">Keep your car spectacular for <b style="color:#fff">$135 a month</b>. Three visits, every month, and the price never goes up for as long as you stay. Ten founding memberships — when they are gone, they are gone.</p>
+    <p class="lede">Keep your car spectacular for <b style="color:#fff">$149 a month</b>. Two full details every month, and they do not have to be the same car. The price never goes up for as long as you stay. Ten founding memberships — when they are gone, they are gone.</p>
     <div class="vip">
       <ul class="vip-perks">
         <li><span class="ico"><svg><use href="#i-repeat"/></svg></span>
-          <div><strong>A full detail every month</strong><p>The whole inside and outside, the same $95 job, on a standing slot — same day, same time, so you never have to think about booking it.</p></div></li>
+          <div><strong>Two full details a month</strong><p>Not a wash, not a cut-down version — the whole $95 job, twice, on a standing slot. Same day, same time, so you never have to think about booking it.</p></div></li>
         <li><span class="ico"><svg><use href="#i-bolt"/></svg></span>
-          <div><strong>Then two clean-ups in between</strong><p>Hand wash, wheels and tires, interior wipe-down, vacuum and glass. About forty five minutes each, roughly every ten days, and they only take that long because your car never gets bad again.</p></div></li>
+          <div><strong>Use them on two different cars</strong><p>Both of yours, yours and your partner's, whatever you like. Two details a month is two details a month — we do not care whose driveway they are parked in, as long as it is the same address.</p></div></li>
         <li><span class="ico"><svg><use href="#i-gift"/></svg></span>
           <div><strong>Free add-ons every single visit</strong><p>Tire shine and interior protectant always, plus a rotating extra like engine bay or headlight restoration. Everything else on the add-on list is 20% off.</p></div></li>
         <li><span class="ico"><svg><use href="#i-tag"/></svg></span>
-          <div><strong>The second car rides along</strong><p>Another car at the same address is $65 a detail instead of $95. Members also get weekend slots and promos before anyone else sees them.</p></div></li>
+          <div><strong>More cars, still cheaper</strong><p>Past the two that are included, any other car at the same address is $65 a detail instead of $95. Members also get weekend slots and promos before anyone else sees them.</p></div></li>
       </ul>
 
       <div class="vip-card">
         <h3 class="h3" style="position:relative"><svg style="width:21px;height:21px;color:var(--red);vertical-align:-2px;margin-right:6px"><use href="#i-crown"/></svg>Founding membership</h3>
         <div class="club-price"><b id="clubPrice">$120</b><span>/month</span></div>
-        <p class="club-math" id="clubMath">Three visits a month, about $45 each. Cancel any time, no contract and no cancellation fee.</p>
+        <p class="club-math" id="clubMath">Two full details a month, about $75 each against $95 apiece. Cancel any time, no contract and no cancellation fee.</p>
         <p class="club-spots" id="clubSpots" hidden></p>
         <form id="vipForm" style="position:relative" novalidate>
           <div class="row2">
@@ -678,6 +703,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
         <p class="delay-note" id="textDelay" hidden><strong>Heads up:</strong> right now our confirmation text can take up to 30 minutes to arrive after you book. Your spot is saved the moment this page says you are booked, so there is no need to book twice.</p>
 
+        <label class="svc-label">What are we doing?</label>
+        <div class="seg" id="segService"></div>
+
         <div class="days" id="days"></div>
         <div class="slots" id="slots"></div>
 
@@ -700,7 +728,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
             </div>
             <div class="field"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger"></div>
             <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street address, Elk Grove">
-              <p class="fieldnote">Free travel within 15 miles of Elk Grove. Farther out is a $25 travel charge, and past 25 miles we will call you before we commit.</p></div>
+              <p class="fieldnote">Free travel within 15 miles of Elk Grove. Past that it is $1 a mile — 20 miles out is $5. Past 25 miles we will call you before we commit.</p></div>
 
             <button type="button" class="linkbtn" id="noteToggle">Add a note</button>
             <div class="field" id="noteField" hidden style="margin-top:6px">
@@ -728,7 +756,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     </div>
 
     <h3 class="h3" style="margin-top:48px">Where we go</h3>
-    <p style="color:var(--muted);font-size:15px;margin:0;max-width:60ch">Anywhere within 15 miles of Elk Grove, no travel charge. Between 15 and 25 miles we can still come out, it is a flat <b style="color:#fff">$25</b> on top of the detail. Past 25 miles, book it anyway and we will call you to work it out before we drive.</p>
+    <p style="color:var(--muted);font-size:15px;margin:0;max-width:60ch">Anywhere within 15 miles of Elk Grove, no travel charge at all. Past that it is <b style="color:#fff">$1 a mile</b> for the miles over fifteen — so 20 miles out is $5 and 25 is $10, on top of the detail. Past 25 miles, book it anyway and we will call you to work it out before we drive.</p>
     <div class="area">
       <span class="hub">Elk Grove</span><span class="hub">South Sacramento</span><span>Laguna West</span>
       <span>Vineyard</span><span>Sheldon</span><span>Florin</span><span>Pocket</span>
@@ -743,7 +771,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <h2 class="h2">Questions people ask.</h2>
     <div class="faq">
       <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 15 miles of Elk Grove with no travel charge. If you would rather drop the car off, pick that option when you book and we will text you the address.</div></details>
-      <details class="q"><summary>What if I am outside Elk Grove?</summary><div class="a">Inside 15 miles of Elk Grove there is no travel charge at all, and that covers most of south Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket and Delta Shores. Between 15 and 25 miles out, the detail is the same price plus a flat <b style="color:#fff">$25</b> for the drive. Past 25 miles, go ahead and book and we will call you first — some days we can make it work and some days we cannot, and we would rather tell you straight than no-show you.</div></details>
+      <details class="q"><summary>What if I am outside Elk Grove?</summary><div class="a">Inside 15 miles of Elk Grove there is no travel charge at all, and that covers most of south Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket and Delta Shores. Past fifteen it is <b style="color:#fff">$1 a mile</b>, and only for the miles over fifteen — at 20 miles that is $5, at 25 it is $10. Past 25 miles, go ahead and book and we will call you first — some days we can make it work and some days we cannot, and we would rather tell you straight than no-show you.</div></details>
       <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we knock <b style="color:#fff">$5 off the price</b> for it. We run off an outside spigot and an outdoor outlet. To be straight with you about what that actually costs: a two hour job pulls roughly 30 gallons and a couple of kilowatt-hours, which lands under a dollar on your bill. The $5 is not us breaking even, it is us not wanting to nickel you over a hose. If you are not sure you have an outdoor spigot or outlet, or your complex is tight on space, say so when you book and we will sort it out before we drive over.</div></details>
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full inside and outside on a normal car. If we look at yours and think it needs longer, because of matted pet hair or a bad spill, we tell you before we start rather than after. You do not have to stand around either. We text you when we are wrapping up.</div></details>
       <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Pick your size on the pricing list and that is what you pay. A full sedan detail is $95, and your first one with us is $75 if you book by Monday the 14th. Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
@@ -843,6 +871,17 @@ const CFG = {
     sizesPromo: 'SUV $85  ·  Truck or 3-row $95'
   },
 
+  /* --- what we sell ----------------------------------------------------
+     `minutes` has to match booking_config.services on the dashboard: it is
+     what the calendar blocks out. The intro price applies to the full detail
+     only — the express is already the cheap one.                          */
+  SERVICES: [
+    { id:'full',    label:'Full Detail',    minutes:120, blurb:'About two hours. The works, inside and out.',
+      prices:{ sedan:95, suv:110, truck:125 } },
+    { id:'express', label:'Express Detail', minutes:60,  blurb:'About an hour. Inside and out, less thorough.',
+      prices:{ sedan:55, suv:65,  truck:75  } },
+  ],
+
   /* --- booking backend -------------------------------------------------
      Empty API_BASE = demo mode (invents believable availability so the
      calendar is usable today). Point it at the Blue SMS dashboard origin
@@ -866,7 +905,7 @@ const CFG = {
      collects founding signups the way it always has and nobody is asked for
      money; paste the link in and the button becomes a real checkout.        */
   CLUB: {
-    PRICE      : 135,
+    PRICE      : 149,
     SPOTS      : 10,
     STRIPE_LINK: '',
     SECOND_CAR : 65,
@@ -877,7 +916,7 @@ const CFG = {
      is, and past FAR_MI we call first instead of quoting.                */
   RADIUS_MI  : 15,
   FAR_MI     : 25,
-  TRAVEL_FEE : 25,
+  TRAVEL_PER_MILE : 1,
 
   /* --- reviews ---------------------------------------------------------
      Section stays hidden while this is empty. Never invent entries.
@@ -943,7 +982,10 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
     $('#finaleKicker').textContent = 'Book a detail';
     $('#finaleLede').innerHTML = 'A full interior and exterior detail at your house, from <b style="color:#fff">' +
       CFG.PRICE.headlineReg + '</b>. Thirty seconds to book and no deposit.';
-    $$('.tier .amt').forEach(a => a.textContent = a.dataset.reg);
+    // Only the full-detail cards carry an intro price. The express cards have no
+    // data-reg, and writing `undefined` into them is exactly what happened the
+    // first time this ran over every .tier on the page.
+    $$('.tier .amt').forEach(a => { if (a.dataset.reg) a.textContent = a.dataset.reg; });
     $$('.tier .old').forEach(o => o.hidden = true);
     $('#tierNote').textContent = 'That is the price, every day. No deposit, and nothing gets added at the end.';
   }
@@ -1047,8 +1089,39 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
 (function booking(){
   const daysEl = $('#days'), slotsEl = $('#slots'), form = $('#bookForm'), step2 = $('#step2');
   let cfg = { hours:CFG.HOURS, booked:[], slotMinutes:CFG.SLOT_MIN, stepMinutes:CFG.STEP_MIN,
-              horizonDays:CFG.HORIZON, leadHours:CFG.LEAD_HOURS };
+              horizonDays:CFG.HORIZON, leadHours:CFG.LEAD_HOURS, services:CFG.SERVICES };
   let mode = 'mobile', pickedDay = null, picked = null;
+  let service = (CFG.SERVICES && CFG.SERVICES[0]) || null;
+
+  /* An express is an hour and a full detail is two, so the service has to be
+     chosen before the times are drawn — an hour job fits gaps a full one can't,
+     and blocking two hours for a one hour job would quietly lose him bookings. */
+  function serviceMinutes(){
+    return (service && service.minutes) || cfg.slotMinutes;
+  }
+  function renderServices(){
+    const list = (cfg.services && cfg.services.length ? cfg.services : CFG.SERVICES) || [];
+    const el = $('#segService');
+    if (list.length < 2){ el.hidden = true; return; }
+    // The server owns id and minutes; the site owns how it reads.
+    const copy = id => (CFG.SERVICES.find(x => x.id === id) || {});
+    el.innerHTML = list.map(x => {
+      const c = copy(x.id);
+      const from = c.prices ? ' · from $' + c.prices.sedan : '';
+      return `<button type="button" data-svc="${x.id}"${x.id === (service && service.id) ? ' class="sel"' : ''}>` +
+             `${c.label || x.label}<small>${(c.blurb || '')}${from}</small></button>`;
+    }).join('');
+    $$('button', el).forEach(b => b.addEventListener('click', () => {
+      const hit = list.find(x => x.id === b.dataset.svc);
+      if (!hit || (service && hit.id === service.id)) return;
+      service = { ...hit, ...copy(hit.id), id: hit.id, minutes: hit.minutes };
+      $$('button', el).forEach(x => x.classList.remove('sel'));
+      b.classList.add('sel');
+      // A different length means different open times, so start the pick over.
+      picked = null; step2.hidden = true;
+      renderDays();
+    }));
+  }
 
   const ymd  = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
   const hm2m = s => (+s.slice(0,2))*60 + (+s.slice(3,5));
@@ -1098,7 +1171,7 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
     // what a booking blocks) and how far apart the offered start times sit
     // (stepMinutes). Stepping by the job length is what only ever offered
     // 8, 10, 12 — an hourly step offers 8, 9, 10 and still blocks two hours.
-    const job = cfg.slotMinutes, step = cfg.stepMinutes || cfg.slotMinutes;
+    const job = serviceMinutes(), step = cfg.stepMinutes || cfg.slotMinutes;
     const open = hm2m(span[0]), close = hm2m(span[1]);
     const floor = Date.now() + cfg.leadHours*3600*1000;
     const busy = busyBlocks();
@@ -1201,11 +1274,17 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
           cfg = { hours:j.hours || cfg.hours, booked:j.booked || [],
                   slotMinutes:j.slotMinutes || cfg.slotMinutes,
                   stepMinutes:j.stepMinutes || cfg.stepMinutes,
+                  services:(j.services && j.services.length) ? j.services : cfg.services,
                   horizonDays:j.horizonDays || cfg.horizonDays,
                   leadHours:j.leadHours ?? cfg.leadHours };
+          // Keep the picked service pointing at the server's copy of it.
+          const match = cfg.services.find(x => x.id === (service && service.id));
+          if (match) service = { ...service, ...match };
+          else service = cfg.services[0] || service;
         }
       } catch (_) {}
     } else seedDemo();
+    renderServices();
     renderDays();
   }
 
@@ -1231,7 +1310,11 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
           method:'POST', headers:{'Content-Type':'application/json'},
           body: JSON.stringify({ name, phone, start:picked.key, vehicle, mode, address:addr, notes,
-                                 promo:'FIRST75', service:'Full Interior + Exterior Detail' })
+                                 promo: service && service.id === 'express' ? '' : 'FIRST75',
+                                 service_id: service && service.id,
+                                 service: service && service.id === 'express'
+                                   ? 'Express Detail (inside + outside)'
+                                   : 'Full Interior + Exterior Detail' })
         });
         const j = await r.json().catch(()=>({}));
         ok = r.ok && j.ok !== false;
