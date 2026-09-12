@@ -407,6 +407,13 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .tier .old{margin-top:2px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  .club-price{display:flex;align-items:baseline;gap:6px;margin:0 0 6px}
+  .club-price b{font-family:var(--disp);font-style:italic;font-weight:800;font-size:46px;line-height:1;color:#fff}
+  .club-price span{color:var(--muted);font-size:15px;font-weight:600}
+  .club-math{color:var(--muted);font-size:14px;margin:0 0 14px}
+  .club-spots{display:inline-flex;align-items:center;gap:8px;margin:0 0 16px;padding:8px 13px;
+    background:var(--red-wash);border:1px solid rgba(237,28,36,.32);border-radius:4px;
+    font-size:13.4px;font-weight:600;color:#fff}
   .fieldnote{color:var(--faint);font-size:12.6px;line-height:1.45;margin:6px 0 0}
 </style>
 </head>
@@ -614,46 +621,46 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
 <section id="vip">
   <div class="wrap">
-    <p class="kicker">Optional</p>
+    <p class="kicker">Membership</p>
     <h2 class="h2">The Valley Club</h2>
-    <p class="lede">For people who would rather their car never got dirty in the first place. Members keep a standing spot on the calendar and pay less every time.</p>
+    <p class="lede">Ten founding memberships, <b style="color:#fff">$120 a month</b>. Two visits every month, and the price never goes up for as long as you stay. When the ten are gone, they are gone.</p>
     <div class="vip">
       <ul class="vip-perks">
         <li><span class="ico"><svg><use href="#i-repeat"/></svg></span>
-          <div><strong>A standing spot on the calendar</strong><p>Same day, same time, every month or every other week. Your car never gets far enough gone to need rescuing.</p></div></li>
+          <div><strong>A full detail every month</strong><p>The whole inside and outside, the same job everyone else pays $149 for. Your standing slot, same day and time, so you never have to think about booking it.</p></div></li>
         <li><span class="ico"><svg><use href="#i-bolt"/></svg></span>
-          <div><strong>Member pricing and first pick</strong><p>$119 on a sedan detail every time, and weekend slots open to members before anyone else sees them.</p></div></li>
+          <div><strong>Plus a maintenance visit mid-month</strong><p>Exterior wash, wheels and tires, interior wipe-down, vacuum and glass. About forty five minutes, and it is only possible because your car never gets bad again.</p></div></li>
         <li><span class="ico"><svg><use href="#i-gift"/></svg></span>
-          <div><strong>Free add-ons every visit</strong><p>Tire shine and interior protectant always, plus a rotating extra like engine bay or headlights.</p></div></li>
+          <div><strong>Free add-ons every single visit</strong><p>Tire shine and interior protectant always, plus a rotating extra like engine bay or headlight restoration. Everything else on the add-on list is 20% off.</p></div></li>
         <li><span class="ico"><svg><use href="#i-tag"/></svg></span>
-          <div><strong>Deals reach you first</strong><p>Promos like this one go out to members days before they hit Instagram. Some never leave the list.</p></div></li>
+          <div><strong>The second car rides along</strong><p>Another car at the same address is $79 a detail instead of $149. Members also get weekend slots and promos before anyone else sees them.</p></div></li>
       </ul>
 
       <div class="vip-card">
-        <h3 class="h3" style="position:relative"><svg style="width:21px;height:21px;color:var(--red);vertical-align:-2px;margin-right:6px"><use href="#i-crown"/></svg>Claim a founding spot</h3>
-        <p style="color:var(--muted);font-size:14.4px;margin:0 0 20px;position:relative">The Club opens soon and founding members keep launch pricing for good. It is free to join and nothing is charged today. We text you when spots open and you decide then.</p>
+        <h3 class="h3" style="position:relative"><svg style="width:21px;height:21px;color:var(--red);vertical-align:-2px;margin-right:6px"><use href="#i-crown"/></svg>Founding membership</h3>
+        <div class="club-price"><b id="clubPrice">$120</b><span>/month</span></div>
+        <p class="club-math" id="clubMath">Two visits a month. Cancel any time, no contract and no cancellation fee.</p>
+        <p class="club-spots" id="clubSpots" hidden></p>
         <form id="vipForm" style="position:relative" novalidate>
           <div class="row2">
             <div class="field"><label for="vName">Name</label><input id="vName" autocomplete="name" placeholder="Your name"></div>
             <div class="field"><label for="vPhone">Mobile</label><input id="vPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(916) 555-0123"></div>
           </div>
-          <div class="field"><label for="vPlan">How often?</label>
+          <div class="field"><label for="vPlan">Which day suits you?</label>
             <select id="vPlan">
-              <option value="monthly">Once a month</option>
+              <option value="monthly">Once a month is perfect</option>
               <option value="biweekly">Every two weeks</option>
               <option value="quarterly">Every few months</option>
               <option value="unsure">Not sure yet, just keep me posted</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-red btn-block" style="margin-top:6px">Save My Spot</button>
+          <button type="submit" class="btn btn-red btn-block" style="margin-top:6px" id="vipBtn">Claim a Founding Spot</button>
           <p class="err-msg" id="vipErr"></p>
-          <p class="formnote">Texts about the Club only. Reply STOP any time.</p>
+          <p class="formnote" id="vipNote">Nothing is charged right now. We text you to set up your first visit and your standing slot, and billing starts after that detail is done.</p>
         </form>
-        <div class="ok-msg" id="vipOk"><strong>You are on the list.</strong><br>We will text you the moment founding spots open. Want a detail before then? Book below. Members and guests use the same calendar.</div>
+        <div class="ok-msg" id="vipOk"><strong>Your founding spot is held.</strong><br>We will text you today to pick your standing slot and get the first detail on the calendar. Billing starts after that one is done, never before.</div>
       </div>
     </div>
-    <div class="guest"><svg><use href="#i-check"/></svg>
-      <div><strong>Browsing as a guest is completely fine.</strong> You never need an account to see prices or book. The Club is an extra for regulars, and nothing on this site is hidden behind it.</div></div>
   </div>
 </section>
 
@@ -851,6 +858,17 @@ const CFG = {
      so a 20:00 stop means the last start offered is 6pm, finishing at 8. */
   HOURS      : {0:['08:00','20:00'], 1:['08:00','20:00'], 2:['08:00','20:00'], 3:['08:00','20:00'],
                 4:['08:00','20:00'], 5:['08:00','20:00'], 6:['08:00','20:00']},
+
+  /* --- the Valley Club -------------------------------------------------
+     STRIPE_LINK is the $120/mo Payment Link. While it is empty the section
+     collects founding signups the way it always has and nobody is asked for
+     money; paste the link in and the button becomes a real checkout.        */
+  CLUB: {
+    PRICE      : 120,
+    SPOTS      : 10,
+    STRIPE_LINK: '',
+    SECOND_CAR : 79,
+  },
 
   /* --- how far we drive ------------------------------------------------
      Inside RADIUS_MI of Elk Grove there is no travel charge. Past it there
@@ -1247,7 +1265,36 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
 
 /* --------------------------- club signup ------------------------------ */
 (function vip(){
-  const form = $('#vipForm');
+  const form = $('#vipForm'), club = CFG.CLUB || {};
+  const btn = $('#vipBtn');
+
+  $('#clubPrice').textContent = '$' + club.PRICE;
+
+  /* The spot counter is real or it is absent. A hardcoded "only 2 left!" is the
+     one thing that would make a genuinely good offer read as a scam, so if the
+     count can't be fetched the line simply stays hidden. */
+  (async () => {
+    if (!CFG.API_BASE) return;
+    try {
+      const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/vip-count`);
+      if (!r.ok) return;
+      const j = await r.json();
+      const left = Number(j.remaining);
+      if (!Number.isFinite(left)) return;
+      const el = $('#clubSpots');
+      el.textContent = left > 0
+        ? `${left} of ${j.limit} founding spots left`
+        : `All ${j.limit} founding spots are taken — join the waitlist`;
+      el.hidden = false;
+      if (left <= 0) btn.textContent = 'Join the Waitlist';
+    } catch (_) {}
+  })();
+
+  /* Once the Payment Link exists the button IS the checkout. Until then this
+     stays a signup and nobody is asked for money they can't yet pay. */
+  if (club.STRIPE_LINK){
+    $('#vipNote').textContent = 'Card on file, charged monthly. Cancel any time from the receipt email — no contract, no cancellation fee.';
+  }
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const err = $('#vipErr'); err.textContent = '';
@@ -1258,7 +1305,6 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
     // This used to swallow every failure, so signups vanished while the page
     // told people they were in.
     if (CFG.API_BASE){
-      const btn = form.querySelector('button[type=submit]');
       btn.disabled = true; btn.textContent = 'Saving';
       let ok = false;
       try {
@@ -1272,8 +1318,14 @@ const textDelayed = () => Date.now() < new Date(CFG.TEXT_DELAY_UNTIL).getTime();
       } catch (_) {
         err.textContent = 'Could not reach us. Try again, or call ' + CFG.PHONE_TEXT + '.';
       }
-      btn.disabled = false; btn.textContent = 'Save My Spot';
+      btn.disabled = false; btn.textContent = 'Claim a Founding Spot';
       if (!ok) return;
+    }
+    // Saved first, paid second: if Stripe is set up we hand them straight to
+    // checkout, and if they bail there we still have the lead.
+    if (club.STRIPE_LINK){
+      window.location.href = club.STRIPE_LINK;
+      return;
     }
     form.hidden = true;
     $('#vipOk').classList.add('on');
