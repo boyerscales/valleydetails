@@ -737,8 +737,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
             <label>Where should we do it?</label>
             <div class="seg" id="segMode">
               <button type="button" data-mode="mobile" class="sel">We come to you<small>Your driveway or lot</small></button>
-              <button type="button" data-mode="dropoff">I will drop it off<small>We text the address</small></button>
+              <button type="button" data-mode="dropoff">I will drop it off<small>9280 Trout Way, Elk Grove</small></button>
             </div>
+            <p class="fieldnote" id="dropNote" hidden style="margin:-4px 0 12px">Bring the car to <b style="color:#fff">9280 Trout Way, Elk Grove, CA</b> at your booked time.</p>
 
             <div class="row2">
               <div class="field"><label for="bName">Name</label><input id="bName" autocomplete="name" placeholder="Your name"></div>
@@ -788,7 +789,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <p class="kicker">FAQ</p>
     <h2 class="h2">Questions people ask.</h2>
     <div class="faq">
-      <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 15 miles of Elk Grove with no travel charge. If you would rather drop the car off, pick that option when you book and we will text you the address.</div></details>
+      <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 15 miles of Elk Grove with no travel charge. If you would rather drop the car off, bring it to 9280 Trout Way in Elk Grove. Just pick drop off when you book.</div></details>
       <details class="q"><summary>What if I am outside Elk Grove?</summary><div class="a">Inside 15 miles of Elk Grove there is no travel charge at all, and that covers most of south Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket and Delta Shores. Past fifteen it is <b style="color:#fff">$1 a mile</b>, and only for the miles over fifteen. At 20 miles that is $5, at 25 it is $10. Past 25 miles, go ahead and book and we will call you first. Some days we can make it work and some days we cannot, and we would rather tell you straight than no-show you.</div></details>
       <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we knock <b style="color:#fff">$5 off the price</b> for it. We run off an outside spigot and an outdoor outlet. To be straight with you about what that actually costs: a two hour job pulls roughly 30 gallons and a couple of kilowatt-hours, which lands under a dollar on your bill. The $5 is not us breaking even, it is us not wanting to nickel you over a hose. If you are not sure you have an outdoor spigot or outlet, or your complex is tight on space, say so when you book and we will sort it out before we drive over.</div></details>
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full inside and outside on a normal car. If we look at yours and think it needs longer, because of matted pet hair or a bad spill, we tell you before we start rather than after. You do not have to stand around either. We text you when we are wrapping up.</div></details>
@@ -1147,6 +1148,7 @@ const pad = n => String(n).padStart(2,'0');
     b.classList.add('sel');
     mode = b.dataset.mode;
     $('#addrField').hidden = mode !== 'mobile';
+    $('#dropNote').hidden = mode !== 'dropoff';
     if (mode !== 'mobile') $('#bAddr').value = '';
   }));
 
@@ -1355,7 +1357,7 @@ const pad = n => String(n).padStart(2,'0');
     const shown = first.charAt(0).toUpperCase() + first.slice(1);
     box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
       <span class="ok-when">${pretty}</span>
-      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off'} · ${vehicle}</span>
+      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${vehicle}</span>
       <span class="ok-note">${textLine}</span>
       Need to change it? Call or text <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a>.`;
     box.classList.add('on');
