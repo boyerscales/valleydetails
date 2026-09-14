@@ -104,6 +104,11 @@ nav.main{display:flex;gap:26px;align-items:center}
 nav.main a{font-weight:600;font-size:14.5px;color:var(--muted);transition:color .14s}
 nav.main a:hover{color:#fff}
 .hdr-cta{display:flex;gap:10px;align-items:center}
+/* Square, and exactly as tall as the phone button beside it: 13px padding plus a
+   1.05em icon there, 11px padding plus a 4px-larger icon here. */
+.btn-icon{padding:11px}
+.btn-icon svg{width:calc(1.05em + 4px);height:calc(1.05em + 4px)}
+.btn-icon:hover{border-color:var(--red);color:#fff;background:var(--red-wash)}
 
 /* ---------- hero ---------- */
 .hero{position:relative;padding:clamp(46px,6vw,84px) 0 clamp(52px,7vw,88px);overflow:hidden;isolation:isolate}
@@ -481,6 +486,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <a href="#faq">FAQ</a>
     </nav>
     <div class="hdr-cta">
+      <a class="btn btn-ghost btn-sm btn-icon" href="https://www.instagram.com/valleydetailsca/" target="_blank" rel="noopener" aria-label="Valley Details on Instagram" title="@valleydetailsca on Instagram"><svg><use href="#i-ig"/></svg></a>
       <a class="btn btn-ghost btn-sm" href="tel:+19162490631"><svg><use href="#i-phone"/></svg><span>(916) 249-0631</span></a>
       <a class="btn btn-red btn-sm" href="#book">Book</a>
     </div>
