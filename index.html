@@ -1074,6 +1074,36 @@ const pad = n => String(n).padStart(2,'0');
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 })();
 
+/* ----------------- in-page links leave the address alone ---------------
+   Tapping Book used to write #book into the address bar, so a refresh jumped
+   back down to the booking form. Links now just scroll, and a refresh always
+   starts at the top. A link someone already shared with a #section still
+   lands on that section once, then the hash is cleared. */
+(function anchors(){
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  const reload = !!nav && nav.type === 'reload';
+  if (location.hash){
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    history.replaceState(null, '', location.pathname + location.search);
+    if (reload || !target) scrollTo(0, 0);
+    // After load, and instant: a smooth scroll started while the calendar and photos
+    // are still filling in gets cancelled and leaves them at the top.
+    else addEventListener('load', () => setTimeout(() => target.scrollIntoView({ behavior: 'instant' }), 60), { once: true });
+  } else if (reload) scrollTo(0, 0);
+
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const id = a.getAttribute('href').slice(1);
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    if (id === 'top') scrollTo({ top: 0, behavior: 'smooth' });
+    else target.scrollIntoView({ behavior: 'smooth' });
+  });
+})();
+
 /* ------------------------- promo countdown ---------------------------- */
 (function promo(){
   const end = new Date(CFG.PROMO_END).getTime();
