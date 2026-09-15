@@ -334,6 +334,24 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 #segCars{grid-template-columns:repeat(3,1fr)}
 #segService button,#segCars button{padding:12px 6px}
 .seg-hint{color:var(--faint);font-size:13px;line-height:1.45;margin:-8px 0 18px}
+.fit-note{color:#ff8a8f;margin:0 0 12px}
+/* 3+ cars: the exact count sits right under the choice, before the times, because
+   every extra car changes how long the job holds. */
+.carcount{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-6px 0 14px;
+  padding:8px 8px 8px 16px;border:1px solid var(--line2);border-radius:4px;background:#000}
+.carcount>span{font-size:14.2px;font-weight:600;color:#fff}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:42px;height:42px;border:1px solid var(--line2);border-radius:4px;background:var(--panel2);
+  color:#fff;font-size:21px;font-weight:700;line-height:1;cursor:pointer}
+.stepper button:hover:not(:disabled){border-color:var(--red)}
+.stepper button:disabled{opacity:.3;cursor:default}
+.stepper b{min-width:34px;text-align:center;font-family:var(--disp);font-style:italic;font-weight:800;font-size:25px}
+.car-in{display:flex;gap:8px}
+.car-in input{flex:1;min-width:0}
+.car-x{flex:0 0 48px;border:1px solid var(--line2);border-radius:4px;background:#000;color:var(--muted);
+  font-size:22px;line-height:1;cursor:pointer}
+.car-x:hover{border-color:var(--red);color:#fff}
+.addcar{display:block;margin:-4px 0 14px;color:#fff;text-decoration:none;font-size:14px}
 /* After the sale this box only repeats the big price above it. */
 .cd.ended{display:none}
 .callcard{background:linear-gradient(165deg,var(--panel2),#000);border:1px solid var(--line2);border-radius:5px;
@@ -634,7 +652,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <div class="saves">
       <div class="save">
         <span class="ico"><svg><use href="#i-car"/></svg></span>
-        <div><b>Two cars, one stop</b><p>Take $25 off the second car when we do both at the same address. Just pick Two cars when you book.</p></div>
+        <div><b>Two cars, one stop</b><p>Take $25 off the second car when we do both at the same address. Three or more, book a time and we will call you with our best price.</p></div>
       </div>
       <div class="save">
         <span class="ico"><svg><use href="#i-users"/></svg></span>
@@ -783,7 +801,16 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
           <button type="button" data-cars="2">2 cars</button>
           <button type="button" data-cars="3">3+ cars</button>
         </div>
+        <div class="carcount" id="carCount" hidden>
+          <span>Number of cars</span>
+          <div class="stepper">
+            <button type="button" id="carsMinus" aria-label="One less car">&minus;</button>
+            <b id="carsNum" aria-live="polite">3</b>
+            <button type="button" id="carsPlus" aria-label="One more car">+</button>
+          </div>
+        </div>
         <p class="seg-hint" id="carsHint" hidden></p>
+        <p class="seg-hint fit-note" id="fitNote" hidden></p>
 
         <div class="days" id="days"></div>
         <div class="slots" id="slots"></div>
@@ -807,14 +834,15 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
               <div class="field"><label for="bPhone">Mobile</label><input id="bPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(916) 555-0123"></div>
             </div>
             <label class="optin"><input type="checkbox" id="bOptin"><span>Text me open slots and member deals. Reply STOP anytime.</span></label>
-            <div class="field"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger"></div>
-            <div class="field" id="vehicle2Field" hidden><label for="bVehicle2">Second vehicle</label><input id="bVehicle2" placeholder="2021 Toyota RAV4"></div>
+            <div class="field" id="carsField"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger"></div>
+            <div id="moreCars"></div>
+            <button type="button" class="linkbtn addcar" id="addCar">+ Add another car</button>
             <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street address, Elk Grove">
               <p class="fieldnote">Free travel within 10 miles of Elk Grove. Past that it is $1 a mile, so 15 miles out is $5. Past 25 miles we will call you before we commit.</p></div>
 
             <button type="button" class="linkbtn" id="noteToggle">Add a note</button>
             <div class="field" id="noteField" hidden style="margin-top:6px">
-              <input id="bNotes" placeholder="Spilled coffee, tight driveway, second car">
+              <input id="bNotes" placeholder="Spilled coffee, tight driveway, gate code">
             </div>
 
             <button type="submit" class="btn btn-red btn-block btn-lg" id="bookBtn" style="margin-top:14px">Hold This Spot</button>
@@ -963,9 +991,11 @@ const CFG = {
        "Two cars" choice books it, which is what pairOf marks. $25 off the second car. */
     { id:'full2',   label:'Two Full Details', minutes:240, pairOf:'full',
       prices:{ sedan:175, suv:205, truck:235 } },
-    /* Three or more cars. Picked with "3+ cars?", holds six hours, and the price is
-       worked out on a call, so there is no price here. */
-    { id:'full3',   label:'3+ Full Details', minutes:360, pairOf:'full' },
+    /* Three or more cars. Picked with "3+ cars", priced on a call, so no prices here.
+       Each car adds two hours; five or more holds the whole working day (full5). */
+    { id:'full3',   label:'3 Full Details',  minutes:360, pairOf:'full' },
+    { id:'full4',   label:'4 Full Details',  minutes:480, pairOf:'full' },
+    { id:'full5',   label:'5+ Full Details', minutes:600, pairOf:'full' },
   ],
 
   /* --- booking backend -------------------------------------------------
@@ -1187,40 +1217,96 @@ const pad = n => String(n).padStart(2,'0');
   /* An express is an hour and a full detail is two, so the service has to be
      chosen before the times are drawn. An hour job fits gaps a full one can't,
      and blocking two hours for a one hour job would quietly lose him bookings. */
-  // Two cars on a full detail books the paired service, which blocks both cars' time.
+  // Every car past the first is another full detail back to back, so the hold grows
+  // with the count: full2 is four hours, full3 six, full4 eight. Five or more holds
+  // full5, the whole working day, and the owner plans the rest when he calls.
+  const MAX_CARS = 10;
   function bookedServiceId(){
-    // Three or more books full3, which holds the time until they call with a price.
-    return service && service.id === 'full' && cars > 1 ? 'full' + cars : service && service.id;
+    return service && service.id === 'full' && cars > 1 ? 'full' + Math.min(cars, 5) : service && service.id;
   }
   function serviceMinutes(){
     const id = bookedServiceId();
     const hit = (cfg.services || []).find(x => x.id === id) || CFG.SERVICES.find(x => x.id === id);
     return (hit && hit.minutes) || (service && service.minutes) || cfg.slotMinutes;
   }
-  function showCars(){
+  function showCars(values){
     const on = !!service && service.id === 'full';
     $('#segCars').hidden = $('#carsLabel').hidden = !on;
     if (!on) cars = 1;
-    $$('#segCars button').forEach(b => b.classList.toggle('sel', Number(b.dataset.cars) === cars));
-    $('#vehicle2Field').hidden = cars < 2;
-    $('#vehicle2Field label').textContent = cars > 2 ? 'Other vehicles' : 'Second vehicle';
-    $('#bVehicle2').placeholder = cars > 2 ? '2021 Toyota RAV4, 2018 Ford F-150' : '2021 Toyota RAV4';
+    // Any count from three up lights the "3+ cars" button.
+    $$('#segCars button').forEach(b => b.classList.toggle('sel', Number(b.dataset.cars) === Math.min(cars, 3)));
+    $('#carCount').hidden = !on || cars < 3;
+    $('#carsNum').textContent = cars;
+    $('#carsMinus').disabled = cars <= 3;
+    $('#carsPlus').disabled = cars >= MAX_CARS;
     $('#carsHint').hidden = !on || cars === 1;
-    $('#carsHint').textContent = cars > 2
-      ? 'Go ahead and book the day and time, and we will contact you with our best price.'
+    $('#carsHint').textContent = cars >= 5
+      ? 'Five or more takes the whole day. Book the day, and we will contact you with our best price.'
+      : cars > 2 ? 'Go ahead and book the day and time, and we will contact you with our best price.'
       : 'Same address, $25 off the second car.';
     const c = service && CFG.SERVICES.find(x => x.id === service.id);
     $('#svcHint').textContent = (c && c.blurb) || '';
+    renderCarInputs(values);
+  }
+
+  // One input per car. What they already typed survives adding or removing a row.
+  function carValues(){
+    return [$('#bVehicle'), ...$$('#moreCars input')].map(i => i.value.trim());
+  }
+  function renderCarInputs(values = carValues()){
+    $('#carsField label').textContent = cars > 1 ? 'Car 1' : 'Vehicle';
+    const eg = ['2021 Toyota RAV4', '2018 Ford F-150', '2020 Honda Civic'];
+    $('#moreCars').innerHTML = Array.from({ length: cars - 1 }, (_, i) => {
+      const n = i + 2;
+      return `<div class="field"><label for="bCar${n}">Car ${n}</label><div class="car-in">` +
+             `<input id="bCar${n}" placeholder="${eg[i % eg.length]}">` +
+             `<button type="button" class="car-x" data-rm="${n}" aria-label="Remove car ${n}">&times;</button></div></div>`;
+    }).join('');
+    $$('#moreCars input').forEach((inp, i) => { inp.value = values[i + 1] || ''; });
+    $('#addCar').hidden = !service || service.id !== 'full' || cars >= MAX_CARS;
+  }
+
+  function setCars(n, values){
+    n = Math.max(1, Math.min(MAX_CARS, n));
+    if (n === cars) return;
+    cars = n;
+    showCars(values);
+    refit();
   }
   $$('#segCars button').forEach(b => b.addEventListener('click', () => {
     const n = Number(b.dataset.cars);
-    if (n === cars) return;
-    cars = n;
-    showCars();
-    // Two cars need twice the time, so the open times change and the pick starts over.
-    picked = null; step2.hidden = true;
-    renderDays();
+    if (n === Math.min(cars, 3)) return;
+    setCars(n);
   }));
+  $('#carsMinus').addEventListener('click', () => setCars(cars - 1));
+  $('#carsPlus').addEventListener('click', () => setCars(cars + 1));
+  $('#addCar').addEventListener('click', () => {
+    setCars(cars + 1);
+    const last = $$('#moreCars input').at(-1);
+    if (last && !step2.hidden) last.focus();
+  });
+  $('#moreCars').addEventListener('click', e => {
+    const btn = e.target.closest('[data-rm]');
+    if (!btn) return;
+    const values = carValues();
+    values.splice(Number(btn.dataset.rm) - 1, 1);
+    setCars(cars - 1, values);
+  });
+
+  /* The count decides how long the job holds, so a change redraws the times. Their
+     day and time stay picked when the longer job still fits there. When it doesn't,
+     they are told why and sent back to the times rather than losing it silently. */
+  function refit(){
+    const day = pickedDay, key = picked && picked.key;
+    renderDays(day);
+    if (!key) return;
+    const hit = slotsFor(day).find(s => s.key === key && !s.taken);
+    if (hit) return selectSlot(hit, false);
+    const hours = serviceMinutes() / 60;
+    $('#fitNote').textContent = `That time does not have ${hours} open hours for ${cars} cars. Pick another time.`;
+    $('#fitNote').hidden = false;
+    daysEl.scrollIntoView({behavior:'smooth', block:'center'});
+  }
   function renderServices(){
     const copy = id => (CFG.SERVICES.find(x => x.id === id) || {});
     // A paired service (two cars) is chosen with the car count, not with its own button.
@@ -1253,6 +1339,7 @@ const pad = n => String(n).padStart(2,'0');
   const label = m => { const h=Math.floor(m/60), mm=m%60, ap=h>=12?'PM':'AM', hh=h%12||12;
                        return hh + (mm ? ':'+pad(mm) : '') + ' ' + ap; };
   const digits = s => (s||'').replace(/\D/g,'');
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
   $$('#segMode button').forEach(b => b.addEventListener('click', () => {
     $$('#segMode button').forEach(x => x.classList.remove('sel'));
@@ -1333,11 +1420,12 @@ const pad = n => String(n).padStart(2,'0');
     cfg.booked = booked;
   }
 
-  function renderDays(){
+  // `keep` holds on to the day they already chose; without it the first open day is picked.
+  function renderDays(keep){
     const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     daysEl.innerHTML = '';
-    let first = null;
+    let first = null, kept = null;
     for (let i = 0; i < cfg.horizonDays; i++){
       const d = new Date(); d.setDate(d.getDate()+i); d.setHours(0,0,0,0);
       const open = slotsFor(d).some(s => !s.taken);
@@ -1349,12 +1437,15 @@ const pad = n => String(n).padStart(2,'0');
       b.addEventListener('click', () => pickDay(d, b));
       daysEl.append(b);
       if (open && !first) first = [d, b];
+      if (keep && ymd(d) === ymd(keep)) kept = [d, b];
     }
-    if (first) pickDay(first[0], first[1]);
+    const go = kept || first;
+    if (go) pickDay(go[0], go[1]);
   }
 
   function pickDay(d, btn){
     pickedDay = d; picked = null; step2.hidden = true;
+    $('#fitNote').hidden = true;
     $$('.day', daysEl).forEach(x => x.classList.remove('sel'));
     btn.classList.add('sel');
     renderSlots();
@@ -1378,17 +1469,20 @@ const pad = n => String(n).padStart(2,'0');
         slotsEl.append(b);
         return;
       }
-      b.addEventListener('click', () => {
-        $$('.slot', slotsEl).forEach(x => x.classList.remove('sel'));
-        b.classList.add('sel');
-        picked = s;
-        $('#pickedText').textContent =
-          s.date.toLocaleDateString('en-US',{weekday:'short', month:'short', day:'numeric'}) + ' at ' + s.text;
-        step2.hidden = false;
-        requestAnimationFrame(() => step2.scrollIntoView({behavior:'smooth', block:'nearest'}));
-      });
+      b.dataset.key = s.key;
+      b.addEventListener('click', () => selectSlot(s, true));
       slotsEl.append(b);
     });
+  }
+
+  function selectSlot(s, scroll){
+    $$('.slot', slotsEl).forEach(x => x.classList.toggle('sel', x.dataset.key === s.key));
+    picked = s;
+    $('#fitNote').hidden = true;
+    $('#pickedText').textContent =
+      s.date.toLocaleDateString('en-US',{weekday:'short', month:'short', day:'numeric'}) + ' at ' + s.text;
+    step2.hidden = false;
+    if (scroll) requestAnimationFrame(() => step2.scrollIntoView({behavior:'smooth', block:'nearest'}));
   }
 
   async function load(){
@@ -1419,16 +1513,17 @@ const pad = n => String(n).padStart(2,'0');
     e.preventDefault();
     const err = $('#bookErr'); err.textContent = '';
     const name = $('#bName').value.trim(), phone = $('#bPhone').value.trim(),
-          vehicle = $('#bVehicle').value.trim(), addr = $('#bAddr').value.trim(),
-          notes = $('#bNotes').value.trim(), vehicle2 = $('#bVehicle2').value.trim(),
-          twoCars = bookedServiceId() === 'full2', manyCars = bookedServiceId() === 'full3',
-          vehicles = (twoCars || manyCars) && vehicle2 ? vehicle + ' and ' + vehicle2 : vehicle;
+          addr = $('#bAddr').value.trim(), notes = $('#bNotes').value.trim(),
+          list = carValues().slice(0, cars), vehicle = list[0],
+          twoCars = cars === 2, manyCars = cars > 2,
+          carsText = twoCars ? list.join(' and ') : list.join(', ');
 
     if (!picked)                    return err.textContent = 'Pick a time first.';
     if (!name)                      return err.textContent = 'We need a name for the appointment.';
     if (digits(phone).length < 10)  return err.textContent = 'That number looks short. We text the confirmation there.';
     if (!vehicle)                   return err.textContent = 'Tell us the vehicle so we bring the right stuff.';
-    if (twoCars && !vehicle2)       return err.textContent = 'Tell us the second vehicle too.';
+    if (list.some(v => !v))         return err.textContent = twoCars ? 'Tell us the second vehicle too.'
+                                                                     : 'Tell us each car so we can price them.';
     if (mode === 'mobile' && !addr) return err.textContent = 'We need an address to come to you, or switch to drop off.';
 
     const btn = $('#bookBtn');
@@ -1439,9 +1534,10 @@ const pad = n => String(n).padStart(2,'0');
       try {
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
           method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ name, phone, start:picked.key, vehicle: vehicles,
-                                 mode, address:addr,
-                                 notes: manyCars ? '3+ cars. Call them with a price before the job.' + (notes ? ' ' + notes : '') : notes,
+          body: JSON.stringify({ name, phone, start:picked.key, vehicle: carsText,
+                                 // Each car by name, so the schedule can count and list them.
+                                 cars, vehicles: list,
+                                 mode, address:addr, notes,
                                  sms_ok: $('#bOptin').checked,
                                  // Checked at submit, so a page left open past midnight stops tagging it.
                                  promo: service && service.id !== 'express' && Date.now() < new Date(CFG.PROMO_END).getTime()
@@ -1450,7 +1546,7 @@ const pad = n => String(n).padStart(2,'0');
                                  service: service && service.id === 'express'
                                    ? 'Express Detail (inside + outside)'
                                    : twoCars ? 'Two Full Details, same address ($25 off the second car)'
-                                   : manyCars ? '3+ Full Details, same address (price by phone)'
+                                   : manyCars ? `${cars} Full Details, same address (price by phone)`
                                    : 'Full Interior + Exterior Detail' })
         });
         const j = await r.json().catch(()=>({}));
@@ -1473,17 +1569,18 @@ const pad = n => String(n).padStart(2,'0');
     $('#segService').hidden = true;
     $('#segCars').hidden = $('#carsLabel').hidden = true;
     $('#svcHint').hidden = $('#carsHint').hidden = true;
+    $('#carCount').hidden = $('#fitNote').hidden = true;
     $('.svc-label').hidden = true;
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
     const textLine = manyCars
-      ? `We will contact ${phone} soon with our best price for all the cars. Nothing has been charged.`
-      : `We will text ${phone} shortly to confirm. Nothing has been charged.`;
+      ? `We will contact ${esc(phone)} soon with our best price for all ${cars} cars. Nothing has been charged.`
+      : `We will text ${esc(phone)} shortly to confirm. Nothing has been charged.`;
     const first = name.split(' ')[0];
-    const shown = first.charAt(0).toUpperCase() + first.slice(1);
+    const shown = esc(first.charAt(0).toUpperCase() + first.slice(1));
     box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
       <span class="ok-when">${pretty}</span>
-      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${vehicles}</span>
+      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${esc(manyCars ? cars + ' cars: ' + carsText : carsText)}</span>
       <span class="ok-note">${textLine}</span>
       Need to change it? Call or text <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a>.`;
     box.classList.add('on');
