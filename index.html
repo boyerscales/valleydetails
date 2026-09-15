@@ -51,9 +51,7 @@ button,input,select,textarea{font-family:inherit;font-size:inherit}
 .h2{font-size:clamp(32px,6vw,56px);margin:0 0 14px}
 .h3{font-size:clamp(22px,3.2vw,29px);margin:0 0 10px}
 .kicker{font-style:normal;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--red);
-  line-height:1;margin:0 0 15px;display:flex;align-items:center;gap:11px}
-.kicker::before{content:"";width:24px;height:3px;background:var(--red);flex:0 0 auto;transform:skewX(-20deg)}
-.lede{color:var(--muted);font-size:clamp(16px,2vw,18px);line-height:1.6;margin:0 0 26px;max-width:56ch}
+  line-height:1;margin:0 0 15px;display:flex;align-items:center;gap:11px}.lede{color:var(--muted);font-size:clamp(16px,2vw,18px);line-height:1.6;margin:0 0 26px;max-width:56ch}
 section{padding:clamp(58px,8vw,100px) 0;position:relative}
 .sec-alt{background:linear-gradient(180deg,#0a0a0d,#050506)}
 
@@ -594,7 +592,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <div class="saves">
       <div class="save">
         <span class="ico"><svg><use href="#i-car"/></svg></span>
-        <div><b>Two cars, one stop</b><p>Take $25 off the second car when we do both at the same address.</p></div>
+        <div><b>Two cars, one stop</b><p>Take $25 off the second car when we do both at the same address. Just pick Two cars when you book.</p></div>
       </div>
       <div class="save">
         <span class="ico"><svg><use href="#i-users"/></svg></span>
@@ -736,6 +734,11 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
         <label class="svc-label">What are we doing?</label>
         <div class="seg" id="segService"></div>
+        <label class="svc-label" id="carsLabel">How many cars?</label>
+        <div class="seg" id="segCars">
+          <button type="button" data-cars="1" class="sel">One car<small>About two hours</small></button>
+          <button type="button" data-cars="2">Two cars<small>Same address, $25 off the second</small></button>
+        </div>
 
         <div class="days" id="days"></div>
         <div class="slots" id="slots"></div>
@@ -760,6 +763,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
             </div>
             <label class="optin"><input type="checkbox" id="bOptin"><span>Text me open slots and member deals. Reply STOP anytime.</span></label>
             <div class="field"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger"></div>
+            <div class="field" id="vehicle2Field" hidden><label for="bVehicle2">Second vehicle</label><input id="bVehicle2" placeholder="2021 Toyota RAV4"></div>
             <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street address, Elk Grove">
               <p class="fieldnote">Free travel within 15 miles of Elk Grove. Past that it is $1 a mile, so 20 miles out is $5. Past 25 miles we will call you before we commit.</p></div>
 
@@ -909,6 +913,10 @@ const CFG = {
       prices:{ sedan:100, suv:115, truck:130 } },
     { id:'express', label:'Express Detail', minutes:60,  blurb:'About an hour. Inside and out, less thorough.',
       prices:{ sedan:50, suv:60,  truck:70  } },
+    /* Two full details at one address in one visit. It has no button of its own: the
+       "Two cars" choice books it, which is what pairOf marks. $25 off the second car. */
+    { id:'full2',   label:'Two Full Details', minutes:240, pairOf:'full',
+      prices:{ sedan:175, suv:205, truck:235 } },
   ],
 
   /* --- booking backend -------------------------------------------------
@@ -1125,19 +1133,44 @@ const pad = n => String(n).padStart(2,'0');
               horizonDays:CFG.HORIZON, leadHours:CFG.LEAD_HOURS, services:CFG.SERVICES };
   let mode = 'mobile', pickedDay = null, picked = null;
   let service = (CFG.SERVICES && CFG.SERVICES[0]) || null;
+  let cars = 1;
 
   /* An express is an hour and a full detail is two, so the service has to be
-     chosen before the times are drawn — an hour job fits gaps a full one can't,
+     chosen before the times are drawn. An hour job fits gaps a full one can't,
      and blocking two hours for a one hour job would quietly lose him bookings. */
-  function serviceMinutes(){
-    return (service && service.minutes) || cfg.slotMinutes;
+  // Two cars on a full detail books the paired service, which blocks both cars' time.
+  function bookedServiceId(){
+    return service && service.id === 'full' && cars === 2 ? 'full2' : service && service.id;
   }
+  function serviceMinutes(){
+    const id = bookedServiceId();
+    const hit = (cfg.services || []).find(x => x.id === id) || CFG.SERVICES.find(x => x.id === id);
+    return (hit && hit.minutes) || (service && service.minutes) || cfg.slotMinutes;
+  }
+  function showCars(){
+    const on = !!service && service.id === 'full';
+    $('#segCars').hidden = $('#carsLabel').hidden = !on;
+    if (!on) cars = 1;
+    $$('#segCars button').forEach(b => b.classList.toggle('sel', Number(b.dataset.cars) === cars));
+    $('#vehicle2Field').hidden = cars !== 2;
+  }
+  $$('#segCars button').forEach(b => b.addEventListener('click', () => {
+    const n = Number(b.dataset.cars);
+    if (n === cars) return;
+    cars = n;
+    showCars();
+    // Two cars need twice the time, so the open times change and the pick starts over.
+    picked = null; step2.hidden = true;
+    renderDays();
+  }));
   function renderServices(){
-    const list = (cfg.services && cfg.services.length ? cfg.services : CFG.SERVICES) || [];
+    const copy = id => (CFG.SERVICES.find(x => x.id === id) || {});
+    // A paired service (two cars) is chosen with the car count, not with its own button.
+    const list = ((cfg.services && cfg.services.length ? cfg.services : CFG.SERVICES) || [])
+      .filter(x => !copy(x.id).pairOf);
     const el = $('#segService');
     if (list.length < 2){ el.hidden = true; return; }
     // The server owns id and minutes; the site owns how it reads.
-    const copy = id => (CFG.SERVICES.find(x => x.id === id) || {});
     el.innerHTML = list.map(x => {
       const c = copy(x.id);
       const from = c.prices ? ' · from $' + c.prices.sedan : '';
@@ -1150,6 +1183,7 @@ const pad = n => String(n).padStart(2,'0');
       service = { ...hit, ...copy(hit.id), id: hit.id, minutes: hit.minutes };
       $$('button', el).forEach(x => x.classList.remove('sel'));
       b.classList.add('sel');
+      showCars();
       // A different length means different open times, so start the pick over.
       picked = null; step2.hidden = true;
       renderDays();
@@ -1319,6 +1353,7 @@ const pad = n => String(n).padStart(2,'0');
       } catch (_) {}
     } else seedDemo();
     renderServices();
+    showCars();
     renderDays();
   }
 
@@ -1327,12 +1362,14 @@ const pad = n => String(n).padStart(2,'0');
     const err = $('#bookErr'); err.textContent = '';
     const name = $('#bName').value.trim(), phone = $('#bPhone').value.trim(),
           vehicle = $('#bVehicle').value.trim(), addr = $('#bAddr').value.trim(),
-          notes = $('#bNotes').value.trim();
+          notes = $('#bNotes').value.trim(), vehicle2 = $('#bVehicle2').value.trim(),
+          twoCars = bookedServiceId() === 'full2';
 
     if (!picked)                    return err.textContent = 'Pick a time first.';
     if (!name)                      return err.textContent = 'We need a name for the appointment.';
     if (digits(phone).length < 10)  return err.textContent = 'That number looks short. We text the confirmation there.';
     if (!vehicle)                   return err.textContent = 'Tell us the vehicle so we bring the right stuff.';
+    if (twoCars && !vehicle2)       return err.textContent = 'Tell us the second vehicle too.';
     if (mode === 'mobile' && !addr) return err.textContent = 'We need an address to come to you, or switch to drop off.';
 
     const btn = $('#bookBtn');
@@ -1343,14 +1380,16 @@ const pad = n => String(n).padStart(2,'0');
       try {
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
           method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ name, phone, start:picked.key, vehicle, mode, address:addr, notes,
+          body: JSON.stringify({ name, phone, start:picked.key, vehicle: twoCars ? vehicle + ' and ' + vehicle2 : vehicle,
+                                 mode, address:addr, notes,
                                  sms_ok: $('#bOptin').checked,
                                  // Checked at submit, so a page left open past midnight stops tagging it.
                                  promo: service && service.id !== 'express' && Date.now() < new Date(CFG.PROMO_END).getTime()
                                    ? 'FIRST75' : '',
-                                 service_id: service && service.id,
+                                 service_id: bookedServiceId(),
                                  service: service && service.id === 'express'
                                    ? 'Express Detail (inside + outside)'
+                                   : twoCars ? 'Two Full Details, same address ($25 off the second car)'
                                    : 'Full Interior + Exterior Detail' })
         });
         const j = await r.json().catch(()=>({}));
@@ -1371,6 +1410,7 @@ const pad = n => String(n).padStart(2,'0');
     daysEl.hidden = true; slotsEl.hidden = true; form.hidden = true;
     $('.panel .ph-sub').hidden = true;
     $('#segService').hidden = true;
+    $('#segCars').hidden = $('#carsLabel').hidden = true;
     $('.svc-label').hidden = true;
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
@@ -1379,7 +1419,7 @@ const pad = n => String(n).padStart(2,'0');
     const shown = first.charAt(0).toUpperCase() + first.slice(1);
     box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
       <span class="ok-when">${pretty}</span>
-      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${vehicle}</span>
+      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${twoCars ? vehicle + ' and ' + vehicle2 : vehicle}</span>
       <span class="ok-note">${textLine}</span>
       Need to change it? Call or text <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a>.`;
     box.classList.add('on');
@@ -1410,7 +1450,7 @@ const pad = n => String(n).padStart(2,'0');
       const el = $('#clubSpots');
       el.textContent = left > 0
         ? `${left} of ${j.limit} founding spots left`
-        : `All ${j.limit} founding spots are taken — join the waitlist`;
+        : `All ${j.limit} founding spots are taken. Join the waitlist.`;
       el.hidden = false;
       if (left <= 0) btn.textContent = 'Join the Waitlist';
     } catch (_) {}
@@ -1419,7 +1459,7 @@ const pad = n => String(n).padStart(2,'0');
   /* Once the Payment Link exists the button IS the checkout. Until then this
      stays a signup and nobody is asked for money they can't yet pay. */
   if (club.STRIPE_LINK){
-    $('#vipNote').textContent = 'Card on file, charged monthly. Cancel any time from the receipt email — no contract, no cancellation fee.';
+    $('#vipNote').textContent = 'Card on file, charged monthly. Cancel any time from the receipt email. No contract, no cancellation fee.';
   }
   form.addEventListener('submit', async e => {
     e.preventDefault();
