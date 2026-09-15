@@ -328,6 +328,7 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .seg button small{font-size:11.5px;color:var(--faint);font-weight:500}
 .seg button.sel{border-color:var(--red);background:var(--red-wash);color:#fff}
 .seg button.sel small{color:#e8b8ba}
+#segCars button[data-cars="3"]{grid-column:1/-1}
 .callcard{background:linear-gradient(165deg,var(--panel2),#000);border:1px solid var(--line2);border-radius:5px;
   padding:clamp(22px,2.8vw,30px);text-align:center}
 .callcard .big{font-family:var(--disp);font-style:italic;font-weight:800;font-size:clamp(29px,4.2vw,38px);
@@ -738,7 +739,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <div class="seg" id="segCars">
           <button type="button" data-cars="1" class="sel">One car<small>About two hours</small></button>
           <button type="button" data-cars="2">Two cars<small>Same address, $25 off the second</small></button>
+          <button type="button" data-cars="3">3+ cars?<small>Book a time, we call with our best price</small></button>
         </div>
+        <p class="fieldnote" id="carsNote" hidden style="margin:-4px 0 12px">Go ahead and book the day and time, and we will contact you to give you our best price.</p>
 
         <div class="days" id="days"></div>
         <div class="slots" id="slots"></div>
@@ -797,7 +800,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <div class="area">
       <span class="hub">Elk Grove</span><span class="hub">South Sacramento</span><span>Laguna West</span>
       <span>Vineyard</span><span>Sheldon</span><span>Florin</span><span>Pocket</span>
-      <span>Delta Shores</span><span>Wilton</span><span>Galt</span>
+      <span>Delta Shores</span><span>Wilton</span><span>Galt</span><span>Natomas</span>
+      <span>Arden Arcade</span><span>Citrus Heights</span><span>Roseville</span><span>Folsom</span>
+      <span>El Dorado Hills</span><span>Davis</span><span>Stockton</span>
     </div>
   </div>
 </section>
@@ -917,6 +922,9 @@ const CFG = {
        "Two cars" choice books it, which is what pairOf marks. $25 off the second car. */
     { id:'full2',   label:'Two Full Details', minutes:240, pairOf:'full',
       prices:{ sedan:175, suv:205, truck:235 } },
+    /* Three or more cars. Picked with "3+ cars?", holds six hours, and the price is
+       worked out on a call, so there is no price here. */
+    { id:'full3',   label:'3+ Full Details', minutes:360, pairOf:'full' },
   ],
 
   /* --- booking backend -------------------------------------------------
@@ -1140,7 +1148,8 @@ const pad = n => String(n).padStart(2,'0');
      and blocking two hours for a one hour job would quietly lose him bookings. */
   // Two cars on a full detail books the paired service, which blocks both cars' time.
   function bookedServiceId(){
-    return service && service.id === 'full' && cars === 2 ? 'full2' : service && service.id;
+    // Three or more books full3, which holds the time until they call with a price.
+    return service && service.id === 'full' && cars > 1 ? 'full' + cars : service && service.id;
   }
   function serviceMinutes(){
     const id = bookedServiceId();
@@ -1152,7 +1161,10 @@ const pad = n => String(n).padStart(2,'0');
     $('#segCars').hidden = $('#carsLabel').hidden = !on;
     if (!on) cars = 1;
     $$('#segCars button').forEach(b => b.classList.toggle('sel', Number(b.dataset.cars) === cars));
-    $('#vehicle2Field').hidden = cars !== 2;
+    $('#vehicle2Field').hidden = cars < 2;
+    $('#vehicle2Field label').textContent = cars > 2 ? 'Other vehicles' : 'Second vehicle';
+    $('#bVehicle2').placeholder = cars > 2 ? '2021 Toyota RAV4, 2018 Ford F-150' : '2021 Toyota RAV4';
+    $('#carsNote').hidden = cars < 3;
   }
   $$('#segCars button').forEach(b => b.addEventListener('click', () => {
     const n = Number(b.dataset.cars);
@@ -1363,7 +1375,8 @@ const pad = n => String(n).padStart(2,'0');
     const name = $('#bName').value.trim(), phone = $('#bPhone').value.trim(),
           vehicle = $('#bVehicle').value.trim(), addr = $('#bAddr').value.trim(),
           notes = $('#bNotes').value.trim(), vehicle2 = $('#bVehicle2').value.trim(),
-          twoCars = bookedServiceId() === 'full2';
+          twoCars = bookedServiceId() === 'full2', manyCars = bookedServiceId() === 'full3',
+          vehicles = (twoCars || manyCars) && vehicle2 ? vehicle + ' and ' + vehicle2 : vehicle;
 
     if (!picked)                    return err.textContent = 'Pick a time first.';
     if (!name)                      return err.textContent = 'We need a name for the appointment.';
@@ -1380,8 +1393,9 @@ const pad = n => String(n).padStart(2,'0');
       try {
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
           method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ name, phone, start:picked.key, vehicle: twoCars ? vehicle + ' and ' + vehicle2 : vehicle,
-                                 mode, address:addr, notes,
+          body: JSON.stringify({ name, phone, start:picked.key, vehicle: vehicles,
+                                 mode, address:addr,
+                                 notes: manyCars ? '3+ cars. Call them with a price before the job.' + (notes ? ' ' + notes : '') : notes,
                                  sms_ok: $('#bOptin').checked,
                                  // Checked at submit, so a page left open past midnight stops tagging it.
                                  promo: service && service.id !== 'express' && Date.now() < new Date(CFG.PROMO_END).getTime()
@@ -1390,6 +1404,7 @@ const pad = n => String(n).padStart(2,'0');
                                  service: service && service.id === 'express'
                                    ? 'Express Detail (inside + outside)'
                                    : twoCars ? 'Two Full Details, same address ($25 off the second car)'
+                                   : manyCars ? '3+ Full Details, same address (price by phone)'
                                    : 'Full Interior + Exterior Detail' })
         });
         const j = await r.json().catch(()=>({}));
@@ -1414,12 +1429,14 @@ const pad = n => String(n).padStart(2,'0');
     $('.svc-label').hidden = true;
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
-    const textLine = `We will text ${phone} shortly to confirm. Nothing has been charged.`;
+    const textLine = manyCars
+      ? `We will contact ${phone} soon with our best price for all the cars. Nothing has been charged.`
+      : `We will text ${phone} shortly to confirm. Nothing has been charged.`;
     const first = name.split(' ')[0];
     const shown = first.charAt(0).toUpperCase() + first.slice(1);
     box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
       <span class="ok-when">${pretty}</span>
-      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${twoCars ? vehicle + ' and ' + vehicle2 : vehicle}</span>
+      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${vehicles}</span>
       <span class="ok-note">${textLine}</span>
       Need to change it? Call or text <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a>.`;
     box.classList.add('on');
