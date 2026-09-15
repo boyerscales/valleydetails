@@ -207,5 +207,5 @@ Then open <http://localhost:5188>.
   Call / Book bar sits at the bottom, inputs are 16px so iOS does not zoom, and the
   page is pinned to the viewport width with no horizontal scroll.
 - No account required anywhere. The Valley Club is purely additive.
-- `AutoDetailing` JSON-LD with a 15 mile `GeoCircle` around Elk Grove.
+- `AutoDetailing` JSON-LD with a 10 mile `GeoCircle` around Elk Grove.
 - Dark only by design. Respects `prefers-reduced-motion`.
