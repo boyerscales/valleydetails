@@ -328,7 +328,14 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .seg button small{font-size:11.5px;color:var(--faint);font-weight:500}
 .seg button.sel{border-color:var(--red);background:var(--red-wash);color:#fff}
 .seg button.sel small{color:#e8b8ba}
-#segCars button[data-cars="3"]{grid-column:1/-1}
+/* Service and car count sit on one row each. The detail for whatever is picked goes on
+   a single hint line under the row, instead of fine print inside every button. */
+#segService{grid-template-columns:1fr 1fr}
+#segCars{grid-template-columns:repeat(3,1fr)}
+#segService button,#segCars button{padding:12px 6px}
+.seg-hint{color:var(--faint);font-size:13px;line-height:1.45;margin:-8px 0 18px}
+/* After the sale this box only repeats the big price above it. */
+.cd.ended{display:none}
 .callcard{background:linear-gradient(165deg,var(--panel2),#000);border:1px solid var(--line2);border-radius:5px;
   padding:clamp(22px,2.8vw,30px);text-align:center}
 .callcard .big{font-family:var(--disp);font-style:italic;font-weight:800;font-size:clamp(29px,4.2vw,38px);
@@ -373,10 +380,15 @@ details.q summary::after{content:"+";font-family:var(--disp);font-weight:800;fon
   line-height:1;flex:0 0 auto;transition:transform .18s}
 details.q[open] summary::after{transform:rotate(45deg)}
 details.q .a{padding:0 21px 19px;color:var(--muted);font-size:14.6px;line-height:1.65}
-.area{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.area span{background:var(--panel);border:1px solid var(--line);border-radius:100px;padding:9px 16px;
-  font-size:13.6px;font-weight:600;color:#cfcfd8}
-.area span.hub{background:var(--red);border-color:var(--red);color:#fff}
+.area{display:flex;gap:16px;align-items:flex-start;margin-top:44px;padding:24px;background:var(--panel);
+  border:1px solid var(--line);border-radius:5px;max-width:760px}
+.area .ico{width:38px;height:38px;flex:0 0 auto;display:grid;place-items:center;border-radius:4px;
+  background:var(--red-wash);border:1px solid rgba(237,28,36,.3);color:var(--red)}
+.area .ico svg{width:19px;height:19px}
+.area .h3{margin:4px 0 8px}
+.area-rule{margin:0 0 10px;color:var(--muted);font-size:15px;line-height:1.55}
+.area-rule b{color:#fff}
+.area-towns{margin:0;color:var(--faint);font-size:13.6px;line-height:1.7}
 .finale{background:linear-gradient(160deg,#1a0709,#050506 62%);border-top:1px solid var(--line);
   text-align:center;position:relative;overflow:hidden}
 .finale::before{content:"";position:absolute;inset:auto 0 -40% 0;height:80%;
@@ -415,8 +427,37 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .hdr{height:70px}
   .brand img{height:56px}
   .hdr-cta .btn span{display:none}
-  .steps,.saves,.tiers,.row2,.revs,.foot,.seg{grid-template-columns:1fr}
-  .slots{grid-template-columns:repeat(2,1fr)}
+  .steps,.saves,.tiers,.row2,.revs{grid-template-columns:1fr}
+  .slots{grid-template-columns:repeat(3,1fr)}
+  .slot{padding:13px 4px}
+  section{padding:48px 0}
+  .lede{margin-bottom:20px}
+  /* The bottom bar is always on screen with Call and Book, so every other copy of
+     those two buttons is clutter on a phone. Instagram stays in the header. */
+  .topstrip.ended{display:none}
+  .hdr-cta .btn:not(.btn-icon){display:none}
+  .hero-actions .btn-ghost{display:none}
+  .callcard{display:none}
+  .hoursline{margin-top:2px}
+  .trustrow{gap:6px 16px}
+  .trustrow li{background:none;border:0;padding:0}
+  /* Lists that were a pile of separate boxes read as one box with dividers. */
+  .tiers,.saves,.addons,.steps{gap:0;background:var(--panel);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  .tier,.save,.addon,.step{border:0;border-radius:0;background:none;border-bottom:1px solid var(--line)}
+  .tier:last-child,.save:last-child,.addon:last-child,.step:last-child{border-bottom:0}
+  .addons{grid-template-columns:1fr}
+  .save{padding:16px 18px}
+  .step{display:grid;grid-template-columns:32px 1fr;column-gap:14px;padding:18px}
+  .step .n{grid-row:span 2;margin:0}
+  .step h4{font-size:19px;margin:6px 0 4px}
+  .incl-col{padding:18px}
+  .vip-perks{gap:15px}
+  .vip-perks .ico{width:32px;height:32px}
+  .area{padding:18px;gap:13px;margin-top:34px}
+  .area .ico{width:32px;height:32px}
+  .foot{grid-template-columns:1fr 1fr;gap:26px 20px}
+  .foot>:first-child{grid-column:1/-1}
+  footer.site{padding-top:40px}
   .mobar{display:flex}
   .btn-lg{font-size:19px;padding:19px 24px}
   .slab{padding:22px}
@@ -735,13 +776,14 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
         <label class="svc-label">What are we doing?</label>
         <div class="seg" id="segService"></div>
+        <p class="seg-hint" id="svcHint"></p>
         <label class="svc-label" id="carsLabel">How many cars?</label>
         <div class="seg" id="segCars">
-          <button type="button" data-cars="1" class="sel">One car<small>About two hours</small></button>
-          <button type="button" data-cars="2">Two cars<small>Same address, $25 off the second</small></button>
-          <button type="button" data-cars="3">3+ cars?<small>Book a time, we call with our best price</small></button>
+          <button type="button" data-cars="1" class="sel">1 car</button>
+          <button type="button" data-cars="2">2 cars</button>
+          <button type="button" data-cars="3">3+ cars</button>
         </div>
-        <p class="fieldnote" id="carsNote" hidden style="margin:-4px 0 12px">Go ahead and book the day and time, and we will contact you to give you our best price.</p>
+        <p class="seg-hint" id="carsHint" hidden></p>
 
         <div class="days" id="days"></div>
         <div class="slots" id="slots"></div>
@@ -795,14 +837,13 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       </div>
     </div>
 
-    <h3 class="h3" style="margin-top:48px">Where we go</h3>
-    <p style="color:var(--muted);font-size:15px;margin:0;max-width:60ch">Anywhere within 10 miles of Elk Grove, no travel charge at all. Past that it is <b style="color:#fff">$1 a mile</b> for the miles over ten, so 15 miles out is $5, 20 is $10 and 25 is $15, on top of the detail. Past 25 miles, book it anyway and we will call you to work it out before we drive.</p>
     <div class="area">
-      <span class="hub">Elk Grove</span><span class="hub">South Sacramento</span><span>Laguna West</span>
-      <span>Vineyard</span><span>Sheldon</span><span>Florin</span><span>Pocket</span>
-      <span>Delta Shores</span><span>Wilton</span><span>Galt</span><span>Natomas</span>
-      <span>Arden Arcade</span><span>Citrus Heights</span><span>Roseville</span><span>Folsom</span>
-      <span>El Dorado Hills</span><span>Davis</span><span>Stockton</span>
+      <span class="ico"><svg><use href="#i-map"/></svg></span>
+      <div>
+        <h3 class="h3">Where we go</h3>
+        <p class="area-rule"><b>No travel charge within 10 miles of Elk Grove.</b> Past that it is $1 a mile. Farther than 25 miles, book anyway and we will call you first.</p>
+        <p class="area-towns">Elk Grove, South Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket, Delta Shores, Wilton, Galt, Natomas, Arden Arcade, Citrus Heights, Roseville, Folsom, El Dorado Hills, Davis and Stockton.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1164,7 +1205,12 @@ const pad = n => String(n).padStart(2,'0');
     $('#vehicle2Field').hidden = cars < 2;
     $('#vehicle2Field label').textContent = cars > 2 ? 'Other vehicles' : 'Second vehicle';
     $('#bVehicle2').placeholder = cars > 2 ? '2021 Toyota RAV4, 2018 Ford F-150' : '2021 Toyota RAV4';
-    $('#carsNote').hidden = cars < 3;
+    $('#carsHint').hidden = !on || cars === 1;
+    $('#carsHint').textContent = cars > 2
+      ? 'Go ahead and book the day and time, and we will contact you with our best price.'
+      : 'Same address, $25 off the second car.';
+    const c = service && CFG.SERVICES.find(x => x.id === service.id);
+    $('#svcHint').textContent = (c && c.blurb) || '';
   }
   $$('#segCars button').forEach(b => b.addEventListener('click', () => {
     const n = Number(b.dataset.cars);
@@ -1181,13 +1227,13 @@ const pad = n => String(n).padStart(2,'0');
     const list = ((cfg.services && cfg.services.length ? cfg.services : CFG.SERVICES) || [])
       .filter(x => !copy(x.id).pairOf);
     const el = $('#segService');
-    if (list.length < 2){ el.hidden = true; return; }
+    if (list.length < 2){ el.hidden = $('#svcHint').hidden = true; return; }
     // The server owns id and minutes; the site owns how it reads.
     el.innerHTML = list.map(x => {
       const c = copy(x.id);
-      const from = c.prices ? ' · from $' + c.prices.sedan : '';
+      const from = c.prices ? 'from $' + c.prices.sedan : '';
       return `<button type="button" data-svc="${x.id}"${x.id === (service && service.id) ? ' class="sel"' : ''}>` +
-             `${c.label || x.label}<small>${(c.blurb || '')}${from}</small></button>`;
+             `${c.label || x.label}<small>${from}</small></button>`;
     }).join('');
     $$('button', el).forEach(b => b.addEventListener('click', () => {
       const hit = list.find(x => x.id === b.dataset.svc);
@@ -1426,6 +1472,7 @@ const pad = n => String(n).padStart(2,'0');
     $('.panel .ph-sub').hidden = true;
     $('#segService').hidden = true;
     $('#segCars').hidden = $('#carsLabel').hidden = true;
+    $('#svcHint').hidden = $('#carsHint').hidden = true;
     $('.svc-label').hidden = true;
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
