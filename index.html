@@ -366,6 +366,16 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .ok-msg .ok-when{display:block;color:#fff;font-weight:700;margin-bottom:2px}
 .ok-msg .ok-sub{display:block;margin-bottom:16px}
 .ok-msg .ok-note{display:block;margin-bottom:16px}
+/* referral: a friend's link, and your own link after booking */
+.ref-note{margin:-6px 0 16px;padding:11px 14px;border:1px solid rgba(237,28,36,.45);border-radius:4px;
+  background:rgba(237,28,36,.08);color:#fff;font-size:14.4px;line-height:1.5}
+.ok-ref{display:block;margin:0 0 18px;padding:14px 16px;border:1px solid rgba(255,255,255,.14);border-radius:4px;
+  background:rgba(0,0,0,.22);color:#cdebd8}
+.ok-ref b{display:block;color:#fff;margin-bottom:4px}
+.ok-ref-row{display:flex;gap:10px;align-items:center;margin-top:10px;min-width:0}
+.ok-ref-row code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;font-size:13.6px}
+.ok-ref-row button{flex:0 0 auto;background:var(--red);color:#fff;border:0;border-radius:3px;padding:9px 16px;
+  font:inherit;font-weight:700;cursor:pointer}
 /* An element told to hide must hide. .days and .slots set their own display and
    sit later in this sheet, so without this they outrank [hidden] and stay put. */
 [hidden]{display:none !important}
@@ -791,6 +801,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <div class="panel">
         <h4>Book online</h4>
         <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
+        <p class="ref-note" id="refNote" hidden></p>
 
         <label class="svc-label">What are we doing?</label>
         <div class="seg" id="segService"></div>
@@ -1060,6 +1071,25 @@ const CFG = {
 const $  = (s,r=document)=>r.querySelector(s);
 const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
 const pad = n => String(n).padStart(2,'0');
+
+/* ------------------------------ referrals -------------------------------
+   A customer's link (valleydetails.site/?ref=dom-x7k2p) is remembered for 60 days
+   so a friend can look around first, and taken out of the address bar so it isn't
+   passed along by accident. The discount itself is applied by the calendar when
+   they book; this only tells them it's coming. */
+const REF = (() => {
+  try {
+    const q = new URLSearchParams(location.search).get('ref');
+    if (q && /^[a-z0-9-]{3,40}$/i.test(q)){
+      localStorage.setItem('vdRef', JSON.stringify({ code: q.toLowerCase(), at: Date.now() }));
+      const rest = new URLSearchParams(location.search); rest.delete('ref');
+      history.replaceState(null, '', location.pathname + (rest.toString() ? '?' + rest : '') + location.hash);
+      return q.toLowerCase();
+    }
+    const saved = JSON.parse(localStorage.getItem('vdRef') || 'null');
+    return saved && Date.now() - saved.at < 60 * 864e5 ? saved.code : '';
+  } catch (_) { return ''; }
+})();
 
 /* --------------- sticky header sits under the promo strip -------------- */
 (function stack(){
@@ -1559,7 +1589,7 @@ const pad = n => String(n).padStart(2,'0');
     const btn = $('#bookBtn');
     btn.disabled = true; btn.textContent = 'Sending';
 
-    let ok = true;
+    let ok = true, refUrl = '';
     if (CFG.API_BASE){
       try {
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
@@ -1569,6 +1599,7 @@ const pad = n => String(n).padStart(2,'0');
                                  cars, vehicles: list,
                                  mode, address:addr, notes,
                                  sms_ok: $('#bOptin').checked,
+                                 ref: REF || undefined,
                                  // Checked at submit, so a page left open past midnight stops tagging it.
                                  promo: service && service.id !== 'express' && Date.now() < new Date(CFG.PROMO_END).getTime()
                                    ? 'FIRST75' : '',
@@ -1581,6 +1612,7 @@ const pad = n => String(n).padStart(2,'0');
         });
         const j = await r.json().catch(()=>({}));
         ok = r.ok && j.ok !== false;
+        refUrl = ok && j.ref_url ? String(j.ref_url) : '';
         if (!ok) err.textContent = j.error || 'That slot just got taken. Pick another, or call us.';
       } catch (_) {
         ok = false;
@@ -1612,12 +1644,49 @@ const pad = n => String(n).padStart(2,'0');
       <span class="ok-when">${pretty}</span>
       <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${esc(manyCars ? cars + ' cars: ' + carsText : carsText)}</span>
       <span class="ok-note">${textLine}</span>
+      ${refUrl ? `<span class="ok-ref"><b>Give a friend $20 off</b>Send them your link. When their detail is done, you get $20 off your next one too.
+        <span class="ok-ref-row"><code>${esc(refUrl.replace(/^https?:\/\//, ''))}</code><button type="button" id="refShare">Share</button></span></span>` : ''}
       Need to change it? Call <a href="tel:${CFG.PHONE_E164}" style="color:var(--red);font-weight:700">${CFG.PHONE_TEXT}</a> or <a href="sms:+19167537822" style="color:var(--red);font-weight:700">text us</a>.`;
     box.classList.add('on');
     box.scrollIntoView({behavior:'smooth', block:'center'});
+    // The link they came in on was used; their own is the one to pass on now.
+    try { localStorage.removeItem('vdRef'); } catch (_) {}
+    const share = $('#refShare');
+    if (share) share.addEventListener('click', async () => {
+      const text = 'Valley Details came out and detailed my car. This link gets you $20 off your first one:';
+      try {
+        if (navigator.share) return await navigator.share({ text, url: refUrl });
+        await navigator.clipboard.writeText(refUrl);
+        share.textContent = 'Copied';
+      } catch (err) {
+        if (err && err.name === 'AbortError') return;
+        window.prompt('Copy your link', refUrl);
+      }
+    });
   });
 
   load();
+})();
+
+/* ------------------------- referral welcome --------------------------- */
+(async function referralWelcome(){
+  if (!REF || !CFG.API_BASE) return;
+  const clean = s => String(s || '').replace(/[^A-Za-z' -]/g, '').slice(0, 24);
+  try {
+    const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/ref/${encodeURIComponent(REF)}`);
+    const j = await r.json();
+    if (!j || !j.ok) return;
+    const who = clean(j.first);
+    const off = '$' + (Number(j.discount) || 20);
+    const note = $('#refNote');
+    note.innerHTML = `<b>${who || 'A friend'} sent you.</b> ${off} off your first detail, taken off automatically when you book.`;
+    note.hidden = false;
+    $('#promoStrip').classList.remove('ended');
+    $('#promoHead').textContent = `${off} off from ${who || 'a friend'}`;
+    $('#promoTail').innerHTML = '<a href="#book" style="color:#fff;text-decoration:underline">Book your first detail</a>';
+    $('#cdMini').hidden = true;
+    dispatchEvent(new Event('resize'));
+  } catch (_) { /* booking works the same without the welcome */ }
 })();
 
 /* --------------------------- club signup ------------------------------ */
