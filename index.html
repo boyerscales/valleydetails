@@ -58,13 +58,7 @@ button,input,select,textarea{font-family:inherit;font-size:inherit}
 .h3{font-size:clamp(22px,3.2vw,29px);margin:0 0 10px}
 .kicker{font-style:normal;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--red);
   line-height:1;margin:0 0 15px;display:flex;align-items:center;gap:11px}
-/* A short red rule after the label. Cheap, but it stops every section from
-   opening with the same naked line of small caps. */
-.kicker::after{content:"";height:2px;flex:0 0 36px;
-  background:linear-gradient(90deg,var(--red),transparent)}
-.kicker.mid{justify-content:center}
-.kicker.mid::before{content:"";height:2px;flex:0 0 36px;
-  background:linear-gradient(270deg,var(--red),transparent)}.lede{color:var(--muted);font-size:clamp(16px,2vw,18px);line-height:1.6;margin:0 0 26px;max-width:56ch}
+.kicker.mid{justify-content:center}.lede{color:var(--muted);font-size:clamp(16px,2vw,18px);line-height:1.6;margin:0 0 26px;max-width:56ch}
 section{padding:clamp(58px,8vw,100px) 0;position:relative}
 .sec-alt{background:linear-gradient(180deg,#0a0a0d,#050506)}
 
@@ -336,10 +330,10 @@ nav.main a:hover{color:#fff}
 .shot::after{content:"";position:absolute;inset:auto 0 0 0;height:52%;pointer-events:none;
   background:linear-gradient(180deg,transparent,rgba(5,5,6,.82));opacity:0;transition:opacity .3s}
 .shot:hover::after{opacity:1}
-.shot b{position:absolute;left:12px;bottom:10px;z-index:2;font-family:var(--disp);font-style:italic;
+.shot-cap{position:absolute;left:12px;bottom:10px;z-index:2;font-family:var(--disp);font-style:italic;
   font-weight:800;text-transform:uppercase;font-size:13.5px;letter-spacing:.05em;color:#fff;
   opacity:0;transform:translateY(5px);transition:opacity .3s,transform .3s}
-.shot:hover b{opacity:1;transform:none}
+.shot:hover .shot-cap{opacity:1;transform:none}
 
 /* ---------- steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -1492,7 +1486,7 @@ const REF = (() => {
     d.className = 'shot';
     d.innerHTML = `<div class="ph"><div><b>${i+1}</b><small>/assets</small></div></div>
                    <img src="${src}" alt="${alt}" loading="lazy" onerror="this.style.display='none'">` +
-                  (cap ? `<b>${cap}</b>` : '');
+                  (cap ? `<b class="shot-cap">${cap}</b>` : '');
     shots.append(d);
   });
 })();
