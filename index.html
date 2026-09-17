@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050506">
-<title>Valley Details | Mobile Car Detailing in Elk Grove</title>
-<meta name="description" content="Full interior and exterior detail at your house, $100. Elk Grove and south Sacramento. Book online or call (916) 249-0631.">
+<title>Valley Details | Mobile Car Detailing in Elk Grove, CA</title>
+<meta name="description" content="Mobile car detailing in Elk Grove. Full detail $100, interior only from $70, exterior only from $60. We come to you. Book online or call (916) 249-0631.">
 <link rel="canonical" href="https://valleydetails.site/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Valley Details | Affordable Detailing in Elk Grove">
-<meta property="og:description" content="$100 full interior and exterior detail at your house. Book online or call (916) 249-0631.">
+<meta property="og:description" content="Full detail $100, interior only from $70, exterior only from $60. We come to your driveway. Book online or call (916) 249-0631.">
 <meta property="og:image" content="https://valleydetails.site/assets/logo-social.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/icon.png">
@@ -30,6 +30,12 @@
   --wrap:1120px;
   --shadow:0 28px 70px rgba(0,0,0,.62);
   --glow:0 14px 40px rgba(237,28,36,.34);
+  /* Depth kit. A flat dark rectangle is what makes a dark site read as a template;
+     a top hairline plus a real drop shadow is what makes it read as a surface. */
+  --card:linear-gradient(168deg,#111116,#0a0a0e);
+  --card-hi:inset 0 1px 0 rgba(255,255,255,.055);
+  --lift:0 18px 44px rgba(0,0,0,.5);
+  --lift-red:0 18px 50px rgba(237,28,36,.16);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%;overflow-x:clip}
@@ -51,7 +57,14 @@ button,input,select,textarea{font-family:inherit;font-size:inherit}
 .h2{font-size:clamp(32px,6vw,56px);margin:0 0 14px}
 .h3{font-size:clamp(22px,3.2vw,29px);margin:0 0 10px}
 .kicker{font-style:normal;font-weight:700;font-size:13px;letter-spacing:.2em;color:var(--red);
-  line-height:1;margin:0 0 15px;display:flex;align-items:center;gap:11px}.lede{color:var(--muted);font-size:clamp(16px,2vw,18px);line-height:1.6;margin:0 0 26px;max-width:56ch}
+  line-height:1;margin:0 0 15px;display:flex;align-items:center;gap:11px}
+/* A short red rule after the label. Cheap, but it stops every section from
+   opening with the same naked line of small caps. */
+.kicker::after{content:"";height:2px;flex:0 0 36px;
+  background:linear-gradient(90deg,var(--red),transparent)}
+.kicker.mid{justify-content:center}
+.kicker.mid::before{content:"";height:2px;flex:0 0 36px;
+  background:linear-gradient(270deg,var(--red),transparent)}.lede{color:var(--muted);font-size:clamp(16px,2vw,18px);line-height:1.6;margin:0 0 26px;max-width:56ch}
 section{padding:clamp(58px,8vw,100px) 0;position:relative}
 .sec-alt{background:linear-gradient(180deg,#0a0a0d,#050506)}
 
@@ -108,27 +121,38 @@ nav.main a:hover{color:#fff}
 .btn-icon svg{width:calc(1.05em + 4px);height:calc(1.05em + 4px)}
 .btn-icon:hover{border-color:var(--red);color:#fff;background:var(--red-wash)}
 
-/* ---------- hero ---------- */
-.hero{position:relative;padding:clamp(46px,6vw,84px) 0 clamp(52px,7vw,88px);overflow:hidden;isolation:isolate}
-.hero::before{content:"";position:absolute;inset:-20% -10% auto -10%;height:120%;z-index:-2;
-  background:radial-gradient(56% 44% at 50% 6%,rgba(237,28,36,.20),transparent 66%),
-             radial-gradient(38% 32% at 12% 84%,rgba(237,28,36,.09),transparent 70%)}
+/* ---------- hero ----------
+   A real car sits behind the headline. Type on a gradient is the single loudest
+   tell that nobody photographed anything, and he has the photos. The scrim is
+   left-heavy so the words keep their contrast wherever the image crops. */
+.hero{position:relative;padding:clamp(54px,6.5vw,96px) 0 clamp(56px,7vw,96px);overflow:hidden;isolation:isolate}
+.hero-photo{position:absolute;inset:0;z-index:-3;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:72% 58%;
+  filter:saturate(.88) contrast(1.08) brightness(.92)}
+/* Dark enough on the left that the headline never fights the picture, light
+   enough on the right that there is still visibly a car back there. */
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background:linear-gradient(97deg,#050506 16%,rgba(5,5,6,.93) 34%,rgba(5,5,6,.66) 56%,rgba(5,5,6,.42) 100%),
+             linear-gradient(180deg,rgba(5,5,6,.55) 0,transparent 22%,transparent 58%,rgba(5,5,6,.96) 94%,#050506 100%),
+             radial-gradient(44% 38% at 14% 24%,rgba(237,28,36,.16),transparent 66%)}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
-  background-size:58px 58px;mask-image:radial-gradient(70% 60% at 50% 34%,#000,transparent 78%)}
+  background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:58px 58px;mask-image:radial-gradient(64% 58% at 34% 34%,#000,transparent 76%)}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4.4vw,56px);align-items:center}
 .hero h1{margin:0 0 18px}
 .hero h1 em{font-style:italic;color:var(--red);display:block}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
 .trustrow{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
-.trustrow li{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--muted);
-  background:var(--panel2);border:1px solid var(--line);border-radius:100px;padding:7px 14px}
+.trustrow li{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#cfcfd8;
+  background:rgba(20,20,25,.62);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:7px 14px;
+  backdrop-filter:blur(10px)}
 .trustrow li svg{width:14px;height:14px;color:var(--red);flex:0 0 auto}
 
 /* ---------- price slab ---------- */
-.slab{background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line2);
-  border-radius:5px;padding:28px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.slab{background:linear-gradient(165deg,rgba(24,24,30,.82),rgba(8,8,11,.9));border:1px solid rgba(255,255,255,.12);
+  border-radius:5px;padding:28px;position:relative;overflow:hidden;
+  box-shadow:var(--shadow),var(--card-hi);backdrop-filter:blur(20px) saturate(1.1)}
 .slab::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--red)}
 .slab-tag{position:absolute;top:0;right:0;background:var(--red);color:#fff;font-family:var(--disp);
   font-style:italic;font-weight:800;text-transform:uppercase;font-size:15px;padding:8px 16px 8px 22px;
@@ -163,21 +187,94 @@ nav.main a:hover{color:#fff}
 .cd.ended{border-color:var(--line2);background:var(--panel2)}
 .cd.ended .cd-dot{animation:none;background:var(--faint)}
 
+/* ---------- the service menu ----------
+   Four things he sells, each with its own photo, so "interior only" is a thing you
+   can see and tap rather than a line of text. The card's button preselects that
+   service down in the calendar, so picking here is the first half of booking. */
+.menu{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px}
+.card{position:relative;display:flex;flex-direction:column;background:var(--card);
+  border:1px solid var(--line);border-radius:6px;overflow:hidden;
+  box-shadow:var(--card-hi);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.card:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:var(--lift),var(--card-hi)}
+.card.feat{border-color:rgba(237,28,36,.5);box-shadow:var(--lift-red),var(--card-hi)}
+.card.feat:hover{border-color:var(--red);box-shadow:var(--lift-red),var(--lift),var(--card-hi)}
+.card-pic{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0c0c10;flex:0 0 auto}
+.card-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease;filter:saturate(.9)}
+.card:hover .card-pic img{transform:scale(1.05)}
+.card-pic::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(5,5,6,.1),rgba(5,5,6,.9))}
+.card-flag{position:absolute;top:0;left:0;z-index:2;background:var(--red);color:#fff;
+  font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:12.5px;
+  letter-spacing:.06em;padding:6px 15px 6px 12px;clip-path:polygon(0 0,100% 0,calc(100% - 9px) 100%,0 100%)}
+.card-when{position:absolute;right:11px;bottom:10px;z-index:2;display:inline-flex;align-items:center;gap:6px;
+  font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;
+  background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.16);border-radius:100px;padding:5px 11px;
+  backdrop-filter:blur(8px)}
+.card-when svg{width:12px;height:12px;color:var(--red)}
+.card-body{padding:18px 19px 19px;display:flex;flex-direction:column;flex:1}
+.card-body h4{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:22px;line-height:1;margin:0 0 6px}
+.card-what{margin:0 0 15px;color:var(--muted);font-size:13.8px;line-height:1.5;flex:1}
+.card-from{display:flex;align-items:baseline;gap:7px;margin-bottom:10px}
+.card-from b{font-family:var(--disp);font-style:italic;font-weight:800;font-size:40px;line-height:.9;
+  color:var(--red)}
+.card-from span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.card-sizes{list-style:none;padding:0;margin:0 0 16px;display:grid;gap:0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.card-sizes li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;font-size:13.2px;
+  color:var(--muted);border-bottom:1px solid rgba(255,255,255,.035)}
+.card-sizes li:last-child{border-bottom:0}
+.card-sizes li b{color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
+.card .btn{width:100%}
+/* Combined-price nudge under the menu. It is the one number that makes the
+   full detail the obvious pick, so it gets said out loud once. */
+.menu-note{display:flex;align-items:flex-start;gap:11px;margin-top:16px;padding:14px 17px;border-radius:5px;
+  background:var(--red-wash);border:1px solid rgba(237,28,36,.3);font-size:14.2px;line-height:1.55;color:#e8e8ef}
+.menu-note svg{width:17px;height:17px;color:var(--red);flex:0 0 auto;margin-top:3px}
+.menu-note b{color:#fff}
+
 /* ---------- price tiers ---------- */
 .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
-.tier{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:22px;text-align:center;
-  transition:border-color .16s}
-.tier:hover{border-color:var(--line2)}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:5px;padding:22px;text-align:center;
+  box-shadow:var(--card-hi);transition:border-color .16s,transform .16s}
+.tier:hover{border-color:var(--line2);transform:translateY(-2px)}
 .tier .who{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:18px;
   margin-bottom:4px;line-height:1.05}
 .tier .eg{color:var(--faint);font-size:12.5px;margin-bottom:14px}
 .tier .amt{font-family:var(--disp);font-style:italic;font-weight:800;font-size:44px;line-height:1;color:var(--red)}
 .tier .old{color:var(--faint);font-size:14px;margin-top:6px;text-decoration:line-through}
 
+/* ---------- the price table ----------
+   One grid instead of two rows of cards. Four services against three sizes is a
+   thing you read in one look; six separate boxes is a thing you scroll past. */
+.ptable{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--card);
+  box-shadow:var(--card-hi)}
+.ptable table{width:100%;border-collapse:collapse}
+.ptable thead th{text-align:right;padding:15px 16px;font-family:var(--disp);font-style:italic;font-weight:800;
+  text-transform:uppercase;font-size:15px;letter-spacing:.03em;color:#fff;background:rgba(255,255,255,.035);
+  border-bottom:1px solid var(--line2);vertical-align:bottom}
+.ptable thead th:first-child{text-align:left}
+.ptable thead th span{display:block;font-family:var(--font);font-style:normal;font-weight:500;font-size:11.5px;
+  letter-spacing:0;text-transform:none;color:var(--faint);margin-top:3px}
+.ptable tbody th{text-align:left;padding:15px 16px;font-family:var(--disp);font-style:italic;font-weight:800;
+  text-transform:uppercase;font-size:17.5px;color:#fff;white-space:nowrap}
+.ptable tbody th span{display:block;font-family:var(--font);font-style:normal;font-weight:500;font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+.ptable tbody td{text-align:right;padding:15px 16px;font-family:var(--disp);font-style:italic;font-weight:800;
+  font-size:26px;color:var(--red);line-height:1;font-variant-numeric:tabular-nums}
+.ptable tbody tr{border-top:1px solid var(--line)}
+.ptable tbody tr:hover{background:rgba(255,255,255,.022)}
+.ptable tbody tr.feat td{color:var(--red-hot)}
+.ptable tbody tr.feat{background:var(--red-wash)}
+.slab-alt{margin:12px 0 0;font-size:13.4px;color:var(--muted);text-align:center}
+.slab-alt a{color:var(--red);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
 /* ---------- save more ---------- */
 .saves{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-.save{display:flex;gap:13px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
-  border-radius:5px;padding:20px}
+.save{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+  border-radius:5px;padding:20px;box-shadow:var(--card-hi);transition:border-color .16s,transform .16s}
+.save:hover{border-color:var(--line2);transform:translateY(-2px)}
 .save .ico{width:36px;height:36px;flex:0 0 auto;display:grid;place-items:center;border-radius:4px;
   background:var(--red-wash);border:1px solid rgba(237,28,36,.3);color:var(--red)}
 .save .ico svg{width:18px;height:18px}
@@ -187,10 +284,14 @@ nav.main a:hover{color:#fff}
 
 /* ---------- included ---------- */
 .incl{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-.incl-col{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:24px}
+.incl-col{background:var(--card);border:1px solid var(--line);border-radius:5px;padding:24px;
+  box-shadow:var(--card-hi)}
 .incl-col h4{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:19px;
   margin:0 0 15px;padding-bottom:12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px}
 .incl-col h4 svg{width:18px;height:18px;color:var(--red)}
+.incl-tag{margin-left:auto;font-family:var(--font);font-style:normal;font-weight:600;font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--red);background:var(--red-wash);
+  border:1px solid rgba(237,28,36,.32);border-radius:100px;padding:4px 11px;white-space:nowrap}
 .incl-col ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
 .incl-col li{display:flex;gap:10px;font-size:14.6px;color:#d6d6dd;align-items:flex-start}
 .incl-col li svg{width:15px;height:15px;color:var(--red);flex:0 0 auto;margin-top:3.5px}
@@ -225,16 +326,25 @@ nav.main a:hover{color:#fff}
 .ph b{display:block;font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
   font-size:18px;color:#3d3d47;margin-bottom:5px}
 .ph small{font-size:11.5px;letter-spacing:.06em}
-.shots{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
-.shot{aspect-ratio:4/3;border:1px solid var(--line);border-radius:4px;overflow:hidden;position:relative;
-  background:var(--panel2)}
-.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.shot{aspect-ratio:4/3;border:1px solid var(--line);border-radius:5px;overflow:hidden;position:relative;
+  background:var(--panel2);box-shadow:var(--card-hi)}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
 .shot:hover img{transform:scale(1.06)}
+/* The car's name, bottom left. It is the difference between a stock-looking grid
+   and a grid of jobs somebody actually did. */
+.shot::after{content:"";position:absolute;inset:auto 0 0 0;height:52%;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(5,5,6,.82));opacity:0;transition:opacity .3s}
+.shot:hover::after{opacity:1}
+.shot b{position:absolute;left:12px;bottom:10px;z-index:2;font-family:var(--disp);font-style:italic;
+  font-weight:800;text-transform:uppercase;font-size:13.5px;letter-spacing:.05em;color:#fff;
+  opacity:0;transform:translateY(5px);transition:opacity .3s,transform .3s}
+.shot:hover b{opacity:1;transform:none}
 
 /* ---------- steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.step{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:28px 24px;
-  position:relative;overflow:hidden}
+.step{background:var(--card);border:1px solid var(--line);border-radius:5px;padding:28px 24px;
+  position:relative;overflow:hidden;box-shadow:var(--card-hi)}
 .step .n{display:inline-grid;place-items:center;width:32px;height:32px;background:var(--red);color:#fff;
   font-family:var(--disp);font-style:italic;font-weight:800;font-size:17px;margin-bottom:13px;
   clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
@@ -286,7 +396,8 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 
 /* ---------- booking ---------- */
 .book{display:grid;grid-template-columns:1.06fr .94fr;gap:clamp(18px,2.6vw,30px);align-items:start}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:clamp(20px,2.6vw,28px)}
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:6px;
+  padding:clamp(20px,2.6vw,28px);box-shadow:var(--lift),var(--card-hi)}
 .panel h4{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;font-size:20px;
   margin:0 0 4px}
 .panel .ph-sub{color:var(--faint);font-size:13.5px;margin:0 0 18px}
@@ -330,9 +441,19 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .seg button.sel small{color:#e8b8ba}
 /* Service and car count sit on one row each. The detail for whatever is picked goes on
    a single hint line under the row, instead of fine print inside every button. */
-#segService{grid-template-columns:1fr 1fr}
+/* Four services now, so the picker is a 2x2 of small priced cards rather than a
+   row of labels. The price is on the button because "which one is cheaper" is the
+   question people are actually answering here. */
+#segService{grid-template-columns:1fr 1fr;gap:9px}
+#segService button{padding:13px 12px;align-items:flex-start;text-align:left;gap:2px;position:relative}
+#segService button .svc-name{font-family:var(--disp);font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:16.5px;line-height:1.05;color:#fff}
+#segService button .svc-price{font-size:13px;font-weight:600;color:var(--faint)}
+#segService button.sel .svc-price{color:#e8b8ba}
+#segService button .svc-time{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--faint);margin-top:2px}
 #segCars{grid-template-columns:repeat(3,1fr)}
-#segService button,#segCars button{padding:12px 6px}
+#segCars button{padding:12px 6px}
 .seg-hint{color:var(--faint);font-size:13px;line-height:1.45;margin:-8px 0 18px}
 .fit-note{color:#ff8a8f;margin:0 0 12px}
 /* 3+ cars: the exact count sits right under the choice, before the times, because
@@ -389,9 +510,10 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 .stars svg{width:16px;height:16px}
 .rev-agg b{font-family:var(--disp);font-style:italic;font-weight:800;font-size:19px;line-height:1}
 .rev-agg span{color:var(--muted);font-size:13.6px}
+.rev-agg .stars{color:var(--red)}
 .revs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.rev{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:22px;display:flex;
-  flex-direction:column}
+.rev{background:var(--card);border:1px solid var(--line);border-radius:5px;padding:22px;display:flex;
+  flex-direction:column;box-shadow:var(--card-hi)}
 .rev .stars{margin-bottom:12px}
 .rev p{margin:0 0 16px;font-size:14.8px;line-height:1.6;color:#dcdce2;flex:1}
 .rev .who{font-size:13.4px;color:var(--faint);border-top:1px solid var(--line);padding-top:13px}
@@ -399,7 +521,9 @@ select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns=
 
 /* ---------- faq / area / finale / footer ---------- */
 .faq{display:grid;gap:9px;max-width:840px}
-details.q{background:var(--panel);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+details.q{background:var(--card);border:1px solid var(--line);border-radius:5px;overflow:hidden;
+  box-shadow:var(--card-hi);transition:border-color .16s}
+details.q:hover{border-color:var(--line2)}
 details.q[open]{border-color:var(--line2)}
 details.q summary{list-style:none;cursor:pointer;padding:18px 21px;font-weight:600;font-size:15.6px;
   display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -438,6 +562,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 .mobar .btn{flex:1;font-size:17px;padding:16px 10px}
 
 /* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .menu{grid-template-columns:1fr 1fr}
+}
 @media (max-width:960px){
   .hero-grid,.vip,.book,.incl{grid-template-columns:1fr}
   .steps,.saves{grid-template-columns:1fr 1fr}
@@ -445,6 +572,11 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .shots{grid-template-columns:repeat(2,1fr)}
   .revs,.foot{grid-template-columns:1fr 1fr}
   nav.main{display:none}
+  /* The photo stops being a backdrop and becomes a band behind the whole block,
+     so the headline keeps its contrast without the image disappearing. */
+  .hero-photo img{object-position:64% 60%}
+  .hero::before{background:linear-gradient(180deg,rgba(5,5,6,.5) 0,rgba(5,5,6,.8) 32%,rgba(5,5,6,.94) 60%,#050506 84%),
+                           radial-gradient(60% 40% at 50% 12%,rgba(237,28,36,.18),transparent 70%)}
 }
 @media (max-width:640px){
   html{scroll-padding-top:86px}
@@ -455,7 +587,19 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .hdr{height:70px}
   .brand img{height:56px}
   .hdr-cta .btn span{display:none}
-  .steps,.saves,.tiers,.row2,.revs{grid-template-columns:1fr}
+  .steps,.saves,.tiers,.row2,.revs,.menu{grid-template-columns:1fr}
+  .shots{grid-template-columns:repeat(2,1fr);gap:8px}
+  /* On a phone the menu card is a row: picture left, the words and the price right. */
+  .card{flex-direction:row;align-items:stretch}
+  .card-pic{flex:0 0 40%;aspect-ratio:auto}
+  .card-body{padding:15px 16px}
+  .card-body h4{font-size:19px}
+  .card-what,.card-sizes{display:none}
+  .card-from{margin-bottom:12px}
+  .card-from b{font-size:33px}
+  .card-when{display:none}
+  .card .btn{font-size:15.5px;padding:12px 14px}
+  #segService{grid-template-columns:1fr 1fr}
   .slots{grid-template-columns:repeat(3,1fr)}
   .slot{padding:13px 4px}
   section{padding:48px 0}
@@ -494,6 +638,16 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   .tier .eg{margin-bottom:0}
   .tier .amt{font-size:34px}
   .tier .old{margin-top:2px}
+  /* Four columns will not fit a phone, so each service becomes its own block with
+     the three sizes listed under it. Same numbers, no sideways scroll. */
+  .ptable thead{display:none}
+  .ptable table,.ptable tbody,.ptable tr,.ptable tbody th,.ptable tbody td{display:block;width:100%}
+  .ptable tbody tr{padding:14px 16px;border-top:1px solid var(--line)}
+  .ptable tbody th{padding:0 0 10px;white-space:normal}
+  .ptable tbody td{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;
+    font-size:23px;text-align:right}
+  .ptable tbody td::before{content:attr(data-size);font-family:var(--font);font-style:normal;font-weight:500;
+    font-size:13.5px;color:var(--muted);letter-spacing:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
   .mission{padding:clamp(46px,6vw,74px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -569,19 +723,22 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
 <main id="top">
 <section class="hero">
+  <div class="hero-photo" aria-hidden="true">
+    <img src="assets/hero.jpg" alt="" fetchpriority="high" decoding="async">
+  </div>
   <div class="wrap hero-grid">
     <div>
       <p class="kicker">Mobile Detailing · Elk Grove</p>
       <h1 class="h1">Like the day<em>you bought it.</em></h1>
-      <p class="lede">A full interior and exterior detail in your own driveway. About two hours, $100.<span id="ledePromo"> Your first one is $75 through Monday.</span></p>
+      <p class="lede">We pull up to your driveway and detail it there. Inside, outside, or both, your call.<span id="ledePromo"> Your first one is $75 through Monday.</span></p>
       <div class="hero-actions">
         <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
         <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
       </div>
       <ul class="trustrow">
         <li><svg><use href="#i-car"/></svg>We come to you</li>
-        <li><svg><use href="#i-clock"/></svg>About 2 hours</li>
-        <li><svg><use href="#i-check"/></svg>No deposit</li>
+        <li><svg><use href="#i-spark"/></svg>Interior, exterior or both</li>
+        <li><svg><use href="#i-check"/></svg>No deposit, pay after</li>
       </ul>
     </div>
 
@@ -606,13 +763,14 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <li><svg><use href="#i-check"/></svg>Spray wax, tire shine, glass</li>
       </ul>
       <a class="btn btn-red btn-block" href="#book" id="slabCta">Book at $75</a>
+      <p class="slab-alt">Only need one side of it? <a href="#pricing">Interior from $70, exterior from $60.</a></p>
     </div>
   </div>
 </section>
 
 <section class="mission">
   <div class="wrap">
-    <p class="kicker" style="justify-content:center">Our Mission</p>
+    <p class="kicker mid">Our Mission</p>
     <p class="mission-line">Keeping your vehicle clean shouldn’t empty your pockets.</p>
     <span>Our mission is to provide high-quality, professional detailing at an affordable price. We believe everyone deserves to drive a vehicle they’re proud of without having to pay an unreasonable premium.</span>
   </div>
@@ -621,42 +779,98 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 <section id="pricing" class="sec-alt">
   <div class="wrap">
     <p class="kicker">Pricing</p>
-    <h2 class="h2">One price. The whole car.</h2>
-    <p class="lede">The full detail is exactly that, inside and out, with nothing held back for an upsell. If you want something quicker there is an express below, and we tell you plainly what it leaves out. Find your size, and that is what you pay.</p>
+    <h2 class="h2">Pick what your car needs.</h2>
+    <p class="lede">Four jobs, four prices, no upsell waiting at the end. Tap one and it is already chosen when you get to the calendar.</p>
 
-    <div class="tiers">
-      <div class="tier">
-        <div><div class="who">Sedan or Coupe</div><div class="eg">Civic, Camry, Challenger</div></div>
-        <div><div class="amt" data-promo="$75" data-reg="$100">$75</div><div class="old" data-was="$100">$100</div></div>
-      </div>
-      <div class="tier">
-        <div><div class="who">SUV or Crossover</div><div class="eg">RAV4, Equinox, Explorer</div></div>
-        <div><div class="amt" data-promo="$85" data-reg="$115">$85</div><div class="old" data-was="$115">$115</div></div>
-      </div>
-      <div class="tier">
-        <div><div class="who">Truck or 3-Row</div><div class="eg">Silverado, Tahoe, Odyssey</div></div>
-        <div><div class="amt" data-promo="$95" data-reg="$130">$95</div><div class="old" data-was="$130">$130</div></div>
-      </div>
-    </div>
-    <p class="tiernote" id="tierNote">Crossed-out price is what a detail costs every day. The lower one is your first detail with us, through Monday the 14th.</p>
+    <div class="menu">
+      <article class="card feat">
+        <div class="card-pic">
+          <span class="card-flag">Most booked</span>
+          <img src="assets/svc-full.jpg" alt="Mercedes-Benz E-Class after a full interior and exterior detail in Elk Grove" loading="lazy" decoding="async">
+          <span class="card-when"><svg><use href="#i-clock"/></svg>About 2 hr</span>
+        </div>
+        <div class="card-body">
+          <h4>Full Detail</h4>
+          <p class="card-what">Everything. Inside stripped back and cleaned, outside washed, decontaminated and waxed.</p>
+          <div class="card-from"><b>$100</b><span>Sedan</span></div>
+          <ul class="card-sizes">
+            <li>SUV or crossover <b>$115</b></li>
+            <li>Truck or 3-row <b>$130</b></li>
+          </ul>
+          <button type="button" class="btn btn-red" data-book="full"><svg><use href="#i-cal"/></svg>Book This</button>
+        </div>
+      </article>
 
-    <h3 class="h3" style="margin-top:44px">In a hurry? The Express Detail</h3>
-    <p style="color:var(--muted);font-size:15px;margin:0 0 18px;max-width:62ch">Not everybody needs the full two hours. The express is an hour: spray wash outside, vacuum and wipe-down inside. Honest work, just not as deep. We are not pulling ground-in grit out of the carpet or conditioning the leather.</p>
-    <div class="tiers">
-      <div class="tier">
-        <div><div class="who">Sedan or Coupe</div><div class="eg">Civic, Camry, Challenger</div></div>
-        <div><div class="amt">$50</div></div>
-      </div>
-      <div class="tier">
-        <div><div class="who">SUV or Crossover</div><div class="eg">RAV4, Equinox, Explorer</div></div>
-        <div><div class="amt">$60</div></div>
-      </div>
-      <div class="tier">
-        <div><div class="who">Truck or 3-Row</div><div class="eg">Silverado, Tahoe, Odyssey</div></div>
-        <div><div class="amt">$70</div></div>
-      </div>
+      <article class="card">
+        <div class="card-pic">
+          <img src="assets/svc-interior.jpg" alt="Tesla Model 3 interior after an interior-only detail" loading="lazy" decoding="async">
+          <span class="card-when"><svg><use href="#i-clock"/></svg>About 90 min</span>
+        </div>
+        <div class="card-body">
+          <h4>Interior Only</h4>
+          <p class="card-what">The whole inside and nothing else. Vacuum to the trunk, pet hair pulled, leather conditioned, glass done.</p>
+          <div class="card-from"><b>$70</b><span>Sedan</span></div>
+          <ul class="card-sizes">
+            <li>SUV or crossover <b>$80</b></li>
+            <li>Truck or 3-row <b>$90</b></li>
+          </ul>
+          <button type="button" class="btn btn-ghost" data-book="interior"><svg><use href="#i-cal"/></svg>Book This</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-pic">
+          <img src="assets/svc-exterior.jpg" alt="Mercedes-Benz paint and chrome wheels after an exterior-only detail" loading="lazy" decoding="async">
+          <span class="card-when"><svg><use href="#i-clock"/></svg>About 1 hr</span>
+        </div>
+        <div class="card-body">
+          <h4>Exterior Only</h4>
+          <p class="card-what">Paint, glass and wheels. Washed, bugs and tar off, wheels degreased, spray wax and tire shine.</p>
+          <div class="card-from"><b>$60</b><span>Sedan</span></div>
+          <ul class="card-sizes">
+            <li>SUV or crossover <b>$70</b></li>
+            <li>Truck or 3-row <b>$80</b></li>
+          </ul>
+          <button type="button" class="btn btn-ghost" data-book="exterior"><svg><use href="#i-cal"/></svg>Book This</button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-pic">
+          <img src="assets/svc-express.jpg" alt="Audi S4 after an express detail" loading="lazy" decoding="async">
+          <span class="card-when"><svg><use href="#i-clock"/></svg>About 1 hr</span>
+        </div>
+        <div class="card-body">
+          <h4>Express Detail</h4>
+          <p class="card-what">Both sides, quicker. Wash outside, vacuum and wipe-down inside. We skip the deep work, not the care.</p>
+          <div class="card-from"><b>$50</b><span>Sedan</span></div>
+          <ul class="card-sizes">
+            <li>SUV or crossover <b>$60</b></li>
+            <li>Truck or 3-row <b>$70</b></li>
+          </ul>
+          <button type="button" class="btn btn-ghost" data-book="express"><svg><use href="#i-cal"/></svg>Book This</button>
+        </div>
+      </article>
     </div>
-    <p class="tiernote" id="expressNote">Same price every day. The first-detail intro is for the full detail only. Add-ons below work on either one.</p>
+
+    <p class="menu-note"><svg><use href="#i-spark"/></svg><span id="menuSplit">Interior and exterior booked separately come to <b>$130</b>. The full detail is <b>$100</b> and goes deeper on both. If you want the whole car, that is the one.</span></p>
+
+    <h3 class="h3" style="margin-top:46px">Every size, every service</h3>
+    <p style="color:var(--muted);font-size:15px;margin:0 0 18px;max-width:62ch">Find your row, find your column. That is the price, and it is the same price the calendar charges.</p>
+    <!-- Built from CFG.SERVICES so the table and the booking form can never drift
+         apart. The rows below are the no-JS fallback and get replaced on load. -->
+    <div class="ptable" id="priceTable">
+      <table>
+        <thead><tr><th>Service</th><th>Sedan<span>Civic, Camry</span></th><th>SUV<span>RAV4, Explorer</span></th><th>Truck or 3-row<span>Silverado, Odyssey</span></th></tr></thead>
+        <tbody>
+          <tr><th>Full Detail<span>About 2 hr</span></th><td>$100</td><td>$115</td><td>$130</td></tr>
+          <tr><th>Interior Only<span>About 90 min</span></th><td>$70</td><td>$80</td><td>$90</td></tr>
+          <tr><th>Exterior Only<span>About 1 hr</span></th><td>$60</td><td>$70</td><td>$80</td></tr>
+          <tr><th>Express<span>About 1 hr</span></th><td>$50</td><td>$60</td><td>$70</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiernote" id="tierNote">That is the price, every day. No deposit, and nothing gets added at the end.</p>
 
     <h3 class="h3" style="margin-top:44px">Ways to pay less</h3>
     <div class="saves">
@@ -674,10 +888,11 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       </div>
     </div>
 
-    <h3 class="h3" style="margin-top:44px">What you get</h3>
+    <h3 class="h3" style="margin-top:44px">What is in each half</h3>
+    <p style="color:var(--muted);font-size:15px;margin:0 0 4px;max-width:62ch">The full detail is both columns. Interior only is the left one, exterior only is the right one, and neither is a trimmed-down version of itself.</p>
     <div class="incl">
       <div class="incl-col">
-        <h4><svg><use href="#i-car"/></svg>Inside</h4>
+        <h4><svg><use href="#i-car"/></svg>Inside <span class="incl-tag">Interior only, $70</span></h4>
         <ul>
           <li><svg><use href="#i-check"/></svg>Vacuumed from the seats to the trunk</li>
           <li><svg><use href="#i-check"/></svg>Pet hair and ground-in grit lifted out</li>
@@ -687,7 +902,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         </ul>
       </div>
       <div class="incl-col">
-        <h4><svg><use href="#i-spark"/></svg>Outside</h4>
+        <h4><svg><use href="#i-spark"/></svg>Outside <span class="incl-tag">Exterior only, $60</span></h4>
         <ul>
           <li><svg><use href="#i-check"/></svg>Spray wash, roof to rockers</li>
           <li><svg><use href="#i-check"/></svg>Wheels, wheel wells and tires degreased</li>
@@ -736,11 +951,11 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <h2 class="h2">Book, park, done.</h2>
     <div class="steps">
       <div class="step"><span class="n">1</span><h4>Pick a time</h4>
-        <p>Tap a day and a time below. It takes about thirty seconds and there is no account to make.</p></div>
+        <p>Choose inside, outside or both, then tap a day and a time. Thirty seconds, no account to make.</p></div>
       <div class="step"><span class="n">2</span><h4>We show up</h4>
         <p>Your house, your apartment lot, or your work. We need a parking spot, an outside spigot and an outdoor outlet. We take $5 off for using them.</p></div>
       <div class="step"><span class="n">3</span><h4>Get it back clean</h4>
-        <p>About two hours later it looks the way it did on the lot. You pay when you see it, not before.</p></div>
+        <p>An hour to two hours later, depending what you booked. You pay when you see it, not before.</p></div>
     </div>
   </div>
 </section>
@@ -749,17 +964,17 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   <div class="wrap">
     <p class="kicker">Membership</p>
     <h2 class="h2">The Valley Club</h2>
-    <p class="lede">Keep your car spectacular for <b style="color:#fff">$149 a month</b>. Two full details every month, and they do not have to be the same car. The price never goes up for as long as you stay. Ten founding memberships. When they are gone, they are gone.</p>
+    <p class="lede">Two full details a month for <b style="color:#fff">$149</b>, on two different cars if you like. Your price never goes up for as long as you stay. Ten founding spots.</p>
     <div class="vip">
       <ul class="vip-perks">
         <li><span class="ico"><svg><use href="#i-repeat"/></svg></span>
-          <div><strong>Two full details a month</strong><p>Not a wash, not a cut-down version. The whole $100 job, twice, on a standing slot. Same day, same time, so you never have to think about booking it.</p></div></li>
+          <div><strong>Two full details a month</strong><p>The whole $100 job, twice, on a standing slot. Same day, same time, so you never think about booking it.</p></div></li>
         <li><span class="ico"><svg><use href="#i-bolt"/></svg></span>
-          <div><strong>Use them on two different cars</strong><p>Both of yours, yours and your partner's, whatever you like. Two details a month is two details a month. We do not care whose driveway they are parked in, as long as it is the same address.</p></div></li>
+          <div><strong>Use them on two different cars</strong><p>Both of yours, or yours and your partner's. We do not care whose they are, as long as they are at the same address.</p></div></li>
         <li><span class="ico"><svg><use href="#i-gift"/></svg></span>
           <div><strong>Free add-ons every single visit</strong><p>Tire shine and interior protectant always, plus a rotating extra like engine bay or headlight restoration. Everything else on the add-on list is 20% off.</p></div></li>
         <li><span class="ico"><svg><use href="#i-tag"/></svg></span>
-          <div><strong>More cars, still cheaper</strong><p>Past the two that are included, any other car at the same address is $65 a detail instead of $100. Members also get weekend slots and promos before anyone else sees them.</p></div></li>
+          <div><strong>More cars, still cheaper</strong><p>Past the two included, any other car at the same address is $65 instead of $100. Members get weekend slots and promos first.</p></div></li>
       </ul>
 
       <div class="vip-card">
@@ -795,7 +1010,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   <div class="wrap">
     <p class="kicker">Book</p>
     <h2 class="h2">Pick a time.</h2>
-    <p class="lede">Tap a day, tap a time. That is the whole thing. Or call and we will find you one.</p>
+    <p class="lede">What you want done, then a day, then a time. Or call and we will find you one.</p>
 
     <div class="book">
       <div class="panel">
@@ -893,10 +1108,11 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <h2 class="h2">Questions people ask.</h2>
     <div class="faq">
       <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 10 miles of Elk Grove with no travel charge. If you would rather drop the car off, bring it to 9280 Trout Way in Elk Grove. Just pick drop off when you book.</div></details>
+      <details class="q"><summary>Can I get just the inside, or just the outside?</summary><div class="a">Yes, and it is a real choice on the booking form, not something you have to call and ask for. <b style="color:#fff">Interior only</b> starts at $70 and takes about 90 minutes: vacuum to the trunk, pet hair, leather, vents, glass. <b style="color:#fff">Exterior only</b> starts at $60 and takes about an hour: wash, wheels and tires degreased, bugs and tar off, spray wax. Neither one is a cut-down version, it is that half done properly. Worth knowing: the two of them separately come to $130, and the full detail is $100 and goes deeper on both. If you want the whole car, book the full one.</div></details>
       <details class="q"><summary>What if I am outside Elk Grove?</summary><div class="a">Inside 10 miles of Elk Grove there is no travel charge at all, and that covers most of south Sacramento, Laguna West, Vineyard, Sheldon, Florin and Delta Shores. Past ten it is <b style="color:#fff">$1 a mile</b>, and only for the miles over ten. At 15 miles that is $5, at 20 it is $10, at 25 it is $15. Past 25 miles, go ahead and book and we will call you first. Some days we can make it work and some days we cannot, and we would rather tell you straight than no-show you.</div></details>
       <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we knock <b style="color:#fff">$5 off the price</b> for it. We run off an outside spigot and an outdoor outlet. To be straight with you about what that actually costs: a two hour job pulls roughly 30 gallons and a couple of kilowatt-hours, which lands under a dollar on your bill. The $5 is not us breaking even, it is us not wanting to nickel you over a hose. If you are not sure you have an outdoor spigot or outlet, or your complex is tight on space, say so when you book and we will sort it out before we drive over.</div></details>
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full inside and outside on a normal car. If we look at yours and think it needs longer, because of matted pet hair or a bad spill, we tell you before we start rather than after. You do not have to stand around either. We text you when we are wrapping up.</div></details>
-      <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Pick your size on the pricing list and that is what you pay. <span id="faqPrice">A full sedan detail is $100, and your first one with us is $75 if you book by Monday the 14th.</span> Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
+      <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Find your service and your size on the table above and that is what you pay. <span id="faqPrice">A full sedan detail is $100, interior only is $70 and exterior only is $60, and your first full detail is $75 if you book by Monday the 14th.</span> Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
       <details class="q" id="faqAfter"><summary>What happens after Monday?</summary><div class="a">The $75 first-detail price ends September 15th. After that a full sedan detail is $100, and that is what it stays at. No going back up to some other number. Anything booked before the deadline keeps the $75 even if the appointment itself lands later, so grabbing a slot now locks it in.</div></details>
       <details class="q"><summary>How do I pay?</summary><div class="a">When the job is done, not before. We take just about anything: cash, Zelle, Cash App, Venmo, Apple Pay or card. There is no deposit and nothing is charged through this website.</div></details>
       <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain does not matter and we come as planned. Need to move it yourself, just call or text. No fee, no penalty.</div></details>
@@ -906,9 +1122,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
 <section class="finale">
   <div class="wrap">
-    <p class="kicker" style="justify-content:center" id="finaleKicker">First detail $75, through Monday</p>
+    <p class="kicker mid" id="finaleKicker">First detail $75, through Monday</p>
     <h2 class="h2">Stop looking at the mess.</h2>
-    <p class="lede" id="finaleLede">A full interior and exterior detail at your house. <b style="color:#fff">$75</b> for your first one, <b style="color:#fff">$100</b> after. Thirty seconds to book and no deposit.</p>
+    <p class="lede" id="finaleLede">Inside, outside, or the whole car, in your own driveway. <b style="color:#fff">$75</b> for your first full detail, <b style="color:#fff">$100</b> after. Thirty seconds to book and no deposit.</p>
     <div class="hero-actions">
       <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
       <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
@@ -964,6 +1180,15 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   "priceRange":"$$",
   "foundingDate":"2024",
   "sameAs":["https://www.instagram.com/valleydetailsca/"],
+  "hasOfferCatalog":{
+    "@type":"OfferCatalog","name":"Detailing services",
+    "itemListElement":[
+      {"@type":"Offer","name":"Full Detail","description":"Complete interior and exterior detail at your location, about 2 hours.","priceCurrency":"USD","price":"100","priceSpecification":{"@type":"PriceSpecification","minPrice":"100","maxPrice":"130","priceCurrency":"USD"}},
+      {"@type":"Offer","name":"Interior Only","description":"Interior detail only. Vacuum to the trunk, pet hair, leather cleaned and conditioned, glass. About 90 minutes.","priceCurrency":"USD","price":"70","priceSpecification":{"@type":"PriceSpecification","minPrice":"70","maxPrice":"90","priceCurrency":"USD"}},
+      {"@type":"Offer","name":"Exterior Only","description":"Exterior detail only. Wash, wheels and tires degreased, bugs and tar removed, spray wax. About 1 hour.","priceCurrency":"USD","price":"60","priceSpecification":{"@type":"PriceSpecification","minPrice":"60","maxPrice":"80","priceCurrency":"USD"}},
+      {"@type":"Offer","name":"Express Detail","description":"Quicker inside and out. Wash outside, vacuum and wipe-down inside. About 1 hour.","priceCurrency":"USD","price":"50","priceSpecification":{"@type":"PriceSpecification","minPrice":"50","maxPrice":"70","priceCurrency":"USD"}}
+    ]
+  },
   "address":{"@type":"PostalAddress","addressLocality":"Elk Grove","addressRegion":"CA","addressCountry":"US"},
   "areaServed":{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":38.4088,"longitude":-121.3716},"geoRadius":"16093"},
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"20:00"}]
@@ -994,9 +1219,18 @@ const CFG = {
      what the calendar blocks out. The intro price applies to the full detail
      only — the express is already the cheap one.                          */
   SERVICES: [
-    { id:'full',    label:'Full Detail',    minutes:120, blurb:'About two hours. The works, inside and out.',
+    { id:'full',     label:'Full Detail',    minutes:120, blurb:'About two hours. The works, inside and out.',
       prices:{ sedan:100, suv:115, truck:130 } },
-    { id:'express', label:'Express Detail', minutes:60,  blurb:'About an hour. Inside and out, less thorough.',
+    /* Interior only and exterior only. Plenty of people want one side of the car
+       done and nothing else, and being told "it is all or nothing" is how that
+       booking goes to somebody else. Priced so the two of them together ($130)
+       cost more than the full detail ($100), which is the honest answer to
+       "should I just get both" and keeps the full detail the thing to buy. */
+    { id:'interior', label:'Interior Only',  minutes:90,  blurb:'About 90 minutes. The whole inside, nothing outside.',
+      prices:{ sedan:70,  suv:80,  truck:90  } },
+    { id:'exterior', label:'Exterior Only',  minutes:60,  blurb:'About an hour. Paint, glass and wheels, nothing inside.',
+      prices:{ sedan:60,  suv:70,  truck:80  } },
+    { id:'express',  label:'Express Detail', minutes:60,  blurb:'About an hour. Inside and out, less thorough.',
       prices:{ sedan:50, suv:60,  truck:70  } },
     /* Two full details at one address in one visit. It has no button of its own: the
        "Two cars" choice books it, which is what pairOf marks. $25 off the second car. */
@@ -1046,9 +1280,28 @@ const CFG = {
   TRAVEL_PER_MILE : 1,
 
   /* --- reviews ---------------------------------------------------------
-     Section stays hidden while this is empty. Never invent entries.
+     Real Google reviews, word for word, typos and all. Do not tidy them up: the
+     unevenness is the proof. `vehicle` is left off because we do not know what any
+     of them drove, and guessing would be inventing.
        {stars:5, text:'their words', name:'Marcus T.', vehicle:'2018 Civic', where:'Google'} */
-  REVIEWS: [],
+  REVIEWS: [
+    { stars:5, where:'Google', name:'Jeffrey G.',
+      text:'Much needed and well appreciated and fast service !! Quality service and lasting detail !' },
+    { stars:5, where:'Google', name:'Mason A.',
+      text:'Arrived on time friendly faces and great service' },
+    { stars:5, where:'Google', name:'Jose P.',
+      text:'Professional Service, cleaned everything well.' },
+  ],
+
+  /* The badge above the cards. Three reviews are quoted, but the profile has more,
+     and counting the quotes would undersell it. These two numbers are an assertion
+     about the Google profile, so they have to match it: check before changing them,
+     and leave them at 0 to have the badge count the quotes instead. */
+  REVIEW_COUNT: 10,
+  REVIEW_AVG  : 5.0,
+
+  /* Profile -> "Ask for reviews" -> copy the g.page link, and paste it here. It adds
+     a "Leave a Google review" line under the cards. */
   GOOGLE_REVIEW_URL: '',
 
   /* --- photos ----------------------------------------------------------
@@ -1059,12 +1312,15 @@ const CFG = {
   //   {before:'assets/ba1-before.jpg', after:'assets/ba1-after.jpg', cap:'Interior'}
   BA: [],
 
-  // Finished work. Real photos, real jobs.
+  // Finished work. Real photos, real jobs. `cap` is the car's name, shown on hover,
+  // because a grid of unlabelled cars looks bought and a grid of named ones does not.
   SHOTS: [
-    {src:'assets/shot1.jpg', alt:'Porsche Taycan detailed by Valley Details in Elk Grove'},
-    {src:'assets/shot2.jpg', alt:'Audi S4 after a full interior and exterior detail'},
-    {src:'assets/shot3.jpg', alt:'Mercedes-Benz E-Class detailed in Sacramento'},
-    {src:'assets/shot4.jpg', alt:'BMW 5 Series after a full detail'}
+    {src:'assets/work1.jpg', cap:'Porsche Taycan',   alt:'Porsche Taycan detailed by Valley Details in Elk Grove'},
+    {src:'assets/work2.jpg', cap:'Lexus GS',         alt:'Lexus GS paintwork after an exterior detail'},
+    {src:'assets/work3.jpg', cap:'Mercedes E-Class', alt:'Mercedes-Benz E-Class interior after an interior detail'},
+    {src:'assets/work4.jpg', cap:'Lexus GX',         alt:'Lexus GX leather interior cleaned and conditioned'},
+    {src:'assets/work5.jpg', cap:'BMW 540i',         alt:'BMW 5 Series after a full interior and exterior detail'},
+    {src:'assets/work6.jpg', cap:'Audi S4',          alt:'Audi S4 after a full detail in south Sacramento'}
   ]
 };
 
@@ -1155,8 +1411,9 @@ const REF = (() => {
     $('#cdVal').textContent = CFG.PRICE.headlineReg + ' · no deposit';
     $('#slabCta').textContent = 'Book a Detail';
     $('#finaleKicker').textContent = 'Book a detail';
-    $('#finaleLede').innerHTML = 'A full interior and exterior detail at your house, from <b style="color:#fff">' +
-      CFG.PRICE.headlineReg + '</b>. Thirty seconds to book and no deposit.';
+    $('#finaleLede').innerHTML = 'Inside, outside, or the whole car, in your own driveway. Interior from ' +
+      '<b style="color:#fff">$70</b>, exterior from <b style="color:#fff">$60</b>, the full detail ' +
+      '<b style="color:#fff">' + CFG.PRICE.headlineReg + '</b>. No deposit.';
     // Only the full-detail cards carry an intro price. The express cards have no
     // data-reg, and writing `undefined` into them is exactly what happened the
     // first time this ran over every .tier on the page.
@@ -1165,9 +1422,10 @@ const REF = (() => {
     $('#tierNote').textContent = 'That is the price, every day. No deposit, and nothing gets added at the end.';
     // The rest of the copy that only makes sense while the intro is running.
     $('#ledePromo').hidden = true;
-    $('#faqPrice').textContent = 'A full sedan detail is $100.';
+    $('#faqPrice').textContent = 'A full sedan detail is $100, interior only is $70 and exterior only is $60.';
     $('#faqAfter').hidden = true;
-    $('#expressNote').textContent = 'Same price every day. Add-ons below work on either one.';
+    // The tier cards and the separate express note became one price table, which
+    // is built from CFG and already reads correctly after the intro lapses.
   }
 
   function tick(){
@@ -1189,7 +1447,7 @@ const REF = (() => {
   if (!CFG.BA.length && !CFG.SHOTS.length){ $('#work').hidden = true; return; }
   if (!CFG.BA.length){
     $('#workTitle').textContent = 'Recent work.';
-    $('#workLede').textContent  = 'Cars we finished around Elk Grove. Every one of these was somebody\'s daily driver.';
+    $('#workLede').textContent  = 'Cars we finished around Elk Grove. Somebody\'s daily driver, every one of them.';
   }
   const ph = (label, file) => `<div class="ph"><div><b>${label}</b><small>${file}</small></div></div>`;
 
@@ -1229,10 +1487,12 @@ const REF = (() => {
   CFG.SHOTS.forEach((item, i) => {
     const src = typeof item === 'string' ? item : item.src;
     const alt = typeof item === 'string' ? 'Detailing work by Valley Details' : (item.alt || '');
+    const cap = typeof item === 'string' ? '' : (item.cap || '');
     const d = document.createElement('div');
     d.className = 'shot';
     d.innerHTML = `<div class="ph"><div><b>${i+1}</b><small>/assets</small></div></div>
-                   <img src="${src}" alt="${alt}" loading="lazy" onerror="this.style.display='none'">`;
+                   <img src="${src}" alt="${alt}" loading="lazy" onerror="this.style.display='none'">` +
+                  (cap ? `<b>${cap}</b>` : '');
     shots.append(d);
   });
 })();
@@ -1251,11 +1511,15 @@ const REF = (() => {
       <div class="who"><b>${r.name || 'Verified customer'}</b>${[r.vehicle, r.where].filter(Boolean).join(' · ')}</div>`;
     $('#revGrid').append(d);
   });
-  if (list.length >= 3){
-    const avg = list.reduce((a,r) => a + (r.stars || 5), 0) / list.length;
+  // The badge speaks for the whole Google profile when CFG says how big it is, and
+  // falls back to the quoted reviews when it does not.
+  const total = Number(CFG.REVIEW_COUNT) || list.length;
+  const avg   = Number(CFG.REVIEW_AVG)   ||
+                list.reduce((a, r) => a + (r.stars || 5), 0) / list.length;
+  if (total >= 3){
     $('#revStars').innerHTML = star.repeat(Math.round(avg));
     $('#revAvg').textContent = avg.toFixed(1);
-    $('#revCount').textContent = 'from ' + list.length + ' customers';
+    $('#revCount').textContent = 'from ' + total + ' Google reviews';
     $('#revAgg').hidden = false;
   }
   if (CFG.GOOGLE_REVIEW_URL){
@@ -1263,6 +1527,54 @@ const REF = (() => {
       '" target="_blank" rel="noopener" style="color:var(--red);font-weight:600">Leave a Google review.</a>';
     $('#revAsk').hidden = false;
   }
+})();
+
+/* ----------------------- one set of prices -----------------------------
+   The pricing table and the four menu cards both draw from CFG.SERVICES. The
+   markup in the file is the no-JS fallback and stays correct on its own; this
+   just guarantees that editing a price in one place moves it everywhere, which
+   is the failure that gets a detailer arguing on a driveway. */
+(function prices(){
+  const SIZES = [['sedan','Sedan','Civic, Camry'],['suv','SUV','RAV4, Explorer'],
+                 ['truck','Truck or 3-row','Silverado, Odyssey']];
+  const named = id => CFG.SERVICES.find(x => x.id === id && x.prices);
+  const rows  = ['full','interior','exterior','express'].map(named).filter(Boolean);
+  if (!rows.length) return;
+  // 60 and 120 read as hours, 90 stays as minutes. "About 60 min" is how a form
+  // talks; "about an hour" is how the guy doing the job talks.
+  const howLong = m => m === 60 ? 'About 1 hr'
+                     : m >= 120 && m % 60 === 0 ? 'About ' + (m/60) + ' hr'
+                     : 'About ' + m + ' min';
+
+  const body = $('#priceTable tbody');
+  if (body) body.innerHTML = rows.map(sv =>
+    `<tr${sv.id === 'full' ? ' class="feat"' : ''}><th>${sv.label}<span>${howLong(sv.minutes)}</span></th>` +
+    SIZES.map(([k,lab]) => `<td data-size="${lab}">$${sv.prices[k]}</td>`).join('') + '</tr>').join('');
+  const head = $('#priceTable thead tr');
+  if (head) head.innerHTML = '<th>Service</th>' +
+    SIZES.map(([,lab,eg]) => `<th>${lab}<span>${eg}</span></th>`).join('');
+
+  // Each menu card: the headline sedan price, then the other two sizes under it.
+  $$('.card [data-book]').forEach(btn => {
+    const sv = named(btn.dataset.book), card = btn.closest('.card');
+    if (!sv || !card) return;
+    const big = $('.card-from b', card);
+    if (big) big.textContent = '$' + sv.prices.sedan;
+    const list = $('.card-sizes', card);
+    if (list) list.innerHTML = SIZES.slice(1)
+      .map(([k,lab]) => `<li>${lab} <b>$${sv.prices[k]}</b></li>`).join('');
+    const when = $('.card-when', card);
+    if (when) when.innerHTML = '<svg><use href="#i-clock"/></svg>' + howLong(sv.minutes);
+  });
+
+  // "Both halves separately cost more than the whole car" only reads as honest if
+  // the number is the real sum, so it is added up rather than typed in.
+  const int = named('interior'), ext = named('exterior'), full = named('full');
+  const note = $('#menuSplit');
+  if (note && int && ext && full)
+    note.innerHTML = 'Interior and exterior booked separately come to <b>$' +
+      (int.prices.sedan + ext.prices.sedan) + '</b>. The full detail is <b>$' + full.prices.sedan +
+      '</b> and goes deeper on both. If you want the whole car, that is the one.';
 })();
 
 /* ------------------------- booking, two steps -------------------------- */
@@ -1281,6 +1593,31 @@ const REF = (() => {
   // with the count: full2 is four hours, full3 six, full4 eight. Five or more holds
   // full5, the whole working day, and the owner plans the rest when he calls.
   const MAX_CARS = 10;
+  /* Server rows win on every field they carry, because the dashboard owns how long
+     a job runs and what it is worth. The ORDER is this file's, though: the server
+     returns them however the config happens to be typed, and a picker that reads
+     Full, Express, Interior, Exterior asks people to hunt. Anything the server has
+     that the site does not list goes on the end rather than disappearing. */
+  function mergeServices(fromServer, local){
+    const server = Array.isArray(fromServer) ? fromServer : [];
+    if (!server.length) return local;
+    const fromSrv = new Map(server.map(x => [x.id, x]));
+    const out = local.map(x => ({ ...x, ...(fromSrv.get(x.id) || {}) }));
+    const seen = new Set(out.map(x => x.id));
+    server.forEach(x => { if (!seen.has(x.id)) out.push(x); });
+    return out;
+  }
+  /* What the owner sees on the job. It has to say which half of the car he is
+     doing, because "Valley Details, 2pm" tells him nothing about what to load. */
+  function serviceText({ twoCars, manyCars, cars }){
+    const id = service && service.id;
+    if (id === 'express')  return 'Express Detail (inside + outside, quick)';
+    if (id === 'interior') return 'Interior Only (no exterior)';
+    if (id === 'exterior') return 'Exterior Only (no interior)';
+    if (twoCars)  return 'Two Full Details, same address ($25 off the second car)';
+    if (manyCars) return `${cars} Full Details, same address (price by phone)`;
+    return 'Full Interior + Exterior Detail';
+  }
   function bookedServiceId(){
     return service && service.id === 'full' && cars > 1 ? 'full' + Math.min(cars, 5) : service && service.id;
   }
@@ -1378,21 +1715,42 @@ const REF = (() => {
     el.innerHTML = list.map(x => {
       const c = copy(x.id);
       const from = c.prices ? 'from $' + c.prices.sedan : '';
+      const mins = Number(x.minutes || c.minutes) || 0;
+      const when = mins === 60 ? '1 hr'
+                 : mins >= 120 && mins % 60 === 0 ? (mins / 60) + ' hr'
+                 : mins ? mins + ' min' : '';
       return `<button type="button" data-svc="${x.id}"${x.id === (service && service.id) ? ' class="sel"' : ''}>` +
-             `${c.label || x.label}<small>${from}</small></button>`;
+             `<span class="svc-name">${esc(c.label || x.label)}</span>` +
+             (from ? `<span class="svc-price">${from}</span>` : '') +
+             (when ? `<span class="svc-time">About ${when}</span>` : '') +
+             `</button>`;
     }).join('');
-    $$('button', el).forEach(b => b.addEventListener('click', () => {
-      const hit = list.find(x => x.id === b.dataset.svc);
+    $$('button', el).forEach(b => b.addEventListener('click', () => pick(b.dataset.svc)));
+
+    function pick(id){
+      const hit = list.find(x => x.id === id);
       if (!hit || (service && hit.id === service.id)) return;
       service = { ...hit, ...copy(hit.id), id: hit.id, minutes: hit.minutes };
-      $$('button', el).forEach(x => x.classList.remove('sel'));
-      b.classList.add('sel');
+      $$('button', el).forEach(x => x.classList.toggle('sel', x.dataset.svc === id));
       showCars();
       // A different length means different open times, so start the pick over.
       picked = null; step2.hidden = true;
       renderDays();
-    }));
+    }
+    // The pricing menu's "Book This" buttons come down here with the service already
+    // chosen, so picking one up there is the first half of booking rather than a
+    // scroll back through the page looking for the same words again.
+    choose = pick;
   }
+
+  /* Set by renderServices once the real list is known. Until then a menu tap just
+     scrolls, which is what it would have done anyway. */
+  let choose = null;
+  $$('[data-book]').forEach(b => b.addEventListener('click', () => {
+    if (choose) choose(b.dataset.book);
+    const to = document.getElementById('book');
+    if (to) to.scrollIntoView({ behavior:'smooth', block:'start' });
+  }));
 
   const ymd  = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
   const hm2m = s => (+s.slice(0,2))*60 + (+s.slice(3,5));
@@ -1554,7 +1912,14 @@ const REF = (() => {
           cfg = { hours:j.hours || cfg.hours, booked:j.booked || [],
                   slotMinutes:j.slotMinutes || cfg.slotMinutes,
                   stepMinutes:j.stepMinutes || cfg.stepMinutes,
-                  services:(j.services && j.services.length) ? j.services : cfg.services,
+                  /* The dashboard owns the length and the money for every service it
+                     knows about, and must keep owning them: that is what stops a
+                     visitor booking a two hour job into a one hour hole. But a
+                     service the site sells and the dashboard has not been given yet
+                     used to vanish off the page entirely. Merge instead of replace,
+                     server first, so new offerings work the day they ship and get
+                     picked up by the dashboard the moment they are added there. */
+                  services:mergeServices(j.services, CFG.SERVICES),
                   horizonDays:j.horizonDays || cfg.horizonDays,
                   leadHours:j.leadHours ?? cfg.leadHours };
           // Keep the picked service pointing at the server's copy of it.
@@ -1601,14 +1966,11 @@ const REF = (() => {
                                  sms_ok: $('#bOptin').checked,
                                  ref: REF || undefined,
                                  // Checked at submit, so a page left open past midnight stops tagging it.
-                                 promo: service && service.id !== 'express' && Date.now() < new Date(CFG.PROMO_END).getTime()
+                                 // The intro price was only ever on the full detail.
+                                 promo: service && service.id === 'full' && Date.now() < new Date(CFG.PROMO_END).getTime()
                                    ? 'FIRST75' : '',
                                  service_id: bookedServiceId(),
-                                 service: service && service.id === 'express'
-                                   ? 'Express Detail (inside + outside)'
-                                   : twoCars ? 'Two Full Details, same address ($25 off the second car)'
-                                   : manyCars ? `${cars} Full Details, same address (price by phone)`
-                                   : 'Full Interior + Exterior Detail' })
+                                 service: serviceText({ twoCars, manyCars, cars }) })
         });
         const j = await r.json().catch(()=>({}));
         ok = r.ok && j.ok !== false;

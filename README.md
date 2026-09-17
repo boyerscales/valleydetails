@@ -7,24 +7,33 @@ Everything configurable lives in the `CFG` object near the bottom of the file.
 
 ---
 
-## Two things to do first
+## What is left to do
 
-### 1. Add the logo
-Save it as **`assets/logo.png`** (transparent PNG, 600px wide is plenty). Until it
-exists the header falls back to a built-in "VD / VALLEY DETAILS" wordmark, so nothing
-looks broken.
+1. ~~Add the two services on the dashboard.~~ **Done 2026-09-17.** `interior` (90 min,
+   $70) and `exterior` (60 min, $60) are live in `booking_config.services`, verified
+   against the API. See *Interior only and exterior only* if it ever needs redoing.
+2. **Paste the g.page review link** into `CFG.GOOGLE_REVIEW_URL`. Three real reviews
+   are already live; this just adds the "leave one" link under them. See *Reviews*.
 
-### 2. Add photos
-Instagram is login-walled to automated tools, so the posts could not be pulled down.
+## Photos
+
+The logo is `assets/logo.png`. Until it exists the header falls back to a built-in
+"VD / VALLEY DETAILS" wordmark, so nothing looks broken.
+
 Drop files into `assets/` with these names and they appear immediately. Missing files
 render as a labelled placeholder, never a broken image.
 
-Four files. That is all.
-
 | File | Where it shows |
 |---|---|
-| `ba1-before.jpg` / `ba1-after.jpg` | Slider 1, interior |
-| `ba2-before.jpg` / `ba2-after.jpg` | Slider 2, exterior |
+| `hero.jpg` | Behind the headline |
+| `svc-full/interior/exterior/express.jpg` | The four pricing menu cards |
+| `work1.jpg` … `work6.jpg` | The Recent Work grid, listed in `CFG.SHOTS` |
+| `ba1-before.jpg` / `ba1-after.jpg` | Slider 1, interior (optional) |
+| `ba2-before.jpg` / `ba2-after.jpg` | Slider 2, exterior (optional) |
+
+The current set was cut from `google-profile-photos/` with `sips`. Card photos are
+900px wide, the gallery 1000px, the hero 1600px. Keep new ones in that range: the
+whole `assets/` folder is about 2.5MB and should stay there.
 
 Shoot **the same angle** before and after. Stand in the same spot both times.
 That is the whole effect.
@@ -48,29 +57,65 @@ plates and trim are exactly what car people notice.
 
 ## Pricing
 
-Three size tiers, currently half off. Regular prices sit at the Sacramento market rate
-(Yelp reports a $167 typical, $95 low, $250 high across 50k local quotes).
+Four services, three sizes each. **Every number lives in one place: `CFG.SERVICES`.**
+The pricing table, the four menu cards and the booking picker are all rendered from
+it on load, so changing a price there changes it everywhere. The numbers written into
+the HTML are only the no-JS fallback; keep them in step when you edit a price, but
+nothing on a real browser reads them.
 
-| Tier | Regular | Promo |
-|---|---|---|
-| Sedan or coupe | $149 | $75 |
-| SUV or crossover | $169 | $85 |
-| Truck or 3-row | $189 | $95 |
+| Service | `id` | Minutes | Sedan | SUV | Truck / 3-row |
+|---|---|---|---|---|---|
+| Full Detail | `full` | 120 | $100 | $115 | $130 |
+| Interior Only | `interior` | 90 | $70 | $80 | $90 |
+| Exterior Only | `exterior` | 60 | $60 | $70 | $80 |
+| Express Detail | `express` | 60 | $50 | $60 | $70 |
 
-Prices live in two places, both plain text:
-- **Tiers section:** `data-promo` and `data-reg` attributes on each `.tier .amt`, plus
-  the `.tier .old` strikethrough.
-- **Hero slab:** `CFG.PRICE.headlineReg` / `headlinePromo` / `sizesReg` / `sizesPromo`.
+Interior and exterior are deliberately priced so that buying both separately ($130)
+costs more than the full detail ($100). That is the honest answer to "should I just
+get both", and the page says it out loud under the menu rather than hoping nobody
+does the arithmetic. The sentence adds the two numbers up itself, so it cannot go
+stale.
 
-Add-ons: pet hair $30, engine bay $35, stain and odor $40, headlights $50, ceramic $85.
+Add-ons: shampoo + steam $45, engine bay $35, odor $40, headlights $50, ceramic $85.
 
-Standing discounts (not tied to the promo, so they survive Sept 15):
-- **$25 off the second car** at the same address, same stop. Costs no extra drive time.
-- **Referral, $20 each way.** Friend gets $20 off their first, you get $20 off your next.
-- **Club member rate, $119** on a sedan detail.
+Standing discounts:
+- **$25 off the second car** at the same address, same stop.
+- **Referral, $20 each way.**
+- **Club member, $149/month** for two full details.
 
 > Do **not** offer a discount for leaving a Google review. Google prohibits incentivised
 > reviews and will filter or penalise them. Ask for reviews, just never pay for them.
+
+---
+
+## Interior only and exterior only
+
+Two things had to change for this to work end to end.
+
+**1. The site.** `interior` and `exterior` are in `CFG.SERVICES`. The pricing menu has
+a card each, and the card's "Book This" button scrolls to the calendar with that
+service already selected, so picking is the first half of booking rather than
+something you do twice.
+
+**2. The dashboard.** The `/api/public/schedule/{slug}` response owns how long a job
+holds and what it is worth (`bookingDuration` / `bookingAmount` in the Client Dash
+`server.js`), and it only knows the services in `client_settings.booking_config`.
+The site used to take the server list verbatim, so anything not on it vanished off
+the page; it now **merges** — server fields win, this file's ordering wins, and a
+service the server has not been told about still appears and still books.
+
+**This was applied on 2026-09-17** and verified against the live API: `interior`
+(90 min, $70) and `exterior` (60 min, $60) now sit in `booking_config.services`
+alongside `full`, `express` and `full2`–`full5`. `price` is the sedan price, matching
+how `full` is stored as 100.
+
+The SQL is kept in the Client Dash repo as `valley-details-interior-exterior.sql` and
+is safe to re-run. It matters because of what happens without it: the booking still
+lands correctly on the calendar and the job still reads *"Interior Only (no exterior)"*
+on the schedule, but the server falls back to `slotMinutes` (120) and records the job
+at the full detail's $100. The customer never sees that — they pay in person at the
+price on the site — but the dashboard's own duration and revenue figures go wrong
+quietly, which is the worst way for them to go wrong.
 
 ---
 
@@ -132,17 +177,38 @@ hours stay database-driven in `client_settings` rather than in this file.
 
 ## Reviews
 
-`CFG.REVIEWS` is empty, so the reviews section is **completely hidden**. No invented
-testimonials. Add real ones and it switches itself on:
+Three real Google reviews are live in `CFG.REVIEWS`, quoted word for word. Typos,
+double exclamation marks and the stray space before a `!` are all theirs and are all
+deliberate: the unevenness is what a real review looks like. Do not tidy them up.
 
 ```js
 REVIEWS: [
-  { stars:5, text:'their words', name:'Marcus T.', vehicle:'2018 Civic', where:'Google' }
+  { stars:5, where:'Google', name:'Jeffrey G.', text:'...' },
 ],
-GOOGLE_REVIEW_URL: 'https://g.page/r/.../review',
+REVIEW_COUNT: 10,   // what the Google profile actually shows
+REVIEW_AVG  : 5.0,
+GOOGLE_REVIEW_URL: '',
 ```
 
-At three or more reviews an aggregate "5.0 from N customers" badge appears.
+`name` is first name plus last initial, which is the convention here even though the
+profile shows full names. `vehicle` is deliberately left off every entry: we do not
+know what any of them drove, and filling it in would be inventing.
+
+`REVIEW_COUNT` and `REVIEW_AVG` drive the badge above the cards, so it can read
+"5.0 from 10 Google reviews" while only three are quoted. **They are an assertion
+about the live Google profile, so keep them matching it.** Set either to 0 and the
+badge goes back to counting and averaging the quoted reviews instead.
+
+Picked for spread rather than for being the most flattering: one says he turned up on
+time, one says the work was thorough, one says it lasted. Three quotes saying the
+same thing reads worse than three saying different things.
+
+Not used: the two from a Boyer and a Randhawa (owner's own circle, and the first thing
+a suspicious reader checks), and Jugraj Bains' "Did a good job" (too thin to put on a
+page, though he is a Local Guide with 18 reviews if you ever want the badge).
+
+`GOOGLE_REVIEW_URL` is still empty. Profile → "Ask for reviews" → copy the g.page
+link → paste it in, and a "Leave a Google review" line appears under the cards.
 
 ---
 

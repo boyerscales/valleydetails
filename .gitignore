@@ -1,2 +1,5 @@
 .DS_Store
 .claude/
+
+# Full-size originals the site images were cut from. Not served, ~5MB.
+google-profile-photos/
