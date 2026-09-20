@@ -115,14 +115,14 @@ service the server has not been told about still appears and still books.
 alongside `full`, `express` and `full2`–`full5`. `price` is the sedan price, matching
 how `full` is stored as 100.
 
-> **Out of date as of 2026-09-19.** The prices above are what the dashboard was told in
-> September; the site has since gone to 150/170/190 for `full`, 85/95/105 for `interior`
-> and 75/85/95 for `exterior`. Until `booking_config.services` is updated to match, the
-> calendar still books correctly and customers still pay the price on the site, but the
-> dashboard's own revenue figures under-report every job. The fix is written and waiting:
-> `valley-details-prices-2026-09.sql` in the Client Dash repo. Paste it into the Supabase
-> SQL editor and it is done. Jobs already on the calendar keep the amount they were
-> booked at, which is what those customers were actually quoted.
+> **Superseded on 2026-09-19.** The prices above are what the dashboard was told in
+> September. The site then went to 150/170/190 for `full`, 85/95/105 for `interior` and
+> 75/85/95 for `exterior`, and `booking_config.services` was updated to match the same
+> day: `full` 150, `interior` 85, `exterior` 75, `express` 50 (unchanged), `full2` 275,
+> `full3` 450, `full4` 600, `full5` 750, stored as sedan prices the way they always were.
+> Written up as `valley-details-prices-2026-09.sql` in the Client Dash repo, applied and
+> verified through `/api/public/schedule/valleydetails`. Jobs already on the calendar
+> keep the amount they were booked at, which is what those customers were quoted.
 
 The SQL is kept in the Client Dash repo as `valley-details-interior-exterior.sql` and
 is safe to re-run. It matters because of what happens without it: the booking still
