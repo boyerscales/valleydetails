@@ -3,3 +3,8 @@
 
 # Full-size originals the site images were cut from. Not served, ~5MB.
 google-profile-photos/
+
+# Local prospecting data. Names, numbers and call scripts for other businesses.
+# This repo is published as a public GitHub Pages site: never commit these.
+leadjson/
+.tracker/

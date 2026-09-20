@@ -65,13 +65,19 @@ nothing on a real browser reads them.
 
 | Service | `id` | Minutes | Sedan | SUV | Truck / 3-row |
 |---|---|---|---|---|---|
-| Full Detail | `full` | 120 | $100 | $115 | $130 |
-| Interior Only | `interior` | 90 | $70 | $80 | $90 |
-| Exterior Only | `exterior` | 60 | $60 | $70 | $80 |
+| Full Detail | `full` | 120 | $150 | $170 | $190 |
+| Interior Only | `interior` | 90 | $85 | $95 | $105 |
+| Exterior Only | `exterior` | 60 | $75 | $85 | $95 |
 | Express Detail | `express` | 60 | $50 | $60 | $70 |
 
-Interior and exterior are deliberately priced so that buying both separately ($130)
-costs more than the full detail ($100). That is the honest answer to "should I just
+**Raised on 2026-09-19.** The full detail went 100/115/130 → 150/170/190. Interior and
+exterior went up $15 across the board so the arithmetic below still holds. The express
+deliberately did **not** move: it is the cheap way in, and the wider the gap between
+$50 and $150 the more obvious that is. The menu, the FAQ and the express card all tell
+people to book the express when the car only needs a wipe down and a quick wash.
+
+Interior and exterior are deliberately priced so that buying both separately ($160)
+costs more than the full detail ($150). That is the honest answer to "should I just
 get both", and the page says it out loud under the menu rather than hoping nobody
 does the arithmetic. The sentence adds the two numbers up itself, so it cannot go
 stale.
@@ -81,7 +87,7 @@ Add-ons: shampoo + steam $45, engine bay $35, odor $40, headlights $50, ceramic 
 Standing discounts:
 - **$25 off the second car** at the same address, same stop.
 - **Referral, $20 each way.**
-- **Club member, $149/month** for two full details.
+- **The 3-Pack, $375 prepaid** for three full details, $125 each against $150.
 
 > Do **not** offer a discount for leaving a Google review. Google prohibits incentivised
 > reviews and will filter or penalise them. Ask for reviews, just never pay for them.
@@ -108,6 +114,15 @@ service the server has not been told about still appears and still books.
 (90 min, $70) and `exterior` (60 min, $60) now sit in `booking_config.services`
 alongside `full`, `express` and `full2`–`full5`. `price` is the sedan price, matching
 how `full` is stored as 100.
+
+> **Out of date as of 2026-09-19.** The prices above are what the dashboard was told in
+> September; the site has since gone to 150/170/190 for `full`, 85/95/105 for `interior`
+> and 75/85/95 for `exterior`. Until `booking_config.services` is updated to match, the
+> calendar still books correctly and customers still pay the price on the site, but the
+> dashboard's own revenue figures under-report every job. The fix is written and waiting:
+> `valley-details-prices-2026-09.sql` in the Client Dash repo. Paste it into the Supabase
+> SQL editor and it is done. Jobs already on the calendar keep the amount they were
+> booked at, which is what those customers were actually quoted.
 
 The SQL is kept in the Client Dash repo as `valley-details-interior-exterior.sql` and
 is safe to re-run. It matters because of what happens without it: the booking still

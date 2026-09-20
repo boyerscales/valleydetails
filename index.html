@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050506">
 <title>Valley Details | Mobile Car Detailing in Elk Grove, CA</title>
-<meta name="description" content="Mobile car detailing in Elk Grove. Full detail $100, interior only from $70, exterior only from $60. We come to you. Book online or call (916) 249-0631.">
+<meta name="description" content="Mobile car detailing in Elk Grove. Express detail from $50, full detail $150, interior only from $85. We come to you. Book online or call (916) 249-0631.">
 <link rel="canonical" href="https://valleydetails.site/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Valley Details | Affordable Detailing in Elk Grove">
-<meta property="og:description" content="Full detail $100, interior only from $70, exterior only from $60. We come to your driveway. Book online or call (916) 249-0631.">
+<meta property="og:description" content="Express detail from $50, full detail $150, interior only from $85. We come to your driveway. Book online or call (916) 249-0631.">
 <meta property="og:image" content="https://valleydetails.site/assets/logo-social.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/icon.png">
@@ -346,7 +346,7 @@ nav.main a:hover{color:#fff}
   margin:0 0 8px;line-height:1}
 .step p{margin:0;color:var(--muted);font-size:14.6px}
 
-/* ---------- valley club ---------- */
+/* ---------- the 3-pack ---------- */
 .vip{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,3.2vw,40px);align-items:stretch}
 /* The perk list is shorter than the signup card, so left it alone the two
    columns ended at different heights and the card hung off the bottom.
@@ -685,9 +685,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
 <div class="topstrip" id="promoStrip">
   <div class="topstrip-in">
-    <b id="promoHead">First Detail $75</b>
-    <span id="promoTail">Ends Monday, Sept 14</span>
-    <span class="cd-mini" id="cdMini">&nbsp;</span>
+    <b id="promoHead">Full Detail $150</b>
+    <span id="promoTail">Every day, 8am to 6pm</span>
+    <span class="cd-mini" id="cdMini" hidden>&nbsp;</span>
   </div>
 </div>
 
@@ -704,7 +704,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <a href="#pricing">Pricing</a>
       <a href="#work">Our Work</a>
       <a href="#how">How It Works</a>
-      <a href="#vip">Membership</a>
+      <a href="#vip">3-Pack</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="hdr-cta">
@@ -724,7 +724,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <div>
       <p class="kicker">Mobile Detailing · Elk Grove</p>
       <h1 class="h1">Like the day<em>you bought it.</em></h1>
-      <p class="lede">We pull up to your driveway and detail it there. Inside, outside, or both, your call.<span id="ledePromo"> Your first one is $75 through Monday.</span></p>
+      <p class="lede">We pull up to your driveway and detail it there. Inside, outside, or both, your call.<span id="ledePromo" hidden></span></p>
       <div class="hero-actions">
         <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
         <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
@@ -737,18 +737,18 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     </div>
 
     <div class="slab">
-      <span class="slab-tag" id="slabTag">First Detail</span>
+      <span class="slab-tag" id="slabTag" hidden>First Detail</span>
       <h3>The Full Detail</h3>
       <p class="sub">Inside and out</p>
       <div class="priceline">
-        <span class="price-was" id="priceWas">$100</span>
-        <span class="price-now" id="priceNow">$75</span>
+        <span class="price-was" id="priceWas" hidden>$100</span>
+        <span class="price-now" id="priceNow">$150</span>
       </div>
-      <p class="price-sizes" id="priceSizes">SUV $85 &nbsp;·&nbsp; Truck or 3-row $95</p>
+      <p class="price-sizes" id="priceSizes">SUV $170 &nbsp;·&nbsp; Truck or 3-row $190</p>
 
-      <div class="cd" id="cdBox">
-        <span class="cd-lab"><span class="cd-dot" id="cdDot"></span><span id="cdLab">Ends in</span></span>
-        <span class="cd-val" id="cdVal">&nbsp;</span>
+      <div class="cd ended" id="cdBox">
+        <span class="cd-lab"><span class="cd-dot" id="cdDot"></span><span id="cdLab">Our everyday price</span></span>
+        <span class="cd-val" id="cdVal">$150 · no deposit</span>
       </div>
 
       <ul class="slab-list">
@@ -756,8 +756,8 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <li><svg><use href="#i-check"/></svg>Spray wash, wheels and tires</li>
         <li><svg><use href="#i-check"/></svg>Spray wax, tire shine, glass</li>
       </ul>
-      <a class="btn btn-red btn-block" href="#book" id="slabCta">Book at $75</a>
-      <p class="slab-alt">Only need one side of it? <a href="#pricing">Interior from $70, exterior from $60.</a></p>
+      <a class="btn btn-red btn-block" href="#book" id="slabCta">Book a Detail</a>
+      <p class="slab-alt">Only need one side of it? <a href="#pricing">Interior from $85, exterior from $75.</a></p>
     </div>
   </div>
 </section>
@@ -786,10 +786,10 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <div class="card-body">
           <h4>Full Detail</h4>
           <p class="card-what">Everything. Inside stripped back and cleaned, outside washed, decontaminated and waxed.</p>
-          <div class="card-from"><b>$100</b><span>Sedan</span></div>
+          <div class="card-from"><b>$150</b><span>Sedan</span></div>
           <ul class="card-sizes">
-            <li>SUV or crossover <b>$115</b></li>
-            <li>Truck or 3-row <b>$130</b></li>
+            <li>SUV or crossover <b>$170</b></li>
+            <li>Truck or 3-row <b>$190</b></li>
           </ul>
           <button type="button" class="btn btn-red" data-book="full"><svg><use href="#i-cal"/></svg>Book This</button>
         </div>
@@ -803,10 +803,10 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <div class="card-body">
           <h4>Interior Only</h4>
           <p class="card-what">The whole inside and nothing else. Vacuum to the trunk, pet hair pulled, leather conditioned, glass done.</p>
-          <div class="card-from"><b>$70</b><span>Sedan</span></div>
+          <div class="card-from"><b>$85</b><span>Sedan</span></div>
           <ul class="card-sizes">
-            <li>SUV or crossover <b>$80</b></li>
-            <li>Truck or 3-row <b>$90</b></li>
+            <li>SUV or crossover <b>$95</b></li>
+            <li>Truck or 3-row <b>$105</b></li>
           </ul>
           <button type="button" class="btn btn-ghost" data-book="interior"><svg><use href="#i-cal"/></svg>Book This</button>
         </div>
@@ -820,10 +820,10 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <div class="card-body">
           <h4>Exterior Only</h4>
           <p class="card-what">Paint, glass and wheels. Washed, bugs and tar off, wheels degreased, spray wax and tire shine.</p>
-          <div class="card-from"><b>$60</b><span>Sedan</span></div>
+          <div class="card-from"><b>$75</b><span>Sedan</span></div>
           <ul class="card-sizes">
-            <li>SUV or crossover <b>$70</b></li>
-            <li>Truck or 3-row <b>$80</b></li>
+            <li>SUV or crossover <b>$85</b></li>
+            <li>Truck or 3-row <b>$95</b></li>
           </ul>
           <button type="button" class="btn btn-ghost" data-book="exterior"><svg><use href="#i-cal"/></svg>Book This</button>
         </div>
@@ -831,12 +831,13 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
       <article class="card">
         <div class="card-pic">
+          <span class="card-flag">Just needs a wash?</span>
           <img src="assets/svc-express.jpg" alt="Audi S4 after an express detail" loading="lazy" decoding="async">
           <span class="card-when"><svg><use href="#i-clock"/></svg>About 1 hr</span>
         </div>
         <div class="card-body">
           <h4>Express Detail</h4>
-          <p class="card-what">Both sides, quicker. Wash outside, vacuum and wipe-down inside. We skip the deep work, not the care.</p>
+          <p class="card-what">Both sides, quicker. Wash outside, vacuum and wipe-down inside. If your car only needs a wipe down and a quick wash, this is the one to book.</p>
           <div class="card-from"><b>$50</b><span>Sedan</span></div>
           <ul class="card-sizes">
             <li>SUV or crossover <b>$60</b></li>
@@ -847,7 +848,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       </article>
     </div>
 
-    <p class="menu-note"><svg><use href="#i-spark"/></svg><span id="menuSplit">Interior and exterior booked separately come to <b>$130</b>. The full detail is <b>$100</b> and goes deeper on both. If you want the whole car, that is the one.</span></p>
+    <p class="menu-note"><svg><use href="#i-spark"/></svg><span id="menuSplit">Interior and exterior booked separately come to <b>$160</b>. The full detail is <b>$150</b> and goes deeper on both. If you want the whole car, that is the one.</span></p>
+
+    <p class="menu-note"><svg><use href="#i-clock"/></svg><span id="menuExpress">Not sure which to pick? If the car is mostly just dusty and only needs a wipe down and a quick wash, book the <b>Express</b>. If it has been a while, or there is pet hair, spills or baked-on grime, the full detail is the one that actually fixes it.</span></p>
 
     <h3 class="h3" style="margin-top:46px">Price by vehicle size</h3>
     <p style="color:var(--muted);font-size:15px;margin:0 0 18px;max-width:62ch">Your price is where your service meets your vehicle size. It is the same price the calendar charges.</p>
@@ -857,9 +860,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <table>
         <thead><tr><th>Service</th><th>Sedan<span>Civic, Camry</span></th><th>SUV<span>RAV4, Explorer</span></th><th>Truck or 3-row<span>Silverado, Odyssey</span></th></tr></thead>
         <tbody>
-          <tr><th>Full Detail<span>About 2 hr</span></th><td>$100</td><td>$115</td><td>$130</td></tr>
-          <tr><th>Interior Only<span>About 90 min</span></th><td>$70</td><td>$80</td><td>$90</td></tr>
-          <tr><th>Exterior Only<span>About 1 hr</span></th><td>$60</td><td>$70</td><td>$80</td></tr>
+          <tr><th>Full Detail<span>About 2 hr</span></th><td>$150</td><td>$170</td><td>$190</td></tr>
+          <tr><th>Interior Only<span>About 90 min</span></th><td>$85</td><td>$95</td><td>$105</td></tr>
+          <tr><th>Exterior Only<span>About 1 hr</span></th><td>$75</td><td>$85</td><td>$95</td></tr>
           <tr><th>Express<span>About 1 hr</span></th><td>$50</td><td>$60</td><td>$70</td></tr>
         </tbody>
       </table>
@@ -878,7 +881,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       </div>
       <div class="save">
         <span class="ico"><svg><use href="#i-crown"/></svg></span>
-        <div><b>Join the Club</b><p>$149 a month gets two full details, and they can be two different cars. <a href="#vip" style="color:var(--red);font-weight:600">See how it works</a></p></div>
+        <div><b>Buy three, save $75</b><p>Three full details prepaid for $375, which is $125 each instead of $150. <a href="#vip" style="color:var(--red);font-weight:600">See how it works</a></p></div>
       </div>
     </div>
 
@@ -886,7 +889,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <p style="color:var(--muted);font-size:15px;margin:0 0 4px;max-width:62ch">The full detail covers both lists. Interior only and exterior only are each that half done properly, not a cut-down version.</p>
     <div class="incl">
       <div class="incl-col">
-        <h4><svg><use href="#i-car"/></svg>Inside <span class="incl-tag">Interior only, $70</span></h4>
+        <h4><svg><use href="#i-car"/></svg>Inside <span class="incl-tag">Interior only, $85</span></h4>
         <ul>
           <li><svg><use href="#i-check"/></svg>Vacuumed from the seats to the trunk</li>
           <li><svg><use href="#i-check"/></svg>Pet hair and ground-in grit lifted out</li>
@@ -896,7 +899,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         </ul>
       </div>
       <div class="incl-col">
-        <h4><svg><use href="#i-spark"/></svg>Outside <span class="incl-tag">Exterior only, $60</span></h4>
+        <h4><svg><use href="#i-spark"/></svg>Outside <span class="incl-tag">Exterior only, $75</span></h4>
         <ul>
           <li><svg><use href="#i-check"/></svg>Spray wash, roof to rockers</li>
           <li><svg><use href="#i-check"/></svg>Wheels, wheel wells and tires degreased</li>
@@ -956,45 +959,42 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
 <section id="vip">
   <div class="wrap">
-    <p class="kicker">Membership</p>
-    <h2 class="h2">The Valley Club</h2>
-    <p class="lede">Two full details a month for <b style="color:#fff">$149</b>, on two different cars if you like. Your price never goes up for as long as you stay. Ten founding spots.</p>
+    <p class="kicker">Prepaid</p>
+    <h2 class="h2">The Valley 3-Pack</h2>
+    <p class="lede">Three full details for <b style="color:#fff">$375</b>. That is <b style="color:#fff">$125 each</b> instead of $150, paid once, and you use them whenever you want.</p>
     <div class="vip">
       <ul class="vip-perks">
-        <li><span class="ico"><svg><use href="#i-repeat"/></svg></span>
-          <div><strong>Two full details a month</strong><p>The whole $100 job, twice, on a standing slot. Same day, same time, so you never think about booking it.</p></div></li>
-        <li><span class="ico"><svg><use href="#i-bolt"/></svg></span>
-          <div><strong>Use them on two different cars</strong><p>Both of yours, or yours and your partner's. We do not care whose they are, as long as they are at the same address.</p></div></li>
-        <li><span class="ico"><svg><use href="#i-gift"/></svg></span>
-          <div><strong>Free add-ons every single visit</strong><p>Tire shine and interior protectant always, plus a rotating extra like engine bay or headlight restoration. Everything else on the add-on list is 20% off.</p></div></li>
         <li><span class="ico"><svg><use href="#i-tag"/></svg></span>
-          <div><strong>More cars, still cheaper</strong><p>Past the two included, any other car at the same address is $65 instead of $100. Members get weekend slots and promos first.</p></div></li>
+          <div><strong>Three full details, $125 each</strong><p>Pay $375 once and all three are yours. Booked one at a time those same three details are $450, so you are $75 ahead the moment you buy it.</p></div></li>
+        <li><span class="ico"><svg><use href="#i-repeat"/></svg></span>
+          <div><strong>Use them whenever you want</strong><p>No standing slot, no schedule to keep. Space them a month apart or six months apart, any time in the next year.</p></div></li>
+        <li><span class="ico"><svg><use href="#i-bolt"/></svg></span>
+          <div><strong>They do not have to be the same car</strong><p>Yours, your partner's, your kid's. We do not care whose it is, as long as it is at the same address.</p></div></li>
       </ul>
 
       <div class="vip-card">
-        <h3 class="h3" style="position:relative"><svg style="width:21px;height:21px;color:var(--red);vertical-align:-2px;margin-right:6px"><use href="#i-crown"/></svg>Founding membership</h3>
-        <div class="club-price"><b id="clubPrice">$149</b><span>/month</span></div>
-        <p class="club-math" id="clubMath">Two full details a month, about $75 each against $100 apiece. Cancel any time, no contract and no cancellation fee.</p>
-        <p class="club-spots" id="clubSpots" hidden></p>
+        <h3 class="h3" style="position:relative"><svg style="width:21px;height:21px;color:var(--red);vertical-align:-2px;margin-right:6px"><use href="#i-crown"/></svg>The 3-Pack</h3>
+        <div class="club-price"><b id="clubPrice">$375</b><span>for three</span></div>
+        <p class="club-math" id="clubMath">Three full details, $125 each against $150 apiece. Good for twelve months, and any unused detail is refunded if you change your mind.</p>
         <form id="vipForm" style="position:relative" novalidate>
           <div class="row2">
             <div class="field"><label for="vName">Name</label><input id="vName" autocomplete="name" placeholder="Your name"></div>
             <div class="field"><label for="vPhone">Mobile</label><input id="vPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(916) 555-0123"></div>
           </div>
-          <label class="optin"><input type="checkbox" id="vOptin"><span>Text me open slots and member deals. Reply STOP anytime.</span></label>
-          <div class="field"><label for="vPlan">Which day suits you?</label>
+          <label class="optin"><input type="checkbox" id="vOptin"><span>Text me open slots and deals. Reply STOP anytime.</span></label>
+          <div class="field"><label for="vPlan">When do you want the first one?</label>
             <select id="vPlan">
-              <option value="monthly">Once a month is perfect</option>
-              <option value="biweekly">Every two weeks</option>
-              <option value="quarterly">Every few months</option>
-              <option value="unsure">Not sure yet, just keep me posted</option>
+              <option value="asap">As soon as you can get out here</option>
+              <option value="week">Some time in the next week or two</option>
+              <option value="month">Within the month</option>
+              <option value="unsure">Not sure yet, just holding the pack</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-red btn-block" style="margin-top:6px" id="vipBtn">Claim a Founding Spot</button>
+          <button type="submit" class="btn btn-red btn-block" style="margin-top:6px" id="vipBtn">Get the 3-Pack</button>
           <p class="err-msg" id="vipErr"></p>
-          <p class="formnote" id="vipNote">Nothing is charged right now. We text you to set up your first visit and your standing slot, and billing starts after that detail is done.</p>
+          <p class="formnote" id="vipNote">Nothing is charged right now. We text you to get the first detail on the calendar, and you pay for the pack when we show up for it.</p>
         </form>
-        <div class="ok-msg" id="vipOk"><strong>Your founding spot is held.</strong><br>We will text you today to pick your standing slot and get the first detail on the calendar. Billing starts after that one is done, never before.</div>
+        <div class="ok-msg" id="vipOk"><strong>Your 3-Pack is reserved.</strong><br>We will text you today to get the first detail on the calendar. You pay for the pack at that first visit, never before.</div>
       </div>
     </div>
   </div>
@@ -1102,12 +1102,13 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
     <h2 class="h2">Common questions</h2>
     <div class="faq">
       <details class="q" open><summary>Do you actually come to me?</summary><div class="a">Yes, that is how most of our jobs run. We come to your house, apartment complex or workplace and do the whole detail right there, anywhere within about 10 miles of Elk Grove with no travel charge. If you would rather drop the car off, bring it to 9280 Trout Way in Elk Grove. Just pick drop off when you book.</div></details>
-      <details class="q"><summary>Can I get just the inside, or just the outside?</summary><div class="a">Yes, and it is a real choice on the booking form, not something you have to call and ask for. <b style="color:#fff">Interior only</b> starts at $70 and takes about 90 minutes: vacuum to the trunk, pet hair, leather, vents, glass. <b style="color:#fff">Exterior only</b> starts at $60 and takes about an hour: wash, wheels and tires degreased, bugs and tar off, spray wax. Neither one is a cut-down version, it is that half done properly. Worth knowing: the two of them separately come to $130, and the full detail is $100 and goes deeper on both. If you want the whole car, book the full one.</div></details>
+      <details class="q"><summary>Can I get just the inside, or just the outside?</summary><div class="a">Yes, and it is a real choice on the booking form, not something you have to call and ask for. <b style="color:#fff">Interior only</b> starts at $85 and takes about 90 minutes: vacuum to the trunk, pet hair, leather, vents, glass. <b style="color:#fff">Exterior only</b> starts at $75 and takes about an hour: wash, wheels and tires degreased, bugs and tar off, spray wax. Neither one is a cut-down version, it is that half done properly. Worth knowing: the two of them separately come to $160, and the full detail is $150 and goes deeper on both. If you want the whole car, book the full one.</div></details>
+      <details class="q"><summary>What if my car is not that dirty?</summary><div class="a">Then book the <b style="color:#fff">Express</b> and keep the difference. It is about an hour, inside and out: wash, wheels and tires, spray wax outside, vacuum and a full wipe down inside. If your car only needs a wipe down and a quick wash, that is the honest answer and we would rather tell you than sell you two hours you do not need. Where it is not enough is ground-in dirt, pet hair, spills, tar or water spots, because those take the deep work in the full detail. Not sure? Say so when you book, or text us a photo and we will tell you which one your car actually needs.</div></details>
       <details class="q"><summary>What if I am outside Elk Grove?</summary><div class="a">Inside 10 miles of Elk Grove there is no travel charge at all, and that covers most of south Sacramento, Laguna West, Vineyard, Sheldon, Florin and Delta Shores. Past ten it is <b style="color:#fff">$1 a mile</b>, and only for the miles over ten. At 15 miles that is $5, at 20 it is $10, at 25 it is $15. Past 25 miles, go ahead and book and we will call you first. Some days we can make it work and some days we cannot, and we would rather tell you straight than no-show you.</div></details>
       <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we knock <b style="color:#fff">$5 off the price</b> for it. We run off an outside spigot and an outdoor outlet. To be straight with you about what that actually costs: a two hour job pulls roughly 30 gallons and a couple of kilowatt-hours, which lands under a dollar on your bill. The $5 is not us breaking even, it is us not wanting to nickel you over a hose. If you are not sure you have an outdoor spigot or outlet, or your complex is tight on space, say so when you book and we will sort it out before we drive over.</div></details>
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full inside and outside on a normal car. If we look at yours and think it needs longer, because of matted pet hair or a bad spill, we tell you before we start rather than after. You do not have to stand around either. We text you when we are wrapping up.</div></details>
-      <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Find your service and your size on the table above and that is what you pay. <span id="faqPrice">A full sedan detail is $100, interior only is $70 and exterior only is $60, and your first full detail is $75 if you book by Monday the 14th.</span> Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
-      <details class="q" id="faqAfter"><summary>What happens after Monday?</summary><div class="a">The $75 first-detail price ends September 15th. After that a full sedan detail is $100, and that is what it stays at. No going back up to some other number. Anything booked before the deadline keeps the $75 even if the appointment itself lands later, so grabbing a slot now locks it in.</div></details>
+      <details class="q"><summary>Is that the real price?</summary><div class="a">Yes. Find your service and your size on the table above and that is what you pay. <span id="faqPrice">A full sedan detail is $150, interior only is $85, exterior only is $75 and the express is $50.</span> Add-ons like shampoo or ceramic are listed and always optional. Nothing gets tacked on at the end that you did not agree to.</div></details>
+      <details class="q" id="faqAfter" hidden><summary>What happens after Monday?</summary><div class="a">The $75 first-detail price ends September 15th. After that a full sedan detail is $100, and that is what it stays at. No going back up to some other number. Anything booked before the deadline keeps the $75 even if the appointment itself lands later, so grabbing a slot now locks it in.</div></details>
       <details class="q"><summary>How do I pay?</summary><div class="a">When the job is done, not before. We take just about anything: cash, Zelle, Cash App, Venmo, Apple Pay or card. There is no deposit and nothing is charged through this website.</div></details>
       <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain does not matter and we come as planned. Need to move it yourself, just call or text. No fee, no penalty.</div></details>
     </div>
@@ -1116,9 +1117,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
 <section class="finale">
   <div class="wrap">
-    <p class="kicker mid" id="finaleKicker">First detail $75, through Monday</p>
+    <p class="kicker mid" id="finaleKicker">Book a detail</p>
     <h2 class="h2">Stop looking at the mess.</h2>
-    <p class="lede" id="finaleLede">Inside, outside, or the whole car, in your own driveway. <b style="color:#fff">$75</b> for your first full detail, <b style="color:#fff">$100</b> after. Thirty seconds to book and no deposit.</p>
+    <p class="lede" id="finaleLede">Inside, outside, or the whole car, in your own driveway. Express from <b style="color:#fff">$50</b>, interior from <b style="color:#fff">$85</b>, the full detail <b style="color:#fff">$150</b>. Thirty seconds to book and no deposit.</p>
     <div class="hero-actions">
       <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
       <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
@@ -1140,7 +1141,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
         <a href="tel:+19162490631">(916) 249-0631</a>
         <a href="sms:+19167537822">Text us</a>
         <a href="#book">Online calendar</a>
-        <a href="#vip">The Valley Club</a>
+        <a href="#vip">The Valley 3-Pack</a>
       </div>
       <div>
         <h5>Info</h5>
@@ -1203,8 +1204,8 @@ const CFG = {
   PROMO_END  : '2026-09-15T00:00:00-07:00',
 
   PRICE: {
-    headlineReg:'$100', headlinePromo:'$75',
-    sizesReg  : 'SUV $115  ·  Truck or 3-row $130',
+    headlineReg:'$150', headlinePromo:'$75',
+    sizesReg  : 'SUV $170  ·  Truck or 3-row $190',
     sizesPromo: 'SUV $85  ·  Truck or 3-row $95'
   },
 
@@ -1214,22 +1215,22 @@ const CFG = {
      only — the express is already the cheap one.                          */
   SERVICES: [
     { id:'full',     label:'Full Detail',    minutes:120, blurb:'About two hours. The works, inside and out.',
-      prices:{ sedan:100, suv:115, truck:130 } },
+      prices:{ sedan:150, suv:170, truck:190 } },
     /* Interior only and exterior only. Plenty of people want one side of the car
        done and nothing else, and being told "it is all or nothing" is how that
-       booking goes to somebody else. Priced so the two of them together ($130)
-       cost more than the full detail ($100), which is the honest answer to
+       booking goes to somebody else. Priced so the two of them together ($160)
+       cost more than the full detail ($150), which is the honest answer to
        "should I just get both" and keeps the full detail the thing to buy. */
     { id:'interior', label:'Interior Only',  minutes:90,  blurb:'About 90 minutes. The whole inside, nothing outside.',
-      prices:{ sedan:70,  suv:80,  truck:90  } },
+      prices:{ sedan:85,  suv:95,  truck:105 } },
     { id:'exterior', label:'Exterior Only',  minutes:60,  blurb:'About an hour. Paint, glass and wheels, nothing inside.',
-      prices:{ sedan:60,  suv:70,  truck:80  } },
-    { id:'express',  label:'Express Detail', minutes:60,  blurb:'About an hour. Inside and out, less thorough.',
+      prices:{ sedan:75,  suv:85,  truck:95  } },
+    { id:'express',  label:'Express Detail', minutes:60,  blurb:'About an hour. Inside and out, quicker. The right call if it only needs a wipe down and a quick wash.',
       prices:{ sedan:50, suv:60,  truck:70  } },
     /* Two full details at one address in one visit. It has no button of its own: the
        "Two cars" choice books it, which is what pairOf marks. $25 off the second car. */
     { id:'full2',   label:'Two Full Details', minutes:240, pairOf:'full',
-      prices:{ sedan:175, suv:205, truck:235 } },
+      prices:{ sedan:275, suv:315, truck:365 } },
     /* Three or more cars. Picked with "3+ cars", priced on a call, so no prices here.
        Each car adds two hours; five or more holds the whole working day (full5). */
     { id:'full3',   label:'3 Full Details',  minutes:360, pairOf:'full' },
@@ -1255,15 +1256,14 @@ const CFG = {
   HOURS      : {0:['08:00','20:00'], 1:['08:00','20:00'], 2:['08:00','20:00'], 3:['08:00','20:00'],
                 4:['08:00','20:00'], 5:['08:00','20:00'], 6:['08:00','20:00']},
 
-  /* --- the Valley Club -------------------------------------------------
-     STRIPE_LINK is the $149/mo Payment Link. While it is empty the section
-     collects founding signups the way it always has and nobody is asked for
-     money; paste the link in and the button becomes a real checkout.        */
+  /* --- the 3-pack ------------------------------------------------------
+     STRIPE_LINK is the $375 one-off Payment Link. While it is empty the section
+     collects signups the way it always has and nobody is asked for money;
+     paste the link in and the button becomes a real checkout.               */
   CLUB: {
-    PRICE      : 149,
-    SPOTS      : 10,
+    PRICE      : 375,
+    DETAILS    : 3,
     STRIPE_LINK: '',
-    SECOND_CAR : 65,
   },
 
   /* --- how far we drive ------------------------------------------------
@@ -1406,7 +1406,7 @@ const REF = (() => {
     $('#slabCta').textContent = 'Book a Detail';
     $('#finaleKicker').textContent = 'Book a detail';
     $('#finaleLede').innerHTML = 'Inside, outside, or the whole car, in your own driveway. Interior from ' +
-      '<b style="color:#fff">$70</b>, exterior from <b style="color:#fff">$60</b>, the full detail ' +
+      '<b style="color:#fff">$85</b>, exterior from <b style="color:#fff">$75</b>, the full detail ' +
       '<b style="color:#fff">' + CFG.PRICE.headlineReg + '</b>. No deposit.';
     // Only the full-detail cards carry an intro price. The express cards have no
     // data-reg, and writing `undefined` into them is exactly what happened the
@@ -1416,7 +1416,7 @@ const REF = (() => {
     $('#tierNote').textContent = 'That is the price, every day. No deposit, and nothing gets added at the end.';
     // The rest of the copy that only makes sense while the intro is running.
     $('#ledePromo').hidden = true;
-    $('#faqPrice').textContent = 'A full sedan detail is $100, interior only is $70 and exterior only is $60.';
+    $('#faqPrice').textContent = 'A full sedan detail is $150, interior only is $85, exterior only is $75 and the express is $50.';
     $('#faqAfter').hidden = true;
     // The tier cards and the separate express note became one price table, which
     // is built from CFG and already reads correctly after the intro lapses.
@@ -2045,37 +2045,17 @@ const REF = (() => {
   } catch (_) { /* booking works the same without the welcome */ }
 })();
 
-/* --------------------------- club signup ------------------------------ */
+/* -------------------------- 3-pack signup ----------------------------- */
 (function vip(){
   const form = $('#vipForm'), club = CFG.CLUB || {};
   const btn = $('#vipBtn');
 
   $('#clubPrice').textContent = '$' + club.PRICE;
 
-  /* The spot counter is real or it is absent. A hardcoded "only 2 left!" is the
-     one thing that would make a genuinely good offer read as a scam, so if the
-     count can't be fetched the line simply stays hidden. */
-  (async () => {
-    if (!CFG.API_BASE) return;
-    try {
-      const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/vip-count`);
-      if (!r.ok) return;
-      const j = await r.json();
-      const left = Number(j.remaining);
-      if (!Number.isFinite(left)) return;
-      const el = $('#clubSpots');
-      el.textContent = left > 0
-        ? `${left} of ${j.limit} founding spots left`
-        : `All ${j.limit} founding spots are taken. Join the waitlist.`;
-      el.hidden = false;
-      if (left <= 0) btn.textContent = 'Join the Waitlist';
-    } catch (_) {}
-  })();
-
   /* Once the Payment Link exists the button IS the checkout. Until then this
      stays a signup and nobody is asked for money they can't yet pay. */
   if (club.STRIPE_LINK){
-    $('#vipNote').textContent = 'Card on file, charged monthly. Cancel any time from the receipt email. No contract, no cancellation fee.';
+    $('#vipNote').textContent = 'One payment of $' + club.PRICE + ' for all three. Nothing recurring, and any detail you have not used is refunded.';
   }
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -2100,7 +2080,7 @@ const REF = (() => {
       } catch (_) {
         err.textContent = 'Could not reach us. Try again, or call ' + CFG.PHONE_TEXT + '.';
       }
-      btn.disabled = false; btn.textContent = 'Claim a Founding Spot';
+      btn.disabled = false; btn.textContent = 'Get the 3-Pack';
       if (!ok) return;
     }
     // Saved first, paid second: if Stripe is set up we hand them straight to
