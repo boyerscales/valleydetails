@@ -202,7 +202,7 @@ REVIEWS: [
 ],
 REVIEW_COUNT: 10,   // what the Google profile actually shows
 REVIEW_AVG  : 5.0,
-GOOGLE_REVIEW_URL: '',
+GOOGLE_REVIEW_URL: 'https://g.page/r/CVoDC0vKzixlEBM/review',
 ```
 
 `name` is first name plus last initial, which is the convention here even though the
@@ -222,8 +222,10 @@ Not used: the two from a Boyer and a Randhawa (owner's own circle, and the first
 a suspicious reader checks), and Jugraj Bains' "Did a good job" (too thin to put on a
 page, though he is a Local Guide with 18 reviews if you ever want the badge).
 
-`GOOGLE_REVIEW_URL` is still empty. Profile → "Ask for reviews" → copy the g.page
-link → paste it in, and a "Leave a Google review" line appears under the cards.
+`GOOGLE_REVIEW_URL` is set as of 2026-09-19, to the same g.page link the dashboard
+already had in `client_settings.google_review_link`. A "Leave a Google review" line
+now shows under the cards. If it ever needs changing, it lives in two places: here
+and that column, which is what the post-job review text sends.
 
 ---
 
