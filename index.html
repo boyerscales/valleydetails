@@ -1173,13 +1173,14 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   "image":"https://valleydetails.site/assets/logo-social.png",
   "priceRange":"$$",
   "foundingDate":"2024",
-  "sameAs":["https://www.instagram.com/valleydetailsca/"],
+  "sameAs":["https://www.instagram.com/valleydetailsca/","https://maps.google.com/?cid=7290429265043719002"],
+  "hasMap":"https://maps.google.com/?cid=7290429265043719002",
   "hasOfferCatalog":{
     "@type":"OfferCatalog","name":"Detailing services",
     "itemListElement":[
-      {"@type":"Offer","name":"Full Detail","description":"Complete interior and exterior detail at your location, about 2 hours.","priceCurrency":"USD","price":"100","priceSpecification":{"@type":"PriceSpecification","minPrice":"100","maxPrice":"130","priceCurrency":"USD"}},
-      {"@type":"Offer","name":"Interior Only","description":"Interior detail only. Vacuum to the trunk, pet hair, leather cleaned and conditioned, glass. About 90 minutes.","priceCurrency":"USD","price":"70","priceSpecification":{"@type":"PriceSpecification","minPrice":"70","maxPrice":"90","priceCurrency":"USD"}},
-      {"@type":"Offer","name":"Exterior Only","description":"Exterior detail only. Wash, wheels and tires degreased, bugs and tar removed, spray wax. About 1 hour.","priceCurrency":"USD","price":"60","priceSpecification":{"@type":"PriceSpecification","minPrice":"60","maxPrice":"80","priceCurrency":"USD"}},
+      {"@type":"Offer","name":"Full Detail","description":"Complete interior and exterior detail at your location, about 2 hours.","priceCurrency":"USD","price":"150","priceSpecification":{"@type":"PriceSpecification","minPrice":"150","maxPrice":"190","priceCurrency":"USD"}},
+      {"@type":"Offer","name":"Interior Only","description":"Interior detail only. Vacuum to the trunk, pet hair, leather cleaned and conditioned, glass. About 90 minutes.","priceCurrency":"USD","price":"85","priceSpecification":{"@type":"PriceSpecification","minPrice":"85","maxPrice":"105","priceCurrency":"USD"}},
+      {"@type":"Offer","name":"Exterior Only","description":"Exterior detail only. Wash, wheels and tires degreased, bugs and tar removed, spray wax. About 1 hour.","priceCurrency":"USD","price":"75","priceSpecification":{"@type":"PriceSpecification","minPrice":"75","maxPrice":"95","priceCurrency":"USD"}},
       {"@type":"Offer","name":"Express Detail","description":"Quicker inside and out. Wash outside, vacuum and wipe-down inside. About 1 hour.","priceCurrency":"USD","price":"50","priceSpecification":{"@type":"PriceSpecification","minPrice":"50","maxPrice":"70","priceCurrency":"USD"}}
     ]
   },
@@ -1290,12 +1291,14 @@ const CFG = {
      and counting the quotes would undersell it. These two numbers are an assertion
      about the Google profile, so they have to match it: check before changing them,
      and leave them at 0 to have the badge count the quotes instead. */
-  REVIEW_COUNT: 10,
+  REVIEW_COUNT: 12,
   REVIEW_AVG  : 5.0,
 
   /* Profile -> "Ask for reviews" -> copy the g.page link, and paste it here. It adds
      a "Leave a Google review" line under the cards. */
   GOOGLE_REVIEW_URL: 'https://g.page/r/CVoDC0vKzixlEBM/review',
+  // The profile itself, so the badge can link to every review, not just the three quoted.
+  GOOGLE_PROFILE_URL: 'https://g.page/r/CVoDC0vKzixlEBM',
 
   /* --- photos ----------------------------------------------------------
      Drop files in ./assets with these names and they appear. Missing files
@@ -1512,6 +1515,9 @@ const REF = (() => {
     $('#revStars').innerHTML = star.repeat(Math.round(avg));
     $('#revAvg').textContent = avg.toFixed(1);
     $('#revCount').textContent = 'from ' + total + ' Google reviews';
+    if (CFG.GOOGLE_PROFILE_URL){
+      $('#revCount').innerHTML = 'from <a href="' + CFG.GOOGLE_PROFILE_URL + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px">' + total + ' Google reviews</a>';
+    }
     $('#revAgg').hidden = false;
   }
   if (CFG.GOOGLE_REVIEW_URL){
