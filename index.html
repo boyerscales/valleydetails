@@ -134,8 +134,8 @@ nav.main a:hover{color:#fff}
                    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
   background-size:58px 58px;mask-image:radial-gradient(64% 58% at 34% 34%,#000,transparent 76%)}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4.4vw,56px);align-items:center}
-.hero h1{margin:0 0 18px}
-.hero h1 em{font-style:italic;color:var(--red);display:block}
+.hero .hero-title{margin:0 0 18px}
+.hero .hero-title em{font-style:italic;color:var(--red);display:block}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
 .trustrow{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
 .trustrow li{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#cfcfd8;
@@ -722,9 +722,9 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
   </div>
   <div class="wrap hero-grid">
     <div>
-      <p class="kicker">Mobile Detailing · Elk Grove</p>
-      <h1 class="h1">Like the day<em>you bought it.</em></h1>
-      <p class="lede">We pull up to your driveway and detail it there. Inside, outside, or both, your call.<span id="ledePromo" hidden></span></p>
+      <h1 class="kicker">Mobile Car Detailing · Elk Grove, CA</h1>
+      <p class="h1 hero-title">Like the day<em>you bought it.</em></p>
+      <p class="lede">We pull up to your driveway in Elk Grove or south Sacramento and detail it there. Inside, outside, or both, your call.<span id="ledePromo" hidden></span></p>
       <div class="hero-actions">
         <a class="btn btn-red btn-lg" href="#book"><svg><use href="#i-cal"/></svg>Book a Detail</a>
         <a class="btn btn-ghost btn-lg" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>(916) 249-0631</a>
@@ -1090,7 +1090,7 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
       <div>
         <h3 class="h3">Areas we serve</h3>
         <p class="area-rule"><b>No travel charge within 10 miles of Elk Grove.</b> Past that it is $1 a mile. Farther than 25 miles, book anyway and we will call you first.</p>
-        <p class="area-towns">Elk Grove, South Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket, Delta Shores, Wilton, Galt, Natomas, Arden Arcade, Citrus Heights, Roseville, Folsom, El Dorado Hills, Davis and Stockton.</p>
+        <p class="area-towns">Elk Grove, South Sacramento, Laguna West, Vineyard, Sheldon, Florin, Pocket, Delta Shores, Wilton, Galt, Natomas, Arden Arcade, Rancho Cordova, West Sacramento, Citrus Heights, Roseville, Folsom, El Dorado Hills, Davis, Lodi and Stockton.</p>
       </div>
     </div>
   </div>
@@ -1164,29 +1164,160 @@ footer.site{background:#020203;border-top:1px solid var(--line);padding:52px 0 1
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@type":"AutoDetailing",
-  "name":"Valley Details",
-  "description":"Mobile and drop-off car detailing around Elk Grove and south Sacramento.",
-  "telephone":"+1-916-249-0631",
-  "url":"https://valleydetails.site/",
-  "image":"https://valleydetails.site/assets/logo-social.png",
-  "priceRange":"$$",
-  "foundingDate":"2024",
-  "sameAs":["https://www.instagram.com/valleydetailsca/","https://maps.google.com/?cid=7290429265043719002"],
-  "hasMap":"https://maps.google.com/?cid=7290429265043719002",
-  "hasOfferCatalog":{
-    "@type":"OfferCatalog","name":"Detailing services",
-    "itemListElement":[
-      {"@type":"Offer","name":"Full Detail","description":"Complete interior and exterior detail at your location, about 2 hours.","priceCurrency":"USD","price":"150","priceSpecification":{"@type":"PriceSpecification","minPrice":"150","maxPrice":"190","priceCurrency":"USD"}},
-      {"@type":"Offer","name":"Interior Only","description":"Interior detail only. Vacuum to the trunk, pet hair, leather cleaned and conditioned, glass. About 90 minutes.","priceCurrency":"USD","price":"85","priceSpecification":{"@type":"PriceSpecification","minPrice":"85","maxPrice":"105","priceCurrency":"USD"}},
-      {"@type":"Offer","name":"Exterior Only","description":"Exterior detail only. Wash, wheels and tires degreased, bugs and tar removed, spray wax. About 1 hour.","priceCurrency":"USD","price":"75","priceSpecification":{"@type":"PriceSpecification","minPrice":"75","maxPrice":"95","priceCurrency":"USD"}},
-      {"@type":"Offer","name":"Express Detail","description":"Quicker inside and out. Wash outside, vacuum and wipe-down inside. About 1 hour.","priceCurrency":"USD","price":"50","priceSpecification":{"@type":"PriceSpecification","minPrice":"50","maxPrice":"70","priceCurrency":"USD"}}
-    ]
+ "@context": "https://schema.org",
+ "@type": "AutoDetailing",
+ "@id": "https://valleydetails.site/#business",
+ "name": "Valley Details",
+ "description": "Mobile and drop-off car detailing around Elk Grove and south Sacramento.",
+ "telephone": "+1-916-249-0631",
+ "url": "https://valleydetails.site/",
+ "image": "https://valleydetails.site/assets/logo-social.png",
+ "logo": "https://valleydetails.site/assets/icon.png",
+ "priceRange": "$$",
+ "foundingDate": "2024",
+ "sameAs": [
+  "https://www.instagram.com/valleydetailsca/",
+  "https://maps.google.com/?cid=7290429265043719002"
+ ],
+ "hasMap": "https://maps.google.com/?cid=7290429265043719002",
+ "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Detailing services",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "name": "Full Detail",
+    "description": "Complete interior and exterior detail at your location, about 2 hours.",
+    "priceCurrency": "USD",
+    "price": "150",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "150",
+     "maxPrice": "190",
+     "priceCurrency": "USD"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Interior Only",
+    "description": "Interior detail only. Vacuum to the trunk, pet hair, leather cleaned and conditioned, glass. About 90 minutes.",
+    "priceCurrency": "USD",
+    "price": "85",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "85",
+     "maxPrice": "105",
+     "priceCurrency": "USD"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Exterior Only",
+    "description": "Exterior detail only. Wash, wheels and tires degreased, bugs and tar removed, spray wax. About 1 hour.",
+    "priceCurrency": "USD",
+    "price": "75",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "75",
+     "maxPrice": "95",
+     "priceCurrency": "USD"
+    }
+   },
+   {
+    "@type": "Offer",
+    "name": "Express Detail",
+    "description": "Quicker inside and out. Wash outside, vacuum and wipe-down inside. About 1 hour.",
+    "priceCurrency": "USD",
+    "price": "50",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "minPrice": "50",
+     "maxPrice": "70",
+     "priceCurrency": "USD"
+    }
+   }
+  ]
+ },
+ "address": {
+  "@type": "PostalAddress",
+  "addressLocality": "Elk Grove",
+  "addressRegion": "CA",
+  "addressCountry": "US"
+ },
+ "areaServed": [
+  {
+   "@type": "City",
+   "name": "Elk Grove, CA"
   },
-  "address":{"@type":"PostalAddress","addressLocality":"Elk Grove","addressRegion":"CA","addressCountry":"US"},
-  "areaServed":{"@type":"GeoCircle","geoMidpoint":{"@type":"GeoCoordinates","latitude":38.4088,"longitude":-121.3716},"geoRadius":"16093"},
-  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"08:00","closes":"20:00"}]
+  {
+   "@type": "City",
+   "name": "Sacramento, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Florin, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Vineyard, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Wilton, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Galt, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Rancho Cordova, CA"
+  },
+  {
+   "@type": "City",
+   "name": "West Sacramento, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Citrus Heights, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Folsom, CA"
+  },
+  {
+   "@type": "City",
+   "name": "El Dorado Hills, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Roseville, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Davis, CA"
+  },
+  {
+   "@type": "City",
+   "name": "Lodi, CA"
+  }
+ ],
+ "openingHoursSpecification": [
+  {
+   "@type": "OpeningHoursSpecification",
+   "dayOfWeek": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+   ],
+   "opens": "08:00",
+   "closes": "18:00"
+  }
+ ]
 }
 </script>
 
