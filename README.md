@@ -5,6 +5,20 @@ Drop it on any static host (Fly static, Netlify, Vercel, Cloudflare Pages, S3).
 
 Everything configurable lives in the `CFG` object near the bottom of the file.
 
+> **Redesign, 2026-09-27.** The page was rebuilt to look premium ahead of raising the
+> full detail toward $250. Some sections below describe the old page. What changed:
+>
+> - **Prices are written into the markup by hand** (hero note, Full Detail price row,
+>   Other Services rows, FAQ, structured data). `CFG.SERVICES` now only drives the
+>   booking picker. Change a price in both places.
+> - **Photos live in `assets/v2/`**, each in a phone size and a large size
+>   (`name-800.jpg`, `name-1200.jpg` or larger), wired up with `srcset`. `CFG.SHOTS`,
+>   `CFG.BA`, the promo countdown, the 3-Pack and the reviews config are gone; the
+>   three reviews and the work photos are plain HTML.
+> - **Camera originals go in `assets/originals/`** (gitignored). Cut web sizes from
+>   them with `sips -Z <width> -s formatOptions 72`.
+> - Booking, referrals and the dashboard API are unchanged.
+
 ---
 
 ## What is left to do

@@ -8,3 +8,6 @@ google-profile-photos/
 # This repo is published as a public GitHub Pages site: never commit these.
 leadjson/
 .tracker/
+
+# Full-resolution camera originals the web sizes are cut from. Not served.
+assets/originals/
