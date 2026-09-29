@@ -11,3 +11,6 @@ leadjson/
 
 # Full-resolution camera originals the web sizes are cut from. Not served.
 assets/originals/
+
+# Ad creative (source + rendered PNGs). Not part of the site, not served.
+ads/

@@ -202,7 +202,7 @@ section{padding:88px 0}
 .rev cite b{color:var(--ink);font-weight:500}
 .rev-links{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:30px}
 
-/* ---------- other services + add-ons ---------- */
+/* ---------- other services ---------- */
 .others{background:var(--bg2);border-top:1px solid var(--line)}
 .svc{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
 .svc:first-of-type{border-top:1px solid var(--line2)}
@@ -215,11 +215,6 @@ section{padding:88px 0}
 .svc-foot .time{font-size:13px;color:var(--ink3)}
 .svc-foot .arrow{font-size:14px}
 .sizes{font-size:14px;color:var(--ink3);margin:22px 0 0}
-.addons{margin-top:56px}
-.addons h3{margin:0 0 6px}
-.addons ul{list-style:none;margin:0;padding:0}
-.addons li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15.5px}
-.addons li b{font-weight:500;font-variant-numeric:tabular-nums}
 
 /* ---------- how it works ---------- */
 .steps{display:grid;gap:0;counter-reset:s}
@@ -590,18 +585,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
         <div class="svc-foot"><span class="time">About an hour</span><button type="button" class="arrow" data-book="express">Book <svg><use href="#i-arrow"/></svg></button></div>
       </div>
       <p class="sizes">Prices shown are for sedans. SUVs add $10, trucks and 3-rows add $20.</p>
-
-      <div class="addons rv">
-        <h3 class="label">Add to any detail</h3>
-        <ul>
-          <li><span>Carpet and seat shampoo, plus steam</span><b>+$45</b></li>
-          <li><span>Engine bay cleaning</span><b>+$35</b></li>
-          <li><span>Odor removal treatment</span><b>+$40</b></li>
-          <li><span>Headlight restoration</span><b>+$50</b></li>
-          <li><span>Ceramic spray sealant</span><b>+$85</b></li>
-        </ul>
-        <p class="sizes">Not sure what yours needs? Mention it when you book, or text us a photo.</p>
-      </div>
+      <p class="sizes">Not sure what yours needs? Mention it when you book, or text us a photo.</p>
     </div>
   </div>
 </section>
@@ -844,7 +828,32 @@ const CFG = {
   LEAD_HOURS : 3,
   HOURS      : {0:['08:00','20:00'], 1:['08:00','20:00'], 2:['08:00','20:00'], 3:['08:00','20:00'],
                 4:['08:00','20:00'], 5:['08:00','20:00'], 6:['08:00','20:00']},
+
+  /* --- Meta Pixel (for Instagram / Facebook ads) --------------------------
+     Paste the Pixel ID (Meta calls it a dataset ID) from Events Manager.
+     Empty = nothing loads and nothing is tracked.                          */
+  META_PIXEL_ID : '1450589283634376',
 };
+
+/* ------------------------------ Meta Pixel ------------------------------
+   Tells Meta which ad clicks turned into a booking, a call or a text, so the
+   ads can be judged on bookings instead of clicks. Sends the event name only,
+   never what was typed into the form. track() is safe to call with no pixel. */
+const track = (name, data) => { try { if (window.fbq) fbq('track', name, data || {}); } catch (_) {} };
+(function pixel(){
+  if (!CFG.META_PIXEL_ID) return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', CFG.META_PIXEL_ID);
+  fbq('track', 'PageView');
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="tel:"], a[href^="sms:"]');
+    if (a) track('Contact', { method: a.getAttribute('href').startsWith('tel:') ? 'call' : 'text' });
+  });
+})();
 
 const $  = (s,r=document)=>r.querySelector(s);
 const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
@@ -1345,6 +1354,7 @@ const REF = (() => {
     }
     btn.disabled = false; btn.textContent = 'Hold This Spot';
     if (!ok) return;
+    track('Schedule', { content_name: bookedServiceId() });
 
     const pretty = picked.date.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'}) +
                    ' at ' + picked.text;
