@@ -852,7 +852,10 @@ const CFG = {
      Meta Pixel never hears about them. Each day picks PER_DAY of its
      candidate times from a hash of the date, so the pattern shifts day to
      day but stays the same on every reload. Only the exact start time is
-     greyed, so a ghost never blocks the hour next to it. ON:false = off.  */
+     greyed, so a ghost never blocks the hour next to it. ON:false = off.
+     Counts are full for the next FULL_DAYS days, then thin out over
+     FADE_DAYS, and the far end of the calendar has none, the way a real
+     calendar fills up close in and is still open further out.            */
   GHOSTS: {
     ON: true,
     SLOTS: {                                   // 0 = Sunday. Slow hours only.
@@ -865,6 +868,8 @@ const CFG = {
       6: ['08:00','17:00','18:00'],            // Saturday mid-day is the good stuff. Leave it.
     },
     PER_DAY: {0:3, 1:4, 2:4, 3:4, 4:4, 5:3, 6:2},   // about 24 a week
+    FULL_DAYS: 7,                              // today through day 6 at full count
+    FADE_DAYS: 4,                              // days 7-10 taper, day 11 on is clean
   },
 
   /* --- Meta Pixel (for Instagram / Facebook ads) --------------------------
@@ -1252,11 +1257,15 @@ const PROMO = (() => {
     const g = CFG.GHOSTS;
     if (!g || !g.ON) return new Set();
     const day = ymd(date), dow = date.getDay();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const ahead = Math.round((new Date(date).setHours(0,0,0,0) - today) / 86400000);
+    const fade = ahead < g.FULL_DAYS ? 1 : Math.max(0, 1 - (ahead - g.FULL_DAYS + 1) / (g.FADE_DAYS + 1));
+    const count = Math.round((g.PER_DAY[dow] || 0) * fade);
     const hash = s => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
     return new Set((g.SLOTS[dow] || [])
       .map(t => ({ t, h: hash(day + t) }))
       .sort((a, b) => a.h - b.h)
-      .slice(0, g.PER_DAY[dow] || 0)
+      .slice(0, count)
       .map(x => day + 'T' + x.t));
   }
 
