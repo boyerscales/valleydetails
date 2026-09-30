@@ -198,11 +198,27 @@ POST {API_BASE}/api/public/schedule/{SLUG}/vip
      { name, phone, plan, source }
 ```
 
-`mode` is `"mobile"` or `"dropoff"`. `promo` is `"HALFOFF"` so promo bookings stay
-attributable. The server payload overrides the local `HOURS` / `SLOT_MIN` defaults, so
+`mode` is `"mobile"` or `"dropoff"`. `promo` is the code from a promo link (see
+*Promo links* below), or empty, so promo bookings stay attributable. The server payload overrides the local `HOURS` / `SLOT_MIN` defaults, so
 hours stay database-driven in `client_settings` rather than in this file.
 
 ---
+
+## Promo links
+
+A link like `valleydetails.site/?promo=story` tags the booking. The page remembers the
+code for 14 days, strips it from the address bar, shows the banner from `CFG.PROMOS`
+above the booking form, and sends the code with the booking. The dashboard then shows
+`Promo: story` on the appointment, and the discount is taken off in person at payment.
+Nobody who types the address in by hand gets the tag.
+
+Each entry in `CFG.PROMOS` has a `banner` (above the form), a `booked` line (in the
+confirmation) and an `ends` date. The code is good through that day; after it, the
+banner stops and the code is no longer sent, so a stale link books at the normal price.
+Delete the entry once the deal is over. A code not in the list is still sent, it just
+shows no banner.
+
+Current: `story`, $20 off any detail, ends 2026-10-04 (the Instagram story deal).
 
 ## Reviews
 

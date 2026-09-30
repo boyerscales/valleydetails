@@ -613,6 +613,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
       <h4>Book online</h4>
       <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
       <p class="ref-note" id="refNote" hidden></p>
+      <p class="ref-note" id="promoNote" hidden></p>
 
       <p class="svc-label">What are we doing?</p>
       <div class="seg" id="segService"></div>
@@ -829,6 +830,22 @@ const CFG = {
   HOURS      : {0:['08:00','20:00'], 1:['08:00','20:00'], 2:['08:00','20:00'], 3:['08:00','20:00'],
                 4:['08:00','20:00'], 5:['08:00','20:00'], 6:['08:00','20:00']},
 
+  /* --- promo links -----------------------------------------------------
+     valleydetails.site/?promo=story remembers the code for 14 days and sends
+     it with the booking, so the dashboard shows "Promo: story" on the
+     appointment. The discount is taken off in person at payment. `banner`
+     shows above the booking form, `booked` in the confirmation, and after
+     `ends` (good through that day, local time) the code is neither shown nor
+     sent, so a stale link books at the normal price. Delete an entry when a
+     deal is over.                                                          */
+  PROMOS: {
+    story: {
+      banner: '<b>Instagram story deal.</b> $20 off any detail, taken off when you pay.',
+      booked: '<b>Story deal locked in.</b>$20 comes off when you pay.',
+      ends:   '2026-10-04',
+    },
+  },
+
   /* --- Meta Pixel (for Instagram / Facebook ads) --------------------------
      Paste the Pixel ID (Meta calls it a dataset ID) from Events Manager.
      Empty = nothing loads and nothing is tracked.                          */
@@ -874,6 +891,29 @@ const REF = (() => {
     }
     const saved = JSON.parse(localStorage.getItem('vdRef') || 'null');
     return saved && Date.now() - saved.at < 60 * 864e5 ? saved.code : '';
+  } catch (_) { return ''; }
+})();
+
+/* -------------------------------- promos --------------------------------
+   A campaign link (valleydetails.site/?promo=story) works like a referral link:
+   remembered for 14 days, taken out of the address bar, sent with the booking.
+   CFG.PROMOS says what each code shows and when it ends. */
+const PROMO = (() => {
+  const live = code => {
+    const p = CFG.PROMOS && CFG.PROMOS[code];
+    if (p && p.ends && Date.now() > new Date(p.ends + 'T23:59:59').getTime()) return '';
+    return code;
+  };
+  try {
+    const q = new URLSearchParams(location.search).get('promo');
+    if (q && /^[a-z0-9-]{2,40}$/i.test(q)){
+      localStorage.setItem('vdPromo', JSON.stringify({ code: q.toLowerCase(), at: Date.now() }));
+      const rest = new URLSearchParams(location.search); rest.delete('promo');
+      history.replaceState(null, '', location.pathname + (rest.toString() ? '?' + rest : '') + location.hash);
+      return live(q.toLowerCase());
+    }
+    const saved = JSON.parse(localStorage.getItem('vdPromo') || 'null');
+    return saved && Date.now() - saved.at < 14 * 864e5 ? live(saved.code) : '';
   } catch (_) { return ''; }
 })();
 
@@ -1339,7 +1379,7 @@ const REF = (() => {
                                  mode, address:addr, notes,
                                  sms_ok: $('#bOptin').checked,
                                  ref: REF || undefined,
-                                 promo: '',
+                                 promo: PROMO || '',
                                  service_id: bookedServiceId(),
                                  service: serviceText({ twoCars, manyCars, cars }) })
         });
@@ -1372,12 +1412,14 @@ const REF = (() => {
       : `We will text ${esc(phone)} shortly to confirm. Nothing has been charged.`;
     const first = name.split(' ')[0];
     const shown = esc(first.charAt(0).toUpperCase() + first.slice(1));
+    const promoBooked = (PROMO && CFG.PROMOS && CFG.PROMOS[PROMO] && CFG.PROMOS[PROMO].booked) || '';
     box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
       <span class="ok-when">${pretty}</span>
       <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${esc(manyCars ? cars + ' cars: ' + carsText : carsText)}</span>
       <span class="ok-note">${textLine}</span>
       ${refUrl ? `<span class="ok-ref"><b>Give a friend $20 off</b>Send them your link. When their detail is done, you get $20 off your next one too.
         <span class="ok-ref-row"><code>${esc(refUrl.replace(/^https?:\/\//, ''))}</code><button type="button" id="refShare">Share</button></span></span>` : ''}
+      ${promoBooked ? `<span class="ok-ref">${promoBooked}</span>` : ''}
       Need to change it? Call <a href="tel:${CFG.PHONE_E164}" style="color:var(--ink);text-decoration:underline">${CFG.PHONE_TEXT}</a> or <a href="sms:+19167537822" style="color:var(--ink);text-decoration:underline">text us</a>.`;
     box.classList.add('on');
     box.scrollIntoView({behavior:'smooth', block:'center'});
@@ -1413,6 +1455,16 @@ const REF = (() => {
     note.innerHTML = `<b>${who || 'A friend'} sent you.</b> ${off} off your first detail, taken off automatically when you book.`;
     note.hidden = false;
   } catch (_) { /* booking works the same without the welcome */ }
+})();
+
+/* ---------------------------- promo banner ----------------------------- */
+(function promoBanner(){
+  const p = PROMO && CFG.PROMOS && CFG.PROMOS[PROMO];
+  if (!p || !p.banner) return;
+  const note = $('#promoNote');
+  if (!note) return;
+  note.innerHTML = p.banner;
+  note.hidden = false;
 })();
 </script>
 </body>
