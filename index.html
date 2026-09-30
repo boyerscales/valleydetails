@@ -846,6 +846,27 @@ const CFG = {
     },
   },
 
+  /* --- ghost holds -----------------------------------------------------
+     Greys out a few slow start times so the calendar does not look empty.
+     Page only: nothing is sent to the dashboard, no text goes out, and the
+     Meta Pixel never hears about them. Each day picks PER_DAY of its
+     candidate times from a hash of the date, so the pattern shifts day to
+     day but stays the same on every reload. Only the exact start time is
+     greyed, so a ghost never blocks the hour next to it. ON:false = off.  */
+  GHOSTS: {
+    ON: true,
+    SLOTS: {                                   // 0 = Sunday. Slow hours only.
+      0: ['08:00','09:00','16:00','17:00','18:00'],
+      1: ['08:00','09:00','11:00','12:00','13:00','14:00','18:00'],
+      2: ['08:00','09:00','11:00','12:00','13:00','14:00','18:00'],
+      3: ['08:00','09:00','11:00','12:00','13:00','14:00','18:00'],
+      4: ['08:00','09:00','11:00','12:00','13:00','14:00','18:00'],
+      5: ['08:00','09:00','11:00','13:00','18:00'],
+      6: ['08:00','17:00','18:00'],            // Saturday mid-day is the good stuff. Leave it.
+    },
+    PER_DAY: {0:3, 1:4, 2:4, 3:4, 4:4, 5:3, 6:2},   // about 24 a week
+  },
+
   /* --- Meta Pixel (for Instagram / Facebook ads) --------------------------
      Paste the Pixel ID (Meta calls it a dataset ID) from Events Manager.
      Empty = nothing loads and nothing is tracked.                          */
@@ -1226,21 +1247,34 @@ const PROMO = (() => {
     }).filter(Boolean);
   }
 
+  /* Ghost holds for one day, as a Set of "YYYY-MM-DDTHH:MM" keys. See CFG.GHOSTS. */
+  function ghostKeys(date){
+    const g = CFG.GHOSTS;
+    if (!g || !g.ON) return new Set();
+    const day = ymd(date), dow = date.getDay();
+    const hash = s => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
+    return new Set((g.SLOTS[dow] || [])
+      .map(t => ({ t, h: hash(day + t) }))
+      .sort((a, b) => a.h - b.h)
+      .slice(0, g.PER_DAY[dow] || 0)
+      .map(x => day + 'T' + x.t));
+  }
+
   function slotsFor(date){
     const span = cfg.hours[date.getDay()];
     if (!span) return [];
     const job = serviceMinutes(), step = cfg.stepMinutes || cfg.slotMinutes;
     const open = hm2m(span[0]), close = hm2m(span[1]);
     const floor = Date.now() + cfg.leadHours*3600*1000;
-    const busy = busyBlocks();
+    const busy = busyBlocks(), ghosts = ghostKeys(date);
     const out = [];
     for (let m = open; m + job <= close; m += step){
       const start = new Date(date); start.setHours(Math.floor(m/60), m%60, 0, 0);
       const from = start.getTime();
       if (from < floor) continue;
       const to = from + job * 60000;
-      const taken = busy.some(b => b.from < to && from < b.to);
       const key = ymd(start)+'T'+pad(start.getHours())+':'+pad(start.getMinutes());
+      const taken = ghosts.has(key) || busy.some(b => b.from < to && from < b.to);
       out.push({ key, text: label(m), date: new Date(start), taken });
     }
     return out;
