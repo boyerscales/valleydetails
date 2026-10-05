@@ -943,6 +943,35 @@ const PROMO = (() => {
   } catch (_) { return ''; }
 })();
 
+/* ------------------------------ ad tracking ------------------------------
+   The utm tags on the link that brought someone in (the Meta ad's link carries
+   utm_source=meta&utm_medium=paid&...) are remembered for 7 days, the same as Meta's
+   click window, and sent with the booking, so the dashboard shows
+   "Came from: meta / paid / launch / e-from-50" on the job. A visit with no tags
+   keeps the last ones. The address bar is left alone: the Pixel reads its click ID
+   from there. */
+const UTM = (() => {
+  let tags = null;
+  try {
+    const q = new URLSearchParams(location.search);
+    if (q.get('utm_source')){
+      tags = {};
+      ['source', 'medium', 'campaign', 'content'].forEach(k => {
+        const v = q.get('utm_' + k);
+        if (v) tags[k] = v.slice(0, 40);
+      });
+    }
+  } catch (_) {}
+  try {
+    if (tags) localStorage.setItem('vdUtm', JSON.stringify({ tags, at: Date.now() }));
+    else {
+      const saved = JSON.parse(localStorage.getItem('vdUtm') || 'null');
+      if (saved && Date.now() - saved.at < 7 * 864e5) tags = saved.tags;
+    }
+  } catch (_) {}
+  return tags;
+})();
+
 /* ----------------- in-page links leave the address alone ---------------
    Links just scroll, and a refresh always starts at the top. A shared link with a
    #section lands there once, then the hash is cleared. */
@@ -1423,6 +1452,7 @@ const PROMO = (() => {
                                  sms_ok: $('#bOptin').checked,
                                  ref: REF || undefined,
                                  promo: PROMO || '',
+                                 utm: UTM || undefined,
                                  service_id: bookedServiceId(),
                                  service: serviceText({ twoCars, manyCars, cars }) })
         });

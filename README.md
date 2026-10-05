@@ -191,7 +191,7 @@ GET  {API_BASE}/api/public/schedule/{SLUG}
  -> { hours, booked, slotMinutes, horizonDays, leadHours }
 
 POST {API_BASE}/api/public/schedule/{SLUG}/book
-     { name, phone, start, vehicle, mode, address, notes, promo, service }
+     { name, phone, start, vehicle, mode, address, notes, promo, utm, service }
  -> { ok: true } | { error: "..." }
 
 POST {API_BASE}/api/public/schedule/{SLUG}/vip
@@ -199,7 +199,14 @@ POST {API_BASE}/api/public/schedule/{SLUG}/vip
 ```
 
 `mode` is `"mobile"` or `"dropoff"`. `promo` is the code from a promo link (see
-*Promo links* below), or empty, so promo bookings stay attributable. The server payload overrides the local `HOURS` / `SLOT_MIN` defaults, so
+*Promo links* below), or empty, so promo bookings stay attributable. `utm` is
+`{ source, medium, campaign, content }` from the `utm_*` tags on the link the visitor
+arrived on, remembered for 7 days (Meta's click window), or left out. The dashboard
+shows it on the job as `Came from: meta / paid / launch / e-from-50`, so ad bookings
+can be told apart from everything else. Unlike `ref` and `promo`, the tags are left in
+the address bar, because the Meta Pixel reads its click ID from there. Any other link
+can be tagged the same way, e.g. the Instagram bio link with
+`?utm_source=instagram&utm_medium=bio`. The server payload overrides the local `HOURS` / `SLOT_MIN` defaults, so
 hours stay database-driven in `client_settings` rather than in this file.
 
 ---
