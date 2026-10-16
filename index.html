@@ -23,12 +23,10 @@
 <script>document.documentElement.classList.add('js')</script>
 <style>
 .dep-amt,.dep-left{font-style:normal}
-/* Why we take a deposit: shown above the Book button only while one applies. */
-.dep-why{margin:16px 0 0;padding:14px 16px;border:1px solid var(--line2);font-size:14px;line-height:1.55;color:var(--ink2)}
-.dep-why b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
+/* Why we take a deposit: a quiet note above the Book button, only while one applies. */
+.dep-why{margin:16px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink3)}
 .dep-why p{margin:0}
-.dep-why p+p{margin-top:8px}
-.dep-why p:last-child{color:var(--ink3);font-size:13px}
+.dep-why p+p{margin-top:6px}
 /* One family, three voices:
    labels  - Archivo expanded, tracked out (the badge-on-a-car voice)
    heads   - Archivo normal width, sentence case, tight
@@ -454,7 +452,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
       <span><b>5.0 on Google</b> · 12 reviews</span>
     </a>
     <div class="proof-item"><span><b>We come to you.</b> Elk Grove and south Sacramento</span></div>
-    <div class="proof-item"><span data-dep="0"><b>No deposit.</b> You pay once you've seen it</span><span data-dep="1" hidden><b>$<i class="dep-amt">25</i> holds your time.</b> It comes off your total</span></div>
+    <div class="proof-item"><span data-dep="0"><b>No deposit.</b> You pay once you've seen it</span><span data-dep="1" hidden><b>Book online.</b> No account needed</span></div>
   </div>
 </div>
 
@@ -674,10 +672,9 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
             <input id="bNotes" placeholder="Spilled coffee, tight driveway, gate code">
           </div>
           <div class="dep-why" id="depWhy" hidden>
-            <b>Why we take a $<i class="dep-amt">25</i> deposit now</b>
-            <p>When you book, we save that time for you and turn other people away for it. When someone doesn't show up, that time is lost for us. The deposit holds your spot.</p>
-            <p><b style="display:inline;font-size:inherit;margin:0">It counts toward your total, so your detail doesn't cost a dollar more.</b> Book a $150 Full Detail and you pay $<i class="dep-left">125</i> when the car is done.</p>
-            <p>The $<i class="dep-amt">25</i> is charged now on Stripe's secure checkout. If we have to move or cancel your appointment, it carries over to your new time or comes back to you.</p>
+            <p>Why a $<i class="dep-amt">25</i> deposit: when you book, we save that time for you and turn other people away for it, so a no-show costs us the slot. The deposit holds your spot.</p>
+            <p>It counts toward your total, so your detail doesn't cost a dollar more. Book a $150 Full Detail and you pay $<i class="dep-left">125</i> when the car is done.</p>
+            <p>It's charged on Stripe's secure checkout. If we have to move or cancel your appointment, it carries over to your new time or comes back to you.</p>
           </div>
           <button type="submit" class="btn btn-red btn-block" id="bookBtn" style="margin-top:18px">Hold This Spot</button>
           <p class="err-msg" id="bookErr"></p>
