@@ -22,6 +22,7 @@
 <link rel="preload" as="image" media="(min-width:760px)" imagesrcset="assets/v2/lexus-dusk-1200.jpg 1200w, assets/v2/lexus-dusk-2000.jpg 2000w" imagesizes="100vw">
 <script>document.documentElement.classList.add('js')</script>
 <style>
+.dep-amt{font-style:normal}
 /* One family, three voices:
    labels  - Archivo expanded, tracked out (the badge-on-a-car voice)
    heads   - Archivo normal width, sentence case, tight
@@ -447,7 +448,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
       <span><b>5.0 on Google</b> · 12 reviews</span>
     </a>
     <div class="proof-item"><span><b>We come to you.</b> Elk Grove and south Sacramento</span></div>
-    <div class="proof-item"><span><b>No deposit.</b> You pay once you've seen it</span></div>
+    <div class="proof-item"><span data-dep="0"><b>No deposit.</b> You pay once you've seen it</span><span data-dep="1" hidden><b>$<i class="dep-amt">20</i> holds your time.</b> It comes off your total</span></div>
   </div>
 </div>
 
@@ -611,7 +612,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
   <div class="wrap book">
     <div class="panel rv">
       <h4>Book online</h4>
-      <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
+      <p class="ph-sub" id="phSub">No account, no deposit. We text you to confirm.</p>
       <p class="ref-note" id="refNote" hidden></p>
       <p class="ref-note" id="promoNote" hidden></p>
 
@@ -668,7 +669,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
           </div>
           <button type="submit" class="btn btn-red btn-block" id="bookBtn" style="margin-top:18px">Hold This Spot</button>
           <p class="err-msg" id="bookErr"></p>
-          <p class="formnote">Nothing is charged online. You pay when the car is done.</p>
+          <p class="formnote" id="formNote">Nothing is charged online. You pay when the car is done.</p>
         </div>
       </form>
       <div class="ok-msg" id="bookOk"></div>
@@ -708,8 +709,8 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
       <details class="q"><summary>Do you use my water and power?</summary><div class="a">Yes, and we take <b>$5 off</b> for it. We run off an outside spigot and an outdoor outlet. A two-hour job uses roughly 30 gallons and a couple of kilowatt-hours, which is under a dollar on your bill. No spigot or outlet, or a tight complex? Say so when you book and we'll sort it out before we drive over.</div></details>
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full detail on a normal car. If yours needs longer because of matted pet hair or a bad spill, we tell you before we start, not after. You don't have to stand around. We text you when we're wrapping up.</div></details>
       <details class="q"><summary>Is there a discount for more than one car?</summary><div class="a">Yes. Two full details at the same address take <b>$25 off the second car</b>. Three or more, book the day and we'll call you with our best price. Customers also get a link after their detail that gives a friend $20 off, and gives them $20 off their next one.</div></details>
-      <details class="q"><summary>How do I pay?</summary><div class="a">When the job is done, not before. Cash, Zelle, Cash App, Venmo, Apple Pay or card. There's no deposit and nothing is charged through this website.</div></details>
-      <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain doesn't matter and we come as planned. Need to move it yourself? Call or text. No fee.</div></details>
+      <details class="q"><summary>How do I pay?</summary><div class="a"><span data-dep="0">When the job is done, not before. Cash, Zelle, Cash App, Venmo, Apple Pay or card. There's no deposit and nothing is charged through this website.</span><span data-dep="1" hidden>Booking online takes a $<i class="dep-amt">20</i> deposit on a secure Stripe page, and it comes off your total. The rest is paid when the job is done: cash, Zelle, Cash App, Venmo, Apple Pay or card.</span></div></details>
+      <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain doesn't matter and we come as planned. Need to move or cancel it yourself? Use the link in your confirmation text, or call or text us. <span id="faqPolicy"></span></div></details>
     </div>
   </div>
 </section>
@@ -1144,6 +1145,7 @@ const UTM = (() => {
     const c = service && CFG.SERVICES.find(x => x.id === service.id);
     $('#svcHint').textContent = (c && c.blurb) || '';
     renderCarInputs(values);
+    applyDeposit();
   }
   function carValues(){
     return [$('#bVehicle'), ...$$('#moreCars input')].map(i => i.value.trim());
@@ -1410,6 +1412,9 @@ const UTM = (() => {
                   services:mergeServices(j.services, CFG.SERVICES),
                   horizonDays:j.horizonDays || cfg.horizonDays,
                   leadHours:j.leadHours ?? cfg.leadHours };
+          // What the dashboard will actually take: 0 until Valley's Stripe can.
+          DEP = Number(j.deposit) > 0 ? Number(j.deposit) : 0;
+          POLICY = String(j.cancel_policy || '');
           const match = cfg.services.find(x => x.id === (service && service.id));
           if (match) service = { ...service, ...match };
           else service = cfg.services[0] || service;
@@ -1419,6 +1424,33 @@ const UTM = (() => {
     renderServices();
     showCars();
     renderDays();
+    applyDeposit();
+  }
+
+  /* --- deposit --------------------------------------------------------------
+     Off until the dashboard says Valley takes one (deposit > 0 in the schedule).
+     Then 1 or 2 car bookings pay it on Stripe; 3+ cars are priced on a call and
+     never do. All the deposit wording on the page follows from here, so the page
+     never promises "no deposit" while charging one, or the other way round.    */
+  var DEP = 0, POLICY = ''; // var: showCars can run before this line does
+  function depositNow(){ return DEP && cars <= 2 ? DEP : 0; }
+  function bookLabel(){ return depositNow() ? `Hold This Spot · $${depositNow()} deposit` : 'Hold This Spot'; }
+  function applyDeposit(){
+    $$('[data-dep]').forEach(el => { el.hidden = (el.dataset.dep === '1') !== Boolean(DEP); });
+    $$('.dep-amt').forEach(el => { el.textContent = DEP || 20; });
+    $('#phSub').textContent = depositNow()
+      ? `No account needed. A $${DEP} deposit holds your time and comes off your total.`
+      : DEP ? 'No account, and no deposit for 3 or more cars. We call you with a price.'
+      : 'No account, no deposit. We text you to confirm.';
+    const btn = $('#bookBtn'); if (!btn.disabled) btn.textContent = bookLabel();
+    // The dashboard's policy line talks about the deposit; a booking without one
+    // just gets the notice part.
+    const hours = (POLICY.match(/(\d+ hours?)/) || [])[1];
+    const policy = depositNow() || !DEP ? POLICY : hours ? `Please cancel or move at least ${hours} before.` : '';
+    $('#formNote').textContent = depositNow()
+      ? `$${depositNow()} now on a secure Stripe page, the rest when the car is done.${policy ? ' ' + policy : ''}`
+      : `Nothing is charged online. You pay when the car is done.${policy ? ' ' + policy : ''}`;
+    $('#faqPolicy').textContent = POLICY;
   }
 
   form.addEventListener('submit', async e => {
@@ -1441,7 +1473,7 @@ const UTM = (() => {
     const btn = $('#bookBtn');
     btn.disabled = true; btn.textContent = 'Sending';
 
-    let ok = true, refUrl = '';
+    let ok = true, refUrl = '', checkout = '';
     if (CFG.API_BASE){
       try {
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
@@ -1459,18 +1491,35 @@ const UTM = (() => {
         const j = await r.json().catch(()=>({}));
         ok = r.ok && j.ok !== false;
         refUrl = ok && j.ref_url ? String(j.ref_url) : '';
+        checkout = ok && /^https:\/\/checkout\.stripe\.com\//.test(j.checkout_url || '') ? j.checkout_url : '';
         if (!ok) err.textContent = j.error || 'That slot just got taken. Pick another, or call us.';
       } catch (_) {
         ok = false;
         err.textContent = 'Could not reach the calendar. Please call ' + CFG.PHONE_TEXT + '.';
       }
     }
-    btn.disabled = false; btn.textContent = 'Hold This Spot';
+    btn.disabled = false; btn.textContent = bookLabel();
     if (!ok) return;
-    track('Schedule', { content_name: bookedServiceId() });
-
     const pretty = picked.date.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'}) +
                    ' at ' + picked.text;
+    const ctx = { name, phone, mode, carsText, manyCars, cars, refUrl, pretty, service: bookedServiceId() };
+
+    // Deposit on: the time is held while they pay on Stripe, and Stripe sends them
+    // back here with ?deposit=paid or ?deposit=canceled. What they booked rides
+    // along in sessionStorage so the confirmation can say it when they're back.
+    if (checkout) {
+      try { sessionStorage.setItem('vdBooking', JSON.stringify({ ...ctx, deposit: depositNow(), at: Date.now() })); } catch (_) {}
+      track('InitiateCheckout', { content_name: ctx.service, value: depositNow(), currency: 'USD' });
+      btn.disabled = true; btn.textContent = 'Opening secure payment';
+      location.href = checkout;
+      return;
+    }
+    track('Schedule', { content_name: ctx.service });
+    showBooked(ctx);
+  });
+
+  // The booked screen, after the form or after paying the deposit.
+  function showBooked({ name, phone, mode, carsText, manyCars, cars, refUrl, pretty, paid }){
     daysEl.hidden = true; slotsEl.hidden = true; form.hidden = true;
     $('.panel .ph-sub').hidden = true;
     $('#segService').hidden = true;
@@ -1480,20 +1529,21 @@ const UTM = (() => {
     $$('.panel .svc-label').forEach(x => x.hidden = true);
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
+    const charged = paid ? `Your $${paid} deposit is paid and comes off your total.` : 'Nothing has been charged.';
     const textLine = manyCars
-      ? `We will contact ${esc(phone)} soon with our best price for all ${cars} cars. Nothing has been charged.`
-      : `We will text ${esc(phone)} shortly to confirm. Nothing has been charged.`;
-    const first = name.split(' ')[0];
+      ? `We will contact ${esc(phone)} soon with our best price for all ${cars} cars. ${charged}`
+      : `We will text ${esc(phone)} shortly to confirm. ${charged}`;
+    const first = String(name || '').split(' ')[0];
     const shown = esc(first.charAt(0).toUpperCase() + first.slice(1));
     const promoBooked = (PROMO && CFG.PROMOS && CFG.PROMOS[PROMO] && CFG.PROMOS[PROMO].booked) || '';
     box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
-      <span class="ok-when">${pretty}</span>
+      <span class="ok-when">${esc(pretty)}</span>
       <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${esc(manyCars ? cars + ' cars: ' + carsText : carsText)}</span>
       <span class="ok-note">${textLine}</span>
       ${refUrl ? `<span class="ok-ref"><b>Give a friend $20 off</b>Send them your link. When their detail is done, you get $20 off your next one too.
         <span class="ok-ref-row"><code>${esc(refUrl.replace(/^https?:\/\//, ''))}</code><button type="button" id="refShare">Share</button></span></span>` : ''}
       ${promoBooked ? `<span class="ok-ref">${promoBooked}</span>` : ''}
-      Need to change it? Call <a href="tel:${CFG.PHONE_E164}" style="color:var(--ink);text-decoration:underline">${CFG.PHONE_TEXT}</a> or <a href="sms:+19167537822" style="color:var(--ink);text-decoration:underline">text us</a>.`;
+      Need to change or cancel? Use the link in your text, call <a href="tel:${CFG.PHONE_E164}" style="color:var(--ink);text-decoration:underline">${CFG.PHONE_TEXT}</a> or <a href="sms:+19167537822" style="color:var(--ink);text-decoration:underline">text us</a>.`;
     box.classList.add('on');
     box.scrollIntoView({behavior:'smooth', block:'center'});
     try { localStorage.removeItem('vdRef'); } catch (_) {}
@@ -1509,9 +1559,34 @@ const UTM = (() => {
         window.prompt('Copy your link', refUrl);
       }
     });
-  });
+  }
 
-  load();
+  // Back from Stripe. Paid: they're booked, and that's the booking Meta should
+  // count. Backed out: the hold was let go, so they pick a time again.
+  function depositReturn(){
+    const params = new URLSearchParams(location.search);
+    const back = params.get('deposit');
+    if (!back) return;
+    params.delete('deposit');
+    const q = params.toString();
+    try { history.replaceState(null, '', location.pathname + (q ? '?' + q : '') + '#book'); } catch (_) {}
+    let saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem('vdBooking') || 'null'); sessionStorage.removeItem('vdBooking'); } catch (_) {}
+    if (back === 'paid') {
+      track('Schedule', { content_name: (saved && saved.service) || '' });
+      if (saved) showBooked({ ...saved, paid: saved.deposit });
+      else {
+        const box = $('#bookOk');
+        box.innerHTML = '<strong style="font-size:18px">You are booked.</strong><span class="ok-note">Your deposit is paid. We will text you shortly to confirm.</span>';
+        box.classList.add('on');
+        form.hidden = true;
+      }
+    } else if (back === 'canceled') {
+      $('#phSub').textContent = 'No deposit was paid, so that time was not held. Pick a time to try again.';
+    }
+    requestAnimationFrame(() => $('#book').scrollIntoView({ behavior: 'smooth' }));
+  }
+  load().then(depositReturn);
 })();
 
 /* ------------------------- referral welcome --------------------------- */
