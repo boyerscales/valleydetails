@@ -253,6 +253,8 @@ section{padding:88px 0}
 .seg small,.svc-price,.svc-time{font-size:12.5px;color:var(--ink3);font-weight:400}
 .svc-price{color:var(--ink2)}
 .seg-hint{font-size:13.5px;color:var(--ink3);margin:0 0 20px;min-height:1px}
+.svc-sizes{display:block;font-size:15px;color:var(--ink2);margin-bottom:4px}
+.svc-sizes b{color:var(--ink);font-weight:600}
 .fit-note{color:var(--bad)}
 .ref-note{background:rgba(224,22,30,.1);border:1px solid rgba(224,22,30,.35);padding:12px 14px;border-radius:2px;font-size:14.5px;margin:0 0 20px}
 .carcount{display:flex;justify-content:space-between;align-items:center;padding:10px 0 14px;font-size:15px;color:var(--ink2)}
@@ -1151,8 +1153,13 @@ const UTM = (() => {
       ? 'Five or more takes the whole day. Book the day, and we will contact you with our best price.'
       : cars > 2 ? 'Go ahead and book the day and time, and we will contact you with our best price.'
       : 'Same address, $25 off the second car.';
+    // Every size's price right under the pick, so a truck owner coming off the ad
+    // doesn't read "from $150" as his price. Two cars show the pair price.
     const c = service && CFG.SERVICES.find(x => x.id === service.id);
-    $('#svcHint').textContent = (c && c.blurb) || '';
+    const priced = cars === 2 && on ? CFG.SERVICES.find(x => x.id === 'full2') : cars > 2 && on ? null : c;
+    const p = priced && priced.prices;
+    $('#svcHint').innerHTML = (p ? `<span class="svc-sizes"><b>$${p.sedan}</b> sedan · <b>$${p.suv}</b> SUV · <b>$${p.truck}</b> truck or 3-row${cars === 2 && on ? ', for both' : ''}</span>` : '') +
+      esc((c && c.blurb) || '');
     renderCarInputs(values);
     applyDeposit();
   }
