@@ -250,6 +250,15 @@ section{padding:88px 0}
 .seg-hint{font-size:13.5px;color:var(--ink3);margin:0 0 20px;min-height:1px}
 .svc-sizes{display:block;font-size:15px;color:var(--ink2);margin-bottom:4px}
 .svc-sizes b{color:var(--ink);font-weight:600}
+.size{grid-template-columns:repeat(3,1fr);margin:8px 0 0}
+.size button{padding:10px 6px;text-align:center}
+.size .svc-name{display:block;font-size:13.5px}
+.size .svc-price{display:block;margin-top:2px}
+.size button.sel .svc-price{color:var(--ink)}
+.quote{margin:18px 0 0;padding:14px 16px;border:1px solid var(--line2);border-radius:2px;font-size:15px;color:var(--ink2);line-height:1.5}
+.quote b{color:var(--ink);font-weight:600;font-size:17px}
+.quote small{display:block;margin-top:4px;font-size:13px;color:var(--ink3)}
+.quote a{color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
 .fit-note{color:var(--bad)}
 .ref-note{background:rgba(224,22,30,.1);border:1px solid rgba(224,22,30,.35);padding:12px 14px;border-radius:2px;font-size:14.5px;margin:0 0 20px}
 .carcount{display:flex;justify-content:space-between;align-items:center;padding:10px 0 14px;font-size:15px;color:var(--ink2)}
@@ -659,7 +668,8 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
             <div class="field"><label for="bPhone">Mobile</label><input id="bPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(916) 555-0123"></div>
           </div>
           <label class="optin"><input type="checkbox" id="bOptin"><span>Text me open-slot deals. Reply STOP anytime.</span></label>
-          <div class="field" id="carsField"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger"></div>
+          <div class="field" id="carsField"><label for="bVehicle">Vehicle</label><input id="bVehicle" placeholder="2019 Dodge Challenger">
+            <div class="seg size" data-size-for="1" aria-label="Vehicle size"></div></div>
           <div id="moreCars"></div>
           <button type="button" class="linkbtn addcar" id="addCar">+ Add another car</button>
           <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" autocomplete="street-address" placeholder="Street address, Elk Grove">
@@ -668,7 +678,8 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
           <div class="field" id="noteField" hidden style="margin-top:10px">
             <input id="bNotes" placeholder="Spilled coffee, tight driveway, gate code">
           </div>
-          <button type="submit" class="btn btn-red btn-block" id="bookBtn" style="margin-top:18px">Hold This Spot</button>
+          <p class="quote" id="quoteLine" hidden></p>
+          <button type="submit" class="btn btn-red btn-block" id="bookBtn" style="margin-top:14px">Hold This Spot</button>
           <p class="err-msg" id="bookErr"></p>
           <p class="formnote">Nothing is charged online. You pay when the car is done. Free to move or cancel up to 24 hours before. Inside 24 hours or a no-show, there's a $25 cancellation fee.</p>
         </div>
@@ -685,7 +696,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
       <div class="callcard rv">
         <p class="label">Rather talk?</p>
         <a class="big" href="tel:+19162490631">(916) 249-0631</a>
-        <p>Call or text and we'll find you a time on the spot.</p>
+        <p>Call, or text (916) 753-7822, and we'll find you a time on the spot.</p>
         <div class="btns">
           <a class="btn btn-line" href="tel:+19162490631"><svg><use href="#i-phone"/></svg>Call</a>
           <a class="btn btn-line" href="sms:+19167537822?&body=Hi%20Valley%20Details%2C%20I%27d%20like%20to%20book%20a%20detail.">Text</a>
@@ -812,7 +823,7 @@ const CFG = {
     /* Two full details at one address in one visit. It has no button of its own: the
        "Two cars" choice books it, which is what pairOf marks. $25 off the second car. */
     { id:'full2',   label:'Two Full Details', minutes:240, pairOf:'full',
-      prices:{ sedan:275, suv:315, truck:365 } },
+      prices:{ sedan:275, suv:315, truck:355 } },
     /* Three or more cars. Picked with "3+ cars", priced on a call, so no prices here.
        Each car adds two hours; five or more holds the whole working day (full5). */
     { id:'full3',   label:'3 Full Details',  minutes:360, pairOf:'full' },
@@ -1156,6 +1167,75 @@ const UTM = (() => {
   function carValues(){
     return [$('#bVehicle'), ...$$('#moreCars input')].map(i => i.value.trim());
   }
+  /* --- vehicle size ----------------------------------------------------------
+     Ads land people straight here, and "from $150" read as THE price to truck and
+     SUV owners, so every car gets a size pick and the button shows the real total.
+     The size rides along in each vehicle's name and in the service label, so the
+     dashboard job and the owner read the same number the customer agreed to.     */
+  const SIZES = [
+    { id:'sedan', name:'Sedan', long:'sedan or coupe' },
+    { id:'suv',   name:'SUV',   long:'SUV or crossover' },
+    { id:'truck', name:'Truck / 3-row', long:'truck or 3-row' },
+  ];
+  let sizes = [];                                   // one id per car, '' until picked
+  function sizePrices(){
+    const c = service && CFG.SERVICES.find(x => x.id === service.id);
+    return (c && c.prices) || null;
+  }
+  function carPrice(i){
+    const p = sizePrices();
+    return p && sizes[i] ? p[sizes[i]] : null;
+  }
+  // Total the customer agreed to, or null when it is priced by phone (3+ cars).
+  function quoteTotal(){
+    if (!service) return null;
+    if (cars > 2 && service.id === 'full') return null;
+    const n = service.id === 'full' ? cars : 1;
+    let sum = 0;
+    for (let i = 0; i < n; i++){ const v = carPrice(i); if (v == null) return null; sum += v; }
+    return n === 2 ? sum - 25 : sum;               // the site's rule: $25 off the second car
+  }
+  function sizeLong(i){ const hit = SIZES.find(x => x.id === sizes[i]); return hit ? hit.long : ''; }
+  function renderSizes(){
+    const p = sizePrices();
+    $$('[data-size-for]').forEach(seg => {
+      const i = Number(seg.dataset.sizeFor) - 1;
+      seg.innerHTML = SIZES.map(z => `<button type="button" data-size="${z.id}"${sizes[i] === z.id ? ' class="sel"' : ''}>` +
+        `<span class="svc-name">${z.name}</span>${p ? `<span class="svc-price">$${p[z.id]}</span>` : ''}</button>`).join('');
+    });
+    updateQuote();
+  }
+  $('#step2').addEventListener('click', e => {
+    const b = e.target.closest('[data-size]'); if (!b) return;
+    const i = Number(b.closest('[data-size-for]').dataset.sizeFor) - 1;
+    sizes[i] = b.dataset.size;
+    renderSizes();
+  });
+  function bookLabel(){
+    const t = quoteTotal();
+    return t == null ? 'Hold This Spot' : `Hold This Spot · $${t}`;
+  }
+  function updateQuote(){
+    const q = $('#quoteLine'), btn = $('#bookBtn');
+    if (!service) { q.hidden = true; return; }
+    const manyCars = service.id === 'full' && cars > 2;
+    const n = service.id === 'full' ? cars : 1;
+    const picked = Array.from({ length: n }, (_, i) => sizes[i]).filter(Boolean).length;
+    let html;
+    if (manyCars) {
+      html = `<b>${cars} cars, priced by phone.</b> Book the day and we call you with our best price.`;
+    } else if (picked < n) {
+      html = n === 1 ? 'Pick your vehicle size above to see your price.'
+                     : 'Pick a size for each car to see your price.';
+    } else if (n === 2) {
+      html = `<b>$${quoteTotal()}</b> for both. ${esc(service.label)} on a ${sizeLong(0)} ($${carPrice(0)}) and a ${sizeLong(1)} ($${carPrice(1)}), $25 off the second car.`;
+    } else {
+      html = `<b>$${quoteTotal()}</b> for the ${esc(service.label)} on a ${sizeLong(0)}. Paid when the car is done.`;
+    }
+    q.innerHTML = html + `<small>Covers normal dirt and pet hair. If the car is a lot worse than that, we tell you before we start. <a href="/policy#covers">How pricing works</a>.</small>`;
+    q.hidden = false;
+    if (!btn.disabled) btn.textContent = bookLabel();
+  }
   function renderCarInputs(values = carValues()){
     $('#carsField label').textContent = cars > 1 ? 'Car 1' : 'Vehicle';
     const eg = ['2021 Toyota RAV4', '2018 Ford F-150', '2020 Honda Civic'];
@@ -1163,9 +1243,12 @@ const UTM = (() => {
       const n = i + 2;
       return `<div class="field"><label for="bCar${n}">Car ${n}</label><div class="car-in">` +
              `<input id="bCar${n}" placeholder="${eg[i % eg.length]}">` +
-             `<button type="button" class="car-x" data-rm="${n}" aria-label="Remove car ${n}">&times;</button></div></div>`;
+             `<button type="button" class="car-x" data-rm="${n}" aria-label="Remove car ${n}">&times;</button></div>` +
+             `<div class="seg size" data-size-for="${n}" aria-label="Car ${n} size"></div></div>`;
     }).join('');
     $$('#moreCars input').forEach((inp, i) => { inp.value = values[i + 1] || ''; });
+    sizes.length = cars;
+    renderSizes();
     $('#addCar').hidden = !service || service.id !== 'full' || cars >= MAX_CARS;
   }
   function setCars(n, values){
@@ -1192,6 +1275,7 @@ const UTM = (() => {
     if (!btn) return;
     const values = carValues();
     values.splice(Number(btn.dataset.rm) - 1, 1);
+    sizes.splice(Number(btn.dataset.rm) - 1, 1);
     setCars(cars - 1, values);
   });
 
@@ -1445,6 +1529,15 @@ const UTM = (() => {
     if (list.some(v => !v))         return err.textContent = twoCars ? 'Tell us the second vehicle too.'
                                                                      : 'Tell us each car so we can price them.';
     if (mode === 'mobile' && !addr) return err.textContent = 'We need an address to come to you, or switch to drop off.';
+    const sizedCars = service.id === 'full' ? cars : 1;
+    for (let i = 0; i < sizedCars; i++){
+      if (!sizes[i]) return err.textContent = sizedCars === 1 ? 'Pick your vehicle size so we can give you the right price.'
+                                                               : `Pick a size for car ${i + 1} so we can price it.`;
+    }
+    const total = quoteTotal();
+    const sizedList = list.map((v, i) => i < sizedCars && sizes[i] ? `${v} (${sizeLong(i)})` : v);
+    const sizedText = sizedList.join(', ');
+    const priceTag = total == null ? '' : (sizedCars === 1 ? `, ${sizeLong(0)}: $${total}` : `, $${total} for both`);
 
     const btn = $('#bookBtn');
     btn.disabled = true; btn.textContent = 'Sending';
@@ -1454,15 +1547,16 @@ const UTM = (() => {
       try {
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
           method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ name, phone, start:picked.key, vehicle: carsText,
-                                 cars, vehicles: list,
+          body: JSON.stringify({ name, phone, start:picked.key, vehicle: sizedText,
+                                 cars, vehicles: sizedList,
+                                 sizes: sizes.slice(0, sizedCars), quoted_total: total,
                                  mode, address:addr, notes,
                                  sms_ok: $('#bOptin').checked,
                                  ref: REF || undefined,
                                  promo: PROMO || '',
                                  utm: UTM || undefined,
                                  service_id: bookedServiceId(),
-                                 service: serviceText({ twoCars, manyCars, cars }) })
+                                 service: (serviceText({ twoCars, manyCars, cars }) + priceTag).slice(0, 120) })
         });
         const j = await r.json().catch(()=>({}));
         ok = r.ok && j.ok !== false;
@@ -1473,7 +1567,7 @@ const UTM = (() => {
         err.textContent = 'Could not reach the calendar. Please call ' + CFG.PHONE_TEXT + '.';
       }
     }
-    btn.disabled = false; btn.textContent = 'Hold This Spot';
+    btn.disabled = false; btn.textContent = bookLabel();
     if (!ok) return;
     track('Schedule', { content_name: bookedServiceId() });
 
@@ -1490,13 +1584,13 @@ const UTM = (() => {
     const box = $('#bookOk');
     const textLine = manyCars
       ? `We will contact ${esc(phone)} soon with our best price for all ${cars} cars. Nothing has been charged.`
-      : `We will text ${esc(phone)} shortly to confirm. Nothing has been charged.`;
+      : `${total == null ? '' : `Your price is <b>$${total}</b>, paid when the car is done. `}We will text ${esc(phone)} shortly to confirm. Nothing has been charged.`;
     const first = name.split(' ')[0];
     const shown = esc(first.charAt(0).toUpperCase() + first.slice(1));
     const promoBooked = (PROMO && CFG.PROMOS && CFG.PROMOS[PROMO] && CFG.PROMOS[PROMO].booked) || '';
     box.innerHTML = `<strong style="font-size:18px">Got it, ${shown}.</strong>
       <span class="ok-when">${pretty}</span>
-      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${esc(manyCars ? cars + ' cars: ' + carsText : carsText)}</span>
+      <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${esc(manyCars ? cars + ' cars: ' + sizedText : sizedText)}</span>
       <span class="ok-note">${textLine}</span>
       ${refUrl ? `<span class="ok-ref"><b>Give a friend $20 off</b>Send them your link. When their detail is done, you get $20 off your next one too.
         <span class="ok-ref-row"><code>${esc(refUrl.replace(/^https?:\/\//, ''))}</code><button type="button" id="refShare">Share</button></span></span>` : ''}
