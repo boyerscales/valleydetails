@@ -681,7 +681,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
           <p class="quote" id="quoteLine" hidden></p>
           <button type="submit" class="btn btn-red btn-block" id="bookBtn" style="margin-top:14px">Hold This Spot</button>
           <p class="err-msg" id="bookErr"></p>
-          <p class="formnote">Nothing is charged online. You pay when the car is done. Free to move or cancel up to 24 hours before. Inside 24 hours or a no-show, there's a $25 cancellation fee.</p>
+          <p class="formnote">Nothing is charged online. You pay when the car is done. Need to move or cancel? Use the link in your texts any time, and if you can, give us 12+ hours' notice so we can offer the spot to someone else.</p>
         </div>
       </form>
       <div class="ok-msg" id="bookOk"></div>
@@ -722,7 +722,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
       <details class="q"><summary>How long does it take?</summary><div class="a">About two hours for the full detail on a normal car. If yours needs longer because of matted pet hair or a bad spill, we tell you before we start, not after. You don't have to stand around. We text you when we're wrapping up.</div></details>
       <details class="q"><summary>Is there a discount for more than one car?</summary><div class="a">Yes. Two full details at the same address take <b>$25 off the second car</b>. Three or more, book the day and we'll call you with our best price. Customers also get a link after their detail that gives a friend $20 off, and gives them $20 off their next one.</div></details>
       <details class="q"><summary>How do I pay?</summary><div class="a">When the job is done, not before. Cash, Zelle, Cash App, Venmo, Apple Pay or card. There's no deposit and nothing is charged through this website.</div></details>
-      <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain doesn't matter and we come as planned. Need to move it yourself? Use the link in your confirmation text, or call or text. Free up to 24 hours before your start. Inside 24 hours, or if we show up and can't do the job, there's a $25 cancellation fee. The whole policy is <a href="/policy#cancel">here</a>.</div></details>
+      <details class="q"><summary>What if it rains, or I need to reschedule?</summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Covered garage or carport? Then rain doesn't matter and we come as planned. Need to move it yourself? Use the link in your texts, or call or text. There's no fee. If you can, give us 12+ hours' notice so we can offer the spot to someone else. The whole policy is <a href="/policy#cancel">here</a>.</div></details>
     </div>
   </div>
 </section>
@@ -1595,7 +1595,7 @@ const UTM = (() => {
       ${refUrl ? `<span class="ok-ref"><b>Give a friend $20 off</b>Send them your link. When their detail is done, you get $20 off your next one too.
         <span class="ok-ref-row"><code>${esc(refUrl.replace(/^https?:\/\//, ''))}</code><button type="button" id="refShare">Share</button></span></span>` : ''}
       ${promoBooked ? `<span class="ok-ref">${promoBooked}</span>` : ''}
-      Need to change it? Call <a href="tel:${CFG.PHONE_E164}" style="color:var(--ink);text-decoration:underline">${CFG.PHONE_TEXT}</a> or <a href="sms:+19167537822" style="color:var(--ink);text-decoration:underline">text us</a>.`;
+      Need to change it? Use the link in our confirmation text, or call <a href="tel:${CFG.PHONE_E164}" style="color:var(--ink);text-decoration:underline">${CFG.PHONE_TEXT}</a> or <a href="sms:+19167537822" style="color:var(--ink);text-decoration:underline">text us</a>.`;
     box.classList.add('on');
     box.scrollIntoView({behavior:'smooth', block:'center'});
     try { localStorage.removeItem('vdRef'); } catch (_) {}
