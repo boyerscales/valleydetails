@@ -250,6 +250,9 @@ section{padding:88px 0}
 .seg-hint{font-size:13.5px;color:var(--ink3);margin:0 0 20px;min-height:1px}
 .svc-sizes{display:block;font-size:15px;color:var(--ink2);margin-bottom:4px}
 .svc-sizes b{color:var(--ink);font-weight:600}
+/* A thank-you link's struck list price, in the muted grey, ahead of the gift price. */
+.svc-price s,.svc-sizes s{color:var(--ink3);font-weight:400}
+.svc-sizes span{white-space:nowrap}
 .size{grid-template-columns:repeat(3,1fr);margin:8px 0 0}
 .size button{padding:10px 6px;text-align:center}
 .size .svc-name{display:block;font-size:13.5px}
@@ -1188,14 +1191,22 @@ const UTM = (() => {
       ? 'Five or more takes the whole day. Book the day, and we will contact you with our best price.'
       : cars > 2 ? 'Go ahead and book the day and time, and we will contact you with our best price.'
       : 'Same address, $25 off the second car.';
-    // Every size's price right under the pick, so a truck owner coming off the ad
-    // doesn't read "from $150" as his price. Two cars show the pair price.
+    sizeHint();
+    renderCarInputs(values);
+  }
+  // Every size's price right under the pick, so a truck owner coming off the ad
+  // doesn't read "from $150" as his price. Two cars show the pair price. With a
+  // thank-you link the Full Detail (one or two cars) shows each list price struck
+  // through and the price after the gift beside it, so they see the money off
+  // before they book. Same prices, minus GIFT_OFF. 3+ cars has no line here.
+  function sizeHint(){
+    const on = !!service && service.id === 'full';
     const c = service && CFG.SERVICES.find(x => x.id === service.id);
     const priced = cars === 2 && on ? CFG.SERVICES.find(x => x.id === 'full2') : cars > 2 && on ? null : c;
-    const p = priced && priced.prices;
-    $('#svcHint').innerHTML = (p ? `<span class="svc-sizes"><b>$${p.sedan}</b> sedan · <b>$${p.suv}</b> SUV · <b>$${p.truck}</b> truck or 3-row${cars === 2 && on ? ', for both' : ''}</span>` : '') +
+    const p = priced && priced.prices, off = giftOff();
+    const each = (v, name) => off ? `<span><s>$${v}</s> <b>$${Math.max(0, v - off)}</b> ${name}</span>` : `<b>$${v}</b> ${name}`;
+    $('#svcHint').innerHTML = (p ? `<span class="svc-sizes">${each(p.sedan, 'sedan')} · ${each(p.suv, 'SUV')} · ${each(p.truck, 'truck or 3-row')}${cars === 2 && on ? ', for both' : ''}</span>` : '') +
       esc((c && c.blurb) || '');
-    renderCarInputs(values);
   }
   function carValues(){
     return [$('#bVehicle'), ...$$('#moreCars input')].map(i => i.value.trim());
@@ -1347,7 +1358,11 @@ const UTM = (() => {
     if (list.length < 2){ el.hidden = $('#svcHint').hidden = true; return; }
     el.innerHTML = list.map(x => {
       const c = copy(x.id);
-      const from = c.prices ? 'from $' + c.prices.sedan : '';
+      // A thank-you link shows on the Full Detail's card: the list price struck, the
+      // price after the gift beside it. Other services' cards never change.
+      const off = x.id === 'full' ? GIFT_OFF : 0;
+      const from = !c.prices ? '' : off ? `from <s>$${c.prices.sedan}</s> $${Math.max(0, c.prices.sedan - off)}`
+                                         : 'from $' + c.prices.sedan;
       const mins = Number(x.minutes || c.minutes) || 0;
       const when = mins === 60 ? '1 hr'
                  : mins >= 120 && mins % 60 === 0 ? (mins / 60) + ' hr'
@@ -1389,6 +1404,9 @@ const UTM = (() => {
   function giftPick(){
     if (!GIFT_OFF) return;
     if (!touchedService && choose) choose('full');
+    // Redraw the Full Detail's prices with the gift off. Until load() has drawn the
+    // services there is nothing to redraw, and load() calls this again after.
+    if (choose){ renderServices(); sizeHint(); }
     updateQuote();
   }
   document.addEventListener('vd:gift', giftPick);
