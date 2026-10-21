@@ -893,6 +893,38 @@ const CFG = {
   META_PIXEL_ID : '1450589283634376',
 };
 
+/* ---------------------------- thank-you gift -----------------------------
+   A past customer's thank-you link (valleydetails.site/?gift=k7m2p9xq#book) works
+   like a referral link: remembered for 30 days, taken out of the address bar, sent
+   with the booking. The dashboard checks the code and takes the money off a Full
+   Detail. GIFT_OFF stays 0 until the dashboard says the code is good (giftWelcome),
+   so the page never shows a discount the server won't give.
+   It runs before the Meta Pixel, so the personal code is out of the address bar
+   before the page view goes to Meta. Each step has its own try: a browser that
+   blocks storage still gets the link's discount on this visit. */
+const GIFT = (() => {
+  const good = c => typeof c === 'string' && /^[a-z2-9]{8}$/.test(c);
+  let params = null;
+  try { params = new URLSearchParams(location.search); } catch (_) {}
+  if (params && params.has('gift')){
+    const q = (params.get('gift') || '').toLowerCase();
+    try {                                          // a bad code comes out too
+      params.delete('gift');
+      history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params : '') + location.hash);
+    } catch (_) {}
+    if (good(q)){
+      try { localStorage.setItem('vdGift', JSON.stringify({ code: q, at: Date.now() })); } catch (_) {}
+      return q;
+    }
+  }
+  try {
+    const saved = JSON.parse(localStorage.getItem('vdGift') || 'null');
+    return saved && good(saved.code) && Date.now() - saved.at < 30 * 864e5 ? saved.code : '';
+  } catch (_) { return ''; }
+})();
+const forgetGift = () => { try { localStorage.removeItem('vdGift'); } catch (_) {} };
+let GIFT_OFF = 0, GIFT_UNTIL = '';
+
 /* ------------------------------ Meta Pixel ------------------------------
    Tells Meta which ad clicks turned into a booking, a call or a text, so the
    ads can be judged on bookings instead of clicks. Sends the event name only,
@@ -957,27 +989,6 @@ const PROMO = (() => {
     return saved && Date.now() - saved.at < 14 * 864e5 ? live(saved.code) : '';
   } catch (_) { return ''; }
 })();
-
-/* ---------------------------- thank-you gift -----------------------------
-   A past customer's thank-you link (valleydetails.site/?gift=k7m2p9xq#book) works
-   like a referral link: remembered for 30 days, taken out of the address bar, sent
-   with the booking. The dashboard checks the code and takes the money off a Full
-   Detail. GIFT_OFF stays 0 until the dashboard says the code is good (giftWelcome),
-   so the page never shows a discount the server won't give. */
-const GIFT = (() => {
-  try {
-    const q = (new URLSearchParams(location.search).get('gift') || '').toLowerCase();
-    if (/^[a-z2-9]{8}$/.test(q)){
-      localStorage.setItem('vdGift', JSON.stringify({ code: q, at: Date.now() }));
-      const rest = new URLSearchParams(location.search); rest.delete('gift');
-      history.replaceState(null, '', location.pathname + (rest.toString() ? '?' + rest : '') + location.hash);
-      return q;
-    }
-    const saved = JSON.parse(localStorage.getItem('vdGift') || 'null');
-    return saved && /^[a-z2-9]{8}$/.test(saved.code) && Date.now() - saved.at < 30 * 864e5 ? saved.code : '';
-  } catch (_) { return ''; }
-})();
-let GIFT_OFF = 0;
 
 /* ------------------------------ ad tracking ------------------------------
    The utm tags on the link that brought someone in (the Meta ad's link carries
@@ -1642,7 +1653,10 @@ const UTM = (() => {
     $$('.panel .svc-label').forEach(x => x.hidden = true);
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
-    const price = charged != null ? charged : total;
+    // The dashboard's number when it sends one. An offer note that comes without a
+    // number (an older dashboard) states its own price, so the page's total stays
+    // out rather than disagree with it.
+    const price = charged != null ? charged : (offerNote ? null : total);
     const dollars = v => Number.isInteger(v) ? String(v) : v.toFixed(2);
     const textLine = manyCars
       ? `We will contact ${esc(phone)} soon with our best price for all ${cars} cars. Nothing has been charged.`
@@ -1663,10 +1677,14 @@ const UTM = (() => {
     box.scrollIntoView({behavior:'smooth', block:'center'});
     try { localStorage.removeItem('vdRef'); } catch (_) {}
     // The thank-you is spent only when the dashboard says it went on this job. On any
-    // other booking (an Interior, say) the link stays good for a Full Detail.
+    // other booking (an Interior, say) the link stays good for a Full Detail, and
+    // the banner says so instead of "applied".
+    const giftNote = $('#giftNote');
     if (giftApplied){
-      try { localStorage.removeItem('vdGift'); } catch (_) {}
-      $('#giftNote').hidden = true;
+      forgetGift();
+      giftNote.hidden = true;
+    } else if (GIFT_OFF){
+      giftNote.innerHTML = `<b>Your $${GIFT_OFF} thank-you is still good</b> for a Full Detail${GIFT_UNTIL ? ' by ' + GIFT_UNTIL : ''}.`;
     }
     const share = $('#refShare');
     if (share) share.addEventListener('click', async () => {
@@ -1712,16 +1730,21 @@ const UTM = (() => {
   if (!note) return;
   try {
     const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/gift/${encodeURIComponent(GIFT)}`);
+    // Busy (429) or a dashboard without gifts yet: show nothing, keep the code.
+    if (!r.ok) return;
     const j = await r.json();
     if (!j) return;
     if (j.used){
+      // Kept: if the job it went on is canceled, the link is good again.
       note.textContent = 'This thank-you link has already been used.';
       note.hidden = false;
       return;
     }
-    if (!j.ok || j.expired) return;
-    const off = Math.round(Number(j.amount)) || 25;
-    if (off <= 0) return;
+    // Over, or not a code the dashboard knows: nothing to show or keep sending.
+    if (!j.ok || j.expired){ forgetGift(); return; }
+    // No amount from the dashboard means no discount on the page.
+    const off = Math.round(Number(j.amount));
+    if (!Number.isFinite(off) || off <= 0) return;
     // "Nov 21" from the dashboard, or a bare date if that is what comes back.
     let until = String(j.until || '');
     if (/^\d{4}-\d{2}-\d{2}/.test(until)){
@@ -1729,6 +1752,7 @@ const UTM = (() => {
       until = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     }
     until = until.replace(/[^A-Za-z0-9 ,]/g, '').trim().slice(0, 20);
+    GIFT_UNTIL = until;
     note.innerHTML = `<b>Your $${off} thank-you is applied.</b> It comes off any Full Detail you book${until ? ' by ' + until : ''}.`;
     note.hidden = false;
     GIFT_OFF = off;
