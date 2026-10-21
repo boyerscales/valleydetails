@@ -932,8 +932,9 @@ let GIFT_OFF = 0, GIFT_UNTIL = '';
 
 /* ------------------------------ Meta Pixel ------------------------------
    Tells Meta which ad clicks turned into a booking, a call or a text, so the
-   ads can be judged on bookings instead of clicks. Sends the event name only,
-   never what was typed into the form. track() is safe to call with no pixel. */
+   ads can be judged on bookings instead of clicks. A booking carries its dollar
+   value so Ads Manager can show return on ad spend; nothing typed into the form
+   goes to Meta from the page. track() is safe to call with no pixel. */
 const track = (name, data) => { try { if (window.fbq) fbq('track', name, data || {}); } catch (_) {} };
 (function pixel(){
   if (!CFG.META_PIXEL_ID) return;
@@ -1685,7 +1686,10 @@ const UTM = (() => {
     }
     btn.disabled = false; btn.textContent = bookLabel();
     if (!ok) return;
-    track('Schedule', { content_name: bookedServiceId() });
+    // The price the dashboard charged, else the page's own quote.
+    const bookedValue = charged != null ? charged : (total != null ? total : listed);
+    track('Schedule', Object.assign({ content_name: bookedServiceId() },
+      Number.isFinite(Number(bookedValue)) && Number(bookedValue) > 0 ? { value: Number(bookedValue), currency: 'USD' } : {}));
 
     const pretty = picked.date.toLocaleDateString('en-US',{weekday:'long', month:'long', day:'numeric'}) +
                    ' at ' + picked.text;
