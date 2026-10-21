@@ -253,6 +253,8 @@ section{padding:88px 0}
 /* A thank-you link's struck list price, in the muted grey, ahead of the gift price. */
 .svc-price s,.svc-sizes s{color:var(--ink3);font-weight:400}
 .svc-sizes span{white-space:nowrap}
+/* Read aloud, never shown: "was" and "now" around a struck price, since <s> is silent. */
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .size{grid-template-columns:repeat(3,1fr);margin:8px 0 0}
 .size button{padding:10px 6px;text-align:center}
 .size .svc-name{display:block;font-size:13.5px}
@@ -1204,7 +1206,7 @@ const UTM = (() => {
     const c = service && CFG.SERVICES.find(x => x.id === service.id);
     const priced = cars === 2 && on ? CFG.SERVICES.find(x => x.id === 'full2') : cars > 2 && on ? null : c;
     const p = priced && priced.prices, off = giftOff();
-    const each = (v, name) => off ? `<span><s>$${v}</s> <b>$${Math.max(0, v - off)}</b> ${name}</span>` : `<b>$${v}</b> ${name}`;
+    const each = (v, name) => off ? `<span>${wasNow(v, off, true)} ${name}</span>` : `<b>$${v}</b> ${name}`;
     $('#svcHint').innerHTML = (p ? `<span class="svc-sizes">${each(p.sedan, 'sedan')} · ${each(p.suv, 'SUV')} · ${each(p.truck, 'truck or 3-row')}${cars === 2 && on ? ', for both' : ''}</span>` : '') +
       esc((c && c.blurb) || '');
   }
@@ -1245,6 +1247,27 @@ const UTM = (() => {
   function giftOff(){
     return GIFT_OFF && service && service.id === 'full' ? GIFT_OFF : 0;
   }
+  // A list price struck through, the price after the gift beside it. <s> is not read
+  // aloud, so the hidden words give screen readers "was $150 now $125".
+  function wasNow(v, off, bold){
+    const now = '$' + Math.max(0, v - off);
+    return `<s><span class="vh">was </span>$${v}</s> <span class="vh">now </span>${bold ? `<b>${now}</b>` : now}`;
+  }
+  // A service card's "from" price. A thank-you link shows on the Full Detail's card:
+  // the list price struck, the price after the gift beside it. Other cards never change.
+  function fromPrice(id){
+    const c = CFG.SERVICES.find(x => x.id === id) || {};
+    if (!c.prices) return '';
+    const off = id === 'full' ? GIFT_OFF : 0;
+    return off ? 'from ' + wasNow(c.prices.sedan, off) : 'from $' + c.prices.sedan;
+  }
+  // A size button's price. One Full Detail with a thank-you link shows the list price
+  // struck and the price after the gift. Two cars keep the per-car list price, since
+  // the gift comes off once per booking (the line above and the quote show it).
+  function sizeBtnPrice(p, id){
+    const off = cars === 1 ? giftOff() : 0;
+    return off ? wasNow(p[id], off) : '$' + p[id];
+  }
   // Total the customer agreed to, or null when it is priced by phone (3+ cars).
   function quoteTotal(){
     const t = listTotal();
@@ -1256,7 +1279,7 @@ const UTM = (() => {
     $$('[data-size-for]').forEach(seg => {
       const i = Number(seg.dataset.sizeFor) - 1;
       seg.innerHTML = SIZES.map(z => `<button type="button" data-size="${z.id}"${sizes[i] === z.id ? ' class="sel"' : ''}>` +
-        `<span class="svc-name">${z.name}</span>${p ? `<span class="svc-price">$${p[z.id]}</span>` : ''}</button>`).join('');
+        `<span class="svc-name">${z.name}</span>${p ? `<span class="svc-price">${sizeBtnPrice(p, z.id)}</span>` : ''}</button>`).join('');
     });
     updateQuote();
   }
@@ -1358,11 +1381,7 @@ const UTM = (() => {
     if (list.length < 2){ el.hidden = $('#svcHint').hidden = true; return; }
     el.innerHTML = list.map(x => {
       const c = copy(x.id);
-      // A thank-you link shows on the Full Detail's card: the list price struck, the
-      // price after the gift beside it. Other services' cards never change.
-      const off = x.id === 'full' ? GIFT_OFF : 0;
-      const from = !c.prices ? '' : off ? `from <s>$${c.prices.sedan}</s> $${Math.max(0, c.prices.sedan - off)}`
-                                         : 'from $' + c.prices.sedan;
+      const from = fromPrice(x.id);
       const mins = Number(x.minutes || c.minutes) || 0;
       const when = mins === 60 ? '1 hr'
                  : mins >= 120 && mins % 60 === 0 ? (mins / 60) + ' hr'
@@ -1404,9 +1423,17 @@ const UTM = (() => {
   function giftPick(){
     if (!GIFT_OFF) return;
     if (!touchedService && choose) choose('full');
-    // Redraw the Full Detail's prices with the gift off. Until load() has drawn the
-    // services there is nothing to redraw, and load() calls this again after.
-    if (choose){ renderServices(); sizeHint(); }
+    // Put the gift into the prices already on screen. Only the price text changes, so
+    // a button someone is on keeps its focus. Until load() has drawn the services there
+    // is nothing to update, and load() calls this again after.
+    const card = $('#segService [data-svc="full"] .svc-price');
+    if (card) card.innerHTML = fromPrice('full');
+    const p = sizePrices();
+    if (p) $$('[data-size-for] [data-size]').forEach(b => {
+      const el = $('.svc-price', b);
+      if (el) el.innerHTML = sizeBtnPrice(p, b.dataset.size);
+    });
+    if (choose) sizeHint();
     updateQuote();
   }
   document.addEventListener('vd:gift', giftPick);
