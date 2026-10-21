@@ -625,6 +625,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 120px;font-size:14px;colo
       <p class="ph-sub">No account, no deposit. We text you to confirm.</p>
       <p class="ref-note" id="refNote" hidden></p>
       <p class="ref-note" id="promoNote" hidden></p>
+      <p class="ref-note" id="giftNote" hidden></p>
 
       <p class="svc-label">What are we doing?</p>
       <div class="seg" id="segService"></div>
@@ -957,6 +958,27 @@ const PROMO = (() => {
   } catch (_) { return ''; }
 })();
 
+/* ---------------------------- thank-you gift -----------------------------
+   A past customer's thank-you link (valleydetails.site/?gift=k7m2p9xq#book) works
+   like a referral link: remembered for 30 days, taken out of the address bar, sent
+   with the booking. The dashboard checks the code and takes the money off a Full
+   Detail. GIFT_OFF stays 0 until the dashboard says the code is good (giftWelcome),
+   so the page never shows a discount the server won't give. */
+const GIFT = (() => {
+  try {
+    const q = (new URLSearchParams(location.search).get('gift') || '').toLowerCase();
+    if (/^[a-z2-9]{8}$/.test(q)){
+      localStorage.setItem('vdGift', JSON.stringify({ code: q, at: Date.now() }));
+      const rest = new URLSearchParams(location.search); rest.delete('gift');
+      history.replaceState(null, '', location.pathname + (rest.toString() ? '?' + rest : '') + location.hash);
+      return q;
+    }
+    const saved = JSON.parse(localStorage.getItem('vdGift') || 'null');
+    return saved && /^[a-z2-9]{8}$/.test(saved.code) && Date.now() - saved.at < 30 * 864e5 ? saved.code : '';
+  } catch (_) { return ''; }
+})();
+let GIFT_OFF = 0;
+
 /* ------------------------------ ad tracking ------------------------------
    The utm tags on the link that brought someone in (the Meta ad's link carries
    utm_source=meta&utm_medium=paid&...) are remembered for 7 days, the same as Meta's
@@ -1186,14 +1208,25 @@ const UTM = (() => {
     const p = sizePrices();
     return p && sizes[i] ? p[sizes[i]] : null;
   }
-  // Total the customer agreed to, or null when it is priced by phone (3+ cars).
-  function quoteTotal(){
+  // The listed total before any thank-you gift, or null when it is priced by phone
+  // (3+ cars). This is what goes on the job; the dashboard takes the gift off itself.
+  function listTotal(){
     if (!service) return null;
     if (cars > 2 && service.id === 'full') return null;
     const n = service.id === 'full' ? cars : 1;
     let sum = 0;
     for (let i = 0; i < n; i++){ const v = carPrice(i); if (v == null) return null; sum += v; }
     return n === 2 ? sum - 25 : sum;               // the site's rule: $25 off the second car
+  }
+  // A thank-you link's money comes off a Full Detail (one or two cars here; 3+ is
+  // priced on the call), once per booking.
+  function giftOff(){
+    return GIFT_OFF && service && service.id === 'full' ? GIFT_OFF : 0;
+  }
+  // Total the customer agreed to, or null when it is priced by phone (3+ cars).
+  function quoteTotal(){
+    const t = listTotal();
+    return t == null ? null : Math.max(0, t - giftOff());
   }
   function sizeLong(i){ const hit = SIZES.find(x => x.id === sizes[i]); return hit ? hit.long : ''; }
   function renderSizes(){
@@ -1221,17 +1254,20 @@ const UTM = (() => {
     const manyCars = service.id === 'full' && cars > 2;
     const n = service.id === 'full' ? cars : 1;
     const picked = Array.from({ length: n }, (_, i) => sizes[i]).filter(Boolean).length;
+    const off = giftOff(), thanks = off ? `, with your $${off} thank-you` : '';
     let html;
     if (manyCars) {
-      html = `<b>${cars} cars, priced by phone.</b> Book the day and we call you with our best price.`;
+      html = `<b>${cars} cars, priced by phone.</b> Book the day and we call you with our best price.` +
+             (off ? ` $${off} comes off the price we call you with.` : '');
     } else if (picked < n) {
       html = n === 1 ? 'Pick your vehicle size above to see your price.'
                      : 'Pick a size for each car to see your price.';
     } else if (n === 2) {
-      html = `<b>$${quoteTotal()}</b> for both. ${esc(service.label)} on a ${sizeLong(0)} ($${carPrice(0)}) and a ${sizeLong(1)} ($${carPrice(1)}), $25 off the second car.`;
+      html = `<b>$${quoteTotal()}</b> for both${thanks}. ${esc(service.label)} on a ${sizeLong(0)} ($${carPrice(0)}) and a ${sizeLong(1)} ($${carPrice(1)}), $25 off the second car.`;
     } else {
-      html = `<b>$${quoteTotal()}</b> for the ${esc(service.label)} on a ${sizeLong(0)}. Paid when the car is done.`;
+      html = `<b>$${quoteTotal()}</b> for the ${esc(service.label)} on a ${sizeLong(0)}${thanks}. Paid when the car is done.`;
     }
+    if (GIFT_OFF && !off) html += ` Your $${GIFT_OFF} thank-you is for a Full Detail.`;
     q.innerHTML = html + `<small>Covers normal dirt and pet hair. If the car is a lot worse than that, we tell you before we start. <a href="/policy#covers">How pricing works</a>.</small>`;
     q.hidden = false;
     if (!btn.disabled) btn.textContent = bookLabel();
@@ -1311,7 +1347,7 @@ const UTM = (() => {
              (when ? `<span class="svc-time">About ${when}</span>` : '') +
              `</button>`;
     }).join('');
-    $$('button', el).forEach(b => b.addEventListener('click', () => pick(b.dataset.svc)));
+    $$('button', el).forEach(b => b.addEventListener('click', () => { touchedService = true; pick(b.dataset.svc); }));
 
     function pick(id){
       const hit = list.find(x => x.id === id);
@@ -1327,11 +1363,24 @@ const UTM = (() => {
 
   // "Book" buttons elsewhere on the page arrive here with their service already chosen.
   let choose = null;
+  let touchedService = false;                      // they picked a service themselves
   $$('[data-book]').forEach(b => b.addEventListener('click', () => {
+    touchedService = true;
     if (choose) choose(b.dataset.book);
     const to = document.getElementById('book');
     if (to) to.scrollIntoView({ behavior:'smooth', block:'start' });
   }));
+
+  // A good thank-you link starts the form on the Full Detail, unless they already
+  // picked something else, and puts the money off into the price. giftWelcome fires
+  // vd:gift once the dashboard says the code is good; load() checks again in case
+  // the services were not drawn yet.
+  function giftPick(){
+    if (!GIFT_OFF) return;
+    if (!touchedService && choose) choose('full');
+    updateQuote();
+  }
+  document.addEventListener('vd:gift', giftPick);
 
   const ymd  = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
   const hm2m = s => (+s.slice(0,2))*60 + (+s.slice(3,5));
@@ -1511,6 +1560,7 @@ const UTM = (() => {
     renderServices();
     showCars();
     renderDays();
+    giftPick();
   }
 
   form.addEventListener('submit', async e => {
@@ -1534,26 +1584,31 @@ const UTM = (() => {
       if (!sizes[i]) return err.textContent = sizedCars === 1 ? 'Pick your vehicle size so we can give you the right price.'
                                                                : `Pick a size for car ${i + 1} so we can price it.`;
     }
-    const total = quoteTotal();
+    // The job's label and quoted_total carry the listed price. A thank-you gift is
+    // taken off by the dashboard, which writes it on the job as its own Offer line.
+    const total = quoteTotal(), listed = listTotal();
     const sizedList = list.map((v, i) => i < sizedCars && sizes[i] ? `${v} (${sizeLong(i)})` : v);
     const sizedText = sizedList.join(', ');
-    const priceTag = total == null ? '' : (sizedCars === 1 ? `, ${sizeLong(0)}: $${total}` : `, $${total} for both`);
+    const priceTag = listed == null ? '' : (sizedCars === 1 ? `, ${sizeLong(0)}: $${listed}` : `, $${listed} for both`);
 
     const btn = $('#bookBtn');
     btn.disabled = true; btn.textContent = 'Sending';
 
-    let ok = true, refUrl = '';
+    // What the dashboard says it charged and why, when it says so. Older replies
+    // carry neither, and the page's own total stands in.
+    let ok = true, refUrl = '', charged = null, offerNote = '', giftApplied = false;
     if (CFG.API_BASE){
       try {
         const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/book`, {
           method:'POST', headers:{'Content-Type':'application/json'},
           body: JSON.stringify({ name, phone, start:picked.key, vehicle: sizedText,
                                  cars, vehicles: sizedList,
-                                 sizes: sizes.slice(0, sizedCars), quoted_total: total,
+                                 sizes: sizes.slice(0, sizedCars), quoted_total: listed,
                                  mode, address:addr, notes,
                                  sms_ok: $('#bOptin').checked,
                                  ref: REF || undefined,
                                  promo: PROMO || '',
+                                 gift: GIFT || undefined,
                                  utm: UTM || undefined,
                                  service_id: bookedServiceId(),
                                  service: (serviceText({ twoCars, manyCars, cars }) + priceTag).slice(0, 120) })
@@ -1561,6 +1616,11 @@ const UTM = (() => {
         const j = await r.json().catch(()=>({}));
         ok = r.ok && j.ok !== false;
         refUrl = ok && j.ref_url ? String(j.ref_url) : '';
+        if (ok){
+          if (typeof j.price === 'number' && Number.isFinite(j.price) && j.price >= 0) charged = j.price;
+          offerNote = j.offer_note ? String(j.offer_note).replace(/\s*[\u2013\u2014]\s*/g, ' ').trim().slice(0, 300) : '';
+          giftApplied = j.gift_applied === true;
+        }
         if (!ok) err.textContent = j.error || 'That slot just got taken. Pick another, or call us.';
       } catch (_) {
         ok = false;
@@ -1582,9 +1642,11 @@ const UTM = (() => {
     $$('.panel .svc-label').forEach(x => x.hidden = true);
     $('.panel h4').textContent = 'You are booked';
     const box = $('#bookOk');
+    const price = charged != null ? charged : total;
+    const dollars = v => Number.isInteger(v) ? String(v) : v.toFixed(2);
     const textLine = manyCars
       ? `We will contact ${esc(phone)} soon with our best price for all ${cars} cars. Nothing has been charged.`
-      : `${total == null ? '' : `Your price is <b>$${total}</b>, paid when the car is done. `}We will text ${esc(phone)} shortly to confirm. Nothing has been charged.`;
+      : `${price == null ? '' : `Your price is <b>$${dollars(price)}</b>, paid when the car is done. `}We will text ${esc(phone)} shortly to confirm. Nothing has been charged.`;
     const first = name.split(' ')[0];
     const shown = esc(first.charAt(0).toUpperCase() + first.slice(1));
     const promoBooked = (PROMO && CFG.PROMOS && CFG.PROMOS[PROMO] && CFG.PROMOS[PROMO].booked) || '';
@@ -1592,6 +1654,7 @@ const UTM = (() => {
       <span class="ok-when">${pretty}</span>
       <span class="ok-sub">${mode === 'mobile' ? 'We come to you' : 'Drop off at 9280 Trout Way, Elk Grove'} · ${esc(manyCars ? cars + ' cars: ' + sizedText : sizedText)}</span>
       <span class="ok-note">${textLine}</span>
+      ${offerNote ? `<span class="ok-note">${esc(offerNote)}</span>` : ''}
       ${refUrl ? `<span class="ok-ref"><b>Give a friend $20 off</b>Send them your link. When their detail is done, you get $20 off your next one too.
         <span class="ok-ref-row"><code>${esc(refUrl.replace(/^https?:\/\//, ''))}</code><button type="button" id="refShare">Share</button></span></span>` : ''}
       ${promoBooked ? `<span class="ok-ref">${promoBooked}</span>` : ''}
@@ -1599,6 +1662,12 @@ const UTM = (() => {
     box.classList.add('on');
     box.scrollIntoView({behavior:'smooth', block:'center'});
     try { localStorage.removeItem('vdRef'); } catch (_) {}
+    // The thank-you is spent only when the dashboard says it went on this job. On any
+    // other booking (an Interior, say) the link stays good for a Full Detail.
+    if (giftApplied){
+      try { localStorage.removeItem('vdGift'); } catch (_) {}
+      $('#giftNote').hidden = true;
+    }
     const share = $('#refShare');
     if (share) share.addEventListener('click', async () => {
       const text = 'Valley Details came out and detailed my car. This link gets you $20 off your first one:';
@@ -1629,6 +1698,41 @@ const UTM = (() => {
     const note = $('#refNote');
     note.innerHTML = `<b>${who || 'A friend'} sent you.</b> ${off} off your first detail, taken off automatically when you book.`;
     note.hidden = false;
+  } catch (_) { /* booking works the same without the welcome */ }
+})();
+
+/* ------------------------- thank-you welcome --------------------------
+   Asks the dashboard whether the link's code is good. Only then does the banner
+   show and the price come down (GIFT_OFF), so an old or spent link books at the
+   normal price without any fuss. The code still rides along with the booking, and
+   the dashboard decides. */
+(async function giftWelcome(){
+  if (!GIFT || !CFG.API_BASE) return;
+  const note = $('#giftNote');
+  if (!note) return;
+  try {
+    const r = await fetch(`${CFG.API_BASE}/api/public/schedule/${CFG.SLUG}/gift/${encodeURIComponent(GIFT)}`);
+    const j = await r.json();
+    if (!j) return;
+    if (j.used){
+      note.textContent = 'This thank-you link has already been used.';
+      note.hidden = false;
+      return;
+    }
+    if (!j.ok || j.expired) return;
+    const off = Math.round(Number(j.amount)) || 25;
+    if (off <= 0) return;
+    // "Nov 21" from the dashboard, or a bare date if that is what comes back.
+    let until = String(j.until || '');
+    if (/^\d{4}-\d{2}-\d{2}/.test(until)){
+      const d = new Date(until.slice(0, 10) + 'T12:00:00');
+      until = isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+    until = until.replace(/[^A-Za-z0-9 ,]/g, '').trim().slice(0, 20);
+    note.innerHTML = `<b>Your $${off} thank-you is applied.</b> It comes off any Full Detail you book${until ? ' by ' + until : ''}.`;
+    note.hidden = false;
+    GIFT_OFF = off;
+    document.dispatchEvent(new Event('vd:gift'));
   } catch (_) { /* booking works the same without the welcome */ }
 })();
 
