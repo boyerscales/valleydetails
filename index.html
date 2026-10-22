@@ -935,9 +935,14 @@ let GIFT_OFF = 0, GIFT_UNTIL = '';
    ads can be judged on bookings instead of clicks. A booking carries its dollar
    value so Ads Manager can show return on ad spend; nothing typed into the form
    goes to Meta from the page. track() is safe to call with no pixel. */
-const track = (name, data) => { try { if (window.fbq) fbq('track', name, data || {}); } catch (_) {} };
+/* Test mode: open the site with ?test=1 and nothing from this visit reaches the
+   pixel (no PageView, no Schedule with a dollar value) and the booking is marked
+   test. Remembered for the tab, so the booking flow stays in test mode. */
+try { if (new URLSearchParams(location.search).get('test') === '1') sessionStorage.setItem('vdTest', '1'); } catch (_) {}
+const isTest = () => { try { return sessionStorage.getItem('vdTest') === '1'; } catch (_) { return false; } };
+const track = (name, data) => { try { if (isTest()) return; if (window.fbq) fbq('track', name, data || {}); } catch (_) {} };
 (function pixel(){
-  if (!CFG.META_PIXEL_ID) return;
+  if (!CFG.META_PIXEL_ID || isTest()) return;
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -1667,6 +1672,7 @@ const UTM = (() => {
                                  promo: PROMO || '',
                                  gift: GIFT || undefined,
                                  utm: UTM || undefined,
+                                 test: isTest() || undefined,
                                  service_id: bookedServiceId(),
                                  service: (serviceText({ twoCars, manyCars, cars }) + priceTag).slice(0, 120) })
         });
