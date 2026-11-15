@@ -45,21 +45,24 @@ Every day: **8:00 AM to 8:00 PM**
 
 ## 4. Business description (620 of 750 characters)
 
-> Valley Details is a mobile car detailing service based in Elk Grove. We come to your driveway, apartment lot or workplace and detail your car right there. The Express cleans inside and out in about two hours, from $150 on a sedan. The Full adds a deep interior with hot water extractor shampoo and steam, from $250 on a sedan. SUVs and trucks are priced by size, so you know what you pay before we show up. Smaller jobs are by quote. There is no deposit, and you pay when you see the car. No travel charge within 10 miles of Elk Grove. Open 8am to 8pm every day. Serving Sacramento, Laguna, Galt and Folsom. Book online.
+> Valley Details is a mobile car detailing service based in Elk Grove. We come to your driveway, apartment lot or workplace and detail your car right there. The Full cleans inside and out in about two hours, from $150 on a sedan. The Showroom adds a deep interior with hot water extractor shampoo and steam, from $250 on a sedan. The Express is a quick clean inside and out in about an hour, from $60 on a sedan. SUVs and trucks are priced by size, so you know what you pay before we show up. There is no deposit, and you pay when you see the car. No travel charge within 10 miles of Elk Grove. Open 8am to 8pm every day. Serving Sacramento, Laguna, Galt and Folsom. Book online.
 
 ## 5. Services (add each with price)
 
 | Service | Price | Description |
 |---|---|---|
-| Express, Sedan/Coupe | $150 | Inside and out at your location, about 2 hours |
-| Express, SUV/Crossover | $170 | Inside and out at your location, about 2 hours |
-| Express, Truck/3-Row | $190 | Inside and out at your location, about 2 hours |
-| Full, Sedan/Coupe | $250 | Everything in Express plus the deep interior: carpets, mats and cloth seats shampooed with a hot water extractor, steam on vents, cupholders, console, seat rails and door pockets, set-in stains worked on. About 3.5 to 4 hours |
-| Full, SUV/Crossover | $280 | Same as above |
-| Full, Truck/3-Row | $310 | Same as above |
+| Express, Sedan/Coupe | $60 | A quick clean inside and out at your location, about 1 hour |
+| Express, SUV/Crossover | $70 | A quick clean inside and out at your location, about 1 hour |
+| Express, Truck/3-Row | $80 | A quick clean inside and out at your location, about 1 hour |
+| Full, Sedan/Coupe | $150 | Inside and out at your location, about 2 hours |
+| Full, SUV/Crossover | $170 | Inside and out at your location, about 2 hours |
+| Full, Truck/3-Row | $190 | Inside and out at your location, about 2 hours |
+| Showroom, Sedan/Coupe | $250 | Everything in Full plus the deep interior: carpets, mats and cloth seats shampooed with a hot water extractor, steam on vents, cupholders, console, seat rails and door pockets, set-in stains worked on. About 3.5 to 4 hours |
+| Showroom, SUV/Crossover | $280 | Same as above |
+| Showroom, Truck/3-Row | $310 | Same as above |
 | Heavy pet hair | +$40 | Add-on |
-| Seat or carpet shampoo on an Express | +$50 | Add-on |
-| Second car, same address | $25 off | Off the second car |
+| Seat or carpet shampoo on a Full | +$50 | Add-on |
+| Second car, same address | $25 off | Off the second car, Full or Showroom |
 | Anything smaller (just the inside, just the outside, a quick clean) | By quote | No price listed. Text (916) 753-7822 and we text you a price |
 
 ## 6. Attributes to switch on

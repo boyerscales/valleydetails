@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Valley Details | Mobile Car Detailing in Elk Grove, CA</title>
-<meta name="description" content="Mobile car detailing in Elk Grove and south Sacramento. We come to you. Express from $150, Full from $250. No deposit, you pay when the car is done. (916) 249-0631.">
+<meta name="description" content="Mobile car detailing in Elk Grove and south Sacramento. We come to you. Express from $60, Full from $150, Showroom from $250. No deposit, you pay when the car is done. (916) 249-0631.">
 <link rel="canonical" href="https://valleydetails.site/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://valleydetails.site/">
 <meta property="og:title" content="Valley Details | Mobile Car Detailing in Elk Grove">
-<meta property="og:description" content="We come to you, in Elk Grove and south Sacramento. Express from $150, Full from $250. Book online or call (916) 249-0631.">
+<meta property="og:description" content="We come to you, in Elk Grove and south Sacramento. Express from $60, Full from $150, Showroom from $250. Book online or call (916) 249-0631.">
 <meta property="og:image" content="https://valleydetails.site/assets/logo-social.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Valley Details | Mobile Car Detailing in Elk Grove">
-<meta name="twitter:description" content="We come to you, in Elk Grove and south Sacramento. Express from $150, Full from $250. Book online or call (916) 249-0631.">
+<meta name="twitter:description" content="We come to you, in Elk Grove and south Sacramento. Express from $60, Full from $150, Showroom from $250. Book online or call (916) 249-0631.">
 <meta name="twitter:image" content="https://valleydetails.site/assets/logo-social.png">
 <meta name="theme-color" content="#000000">
 <meta name="format-detection" content="telephone=no">
@@ -195,8 +195,13 @@ ul,ol{list-style:none;padding:0}
 .inc li{margin-top:6px;font-size:14.5px;line-height:1.3}
 .inc-one{margin-top:4px}
 @keyframes drop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.less-line{display:block;width:100%;min-height:48px;margin-top:6px;padding:10px 0;border:0;background:none;text-align:left;font-size:15.5px;color:var(--mid)}
-.less-line u{color:var(--ink);font-weight:600;text-underline-offset:3px}
+/* Express: the short job, one row under the two photo tiles */
+.xrow{margin-top:8px;border-radius:14px;background:var(--fill);overflow:hidden}
+.x-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px 12px 0}
+.x-for{margin-top:6px;font-size:14.5px;line-height:1.28;color:#444}
+.xrow .t-price{flex:none;margin-top:0}
+.xrow .btn{width:calc(100% - 24px);height:46px;margin:12px 12px 0;font-size:15.5px}
+.xrow .inc{padding:0 12px 14px;border-radius:0;background:none}
 
 /* before and after, on the white page */
 .jobs2{display:grid;gap:24px;margin-top:18px}
@@ -315,21 +320,16 @@ footer .flogo{width:200px;height:auto}
 .rows li span:last-child{font-weight:600;white-space:nowrap}
 .miss{margin-top:6px;font-size:14px;font-weight:600;line-height:1.35}
 .book-btn.big{width:100%;height:56px;margin-top:8px;font-size:20px}
-/* quote: one step, no price, sent as a text */
-.chip.wide{grid-column:1/-1}
-.q-line{padding:2px 0 0;font-size:15.5px;line-height:1.35;color:#333}
-#qMiss{margin:0 0 8px}
-.q-go{height:54px;font-size:17.5px;font-weight:800}
-.q-or{margin-top:10px;text-align:center}
-.q-or,.q-or a{-webkit-user-select:text;user-select:text}
-.q-or a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+/* three services across: the name over the price */
+.svc3 .chip.svc{flex-direction:column;justify-content:center;gap:3px;height:60px;padding:0 4px;font-size:14.5px}
+.svc3 .chip.svc b{font-size:18px}
 .done{padding:6px 0 10px}
 .done-h{font-size:21px;font-weight:800;font-stretch:106%;line-height:1.2}
 .done-p{margin-top:12px;font-size:16px;line-height:1.45;color:#333}
 .done-r{margin-top:16px;padding:12px 14px;border-radius:10px;background:#efefef;font-size:15px;font-weight:600;line-height:1.35}
 .locked .top-nav .book-btn{visibility:hidden}
 
-/* ---------- production additions: real calendar, link notes, second car, confirmation, quote by text ---------- */
+/* ---------- production additions: real calendar, link notes, second car, confirmation ---------- */
 .vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* a link's note (thank-you gift, friend's link, promo): a light panel with a near-black edge, so it never reads as a button or a field */
 .note{margin-top:10px;padding:9px 12px 9px 13px;border-left:3px solid var(--ink);background:#f7f7f7;font-size:14.5px;line-height:1.35;color:#222}
@@ -367,13 +367,6 @@ footer .flogo{width:200px;height:auto}
 .ref-row{display:flex!important;align-items:center;gap:8px;margin-top:10px}
 .ref-row code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:9px 10px;border-radius:8px;background:#fff;font:500 13px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;-webkit-user-select:all;user-select:all}
 .ref-row button{flex:none;height:36px;padding:0 16px;border:0;border-radius:8px;background:var(--ink);color:#fff;font-size:14.5px;font-weight:700}
-/* quote by text */
-a.q-go{text-decoration:none}
-.q-alt{margin-top:10px}
-.q-alt-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;font-size:13px;line-height:1.4;color:var(--mid)}
-.q-alt-top b{font-weight:600;color:var(--ink);white-space:nowrap}
-.q-alt-top button{flex:none;padding:0;border:0;background:none;font-size:13.5px;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-.q-msg{margin-top:4px;padding:8px 10px;border-radius:8px;background:#f4f4f4;font-size:13px;line-height:1.4;color:#333;max-height:5.6em;overflow-y:auto;overflow-wrap:anywhere}
 .sel,.sel *{-webkit-user-select:text;user-select:text}
 .contact a.pol span+span{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 @media (max-width:359px){
@@ -392,6 +385,7 @@ a.q-go{text-decoration:none}
   .seg button,.chip{font-size:13.5px}
   .t-price{font-size:30px}.t-body .btn{font-size:14px}
   .chip.svc{font-size:14.5px;padding:0 9px}.chip.svc b{font-size:16px}
+  .svc3 .chip.svc{font-size:13px;padding:0 2px}.svc3 .chip.svc b{font-size:16px}
   .next{min-width:108px;padding:0 18px}
 }
 
@@ -437,6 +431,10 @@ a.q-go{text-decoration:none}
   .pick{gap:16px}
   .t-body{padding:16px 16px 6px}
   .inc-btn{padding:0 16px}
+  .xrow{margin-top:16px}
+  .x-top{padding:16px 16px 0}
+  .xrow .btn{width:calc(100% - 32px);margin:12px 16px 0}
+  .xrow .inc{padding:0 16px 16px}
   .jobs2{grid-template-columns:1fr 1fr;gap:28px 20px;align-items:start}
   .quotes blockquote{font-size:22px}
   footer{padding:64px 32px 64px}
@@ -483,7 +481,7 @@ a.q-go{text-decoration:none}
   <div class="intro">
     <p class="intro-h" role="heading" aria-level="1">We come to you.</p>
     <p class="intro-p">Mobile car detailing in Elk Grove and south Sacramento. Your driveway, apartment lot or work.</p>
-    <p class="intro-price"><b data-price="express">$150</b><span>Express, inside and out, <span data-size-name>sedan</span></span></p>
+    <p class="intro-price"><b data-price="full">$150</b><span>Full detail, inside and out, <span data-size-name>sedan</span></span></p>
     <p class="intro-cta"><a class="btn btn-w" href="#prices" data-goto="prices">See prices</a><a href="tel:+19162490631">Call (916) 249-0631</a></p>
     <p class="intro-note"><a href="#reviews" data-goto="reviews">5.0 on Google</a>. Owner-operated since 2024.<br>These are our jobs. Drag or tap a photo to compare.</p>
   </div>
@@ -580,31 +578,31 @@ a.q-go{text-decoration:none}
       </div>
 
       <div class="pick rv">
-        <article class="tile" id="express">
+        <article class="tile" id="full">
           <figure><img src="assets/v3/work/cruze-floor-before.jpg" width="900" height="1200" loading="lazy" decoding="async" alt="A Cruze floor before a detail, crumbs on the carpet"><span class="tag">Before</span></figure>
           <div class="t-body">
-            <h3 class="t-name">Express</h3>
-            <p class="t-for">Vacuum and wash, inside and out.</p>
-            <b class="t-price" data-price="express">$150</b>
-            <span class="t-time">About 2 hours</span>
-            <button type="button" class="btn btn-o" data-open="express">Choose Express</button>
-          </div>
-          <button type="button" class="inc-btn" data-inc="incExpress" aria-expanded="false" aria-controls="incExpress">What's included<span class="pm" aria-hidden="true"></span></button>
-        </article>
-        <article class="tile" id="full">
-          <figure><img src="assets/v3/jobs/camry/01.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2013 Toyota Camry cloth seats before a detail, stains set in"><span class="tag">Before</span></figure>
-          <div class="t-body">
             <h3 class="t-name">Full</h3>
-            <p class="t-for">Stains and ground-in dirt.</p>
-            <b class="t-price" data-price="full">$250</b>
-            <span class="t-time">3.5 to 4 hours</span>
-            <button type="button" class="btn btn-k" data-open="full">Choose Full</button>
+            <p class="t-for">The whole car, inside and out.</p>
+            <b class="t-price" data-price="full">$150</b>
+            <span class="t-time">About 2 hours</span>
+            <button type="button" class="btn btn-o" data-open="full">Book Full</button>
           </div>
           <button type="button" class="inc-btn" data-inc="incFull" aria-expanded="false" aria-controls="incFull">What's included<span class="pm" aria-hidden="true"></span></button>
         </article>
+        <article class="tile" id="showroom">
+          <figure><img src="assets/v3/jobs/camry/01.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2013 Toyota Camry cloth seats before a detail, stains set in"><span class="tag">Before</span></figure>
+          <div class="t-body">
+            <h3 class="t-name">Showroom</h3>
+            <p class="t-for">Stains and ground-in dirt.</p>
+            <b class="t-price" data-price="showroom">$250</b>
+            <span class="t-time">3.5 to 4 hours</span>
+            <button type="button" class="btn btn-k" data-open="showroom">Book Showroom</button>
+          </div>
+          <button type="button" class="inc-btn" data-inc="incShowroom" aria-expanded="false" aria-controls="incShowroom">What's included<span class="pm" aria-hidden="true"></span></button>
+        </article>
 
-        <div class="inc" id="incExpress" hidden>
-          <h3>Express</h3>
+        <div class="inc" id="incFull" hidden>
+          <h3>Full</h3>
           <div class="inc-cols">
             <div>
               <h4>Inside</h4>
@@ -628,10 +626,10 @@ a.q-go{text-decoration:none}
             </div>
           </div>
         </div>
-        <div class="inc" id="incFull" hidden>
-          <h3>Full</h3>
+        <div class="inc" id="incShowroom" hidden>
+          <h3>Showroom</h3>
           <ul class="inc-one">
-            <li>Everything in Express, plus the deep interior.</li>
+            <li>Everything in Full, plus the deep interior.</li>
             <li>Carpets, mats and cloth seats shampooed with a hot water extractor.</li>
             <li>Steam on the vents, cupholders, console, seat rails and door pockets.</li>
             <li>Set-in stains worked on. If one will not come out, we tell you before we start.</li>
@@ -639,7 +637,25 @@ a.q-go{text-decoration:none}
         </div>
       </div>
 
-      <button type="button" class="less-line" data-open="quote">Need something less? <u>Get a quote.</u></button>
+      <article class="xrow rv" id="express">
+        <div class="x-top">
+          <div>
+            <h3 class="t-name">Express</h3>
+            <p class="x-for">A quick clean, inside and out. About an hour.</p>
+          </div>
+          <b class="t-price" data-price="express">$60</b>
+        </div>
+        <button type="button" class="btn btn-o" data-open="express">Book Express</button>
+        <button type="button" class="inc-btn" data-inc="incExpress" aria-expanded="false" aria-controls="incExpress">What's included<span class="pm" aria-hidden="true"></span></button>
+        <div class="inc" id="incExpress" hidden>
+          <ul class="inc-one">
+            <li>Quick vacuum, seats and floors.</li>
+            <li>Dash, console and doors wiped down.</li>
+            <li>Hand wash outside.</li>
+            <li>For a car that is already in decent shape. Stains, pet hair and ground-in dirt need the Full.</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -764,7 +780,7 @@ a.q-go{text-decoration:none}
         <details><summary>What do you need from me?<span class="pm" aria-hidden="true"></span></summary><p class="a">A parking spot, an outside spigot and an outdoor outlet. We bring the equipment, and we take <span data-cfg-m="hookupOff">$5</span> off for using them. Not sure you have them? Say so when you book and we will text you before we drive over to sort it out.</p></details>
         <details><summary>When do I pay?<span class="pm" aria-hidden="true"></span></summary><p class="a">When the car is done. There is no deposit. You look the car over, then you pay: cash, Zelle, Cash App, Venmo, Apple Pay or card.</p></details>
         <details><summary>What if it rains, or I need to move it?<span class="pm" aria-hidden="true"></span></summary><p class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Rescheduling is free. Canceling within 12 hours of your appointment is a <span data-cfg-m="cancelFee">$20</span> fee.</p></details>
-        <details><summary>Is there a deal for two cars?<span class="pm" aria-hidden="true"></span></summary><p class="a">Yes. Two cars at the same address: <span data-cfg-m="secondCarOff">$25</span> off the second car.</p></details>
+        <details><summary>Is there a deal for two cars?<span class="pm" aria-hidden="true"></span></summary><p class="a">Yes. Two cars at the same address: <span data-cfg-m="secondCarOff">$25</span> off the second car on a Full or Showroom.</p></details>
       </div>
     </div>
   </section>
@@ -796,7 +812,7 @@ a.q-go{text-decoration:none}
 
 <!-- the bar: price, Call, Book. On screen the whole time. -->
 <nav class="bar" id="bar" aria-label="Call or book">
-  <p class="bar-price"><span class="bar-label" id="barLabel">Starts at</span><b id="barPrice">$150</b></p>
+  <p class="bar-price"><span class="bar-label" id="barLabel">Full, sedan</span><b id="barPrice">$150</b></p>
   <a class="btn-call" href="tel:+19162490631">Call</a>
   <button type="button" class="book-btn" data-open="bar">Book</button>
 </nav>
@@ -824,9 +840,10 @@ a.q-go{text-decoration:none}
       <div class="step" id="step1">
         <p class="note" id="slotNote" role="alert" hidden></p>
         <p class="lb" id="lbSvc"><span>Service</span></p>
-        <div class="chips c2" role="group" aria-labelledby="lbSvc">
-          <button type="button" class="chip svc" data-svc="express" aria-pressed="true"><span>Express</span><b data-price="express">$150</b></button>
-          <button type="button" class="chip svc" data-svc="full" aria-pressed="false"><span>Full</span><b data-price="full">$250</b></button>
+        <div class="chips c3 svc3" role="group" aria-labelledby="lbSvc">
+          <button type="button" class="chip svc" data-svc="express" aria-pressed="false"><span>Express</span><b data-price="express">$60</b></button>
+          <button type="button" class="chip svc" data-svc="full" aria-pressed="true"><span>Full</span><b data-price="full">$150</b></button>
+          <button type="button" class="chip svc" data-svc="showroom" aria-pressed="false"><span>Showroom</span><b data-price="showroom">$250</b></button>
         </div>
         <p class="lb" id="lbSize"><span id="lbSizeText">Vehicle</span></p>
         <div class="chips c3s" role="group" aria-labelledby="lbSize">
@@ -903,28 +920,6 @@ a.q-go{text-decoration:none}
         <p class="done-p">Need to change it? Use the link in our confirmation text, or call <a href="tel:+19162490631">(916) 249-0631</a>.</p>
       </div>
 
-      <!-- quote: for something less than Express. It goes out as a text from their own phone. -->
-      <form class="step" id="stepQ" novalidate hidden>
-        <p class="q-line">Tell us what you need and we will text you a price.</p>
-        <div id="fNeed">
-          <p class="lb" id="lbNeed"><span>What do you need?</span></p>
-          <div class="chips c2" role="group" aria-labelledby="lbNeed">
-            <button type="button" class="chip" data-need="inside" aria-pressed="false">Just the inside</button>
-            <button type="button" class="chip" data-need="outside" aria-pressed="false">Just the outside</button>
-            <button type="button" class="chip wide" data-need="quick" aria-pressed="false">A quick clean, inside and out</button>
-            <button type="button" class="chip" data-need="spot" aria-pressed="false">One spot or stain</button>
-            <button type="button" class="chip" data-need="else" aria-pressed="false">Something else</button>
-          </div>
-        </div>
-        <p class="lb" id="lbQSize"><span>Vehicle</span></p>
-        <div class="chips c3s" role="group" aria-labelledby="lbQSize">
-          <button type="button" class="chip" data-size="sedan" aria-pressed="true">Sedan</button>
-          <button type="button" class="chip" data-size="suv" aria-pressed="false">SUV</button>
-          <button type="button" class="chip" data-size="truck" aria-pressed="false">Truck or 3-row</button>
-        </div>
-        <label class="field"><span>Anything we should know? (optional)</span><input class="inp" id="qNote" name="note" type="text" autocomplete="off" enterkeyhint="next" maxlength="200"></label>
-        <label class="field" id="fQName"><span>Name</span><input class="inp" id="qName" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="done" maxlength="60"></label>
-      </form>
     </div>
 
     <div class="sh-foot">
@@ -940,14 +935,6 @@ a.q-go{text-decoration:none}
       </div>
       <div id="foot3" hidden>
         <button type="button" class="btn btn-k" id="doneBtn">Done</button>
-      </div>
-      <div id="footQ" hidden>
-        <p class="miss" id="qMiss" role="alert" hidden></p>
-        <a class="btn btn-k q-go" id="quoteGo" data-qgo href="sms:+19167537822">Text us for a quote</a>
-        <div class="q-alt">
-          <p class="q-alt-top"><span>Texting app did not open? Text this to <b class="sel">(916) 753-7822</b></span><button type="button" id="qCopy">Copy</button></p>
-          <p class="q-msg sel" id="qMsg"></p>
-        </div>
       </div>
     </div>
   </div>
@@ -972,9 +959,11 @@ a.q-go{text-decoration:none}
   "@type": "OfferCatalog",
   "name": "Detailing services",
   "itemListElement": [
-   {"@type": "Offer", "name": "Express Detail", "description": "Inside and out at your location, about 2 hours. Vacuumed from the seats to the trunk, pet hair and grit lifted out, leather cleaned and conditioned, hand washed, wheels and tires degreased, bugs and tar taken off, tires dressed, glass and door jambs.", "priceCurrency": "USD", "price": "150",
+   {"@type": "Offer", "name": "Express Detail", "description": "A quick clean inside and out at your location, about 1 hour. Quick vacuum of the seats and floors, dash, console and doors wiped down, hand wash outside.", "priceCurrency": "USD", "price": "60",
+    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "60", "maxPrice": "80", "priceCurrency": "USD"}},
+   {"@type": "Offer", "name": "Full Detail", "description": "Inside and out at your location, about 2 hours. Vacuumed from the seats to the trunk, pet hair and grit lifted out, leather cleaned and conditioned, hand washed, wheels and tires degreased, bugs and tar taken off, tires dressed, glass and door jambs.", "priceCurrency": "USD", "price": "150",
     "priceSpecification": {"@type": "PriceSpecification", "minPrice": "150", "maxPrice": "190", "priceCurrency": "USD"}},
-   {"@type": "Offer", "name": "Full Detail", "description": "Everything in Express, plus the deep interior, about 3.5 to 4 hours. Carpets, mats and cloth seats shampooed with a hot water extractor, steam on the vents, cupholders, console, seat rails and door pockets, set-in stains worked on.", "priceCurrency": "USD", "price": "250",
+   {"@type": "Offer", "name": "Showroom Detail", "description": "Everything in Full, plus the deep interior, about 3.5 to 4 hours. Carpets, mats and cloth seats shampooed with a hot water extractor, steam on the vents, cupholders, console, seat rails and door pockets, set-in stains worked on.", "priceCurrency": "USD", "price": "250",
     "priceSpecification": {"@type": "PriceSpecification", "minPrice": "250", "maxPrice": "310", "priceCurrency": "USD"}}
   ]
  },
@@ -1002,21 +991,28 @@ const CFG = {
   TEXT_TEXT  : '(916) 753-7822',
 
   /* --- what we sell ----------------------------------------------------
-     The dashboard's service ids are deliberately NOT renamed:
-       "Express" on the page books service_id 'full'     (two cars: 'full2')
-       "Full"    on the page books service_id 'showroom' (two cars: 'showroom2')
+     Three tiers. The names on the page match the dashboard's service ids:
+       Express  books service_id 'express'  (two cars: 'express2')
+       Full     books service_id 'full'     (two cars: 'full2')
+       Showroom books service_id 'showroom' (two cars: 'showroom2')
      Prices and minutes here are the fallback. When the calendar's reply lists
      a service with the same id, its prices and minutes win, so a price changed
      in the dashboard shows here without an edit. `minutes` is what the
-     calendar blocks out, so it has to match booking_config.services.       */
+     calendar blocks out, so it has to match booking_config.services.
+     `pairOff` is that tier's second-car discount when the dashboard sends
+     none. `gift:false` keeps a thank-you link's money off that tier, the same
+     as the dashboard's thankYouGift.serviceIds.                            */
   tiers: {
-    express: { id:'full',     pairId:'full2',     name:'Express', label:'Express Detail', pairLabel:'Two Express Details',
-               what:'inside + outside', minutes:120, pairMinutes:240,
-               price:{ sedan:150, suv:170, truck:190 } },
-    full:    { id:'showroom', pairId:'showroom2', name:'Full',    label:'Full Detail',    pairLabel:'Two Full Details',
-               what:'deep interior, extractor + steam', minutes:240, pairMinutes:480,
-               price:{ sedan:250, suv:280, truck:310 } }
-  },                     /* anything less than Express is a quote by text, so it has no price here */
+    express:  { id:'express',  pairId:'express2',  name:'Express',  label:'Express Detail',  pairLabel:'Two Express Details',
+                what:'quick clean, inside + outside', minutes:60, pairMinutes:120, pairOff:0, gift:false,
+                price:{ sedan:60, suv:70, truck:80 } },
+    full:     { id:'full',     pairId:'full2',     name:'Full',     label:'Full Detail',     pairLabel:'Two Full Details',
+                what:'inside + outside', minutes:120, pairMinutes:240,
+                price:{ sedan:150, suv:170, truck:190 } },
+    showroom: { id:'showroom', pairId:'showroom2', name:'Showroom', label:'Showroom Detail', pairLabel:'Two Showroom Details',
+                what:'deep interior, extractor + steam', minutes:240, pairMinutes:480,
+                price:{ sedan:250, suv:280, truck:310 } }
+  },
   sizes: {
     sedan: { name:'Sedan',          word:'sedan',          long:'sedan or coupe' },
     suv:   { name:'SUV',            word:'SUV',            long:'SUV or crossover' },
@@ -1026,7 +1022,7 @@ const CFG = {
      and are settled in person. */
   addons: {
     pet:     { name:'Heavy pet hair',         note:'heavy pet hair',         price:40 },
-    shampoo: { name:'Seat or carpet shampoo', note:'seat or carpet shampoo', price:50 }   /* Express only. Full already includes it. */
+    shampoo: { name:'Seat or carpet shampoo', note:'seat or carpet shampoo', price:50 }   /* Full only. Showroom already includes it. */
   },
   hookupOff: 5,          /* off for using the customer's spigot and outlet */
   secondCarOff: 25,      /* fallback; the dashboard's pairOff wins when it sends one */
@@ -1149,12 +1145,10 @@ const track = (name, data) => { try { if (isTest()) return; if (window.fbq) fbq(
   document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', CFG.META_PIXEL_ID);
   fbq('track', 'PageView');
-  /* Every call or text link counts as a Contact. The quote sheet's text button is
-     left out here (data-qgo): it fires the same event itself, only once the
-     message is ready to send. */
+  /* Every call or text link counts as a Contact. */
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href^="tel:"], a[href^="sms:"]');
-    if (a && !a.hasAttribute('data-qgo')) track('Contact', { method: a.getAttribute('href').startsWith('tel:') ? 'call' : 'text' });
+    if (a) track('Contact', { method: a.getAttribute('href').startsWith('tel:') ? 'call' : 'text' });
   });
 })();
 
@@ -1248,8 +1242,8 @@ const UTM = (() => {
   var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
   /* ---------- state ---------- */
-  var S = { main: 'express', picked: false, size: 'sedan', cars: 1, size2: 'sedan', day: null, time: null,
-            drop: false, water: null, pet: false, shampoo: false, step: 1, view: 1, tried: false, need: null, qTried: false };
+  var S = { main: 'full', picked: false, size: 'sedan', cars: 1, size2: 'sedan', day: null, time: null,
+            drop: false, water: null, pet: false, shampoo: false, step: 1, view: 1, tried: false };
 
   /* ---------- the calendar, as the dashboard last sent it ---------- */
   var cal = { state: 'loading', at: 0,
@@ -1273,7 +1267,7 @@ const UTM = (() => {
   }
   function pairOff(k) {
     var t = CFG.tiers[k], s = srv(t.pairId), n = s ? Number(s.pairOff) : NaN;
-    return s && s.pairOf === t.id && Number.isFinite(n) && n >= 0 ? n : CFG.secondCarOff;
+    return s && s.pairOf === t.id && Number.isFinite(n) && n >= 0 ? n : (t.pairOff != null ? t.pairOff : CFG.secondCarOff);
   }
   function bookedServiceId() { var t = CFG.tiers[S.main]; return S.cars === 2 ? t.pairId : t.id; }
   function serviceMinutes() {
@@ -1282,7 +1276,7 @@ const UTM = (() => {
   }
 
   function sizeWord(z) { return CFG.sizes[z].word; }
-  function shOk() { return S.main === 'express'; }
+  function shOk() { return S.main === 'full'; }
   function hookup() { return !S.drop && S.water === 'yes' ? CFG.hookupOff : 0; }
   /* The listed price, before any thank-you gift: this is what the dashboard works out
      for the job from service_id and sizes. Two cars: each by its own size, less the
@@ -1291,8 +1285,8 @@ const UTM = (() => {
     var p = prices(S.main);
     return S.cars === 2 ? p[S.size] + p[S.size2] - pairOff(S.main) : p[S.size];
   }
-  /* A thank-you link's money comes off once per booking, on either tier. */
-  function giftOff() { return GIFT_OFF || 0; }
+  /* A thank-you link's money comes off once per booking, on a Full or a Showroom. */
+  function giftOff() { return CFG.tiers[S.main].gift === false ? 0 : (GIFT_OFF || 0); }
   function baseTotal() { return Math.max(0, listed() - giftOff()); }
   /* Add-ons and the spigot discount are not on the dashboard's price. They go in the notes. */
   function extras() { return (S.pet ? CFG.addons.pet.price : 0) + (S.shampoo && shOk() ? CFG.addons.shampoo.price : 0) - hookup(); }
@@ -1502,8 +1496,8 @@ const UTM = (() => {
     press($$('[data-seg="size"] button'), function (b) { return b.getAttribute('data-v') === S.size; });
 
     /* bar */
-    $('#barLabel').textContent = S.picked ? (two ? t.name + ', 2 cars' : name) : 'Starts at';
-    put($('#barPrice'), money(S.picked ? listed() : prices('express')[S.size]));
+    $('#barLabel').textContent = S.picked ? (two ? t.name + ', 2 cars' : name) : 'Full, ' + sizeWord(S.size);
+    put($('#barPrice'), money(S.picked ? listed() : prices('full')[S.size]));
 
     /* step 1 */
     press($$('[data-svc]'), function (b) { return b.getAttribute('data-svc') === k; });
@@ -1542,11 +1536,6 @@ const UTM = (() => {
     $('#rows').innerHTML = rowsNow().map(function (r) { return '<li><span>' + esc(r[0]) + '</span><span>' + esc(r[1]) + '</span></li>'; }).join('');
     if (!sending) $('#bookGo').textContent = 'Book, ' + money(total());
     if (S.tried) missing(false);
-
-    /* quote */
-    press($$('[data-need]'), function (b) { return S.need === b.getAttribute('data-need'); });
-    quoteLink();
-    if (S.qTried) qMissing(false);
   }
 
   /* ---------- the pop-up ---------- */
@@ -1568,12 +1557,11 @@ const UTM = (() => {
     window.scrollTo(0, lockY);
     requestAnimationFrame(function () { root.style.scrollSnapType = ''; root.style.scrollBehavior = ''; });
   }
-  /* the pop-up's views: booking is 1, 2, then 3 once it is booked. A quote is q. */
+  /* the pop-up's views: booking is 1, 2, then 3 once it is booked */
   var VIEWS = {
     1: { step: 'step1', foot: 'foot1', title: 'Pick a time' },
     2: { step: 'step2', foot: 'foot2', title: 'Where and who' },
-    3: { step: 'step3', foot: 'foot3', title: 'You are booked' },
-    q: { step: 'stepQ', foot: 'footQ', title: 'Get a quote' }
+    3: { step: 'step3', foot: 'foot3', title: 'You are booked' }
   };
   function showStep(n, dir) {
     var v = VIEWS[n], booking = n === 1 || n === 2 || n === 3;
@@ -1595,9 +1583,8 @@ const UTM = (() => {
   function openSheet(src, opener) {
     if (!modal.hidden) return;
     var view;
-    if (src === 'quote') view = 'q';
-    else {
-      var hadPick = S.time, tile = src === 'express' || src === 'full';
+    {
+      var hadPick = S.time, tile = Object.prototype.hasOwnProperty.call(CFG.tiers, src);
       if (tile) { S.main = src; S.picked = true; S.step = 1; }
       render();                                    /* the pick is checked against the calendar as it stands now */
       if (S.step === 3 || (S.step === 2 && !ready())) S.step = 1;
@@ -1653,7 +1640,6 @@ const UTM = (() => {
     if (!modal.hidden && !closing && !sheet.contains(e.target)) sheet.focus({ preventScroll: true });
   });
   $('#step2').addEventListener('submit', function (e) { e.preventDefault(); });
-  $('#stepQ').addEventListener('submit', function (e) { e.preventDefault(); });
 
   /* what is still missing, in plain words */
   function check(m, mark, items) {
@@ -1674,27 +1660,7 @@ const UTM = (() => {
       [$('#fWater'), 'an answer on the spigot and outlet', !S.drop && !S.water]
     ]);
   }
-  function qMissing(mark) {
-    return check($('#qMiss'), mark, [
-      [$('#fNeed'), 'what you need', !S.need],
-      [$('#fQName'), 'your name', !$('#qName').value.trim()]
-    ]);
-  }
-  $$('.inp', sheet).forEach(function (i) { i.addEventListener('input', function () { if (S.tried) missing(false); if (S.qTried) qMissing(false); quoteLink(); }); });
-
-  /* ---------- the quote, sent as a text from their own phone ---------- */
-  var NEEDS = { inside: 'Just the inside', outside: 'Just the outside', quick: 'A quick clean, inside and out', spot: 'One spot or stain', 'else': 'Something else' };
-  function quoteMsg() {
-    var name = $('#qName').value.trim().replace(/[.\s]+$/, ''), note = $('#qNote').value.trim().replace(/[.\s]+$/, '');
-    return 'Quote request for Valley Details. I need: ' + (NEEDS[S.need] || '') + '. Vehicle: ' + CFG.sizes[S.size].name + '. Name: ' + name + '.' + (note ? ' Note: ' + note + '.' : '');
-  }
-  function quoteHref() { return 'sms:' + CFG.TEXT_E164 + '?&body=' + encodeURIComponent(quoteMsg()); }
-  function quoteLink() {
-    var okNow = !!S.need && !!$('#qName').value.trim();
-    $('#quoteGo').setAttribute('href', okNow ? quoteHref() : 'sms:' + CFG.TEXT_E164);
-    $('.q-alt').hidden = !okNow;
-    if (okNow) $('#qMsg').textContent = quoteMsg();
-  }
+  $$('.inp', sheet).forEach(function (i) { i.addEventListener('input', function () { if (S.tried) missing(false); }); });
 
   /* ---------- sending the booking ---------- */
   function payload(slot) {
@@ -1908,21 +1874,6 @@ const UTM = (() => {
     /* a different tier or a second car is a different length of job, so the times redraw */
     if ((b = t.closest('[data-svc]'))) { had = S.time; S.main = b.getAttribute('data-svc'); S.picked = true; render(); showFit(had); return; }
     if (t.closest('#carSw')) { had = S.time; S.cars = S.cars === 2 ? 1 : 2; S.picked = true; render(); showFit(had); return; }
-    if ((b = t.closest('[data-need]'))) { S.need = b.getAttribute('data-need'); render(); return; }
-    /* Text us for a quote: opens their texting app with the message written. Nothing is sent from the page. */
-    if ((b = t.closest('#quoteGo'))) {
-      S.qTried = true;
-      if (qMissing(true).length) { e.preventDefault(); return; }
-      b.setAttribute('href', quoteHref());
-      track('Contact', { method: 'text' });
-      return;
-    }
-    if ((b = t.closest('#qCopy'))) {
-      var msg = quoteMsg(), done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 2200); };
-      var pick = function () { try { var r = d.createRange(); r.selectNodeContents($('#qMsg')); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (_) {} };
-      try { navigator.clipboard.writeText(msg).then(done, pick); } catch (_) { pick(); }
-      return;
-    }
     if ((b = t.closest('[data-day]'))) { if (b.disabled) return; S.day = b.getAttribute('data-day'); S.time = null; $('#fitNote').hidden = true; render(); return; }
     if ((b = t.closest('[data-time]'))) { if (b.disabled) return; S.time = b.getAttribute('data-time'); $('#fitNote').hidden = true; $('#slotNote').hidden = true; render(); return; }
     if (t.closest('#dayNext') || t.closest('#dayPrev')) {
@@ -2222,7 +2173,7 @@ const UTM = (() => {
         }
         until = until.replace(/[^A-Za-z0-9 ,]/g, '').trim().slice(0, 20);
         GIFT_UNTIL = until;
-        note.innerHTML = '<b>Your $' + off + ' thank-you is applied.</b> It comes off the detail you book' + (until ? ' by ' + until : '') + '.';
+        note.innerHTML = '<b>Your $' + off + ' thank-you is applied.</b> It comes off a Full or Showroom you book' + (until ? ' by ' + until : '') + '.';
         note.hidden = false;
         GIFT_OFF = off;
         render();
