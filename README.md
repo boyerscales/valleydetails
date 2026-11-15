@@ -6,7 +6,8 @@ Drop it on any static host (Fly static, Netlify, Vercel, Cloudflare Pages, S3).
 Everything configurable lives in the `CFG` object near the bottom of the file.
 
 > **Redesign, 2026-09-27.** The page was rebuilt to look premium ahead of raising the
-> full detail toward $250. Some sections below describe the old page. What changed:
+> full detail toward $250. Some sections below describe the old page (the menu in
+> *Pricing* below is the current one). What changed:
 >
 > - **Prices are written into the markup by hand** (hero note, Full Detail price row,
 >   Other Services rows, FAQ, structured data). `CFG.SERVICES` now only drives the
@@ -14,7 +15,7 @@ Everything configurable lives in the `CFG` object near the bottom of the file.
 > - **Photos live in `assets/v2/`**, each in a phone size and a large size
 >   (`name-800.jpg`, `name-1200.jpg` or larger), wired up with `srcset`. `CFG.SHOTS`,
 >   `CFG.BA`, the promo countdown, the 3-Pack and the reviews config are gone; the
->   three reviews and the work photos are plain HTML.
+>   reviews and the work photos are plain HTML.
 > - **Camera originals go in `assets/originals/`** (gitignored). Cut web sizes from
 >   them with `sips -Z <width> -s formatOptions 72`.
 > - Booking, referrals and the dashboard API are unchanged.
@@ -23,10 +24,8 @@ Everything configurable lives in the `CFG` object near the bottom of the file.
 
 ## What is left to do
 
-1. ~~Add the two services on the dashboard.~~ **Done 2026-09-17.** `interior` (90 min,
-   $70) and `exterior` (60 min, $60) are live in `booking_config.services`, verified
-   against the API. See *Interior only and exterior only* if it ever needs redoing.
-2. **Paste the g.page review link** into `CFG.GOOGLE_REVIEW_URL`. Three real reviews
+1. **Update the dashboard's `booking_config.services`** to the menu in *Pricing* below.
+2. **Paste the g.page review link** into `CFG.GOOGLE_REVIEW_URL`. Real reviews
    are already live; this just adds the "leave one" link under them. See *Reviews*.
 
 ## Photos
@@ -71,102 +70,40 @@ plates and trim are exactly what car people notice.
 
 ## Pricing
 
-Four services, three sizes each. **Every number lives in one place: `CFG.SERVICES`.**
-The pricing table, the four menu cards and the booking picker are all rendered from
-it on load, so changing a price there changes it everywhere. The numbers written into
-the HTML are only the no-JS fallback; keep them in step when you edit a price, but
-nothing on a real browser reads them.
+New menu, live 2026-11-14. Two services, three sizes each. The business does not do ceramic, sealant, paint correction or PPF.
 
-| Service | `id` | Minutes | Sedan | SUV | Truck / 3-row |
+
+| Service | `id` | Time | Sedan | SUV | Truck / 3-row |
 |---|---|---|---|---|---|
-| Full Detail | `full` | 120 | $150 | $170 | $190 |
-| Interior Only | `interior` | 90 | $85 | $95 | $105 |
-| Exterior Only | `exterior` | 60 | $75 | $85 | $95 |
-| Express Detail | `express` | 60 | $50 | $60 | $70 |
+| Express (inside and out) | `express` | about 2 hours | $150 | $170 | $190 |
+| Full (Express plus the deep interior) | `full` | about 3.5 to 4 hours | $250 | $280 | $310 |
 
-**Raised on 2026-09-19.** The full detail went 100/115/130 → 150/170/190. Interior and
-exterior went up $15 across the board so the arithmetic below still holds. The express
-deliberately did **not** move: it is the cheap way in, and the wider the gap between
-$50 and $150 the more obvious that is. The menu, the FAQ and the express card all tell
-people to book the express when the car only needs a wipe down and a quick wash.
+The Full's deep interior: carpets, mats and cloth seats shampooed with a hot water
+extractor; steam on vents, cupholders, console, seat rails and door pockets; set-in
+stains worked on.
 
-Interior and exterior are deliberately priced so that buying both separately ($160)
-costs more than the full detail ($150). That is the honest answer to "should I just
-get both", and the page says it out loud under the menu rather than hoping nobody
-does the arithmetic. The sentence adds the two numbers up itself, so it cannot go
-stale.
-
-Add-ons: shampoo + steam $45, engine bay $35, odor $40, headlights $50, ceramic $85.
+Add-ons: heavy pet hair $40. Seat or carpet shampoo on an Express $50.
 
 Standing discounts:
-- **$25 off the second car** at the same address, same stop.
+- **$25 off the second car** at the same address.
+- **$5 off** for using the customer's outside spigot and outdoor outlet.
 - **Referral, $20 each way.**
-- **The 3-Pack, $375 prepaid** for three full details, $125 each against $150.
+
+Anything smaller (just the inside, just the outside, a quick clean) is **by quote**, no
+price listed: "Tap Get a quote on the homepage or text (916) 753-7822 and we will text
+you a price." There is no Interior Only or Exterior Only price any more.
+
+Policies: no deposit, pay when the car is done (cash, Zelle, Cash App, Venmo, Apple Pay
+or card). Rescheduling is free. Canceling within 12 hours of the appointment is a $20
+fee. Travel is free within about 10 miles of Elk Grove, then $1 a mile over ten. Hours
+8am to 8pm every day. The customer-facing wording lives in `policy.html`.
+
+> Not covered by this file: the dashboard's `booking_config.services` (the durations and
+> amounts the booking API returns) has to be changed separately to match this menu. Its
+> old `interior`, `exterior` and `full2` to `full5` entries are out of date.
 
 > Do **not** offer a discount for leaving a Google review. Google prohibits incentivised
 > reviews and will filter or penalise them. Ask for reviews, just never pay for them.
-
----
-
-## Interior only and exterior only
-
-Two things had to change for this to work end to end.
-
-**1. The site.** `interior` and `exterior` are in `CFG.SERVICES`. The pricing menu has
-a card each, and the card's "Book This" button scrolls to the calendar with that
-service already selected, so picking is the first half of booking rather than
-something you do twice.
-
-**2. The dashboard.** The `/api/public/schedule/{slug}` response owns how long a job
-holds and what it is worth (`bookingDuration` / `bookingAmount` in the Client Dash
-`server.js`), and it only knows the services in `client_settings.booking_config`.
-The site used to take the server list verbatim, so anything not on it vanished off
-the page; it now **merges** — server fields win, this file's ordering wins, and a
-service the server has not been told about still appears and still books.
-
-**This was applied on 2026-09-17** and verified against the live API: `interior`
-(90 min, $70) and `exterior` (60 min, $60) now sit in `booking_config.services`
-alongside `full`, `express` and `full2`–`full5`. `price` is the sedan price, matching
-how `full` is stored as 100.
-
-> **Superseded on 2026-09-19.** The prices above are what the dashboard was told in
-> September. The site then went to 150/170/190 for `full`, 85/95/105 for `interior` and
-> 75/85/95 for `exterior`, and `booking_config.services` was updated to match the same
-> day: `full` 150, `interior` 85, `exterior` 75, `express` 50 (unchanged), `full2` 275,
-> `full3` 450, `full4` 600, `full5` 750, stored as sedan prices the way they always were.
-> Written up as `valley-details-prices-2026-09.sql` in the Client Dash repo, applied and
-> verified through `/api/public/schedule/valleydetails`. Jobs already on the calendar
-> keep the amount they were booked at, which is what those customers were quoted.
-
-The SQL is kept in the Client Dash repo as `valley-details-interior-exterior.sql` and
-is safe to re-run. It matters because of what happens without it: the booking still
-lands correctly on the calendar and the job still reads *"Interior Only (no exterior)"*
-on the schedule, but the server falls back to `slotMinutes` (120) and records the job
-at the full detail's $100. The customer never sees that — they pay in person at the
-price on the site — but the dashboard's own duration and revenue figures go wrong
-quietly, which is the worst way for them to go wrong.
-
----
-
-## The promo countdown
-
-```js
-PROMO_END : '2026-09-15T00:00:00-07:00',   // midnight ending Mon Sept 14, Pacific
-```
-
-The instant it lapses, with no deploy, the page:
-
-- turns the red top bar grey and reads "Promo has ended"
-- drops the "Half Off" corner tag and the `$149` strikethrough
-- reprices the hero slab to `$149` and the size line to the regular numbers
-- rewrites all three tier cards to `$149 / $169 / $189` and hides the strikethroughs
-- swaps the countdown for "Regular pricing / Ask about specials"
-- changes "Claim Half Off" to "Book a Detail" and updates the closing section
-
-Verified by running the page with a past `PROMO_END`.
-
-For the next promo, change `PROMO_END`, the two `CFG.PRICE` promo strings, the
-`data-promo` attributes, and the top-bar text.
 
 ---
 
@@ -225,11 +162,11 @@ banner stops and the code is no longer sent, so a stale link books at the normal
 Delete the entry once the deal is over. A code not in the list is still sent, it just
 shows no banner.
 
-Current: `story`, $20 off any detail, ends 2026-10-04 (the Instagram story deal).
+The `story` code (the Instagram story deal) ended 2026-10-04.
 
 ## Reviews
 
-Three real Google reviews are live in `CFG.REVIEWS`, quoted word for word. Typos,
+A few real Google reviews are live in `CFG.REVIEWS`, quoted word for word. Typos,
 double exclamation marks and the stray space before a `!` are all theirs and are all
 deliberate: the unevenness is what a real review looks like. Do not tidy them up.
 
@@ -237,7 +174,7 @@ deliberate: the unevenness is what a real review looks like. Do not tidy them up
 REVIEWS: [
   { stars:5, where:'Google', name:'Jeffrey G.', text:'...' },
 ],
-REVIEW_COUNT: 10,   // what the Google profile actually shows
+REVIEW_COUNT: 0,    // the owner does not want a count shown
 REVIEW_AVG  : 5.0,
 GOOGLE_REVIEW_URL: 'https://g.page/r/CVoDC0vKzixlEBM/review',
 ```
@@ -246,18 +183,16 @@ GOOGLE_REVIEW_URL: 'https://g.page/r/CVoDC0vKzixlEBM/review',
 profile shows full names. `vehicle` is deliberately left off every entry: we do not
 know what any of them drove, and filling it in would be inventing.
 
-`REVIEW_COUNT` and `REVIEW_AVG` drive the badge above the cards, so it can read
-"5.0 from 10 Google reviews" while only three are quoted. **They are an assertion
-about the live Google profile, so keep them matching it.** Set either to 0 and the
-badge goes back to counting and averaging the quoted reviews instead.
+The owner does not want the number of Google reviews shown anywhere. Say "5.0 on Google"
+with no count. Keep any count out of the badge, the copy and the structured data.
 
 Picked for spread rather than for being the most flattering: one says he turned up on
-time, one says the work was thorough, one says it lasted. Three quotes saying the
-same thing reads worse than three saying different things.
+time, one says the work was thorough, one says it lasted. Quotes saying the same
+thing read worse than quotes saying different things.
 
 Not used: the two from a Boyer and a Randhawa (owner's own circle, and the first thing
 a suspicious reader checks), and Jugraj Bains' "Did a good job" (too thin to put on a
-page, though he is a Local Guide with 18 reviews if you ever want the badge).
+page, though he is a Local Guide if you ever want the badge).
 
 `GOOGLE_REVIEW_URL` is set as of 2026-09-19, to the same g.page link the dashboard
 already had in `client_settings.google_review_link`. A "Leave a Google review" line
@@ -326,6 +261,6 @@ Then open <http://localhost:5188>.
 - Mobile first. The promo bar scrolls away on phones instead of pinning, a sticky
   Call / Book bar sits at the bottom, inputs are 16px so iOS does not zoom, and the
   page is pinned to the viewport width with no horizontal scroll.
-- No account required anywhere. The Valley Club is purely additive.
+- No account required anywhere.
 - `AutoDetailing` JSON-LD with a 10 mile `GeoCircle` around Elk Grove.
 - Dark only by design. Respects `prefers-reduced-motion`.

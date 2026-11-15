@@ -1,5 +1,7 @@
 # Valley Details: Google Business Profile setup
 
+**Note (2026-11-14): the Google Business Profile's own services list and description still need changing by hand to match the new menu below. They live on Google, not in this repo.**
+
 Everything below is copy-paste ready. Pulled straight from valleydetails.site so the
 profile and the site say the same thing (Google cross-checks them).
 
@@ -39,38 +41,26 @@ Arden-Arcade, Citrus Heights, Roseville, Folsom, El Dorado Hills, Davis, Stockto
 
 ## 3. Hours
 
-Monday–Sunday: **8:00 AM – 6:00 PM**
+Every day: **8:00 AM to 8:00 PM**
 
-## 4. Business description (732 of 750 characters)
+## 4. Business description (620 of 750 characters)
 
-> Valley Details is a mobile car detailing service based in Elk Grove. We come to your
-> driveway, apartment lot or workplace and detail your car right there. The full interior
-> and exterior detail is $100 on a sedan and takes about two hours, or book one side on
-> its own: interior only from $70, exterior only from $60. SUVs and trucks are priced by
-> size, so you know what you pay before we show up. There's no deposit, and you pay when
-> you see the car. Inside, we vacuum seat to trunk, pull out pet hair, and clean and
-> condition leather. Outside, we wash, degrease wheels and tires, remove bugs and tar, and
-> finish with spray wax. No travel charge within 10 miles of Elk Grove. Serving
-> Sacramento, Laguna, Galt and Folsom. Book online.
+> Valley Details is a mobile car detailing service based in Elk Grove. We come to your driveway, apartment lot or workplace and detail your car right there. The Express cleans inside and out in about two hours, from $150 on a sedan. The Full adds a deep interior with hot water extractor shampoo and steam, from $250 on a sedan. SUVs and trucks are priced by size, so you know what you pay before we show up. Smaller jobs are by quote. There is no deposit, and you pay when you see the car. No travel charge within 10 miles of Elk Grove. Open 8am to 8pm every day. Serving Sacramento, Laguna, Galt and Folsom. Book online.
 
 ## 5. Services (add each with price)
 
 | Service | Price | Description |
 |---|---|---|
-| Interior Only, Sedan/Coupe | $70 | Interior detail only. Vacuum to the trunk, pet hair, leather cleaned and conditioned, glass. About 90 minutes |
-| Exterior Only, Sedan/Coupe | $60 | Exterior detail only. Wash, wheels and tires degreased, bugs and tar off, spray wax. About 1 hour |
-| Full Detail, Sedan/Coupe | $100 | Complete interior and exterior detail at your location, about 2 hours |
-| Full Detail, SUV/Crossover | $115 | Complete interior and exterior detail at your location |
-| Full Detail, Truck/3-Row | $130 | Complete interior and exterior detail at your location |
-| Express Detail, Sedan/Coupe | $50 | 1 hour: spray wash, vacuum and interior wipe-down |
-| Express Detail, SUV/Crossover | $60 | 1 hour: spray wash, vacuum and interior wipe-down |
-| Express Detail, Truck/3-Row | $70 | 1 hour: spray wash, vacuum and interior wipe-down |
-| Carpet & Seat Shampoo + Steam | +$45 | Add-on |
-| Engine Bay Cleaning | +$35 | Add-on |
-| Odor Removal Treatment | +$40 | Add-on |
-| Headlight Restoration | +$50 | Add-on |
-| Ceramic Spray Sealant | +$85 | Add-on |
-| Valley Club Membership | $149/mo | Two full details a month, can be two different cars |
+| Express, Sedan/Coupe | $150 | Inside and out at your location, about 2 hours |
+| Express, SUV/Crossover | $170 | Inside and out at your location, about 2 hours |
+| Express, Truck/3-Row | $190 | Inside and out at your location, about 2 hours |
+| Full, Sedan/Coupe | $250 | Everything in Express plus the deep interior: carpets, mats and cloth seats shampooed with a hot water extractor, steam on vents, cupholders, console, seat rails and door pockets, set-in stains worked on. About 3.5 to 4 hours |
+| Full, SUV/Crossover | $280 | Same as above |
+| Full, Truck/3-Row | $310 | Same as above |
+| Heavy pet hair | +$40 | Add-on |
+| Seat or carpet shampoo on an Express | +$50 | Add-on |
+| Second car, same address | $25 off | Off the second car |
+| Anything smaller (just the inside, just the outside, a quick clean) | By quote | No price listed. Text (916) 753-7822 and we text you a price |
 
 ## 6. Attributes to switch on
 
@@ -102,10 +92,10 @@ address or category while it's pending.** That resets the review.
 2. **Paste it into Client Dash → Settings → Google review link.** The dashboard already
    texts customers a review request after a job is marked completed, but *only once that
    link is set*. Without it, no review texts go out. This is the biggest single lever.
-3. **Text your past happy customers the link by hand** to get the first 10 reviews in.
-   Profiles under ~10 reviews barely show in the map pack.
+3. **Text your past happy customers the link by hand** to get the first reviews in.
+   Profiles with only a few reviews barely show in the map pack.
 4. **Photos:** upload 10+ real ones: finished cars, before/afters, you working, the logo
-   as the profile photo, a wide cover shot. Add 2–3 new job photos every week.
+   as the profile photo, a wide cover shot. Add 2 to 3 new job photos every week.
 5. **Posts:** one Google post a week (a recent job photo + "book this week" + link).
    Use the "Offer" post type whenever there's a promo running.
 6. **Reply to every review** within a day, mention the service and the city naturally
