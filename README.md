@@ -70,7 +70,7 @@ plates and trim are exactly what car people notice.
 
 ## Pricing
 
-Menu live 2026-11-15 (it replaced the one-day two-tier menu of 2026-11-14). Three services, three sizes each, all booked on the page. The names on the page match the dashboard's service ids. The business does not do ceramic, sealant, paint correction or PPF.
+Menu live 2026-11-15 (it replaced the one-day two-tier menu of 2026-11-14). Five services, three sizes each, all booked on the page. The names on the page match the dashboard's service ids. The business does not do ceramic, sealant, paint correction or PPF.
 
 
 | Service | `id` | Two-car `id` | Time | Sedan | SUV | Truck / 3-row |
@@ -78,21 +78,23 @@ Menu live 2026-11-15 (it replaced the one-day two-tier menu of 2026-11-14). Thre
 | Express (quick clean, inside and out) | `express` | `express2` | about 1 hour | $60 | $70 | $80 |
 | Full (inside and out) | `full` | `full2` | about 2 hours | $150 | $170 | $190 |
 | Showroom (Full plus the deep interior) | `showroom` | `showroom2` | about 3.5 to 4 hours | $250 | $280 | $310 |
+| Interior Only (the inside of the Full) | `interior` | `interior2` | about 90 minutes | $100 | $110 | $120 |
+| Exterior Only (the outside of the Full) | `exterior` | `exterior2` | about 1 hour | $75 | $85 | $95 |
 
 The Showroom's deep interior: carpets, mats and cloth seats shampooed with a hot water
 extractor; steam on vents, cupholders, console, seat rails and door pockets; set-in
 stains worked on.
 
-Add-ons: heavy pet hair $40. Seat or carpet shampoo on a Full $50.
+Add-ons: heavy pet hair $40. Seat or carpet shampoo on a Full or Interior Only $50.
 
 Standing discounts:
-- **$25 off the second car** at the same address, on a Full or Showroom. No second-car discount on an Express.
+- **$25 off the second car** at the same address, on a Full or Showroom. No second-car discount on Express, Interior Only or Exterior Only.
 - **$5 off** for using the customer's outside spigot and outdoor outlet.
 - **Referral, $20 each way.**
 
 There is no quote sheet any more: the $60 Express took its place and books like the
-other two. There is no Interior Only or Exterior Only price on the page. A thank-you
-gift link takes money off a Full or Showroom only.
+others. Interior Only and Exterior Only are back on the page as bookable rows next to
+Express (2026-11-15). A thank-you gift link takes money off a Full or Showroom only.
 
 Policies: no deposit, pay when the car is done (cash, Zelle, Cash App, Venmo, Apple Pay
 or card). Rescheduling is free. Canceling within 12 hours of the appointment is a $20
@@ -100,8 +102,8 @@ fee. Travel is free within about 10 miles of Elk Grove, then $1 a mile over ten.
 8am to 8pm every day. The customer-facing wording lives in `policy.html`.
 
 > The dashboard's `booking_config.services` (the durations and amounts the booking API
-> returns) was changed to this menu on 2026-11-15. Its `interior`, `exterior` and
-> `full3` to `full5` entries are for jobs the owner enters by hand.
+> returns) was changed to this menu on 2026-11-15. Its `full3` to `full5` entries are
+> for jobs the owner enters by hand.
 
 > Do **not** offer a discount for leaving a Google review. Google prohibits incentivised
 > reviews and will filter or penalise them. Ask for reviews, just never pay for them.

@@ -195,13 +195,14 @@ ul,ol{list-style:none;padding:0}
 .inc li{margin-top:6px;font-size:14.5px;line-height:1.3}
 .inc-one{margin-top:4px}
 @keyframes drop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-/* Express: the short job, one row under the two photo tiles */
-.xrow{margin-top:8px;border-radius:14px;background:var(--fill);overflow:hidden}
-.x-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px 12px 0}
-.x-for{margin-top:6px;font-size:14.5px;line-height:1.28;color:#444}
-.xrow .t-price{flex:none;margin-top:0}
-.xrow .btn{width:calc(100% - 24px);height:46px;margin:12px 12px 0;font-size:15.5px}
-.xrow .inc{padding:0 12px 14px;border-radius:0;background:none}
+/* the smaller jobs: one compact row each under the two photo tiles */
+.x-lb{margin-top:18px;font-size:13.5px;font-weight:600;color:var(--mid)}
+.xrow{display:flex;align-items:center;gap:10px;margin-top:8px;padding:12px;border-radius:14px;background:var(--fill)}
+.x-txt{flex:1;min-width:0}
+.x-name{font-size:19px;font-weight:800;font-stretch:112%;line-height:1.05}
+.x-for{margin-top:4px;font-size:13.5px;line-height:1.28;color:#444}
+.x-price{flex:none;font-size:24px;font-weight:800;font-stretch:112%;line-height:1;letter-spacing:-.01em}
+.xrow .btn{flex:none;width:auto;height:44px;padding:0 16px;font-size:15px}
 
 /* before and after, on the white page */
 .jobs2{display:grid;gap:24px;margin-top:18px}
@@ -386,6 +387,7 @@ footer .flogo{width:200px;height:auto}
   .t-price{font-size:30px}.t-body .btn{font-size:14px}
   .chip.svc{font-size:14.5px;padding:0 9px}.chip.svc b{font-size:16px}
   .svc3 .chip.svc{font-size:13px;padding:0 2px}.svc3 .chip.svc b{font-size:16px}
+  .x-name{font-size:17px}.x-price{font-size:21px}.xrow .btn{padding:0 12px}
   .next{min-width:108px;padding:0 18px}
 }
 
@@ -431,10 +433,9 @@ footer .flogo{width:200px;height:auto}
   .pick{gap:16px}
   .t-body{padding:16px 16px 6px}
   .inc-btn{padding:0 16px}
-  .xrow{margin-top:16px}
-  .x-top{padding:16px 16px 0}
-  .xrow .btn{width:calc(100% - 32px);margin:12px 16px 0}
-  .xrow .inc{padding:0 16px 16px}
+  .x-lb{margin-top:26px}
+  .xrow{gap:16px;margin-top:10px;padding:14px 16px}
+  .xrow .btn{padding:0 22px}
   .jobs2{grid-template-columns:1fr 1fr;gap:28px 20px;align-items:start}
   .quotes blockquote{font-size:22px}
   footer{padding:64px 32px 64px}
@@ -637,24 +638,30 @@ footer .flogo{width:200px;height:auto}
         </div>
       </div>
 
+      <p class="x-lb rv">Something smaller</p>
       <article class="xrow rv" id="express">
-        <div class="x-top">
-          <div>
-            <h3 class="t-name">Express</h3>
-            <p class="x-for">A quick clean, inside and out. About an hour.</p>
-          </div>
-          <b class="t-price" data-price="express">$60</b>
+        <div class="x-txt">
+          <h3 class="x-name">Express</h3>
+          <p class="x-for">Quick vacuum, wipe-down and hand wash, for a car in decent shape. About an hour.</p>
         </div>
-        <button type="button" class="btn btn-o" data-open="express">Book Express</button>
-        <button type="button" class="inc-btn" data-inc="incExpress" aria-expanded="false" aria-controls="incExpress">What's included<span class="pm" aria-hidden="true"></span></button>
-        <div class="inc" id="incExpress" hidden>
-          <ul class="inc-one">
-            <li>Quick vacuum, seats and floors.</li>
-            <li>Dash, console and doors wiped down.</li>
-            <li>Hand wash outside.</li>
-            <li>For a car that is already in decent shape. A dirtier car needs the Full or Showroom.</li>
-          </ul>
+        <b class="x-price" data-price="express">$60</b>
+        <button type="button" class="btn btn-o" data-open="express" aria-label="Book Express">Book</button>
+      </article>
+      <article class="xrow rv" id="interior">
+        <div class="x-txt">
+          <h3 class="x-name">Interior Only</h3>
+          <p class="x-for">The whole inside of the Full, nothing outside. About 90 minutes.</p>
         </div>
+        <b class="x-price" data-price="interior">$100</b>
+        <button type="button" class="btn btn-o" data-open="interior" aria-label="Book Interior Only">Book</button>
+      </article>
+      <article class="xrow rv" id="exterior">
+        <div class="x-txt">
+          <h3 class="x-name">Exterior Only</h3>
+          <p class="x-for">The whole outside of the Full, nothing inside. About an hour.</p>
+        </div>
+        <b class="x-price" data-price="exterior">$75</b>
+        <button type="button" class="btn btn-o" data-open="exterior" aria-label="Book Exterior Only">Book</button>
       </article>
     </div>
   </section>
@@ -844,6 +851,8 @@ footer .flogo{width:200px;height:auto}
           <button type="button" class="chip svc" data-svc="express" aria-pressed="false"><span>Express</span><b data-price="express">$60</b></button>
           <button type="button" class="chip svc" data-svc="full" aria-pressed="true"><span>Full</span><b data-price="full">$150</b></button>
           <button type="button" class="chip svc" data-svc="showroom" aria-pressed="false"><span>Showroom</span><b data-price="showroom">$250</b></button>
+          <button type="button" class="chip svc" data-svc="interior" aria-pressed="false"><span>Interior</span><b data-price="interior">$100</b></button>
+          <button type="button" class="chip svc" data-svc="exterior" aria-pressed="false"><span>Exterior</span><b data-price="exterior">$75</b></button>
         </div>
         <p class="lb" id="lbSize"><span id="lbSizeText">Vehicle</span></p>
         <div class="chips c3s" role="group" aria-labelledby="lbSize">
@@ -964,7 +973,11 @@ footer .flogo{width:200px;height:auto}
    {"@type": "Offer", "name": "Full Detail", "description": "Inside and out at your location, about 2 hours. Vacuumed from the seats to the trunk, pet hair and grit lifted out, leather cleaned and conditioned, hand washed, wheels and tires degreased, bugs and tar taken off, tires dressed, glass and door jambs.", "priceCurrency": "USD", "price": "150",
     "priceSpecification": {"@type": "PriceSpecification", "minPrice": "150", "maxPrice": "190", "priceCurrency": "USD"}},
    {"@type": "Offer", "name": "Showroom Detail", "description": "Everything in Full, plus the deep interior, about 3.5 to 4 hours. Carpets, mats and cloth seats shampooed with a hot water extractor, steam on the vents, cupholders, console, seat rails and door pockets, set-in stains worked on.", "priceCurrency": "USD", "price": "250",
-    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "250", "maxPrice": "310", "priceCurrency": "USD"}}
+    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "250", "maxPrice": "310", "priceCurrency": "USD"}},
+   {"@type": "Offer", "name": "Interior Only", "description": "The whole inside of the Full Detail at your location, nothing outside, about 90 minutes.", "priceCurrency": "USD", "price": "100",
+    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "100", "maxPrice": "120", "priceCurrency": "USD"}},
+   {"@type": "Offer", "name": "Exterior Only", "description": "The whole outside of the Full Detail at your location, nothing inside, about 1 hour.", "priceCurrency": "USD", "price": "75",
+    "priceSpecification": {"@type": "PriceSpecification", "minPrice": "75", "maxPrice": "95", "priceCurrency": "USD"}}
   ]
  },
  "address": {"@type": "PostalAddress", "streetAddress": "9280 Trout Way", "addressLocality": "Elk Grove", "postalCode": "95624", "addressRegion": "CA", "addressCountry": "US"},
@@ -991,10 +1004,12 @@ const CFG = {
   TEXT_TEXT  : '(916) 753-7822',
 
   /* --- what we sell ----------------------------------------------------
-     Three tiers. The names on the page match the dashboard's service ids:
-       Express  books service_id 'express'  (two cars: 'express2')
-       Full     books service_id 'full'     (two cars: 'full2')
-       Showroom books service_id 'showroom' (two cars: 'showroom2')
+     Five services. The names on the page match the dashboard's service ids:
+       Express       books service_id 'express'  (two cars: 'express2')
+       Full          books service_id 'full'     (two cars: 'full2')
+       Showroom      books service_id 'showroom' (two cars: 'showroom2')
+       Interior Only books service_id 'interior' (two cars: 'interior2')
+       Exterior Only books service_id 'exterior' (two cars: 'exterior2')
      Prices and minutes here are the fallback. When the calendar's reply lists
      a service with the same id, its prices and minutes win, so a price changed
      in the dashboard shows here without an edit. `minutes` is what the
@@ -1011,7 +1026,13 @@ const CFG = {
                 price:{ sedan:150, suv:170, truck:190 } },
     showroom: { id:'showroom', pairId:'showroom2', name:'Showroom', label:'Showroom Detail', pairLabel:'Two Showroom Details',
                 what:'deep interior, extractor + steam', minutes:240, pairMinutes:480,
-                price:{ sedan:250, suv:280, truck:310 } }
+                price:{ sedan:250, suv:280, truck:310 } },
+    interior: { id:'interior', pairId:'interior2', name:'Interior Only', label:'Interior Only', pairLabel:'Two Interior Only',
+                what:'inside only', minutes:90, pairMinutes:180, pairOff:0, gift:false,
+                price:{ sedan:100, suv:110, truck:120 } },
+    exterior: { id:'exterior', pairId:'exterior2', name:'Exterior Only', label:'Exterior Only', pairLabel:'Two Exterior Only',
+                what:'outside only', minutes:60, pairMinutes:120, pairOff:0, gift:false,
+                price:{ sedan:75, suv:85, truck:95 } }
   },
   sizes: {
     sedan: { name:'Sedan',          word:'sedan',          long:'sedan or coupe' },
@@ -1022,7 +1043,7 @@ const CFG = {
      and are settled in person. */
   addons: {
     pet:     { name:'Heavy pet hair',         note:'heavy pet hair',         price:40 },
-    shampoo: { name:'Seat or carpet shampoo', note:'seat or carpet shampoo', price:50 }   /* Full only. Showroom already includes it. */
+    shampoo: { name:'Seat or carpet shampoo', note:'seat or carpet shampoo', price:50 }   /* Full and Interior Only. Showroom already includes it. */
   },
   hookupOff: 5,          /* off for using the customer's spigot and outlet */
   secondCarOff: 25,      /* fallback; the dashboard's pairOff wins when it sends one */
@@ -1276,7 +1297,7 @@ const UTM = (() => {
   }
 
   function sizeWord(z) { return CFG.sizes[z].word; }
-  function shOk() { return S.main === 'full'; }
+  function shOk() { return S.main === 'full' || S.main === 'interior'; }
   function hookup() { return !S.drop && S.water === 'yes' ? CFG.hookupOff : 0; }
   /* The listed price, before any thank-you gift: this is what the dashboard works out
      for the job from service_id and sizes. Two cars: each by its own size, less the
@@ -1537,7 +1558,7 @@ const UTM = (() => {
     if (!sending) $('#bookGo').textContent = 'Book, ' + money(total());
     /* a thank-you link's note says what it comes off, so it never reads as applied on an Express */
     if (GIFT_OFF) $('#giftNote').innerHTML = t.gift === false
-      ? '<b>Your $' + GIFT_OFF + ' thank-you is for a Full or Showroom.</b> It does not come off an Express.'
+      ? '<b>Your $' + GIFT_OFF + ' thank-you is for a Full or Showroom.</b> Pick one of those to use it.'
       : '<b>Your $' + GIFT_OFF + ' thank-you is applied.</b> It comes off a Full or Showroom you book' + (GIFT_UNTIL ? ' by ' + esc(GIFT_UNTIL) : '') + '.';
     if (S.tried) missing(false);
   }

@@ -60,8 +60,14 @@ Every day: **8:00 AM to 8:00 PM**
 | Showroom, Sedan/Coupe | $250 | Everything in Full plus the deep interior: carpets, mats and cloth seats shampooed with a hot water extractor, steam on vents, cupholders, console, seat rails and door pockets, set-in stains worked on. About 3.5 to 4 hours |
 | Showroom, SUV/Crossover | $280 | Same as above |
 | Showroom, Truck/3-Row | $310 | Same as above |
+| Interior Only, Sedan/Coupe | $100 | The whole inside of the Full, nothing outside, about 90 minutes |
+| Interior Only, SUV/Crossover | $110 | Same as above |
+| Interior Only, Truck/3-Row | $120 | Same as above |
+| Exterior Only, Sedan/Coupe | $75 | The whole outside of the Full, nothing inside, about 1 hour |
+| Exterior Only, SUV/Crossover | $85 | Same as above |
+| Exterior Only, Truck/3-Row | $95 | Same as above |
 | Heavy pet hair | +$40 | Add-on |
-| Seat or carpet shampoo on a Full | +$50 | Add-on |
+| Seat or carpet shampoo on a Full or Interior Only | +$50 | Add-on |
 | Second car, same address | $25 off | Off the second car, Full or Showroom |
 | Anything smaller (just the inside, just the outside, a quick clean) | By quote | No price listed. Text (916) 753-7822 and we text you a price |
 
