@@ -24,6 +24,12 @@ h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,6vw,40px);lin
 h2{font-family:var(--display);font-weight:800;font-size:21px;line-height:1.15;margin:0}
 .txt p{margin:0;color:var(--soft);font-size:15px}
 .open{margin-top:auto;padding-top:12px;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.4)}
+.lead{flex-direction:row;margin-top:30px;max-width:760px}
+.lead img{width:44%;max-width:300px;aspect-ratio:375/560;border-bottom:0;border-right:1px solid var(--line)}
+.lead h2{font-size:26px}
+.sub{font-family:var(--display);font-weight:600;font-size:15px;color:var(--soft);margin:38px 0 0}
+.sub + .grid{margin-top:14px}
+@media (max-width:760px){.lead{flex-direction:column}.lead img{width:100%;max-width:none;aspect-ratio:375/420;border-right:0;border-bottom:1px solid var(--line)}}
 .notes{margin-top:34px;border-top:1px solid var(--line);padding-top:22px;display:grid;gap:10px;max-width:68ch}
 .notes h3{font-family:var(--display);font-weight:600;font-size:15px;margin:0}
 .notes ul{margin:0;padding-left:20px;color:var(--soft);font-size:15px;display:grid;gap:6px}
@@ -33,9 +39,20 @@ h2{font-family:var(--display);font-weight:800;font-size:21px;line-height:1.15;ma
 
 <div class="wrap">
   <img class="logo" src="assets/logo-420.png" alt="Valley Details" width="420" height="192">
-  <h1>Three directions for the new site</h1>
-  <p class="lede">Same photos, same prices, same booking steps. Only the look and the structure change. Open each one on your phone and scroll it like a customer coming from an ad.</p>
+  <h1>The combined site, plus the first three</h1>
+  <p class="lede">D is the one built from your notes. Open it on your phone and scroll it like a customer coming from an ad, then tap Book to try the pop-up.</p>
 
+  <a class="card lead" href="d/index.html">
+    <img src="thumbs/d.jpg" alt="Concept D first screen" width="750" height="1280">
+    <div class="txt">
+      <span class="k">Concept D, the combined one</span>
+      <h2>Stories, then simple</h2>
+      <p>The five job slides from C up top. No blue anywhere. A short white page with the two photo tiles for prices and the drag before and afters. Booking is a two-step pop-up.</p>
+      <span class="open">Open concept D</span>
+    </div>
+  </a>
+
+  <h3 class="sub">The first three</h3>
   <div class="grid">
     <a class="card" href="a/index.html">
       <img src="thumbs/a.jpg" alt="Concept A first screen" width="750" height="1280">

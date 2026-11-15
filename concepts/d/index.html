@@ -1,0 +1,1195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<meta name="format-detection" content="telephone=no">
+<title>Valley Details, mobile car detailing in Elk Grove</title>
+<meta name="description" content="Mobile car detailing in Elk Grove and south Sacramento. We come to you. Express from $150, Full from $250. No deposit, you pay when the car is done.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --top:60px;
+  --barh:calc(73px + env(safe-area-inset-bottom));
+  --g1:#141414;--g2:#1f1f1f;--g3:#2c2c2c;--g5:#8f8f8f;--g6:#b9b9b9;
+  --ink:#111;--mid:#555;--soft:#6b6b6b;--line:#dcdcdc;--fill:#f1f1f1;
+  --out:cubic-bezier(.16,1,.3,1);
+  --in:cubic-bezier(.6,0,.9,.2);
+  --spring:cubic-bezier(.3,1.42,.5,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0}
+[hidden]{display:none!important}
+html{background:#000;color:#fff;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Saira',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.45;background:#000;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-appearance:none;appearance:none}
+button,a,input,label,summary{touch-action:manipulation}
+ul,ol{list-style:none;padding:0}
+::selection{background:#111;color:#fff}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+
+/* ---------- top bar: story progress, logo ---------- */
+.top{position:fixed;left:0;right:0;top:0;z-index:30;height:var(--top);padding:8px 12px 0;background:#000;transition:transform .5s var(--out)}
+.top.away{transform:translateY(-102%);transition:transform .26s var(--in)}
+.segs{display:flex;gap:4px}
+.segs i{flex:1;height:3px;border-radius:2px;background:#3d3d3d;overflow:hidden}
+.segs b{display:block;height:100%;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
+.top-row{display:flex;align-items:center;justify-content:space-between;height:46px;margin-top:3px}
+.logo img{height:36px;width:auto}
+.top-meta{text-align:right;font-size:12.5px;line-height:1.28;font-weight:600}
+.top-meta span{display:block}
+.top-meta span+span{color:var(--g6);font-weight:500}
+.top-nav{display:none}
+
+/* ---------- the five story slides (on black) ---------- */
+.intro{display:none}
+.job{position:relative;height:100vh;height:100svh;scroll-snap-align:start;background:#000;overflow:hidden}
+.job .cmp{position:absolute;left:0;right:0;top:var(--top);bottom:var(--barh)}
+.cap{position:absolute;left:0;right:0;bottom:var(--barh);padding:64px 16px 16px;background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.6) 48%,rgba(0,0,0,0));pointer-events:none}
+.cap-h{font-size:34px;font-weight:800;font-stretch:112%;line-height:1.03;letter-spacing:-.012em;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.cap-p{margin-top:8px;font-size:17px;font-weight:500;line-height:1.3;max-width:31ch;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+.cap-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.skip{pointer-events:auto;flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 12px 0 15px;border-radius:19px;background:#000;border:1px solid #5a5a5a;font-size:14.5px;font-weight:600;transition:transform .4s var(--spring)}
+.skip:active{transform:scale(.95)}
+.skip svg{width:14px;height:14px}
+.more{text-align:right;font-size:13.5px;font-weight:500;color:#d6d6d6;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.dk{display:none}
+.js .job .cap>*{opacity:0;transform:translateY(14px)}
+.js .job.on .cap>*{opacity:1;transform:none;transition:opacity .5s var(--out),transform .6s var(--out)}
+.js .job.on .cap>*:nth-child(2){transition-delay:.06s}
+.js .job.on .cap>*:nth-child(3){transition-delay:.12s}
+.js .job.on .cap>*:nth-child(4){transition-delay:.18s}
+
+/* ---------- before and after ---------- */
+.cmp{position:relative;overflow:hidden;background:var(--g1);touch-action:pan-y;-webkit-user-select:none;user-select:none;cursor:ew-resize}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none;transform:var(--t,none)}
+.cmp-clip{position:absolute;inset:0;clip-path:inset(0 0 0 50%)}
+.cmp-line{position:absolute;top:0;bottom:0;left:0;width:2px;margin-left:-1px;background:#fff;transform:translate3d(50vw,0,0);will-change:transform;z-index:2}
+.cmp[data-type="switch"] .cmp-line{opacity:0}
+.cmp-knob{position:absolute;top:42%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;box-shadow:0 1px 8px rgba(0,0,0,.4)}
+.cmp-knob svg{width:24px;height:24px}
+.tag{position:absolute;top:12px;z-index:3;font-size:12.5px;font-weight:600;line-height:1;padding:7px 9px 6px;background:#000;color:#fff;border-radius:6px;transition:opacity .2s}
+.tag-a{left:12px}.tag-b{right:12px}
+.toggle{position:absolute;top:12px;left:12px;z-index:3;display:flex;gap:2px;padding:3px;background:#000;border-radius:9px}
+.toggle button{border:0;background:none;color:#fff;font-size:13px;font-weight:600;line-height:1;min-height:32px;padding:0 12px;border-radius:6px;transition:background .25s var(--out),color .25s var(--out)}
+.toggle button[aria-pressed="true"]{background:#fff;color:#000}
+
+/* ---------- the bar that is always there ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;align-items:center;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#000;border-top:1px solid var(--g3)}
+.bar-price{flex:1;min-width:0;line-height:1.05}
+.bar-label{display:block;font-size:12.5px;font-weight:500;color:var(--g6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-price b{display:inline-block;font-size:27px;font-weight:800;font-stretch:112%;letter-spacing:-.01em}
+.btn-call{display:grid;place-items:center;height:52px;padding:0 20px;border-radius:12px;background:var(--g2);font-size:16.5px;font-weight:700;transition:transform .4s var(--spring)}
+.book-btn{display:grid;place-items:center;height:52px;min-width:124px;padding:0 26px;border:0;border-radius:12px;background:#e0161e;color:#fff;font-size:18.5px;font-weight:800;font-stretch:108%;transition:transform .4s var(--spring)}
+.btn-call:active,.book-btn:active,.btn:active{transform:scale(.96)}
+.flip{animation:flip .5s var(--spring)}
+@keyframes flip{from{opacity:0;transform:translateY(45%)}to{opacity:1;transform:none}}
+
+/* ---------- the white page ---------- */
+.rest{scroll-snap-align:start;background:#000}
+.page{background:#fff;color:var(--ink);border-radius:22px;overflow:hidden}
+.end{height:var(--barh);scroll-snap-align:end}
+.sec{padding:44px 0 6px}
+.sec.last{padding-bottom:48px}
+.pad{padding-left:16px;padding-right:16px}
+.h{font-size:34px;font-weight:800;font-stretch:112%;line-height:1.04;letter-spacing:-.015em}
+.lede{margin-top:8px;font-size:16px;line-height:1.4;color:var(--mid)}
+.js .rv{opacity:0;transform:translateY(18px)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .6s var(--out),transform .7s var(--out)}
+
+.btn{display:flex;align-items:center;justify-content:center;width:100%;height:50px;border:0;border-radius:12px;font-size:16px;font-weight:700;transition:transform .4s var(--spring)}
+.btn-k{background:var(--ink);color:#fff}
+.btn-o{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn-w{background:#fff;color:#000}
+
+.seg{display:grid;grid-template-columns:1fr 1fr 1.45fr;gap:4px;padding:4px;margin-top:16px;border-radius:13px;background:#ededed}
+.seg button{height:44px;border:0;border-radius:9px;background:none;color:var(--ink);font-size:15px;font-weight:600;transition:background .25s var(--out),color .25s var(--out)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+/* which one is your car */
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.tile{display:flex;flex-direction:column;min-width:0;background:var(--fill);border-radius:14px;overflow:hidden}
+.tile figure{position:relative;aspect-ratio:4/5;overflow:hidden;background:#ddd}
+.tile figure img{width:100%;height:100%;object-fit:cover}
+.tile .tag{top:8px;left:8px}
+.t-body{display:flex;flex-direction:column;flex:1;padding:12px 12px 4px}
+.t-name{font-size:25px;font-weight:800;font-stretch:112%;line-height:1}
+.t-for{margin-top:6px;font-size:14.5px;line-height:1.28;min-height:2.56em;color:#444}
+.t-price{display:inline-block;align-self:flex-start;margin-top:10px;font-size:34px;font-weight:800;font-stretch:112%;line-height:1;letter-spacing:-.01em}
+.t-time{display:block;margin-top:4px;font-size:13px;color:var(--soft)}
+.t-body .btn{margin-top:12px;height:46px;font-size:15.5px}
+.inc-btn{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:0 12px;border:0;background:none;font-size:14px;font-weight:600;color:#333;text-align:left}
+.pm{flex:none;position:relative;width:12px;height:12px}
+.pm::before,.pm::after{content:"";position:absolute;left:0;top:5px;width:12px;height:2px;background:currentColor;transition:transform .45s var(--spring)}
+.pm::after{transform:rotate(90deg)}
+[aria-expanded="true"]>.pm::after{transform:rotate(0)}
+.inc{grid-column:1/-1;scroll-margin:16px 0 calc(var(--barh) + 16px);padding:16px;border-radius:14px;background:var(--fill);animation:drop .45s var(--out)}
+.inc h3{font-size:17px;font-weight:800;font-stretch:108%}
+.inc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.inc h4{font-size:13.5px;font-weight:700;color:var(--mid)}
+.inc li{margin-top:6px;font-size:14.5px;line-height:1.3}
+.inc-one{margin-top:4px}
+@keyframes drop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.less-line{display:block;width:100%;min-height:48px;margin-top:6px;padding:10px 0;border:0;background:none;text-align:left;font-size:15.5px;color:var(--mid)}
+.less-line u{color:var(--ink);font-weight:600;text-underline-offset:3px}
+
+/* before and after, on the white page */
+.jobs2{display:grid;gap:24px;margin-top:18px}
+.ba .cmp{aspect-ratio:4/5;border-radius:14px}
+.ba .cmp-knob{top:50%}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pair figure{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:12px;background:#ddd}
+.pair img{width:100%;height:100%;object-fit:cover}
+.pair .tag{top:8px;left:8px}
+.ba-cap{margin-top:9px;font-size:15.5px;line-height:1.35;color:#444}
+.ba-cap b{color:var(--ink);font-weight:700}
+.more-wrap{margin-top:24px}
+#moreBtn{margin-top:22px}
+
+/* reviews */
+.score{display:flex;align-items:flex-end;gap:12px}
+.score b{font-size:76px;font-weight:800;font-stretch:120%;line-height:.8;letter-spacing:-.035em}
+.score span{font-size:16px;font-weight:600;line-height:1.25}
+.quotes{margin-top:22px}
+.quotes li{padding:14px 0 15px;border-top:1px solid var(--line)}
+.quotes blockquote{font-size:19px;font-weight:600;line-height:1.28}
+.quotes cite{display:block;margin-top:5px;font-size:14px;font-style:normal;color:var(--soft)}
+.link{display:inline-block;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.after-q{padding-top:14px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.4;color:#444}
+.after-q .link{margin-bottom:10px;color:var(--ink)}
+
+/* how it works */
+.how-pic{position:relative;margin-top:16px;aspect-ratio:3/2;overflow:hidden;border-radius:14px;background:#ddd}
+.how-pic img{width:100%;height:100%;object-fit:cover}
+.steps{margin-top:6px}
+.steps li{display:grid;grid-template-columns:34px 1fr;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);font-size:17.5px;font-weight:600;line-height:1.3}
+.steps li:last-child{border-bottom:0}
+.steps .num{font-size:25px;font-weight:800;font-stretch:120%;line-height:1}
+
+/* questions */
+.faq{margin-top:12px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:12px 0;font-size:17.5px;font-weight:700;line-height:1.2;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq details[open] .pm::after{transform:rotate(0)}
+.faq .a{padding:0 0 16px;font-size:15.5px;line-height:1.5;color:#444;max-width:60ch}
+.faq details[open] .a{animation:drop .45s var(--out)}
+
+/* footer, back on black */
+footer{padding:34px 16px 30px;color:#fff}
+footer .flogo{width:200px;height:auto}
+.tagline{margin-top:8px;font-size:16.5px;font-weight:600}
+.contact{margin-top:20px;border-top:1px solid var(--g3)}
+.contact a,.contact div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:13px 0;border-bottom:1px solid var(--g3);font-size:16px}
+.contact span:first-child{color:var(--g5);flex:none}
+.contact span+span{font-weight:600;text-align:right}
+.tiny{margin-top:16px;font-size:13.5px;color:var(--g5)}
+
+/* ---------- booking pop-up: a bottom sheet on a phone, a dialog on desktop ---------- */
+.modal{position:fixed;inset:0;z-index:60;display:flex;align-items:flex-end;justify-content:center}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.62);opacity:0;transition:opacity .24s var(--in);touch-action:none}
+.modal.open .dim{opacity:1;transition:opacity .4s var(--out)}
+.sheet{position:relative;display:flex;flex-direction:column;width:100%;max-width:520px;max-height:calc(100vh - 14px);max-height:calc(100dvh - 14px);background:#fff;color:var(--ink);border-radius:20px 20px 0 0;outline:0;transform:translateY(104%);transition:transform .25s var(--in)}
+.modal.open .sheet{transform:none;transition:transform .58s var(--spring)}
+.sheet::after{content:"";position:absolute;left:0;right:0;top:100%;height:90px;background:#fff}
+.sh-head{flex:none;display:flex;align-items:center;gap:8px;padding:12px 12px 6px 16px}
+.sh-head h2{flex:1;min-width:0;font-size:22px;font-weight:800;font-stretch:110%;line-height:1.1;outline:0}
+.sh-step{flex:none;font-size:13px;font-weight:600;color:var(--soft);white-space:nowrap}
+.ib{flex:none;display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:#ededed;color:var(--ink);transition:transform .4s var(--spring)}
+.ib:active{transform:scale(.9)}
+.ib svg{width:18px;height:18px}
+#backBtn{margin-left:-6px}
+.sh-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 16px 14px}
+.step.enter{animation:stepin .42s var(--out)}
+.step.enter.back{animation-name:stepback}
+@keyframes stepin{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}
+@keyframes stepback{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+.lb{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:20px;margin:12px 0 6px;font-size:13.5px;font-weight:600;line-height:1.25;color:#444}
+.lb button{padding:0;border:0;background:none;font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.chips{display:grid;gap:6px}
+.c2{grid-template-columns:1fr 1fr}
+.c3{grid-template-columns:1fr 1fr 1fr}
+.c3s{grid-template-columns:1fr 1fr 1.45fr}
+.c4{grid-template-columns:repeat(4,1fr)}
+.c7{grid-template-columns:repeat(7,1fr);gap:5px}
+.chip{min-width:0;height:44px;padding:0 4px;border:0;border-radius:10px;background:#efefef;color:var(--ink);font-size:15px;font-weight:600;line-height:1.1;white-space:nowrap;transition:background .2s var(--out),color .2s var(--out),transform .4s var(--spring)}
+.chip:active{transform:scale(.94)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+.chip.svc{display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 13px;font-size:16.5px;font-weight:700}
+.chip.svc b{font-size:19px;font-weight:800;font-stretch:112%}
+.chip.day{height:54px;padding:0}
+.chip.day span{display:block;font-size:11.5px;font-weight:500}
+.chip.day b{display:block;margin-top:2px;font-size:19px;font-weight:800}
+.chip.time{height:42px}
+.recap{padding:2px 0 0;font-size:14.5px;color:var(--mid)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.field{display:block;min-width:0}
+.field>span{display:block;margin:10px 0 5px;font-size:13.5px;font-weight:600;color:#444}
+.inp{display:block;width:100%;height:48px;padding:0 12px;border:1.5px solid transparent;border-radius:10px;background:#efefef;color:var(--ink);font:inherit;font-size:16px;-webkit-appearance:none;appearance:none}
+.inp::placeholder{color:#7a7a7a}
+.inp:focus{outline:0;border-color:var(--ink);background:#fff}
+.inp:-webkit-autofill{-webkit-box-shadow:0 0 0 100px #efefef inset;-webkit-text-fill-color:#111;caret-color:#111}
+.need .inp,.need .chip{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.mini{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0;border:0;background:none;font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:none!important}
+.mini em,.sw em{flex:none;position:relative;width:40px;height:24px;border-radius:12px;background:#c4c4c4;transition:background .25s var(--out)}
+.mini em::after,.sw em::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .4s var(--spring)}
+[aria-checked="true"]>em{background:var(--ink)}
+[aria-checked="true"]>em::after{transform:translateX(16px)}
+.say{margin-top:8px;padding:10px 12px;border-radius:10px;background:#efefef;font-size:14.5px;line-height:1.35}
+.addrow{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:46px;margin-top:12px;padding:0 12px;border:0;border-radius:10px;background:#efefef;font-size:15px;font-weight:600;text-align:left}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:46px;padding:4px 12px;border:0;border-bottom:1px solid var(--line);background:none;font-size:15px;font-weight:600;text-align:left}
+.sw span b{font-weight:500;color:var(--mid)}
+.check{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:14.5px;line-height:1.3}
+.check input{flex:none;width:22px;height:22px;margin:0;accent-color:#111}
+.fine{margin-top:12px;font-size:13px;line-height:1.4;color:var(--mid)}
+.sh-foot{flex:none;position:relative;z-index:1;padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid #e3e3e3;background:#fff}
+.f1{display:flex;align-items:center;gap:12px}
+.f1-l{flex:1;min-width:0;line-height:1.1}
+.f1-l span{display:block;font-size:13px;font-weight:500;color:var(--mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f1-l b{display:inline-block;margin-top:2px;font-size:28px;font-weight:800;font-stretch:112%;letter-spacing:-.01em}
+.next{flex:none;width:auto;min-width:132px;height:52px;padding:0 26px;font-size:17.5px;font-weight:800}
+.next:disabled{background:#dedede;color:#8a8a8a;cursor:default;transform:none}
+.rows li{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;line-height:1.5;color:#444}
+.rows li span:last-child{font-weight:600;white-space:nowrap}
+.miss{margin-top:6px;font-size:14px;font-weight:600;line-height:1.35}
+.book-btn.big{width:100%;height:56px;margin-top:8px;font-size:20px}
+.done{padding:6px 0 10px}
+.done-h{font-size:21px;font-weight:800;font-stretch:106%;line-height:1.2}
+.done-p{margin-top:12px;font-size:16px;line-height:1.45;color:#333}
+.done-r{margin-top:16px;padding:12px 14px;border-radius:10px;background:#efefef;font-size:15px;font-weight:600;line-height:1.35}
+.locked .top-nav .book-btn{visibility:hidden}
+
+@media (max-width:359px){
+  .cap-h{font-size:30px}.h{font-size:30px}
+  .top-meta{font-size:11.5px}
+  .btn-call{padding:0 14px}.book-btn{min-width:104px;padding:0 18px}
+  .seg button,.chip{font-size:13.5px}
+  .t-price{font-size:30px}.t-body .btn{font-size:14px}
+  .chip.svc{font-size:14.5px;padding:0 9px}.chip.svc b{font-size:16px}
+  .next{min-width:108px;padding:0 18px}
+}
+
+/* ---------- desktop: the stories in a phone-width column, the rest centered ---------- */
+@media (min-width:900px){
+  :root{--top:68px;--barh:0px}
+  html{scroll-snap-type:none;scrollbar-gutter:stable}
+  .top{padding:0 32px;display:block}
+  .top.away{transform:none}
+  .segs{position:absolute;left:0;right:0;bottom:0;gap:6px;padding:0 32px;transition:opacity .3s var(--out)}
+  .top.done .segs{opacity:0}
+  .top-row{height:65px;margin:0;max-width:1120px;margin:0 auto}
+  .logo img{height:42px}
+  .top-meta{display:none}
+  .top-nav{display:flex;align-items:center;gap:28px;font-size:15.5px;font-weight:600}
+  .top-nav .book-btn{height:42px;min-width:0;padding:0 22px;font-size:16px}
+  .bar{display:none}
+  .feed{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:72px;max-width:1040px;margin:0 auto;padding:108px 32px 72px}
+  .intro{display:flex;flex-direction:column;justify-content:center;position:sticky;top:108px;align-self:start;height:min(760px,calc(100vh - 148px))}
+  .intro-h{font-size:68px;font-weight:800;font-stretch:112%;line-height:.98;letter-spacing:-.025em}
+  .intro-p{margin-top:20px;font-size:20px;line-height:1.4;color:var(--g6);max-width:30ch}
+  .intro-price{display:flex;align-items:baseline;gap:14px;margin-top:34px}
+  .intro-price b{display:inline-block;font-size:60px;font-weight:800;font-stretch:112%;line-height:1}
+  .intro-price span{font-size:16px;color:var(--g6)}
+  .intro-cta{display:flex;align-items:center;gap:22px;margin-top:22px}
+  .intro-cta .btn{width:auto;height:54px;padding:0 28px;font-size:17px}
+  .intro-cta a+a{font-weight:600;text-decoration:underline;text-underline-offset:4px}
+  .intro-note{margin-top:34px;font-size:15px;line-height:1.5;color:var(--g5)}
+  .jobs{display:flex;flex-direction:column;gap:28px}
+  .job{height:min(760px,calc(100vh - 148px));min-height:520px}
+  .job .cmp{top:0;bottom:0}
+  .cap{bottom:0}
+  .ph{display:none}.dk{display:block}
+  .cap-row .more{display:none}
+  .page{max-width:1120px;margin:0 auto;border-radius:28px}
+  .sec{padding:72px 0 8px}
+  .sec.last{padding-bottom:80px}
+  .wrap{max-width:760px;margin:0 auto}
+  .h{font-size:46px}
+  .seg{max-width:420px}
+  .pick{gap:16px}
+  .t-body{padding:16px 16px 6px}
+  .inc-btn{padding:0 16px}
+  .jobs2{grid-template-columns:1fr 1fr;gap:28px 20px;align-items:start}
+  .quotes blockquote{font-size:22px}
+  footer{padding:64px 32px 64px}
+  footer .wrap{max-width:1040px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact{margin-top:0}
+  .modal{align-items:center}
+  .sheet{width:480px;max-height:min(780px,calc(100vh - 48px));border-radius:20px;opacity:0;transform:translateY(26px) scale(.96);transition:transform .22s var(--in),opacity .2s var(--in);box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .modal.open .sheet{opacity:1;transition:transform .55s var(--spring),opacity .25s var(--out)}
+  .sheet::after{display:none}
+  .sh-foot{border-radius:0 0 20px 20px;padding-bottom:14px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .js .rv,.js .job .cap>*{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="segs" id="segs" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+  <div class="top-row">
+    <a class="logo" href="#feed" aria-label="Valley Details, back to the top"><img src="../assets/logo-420.png" width="420" height="192" alt="Valley Details"></a>
+    <p class="top-meta"><span>Mobile detailing, Elk Grove</span><span>5.0 on Google, 15 reviews</span></p>
+    <nav class="top-nav" aria-label="Main">
+      <a href="#prices" data-goto="prices">Prices</a>
+      <a href="tel:+19162490631">(916) 249-0631</a>
+      <button type="button" class="book-btn" data-open="bar">Book</button>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="feed" id="feed">
+
+  <div class="intro">
+    <p class="intro-h" role="heading" aria-level="1">We come to you.</p>
+    <p class="intro-p">Mobile car detailing in Elk Grove and south Sacramento. Your driveway, apartment lot or work.</p>
+    <p class="intro-price"><b data-price="express">$150</b><span>Express, inside and out, <span data-size-name>sedan</span></span></p>
+    <p class="intro-cta"><a class="btn btn-w" href="#prices" data-goto="prices">See prices</a><a href="tel:+19162490631">Call (916) 249-0631</a></p>
+    <p class="intro-note">5.0 on Google from 15 reviews. Owner-operated since 2024.<br>These are our jobs. Drag or tap a photo to compare.</p>
+  </div>
+
+  <div class="jobs">
+
+    <section class="job on" aria-label="Job 1 of 5">
+      <div class="cmp" data-type="switch">
+        <img class="cmp-a" src="../assets/jobs/tesla-model-y/01.jpg" width="864" height="1080" alt="Tesla Model Y before, hair worked into the carpet" style="object-position:24% 50%" fetchpriority="high">
+        <img class="cmp-b" src="../assets/jobs/tesla-model-y/04.jpg" width="864" height="1080" alt="The same Tesla Model Y after, carpet cleared" style="object-position:14% 50%">
+        <div class="toggle"><button type="button" aria-pressed="true">Before</button><button type="button" aria-pressed="false">After</button></div>
+        <div class="cmp-line"></div>
+      </div>
+      <div class="cap">
+        <h1 class="cap-h ph">We come to you.</h1>
+        <p class="cap-p ph">Tesla Model Y. Hair worked into the carpet, then cleared.</p>
+        <h2 class="cap-h dk">Tesla Model Y</h2>
+        <p class="cap-p dk">Hair worked into the carpet, then cleared.</p>
+        <div class="cap-row"><a class="skip" href="#prices" data-goto="prices">Skip to prices <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a><span class="more">Tap the photo to switch</span></div>
+      </div>
+    </section>
+
+    <section class="job" aria-label="Job 2 of 5">
+      <div class="cmp" data-type="drag">
+        <img class="cmp-a" src="../assets/jobs/pacifica/02.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2023 Chrysler Pacifica cargo floor before, crumbs" style="--t:translate(0,1.77%) scale(1.04)">
+        <img class="cmp-b" src="../assets/jobs/pacifica/05.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The same cargo floor after, vacuumed" style="--t:translate(-5%,-4.71%) scale(1.112)">
+        <span class="tag tag-a">Before</span><span class="tag tag-b">After</span>
+        <div class="cmp-line"><span class="cmp-knob" role="slider" tabindex="0" aria-label="Drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+      </div>
+      <div class="cap">
+        <h2 class="cap-h">2023 Chrysler Pacifica</h2>
+        <p class="cap-p">Crumbs across the cargo floor, then vacuumed.</p>
+        <div class="cap-row"><a class="skip" href="#prices" data-goto="prices">Skip to prices <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a><span class="more">Drag the photo to compare</span></div>
+      </div>
+    </section>
+
+    <section class="job" aria-label="Job 3 of 5">
+      <div class="cmp" data-type="switch">
+        <img class="cmp-a" src="../assets/jobs/kia-soul/02.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2018 Kia Soul before, dirt and hair ground into the mats and seats" style="object-position:40% 50%">
+        <img class="cmp-b" src="../assets/jobs/kia-soul/06.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The same Kia Soul after" style="object-position:34% 50%">
+        <div class="toggle"><button type="button" aria-pressed="true">Before</button><button type="button" aria-pressed="false">After</button></div>
+        <div class="cmp-line"></div>
+      </div>
+      <div class="cap">
+        <h2 class="cap-h">2018 Kia Soul</h2>
+        <p class="cap-p">Dirt and hair ground into the mats and seats.</p>
+        <div class="cap-row"><a class="skip" href="#prices" data-goto="prices">Skip to prices <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></div>
+      </div>
+    </section>
+
+    <section class="job" aria-label="Job 4 of 5">
+      <div class="cmp" data-type="switch">
+        <img class="cmp-a" src="../assets/work/merc-trunk-before.jpg" width="904" height="1200" loading="lazy" decoding="async" alt="Mercedes trunk lid before, water spots">
+        <img class="cmp-b" src="../assets/work/merc-trunk-after.jpg" width="904" height="1200" loading="lazy" decoding="async" alt="The same Mercedes trunk lid after">
+        <div class="toggle"><button type="button" aria-pressed="true">Before</button><button type="button" aria-pressed="false">After</button></div>
+        <div class="cmp-line"></div>
+      </div>
+      <div class="cap">
+        <h2 class="cap-h">Mercedes</h2>
+        <p class="cap-p">Water spots on the trunk lid, before and after.</p>
+        <div class="cap-row"><a class="skip" href="#prices" data-goto="prices">Skip to prices <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a></div>
+      </div>
+    </section>
+
+    <section class="job" aria-label="Job 5 of 5">
+      <div class="cmp" data-type="switch">
+        <img class="cmp-a" src="../assets/jobs/bmw-5-series/01.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="White BMW 530e after its detail, outside" style="object-position:18% 50%">
+        <img class="cmp-b" src="../assets/jobs/bmw-5-series/03.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The same BMW 530e, tan leather interior after its detail" style="object-position:62% 50%">
+        <div class="toggle"><button type="button" aria-pressed="true">Outside</button><button type="button" aria-pressed="false">Inside</button></div>
+        <div class="cmp-line"></div>
+      </div>
+      <div class="cap">
+        <h2 class="cap-h">BMW 530e</h2>
+        <p class="cap-p">White, tan leather. Done inside and out.</p>
+        <div class="cap-row"><a class="skip" href="#prices" data-goto="prices">See prices <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a><span class="more">Prices are next</span></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<div class="rest" id="rest">
+ <div class="page">
+
+  <!-- ===== pick your detail ===== -->
+  <section class="sec" id="prices">
+    <div class="wrap pad">
+      <h2 class="h rv">Which one is your car?</h2>
+      <div class="seg rv" data-seg="size" role="group" aria-label="Vehicle size">
+        <button type="button" data-v="sedan" aria-pressed="true">Sedan</button>
+        <button type="button" data-v="suv" aria-pressed="false">SUV</button>
+        <button type="button" data-v="truck" aria-pressed="false">Truck or 3-row</button>
+      </div>
+
+      <div class="pick rv">
+        <article class="tile" id="express">
+          <figure><img src="../assets/work/cruze-floor-before.jpg" width="900" height="1200" loading="lazy" decoding="async" alt="A Cruze floor before a detail, crumbs on the carpet"><span class="tag">Before</span></figure>
+          <div class="t-body">
+            <h3 class="t-name">Express</h3>
+            <p class="t-for">Vacuum and wash, inside and out.</p>
+            <b class="t-price" data-price="express">$150</b>
+            <span class="t-time">About 2 hours</span>
+            <button type="button" class="btn btn-o" data-open="express">Choose Express</button>
+          </div>
+          <button type="button" class="inc-btn" data-inc="incExpress" aria-expanded="false" aria-controls="incExpress">What's included<span class="pm" aria-hidden="true"></span></button>
+        </article>
+        <article class="tile" id="full">
+          <figure><img src="../assets/jobs/camry/01.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2013 Toyota Camry cloth seats before a detail, stains set in"><span class="tag">Before</span></figure>
+          <div class="t-body">
+            <h3 class="t-name">Full</h3>
+            <p class="t-for">Stains and ground-in dirt.</p>
+            <b class="t-price" data-price="full">$250</b>
+            <span class="t-time">3.5 to 4 hours</span>
+            <button type="button" class="btn btn-k" data-open="full">Choose Full</button>
+          </div>
+          <button type="button" class="inc-btn" data-inc="incFull" aria-expanded="false" aria-controls="incFull">What's included<span class="pm" aria-hidden="true"></span></button>
+        </article>
+
+        <div class="inc" id="incExpress" hidden>
+          <h3>Express</h3>
+          <div class="inc-cols">
+            <div>
+              <h4>Inside</h4>
+              <ul>
+                <li>Vacuumed from the seats to the trunk.</li>
+                <li>Pet hair and grit lifted out.</li>
+                <li>Leather cleaned and conditioned.</li>
+                <li>Dash, console, doors and vents wiped down.</li>
+                <li>Glass and mirrors.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Outside</h4>
+              <ul>
+                <li>Hand washed from the roof to the rockers.</li>
+                <li>Wheels, wells and tires degreased.</li>
+                <li>Bugs and tar taken off.</li>
+                <li>Tires dressed.</li>
+                <li>Glass, trim and door jambs.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="inc" id="incFull" hidden>
+          <h3>Full</h3>
+          <ul class="inc-one">
+            <li>Everything in Express, plus the deep interior.</li>
+            <li>Carpets, mats and cloth seats shampooed with a hot water extractor.</li>
+            <li>Steam on the vents, cupholders, console, seat rails and door pockets.</li>
+            <li>Set-in stains worked on. If one will not come out, we tell you before we start.</li>
+          </ul>
+        </div>
+      </div>
+
+      <button type="button" class="less-line" data-open="less">Need something less? <u>Get a quick price.</u></button>
+    </div>
+  </section>
+
+  <!-- ===== before and after ===== -->
+  <section class="sec" id="proof">
+    <div class="wrap pad">
+      <h2 class="h rv">Before and after</h2>
+      <p class="lede rv">Our own jobs. Drag a photo to compare.</p>
+
+      <div class="jobs2">
+        <figure class="ba rv">
+          <div class="cmp" data-type="drag">
+            <img class="cmp-a" src="../assets/jobs/tesla-model-y/01.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="Tesla Model Y before, hair worked into the carpet">
+            <img class="cmp-b" src="../assets/jobs/tesla-model-y/04.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The same Tesla Model Y after, carpet cleared">
+            <span class="tag tag-a">Before</span><span class="tag tag-b">After</span>
+            <div class="cmp-line"><span class="cmp-knob" role="slider" tabindex="0" aria-label="Tesla Model Y, drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+          </div>
+          <figcaption class="ba-cap"><b>Tesla Model Y.</b> Hair worked into the carpet, then cleared.</figcaption>
+        </figure>
+
+        <figure class="ba rv">
+          <div class="pair">
+            <figure><img src="../assets/jobs/camry/03.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2013 Toyota Camry cloth seat before, stains set in"><span class="tag">Before</span></figure>
+            <figure><img src="../assets/jobs/camry/05.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The Camry front seats after, cleaned"><span class="tag">After</span></figure>
+          </div>
+          <figcaption class="ba-cap"><b>2013 Toyota Camry.</b> Stains set into the cloth seats, then cleaned.</figcaption>
+        </figure>
+
+        <figure class="ba rv">
+          <div class="cmp" data-type="drag">
+            <img class="cmp-a" src="../assets/jobs/rav4/02.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2016 Toyota RAV4 wheel before">
+            <img class="cmp-b" src="../assets/jobs/rav4/03.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The same RAV4 wheel after">
+            <span class="tag tag-a">Before</span><span class="tag tag-b">After</span>
+            <div class="cmp-line"><span class="cmp-knob" role="slider" tabindex="0" aria-label="2016 Toyota RAV4 wheel, drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+          </div>
+          <figcaption class="ba-cap"><b>2016 Toyota RAV4.</b> Wheel, before and after.</figcaption>
+        </figure>
+
+        <figure class="ba rv">
+          <div class="pair">
+            <figure><img src="../assets/jobs/kia-soul/01.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2018 Kia Soul back seat and mats before" style="object-position:60% 50%"><span class="tag">Before</span></figure>
+            <figure><img src="../assets/jobs/kia-soul/08.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2018 Kia Soul back seat after"><span class="tag">After</span></figure>
+          </div>
+          <figcaption class="ba-cap"><b>2018 Kia Soul.</b> Dirt and hair ground into the mats and seats.</figcaption>
+        </figure>
+      </div>
+
+      <div class="jobs2 more-wrap" id="moreJobs" hidden>
+        <figure class="ba">
+          <div class="cmp" data-type="drag">
+            <img class="cmp-a" src="../assets/jobs/pacifica/02.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2023 Chrysler Pacifica cargo floor before, crumbs" style="--t:translate(0,1.77%) scale(1.04)">
+            <img class="cmp-b" src="../assets/jobs/pacifica/05.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The same cargo floor after, vacuumed" style="--t:translate(-5%,-4.71%) scale(1.112)">
+            <span class="tag tag-a">Before</span><span class="tag tag-b">After</span>
+            <div class="cmp-line"><span class="cmp-knob" role="slider" tabindex="0" aria-label="2023 Chrysler Pacifica, drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+          </div>
+          <figcaption class="ba-cap"><b>2023 Chrysler Pacifica.</b> Crumbs across the cargo floor, then vacuumed.</figcaption>
+        </figure>
+
+        <figure class="ba">
+          <div class="cmp" data-type="drag">
+            <img class="cmp-a" src="../assets/jobs/rav4/04.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="2016 Toyota RAV4 cargo area before">
+            <img class="cmp-b" src="../assets/jobs/rav4/05.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="The same RAV4 cargo area after">
+            <span class="tag tag-a">Before</span><span class="tag tag-b">After</span>
+            <div class="cmp-line"><span class="cmp-knob" role="slider" tabindex="0" aria-label="2016 Toyota RAV4 cargo area, drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+          </div>
+          <figcaption class="ba-cap"><b>2016 Toyota RAV4.</b> Cargo area, before and after.</figcaption>
+        </figure>
+
+        <figure class="ba">
+          <div class="pair">
+            <figure><img src="../assets/work/merc-trunk-before.jpg" width="904" height="1200" loading="lazy" decoding="async" alt="Mercedes trunk lid before, water spots"><span class="tag">Before</span></figure>
+            <figure><img src="../assets/work/merc-trunk-after.jpg" width="904" height="1200" loading="lazy" decoding="async" alt="The same Mercedes trunk lid after"><span class="tag">After</span></figure>
+          </div>
+          <figcaption class="ba-cap"><b>Mercedes.</b> Water spots on the trunk lid.</figcaption>
+        </figure>
+
+        <figure class="ba">
+          <div class="pair">
+            <figure><img src="../assets/work/tesla-sap-before.jpg" width="900" height="1200" loading="lazy" decoding="async" alt="Tesla before, tree sap on the paint"><span class="tag">Before</span></figure>
+            <figure><img src="../assets/work/tesla-sap-after.jpg" width="900" height="1200" loading="lazy" decoding="async" alt="The same Tesla after"><span class="tag">After</span></figure>
+          </div>
+          <figcaption class="ba-cap"><b>Tesla.</b> Tree sap, before and after.</figcaption>
+        </figure>
+      </div>
+
+      <button type="button" class="btn btn-o" id="moreBtn" aria-expanded="false" aria-controls="moreJobs">More jobs</button>
+    </div>
+  </section>
+
+  <!-- ===== reviews ===== -->
+  <section class="sec" id="reviews">
+    <div class="wrap pad">
+      <h2 class="score rv"><b>5.0</b><span>on Google,<br>from 15 reviews</span></h2>
+      <ul class="quotes">
+        <li class="rv"><blockquote>"Much needed and well appreciated and fast service !! Quality service and lasting detail !"</blockquote><cite>Jeffrey G., Google</cite></li>
+        <li class="rv"><blockquote>"Arrived on time friendly faces and great service"</blockquote><cite>Mason A., Google</cite></li>
+        <li class="rv"><blockquote>"Professional Service, cleaned everything well."</blockquote><cite>Jose P., Google</cite></li>
+      </ul>
+      <p class="after-q rv"><a class="link" href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener">Read the reviews on Google</a><br>Owner-operated since 2024. The people who run it are the ones doing your car.</p>
+    </div>
+  </section>
+
+  <!-- ===== how it works ===== -->
+  <section class="sec" id="how">
+    <div class="wrap pad">
+      <h2 class="h rv">How it works</h2>
+      <figure class="how-pic rv"><img src="../assets/jobs/bmw-5-series/08.jpg" width="864" height="1080" loading="lazy" decoding="async" alt="White BMW 530e in a customer's driveway" style="object-position:50% 46%"></figure>
+      <ol class="steps">
+        <li class="rv"><span class="num" aria-hidden="true">1</span><span>Pick a time. No deposit.</span></li>
+        <li class="rv"><span class="num" aria-hidden="true">2</span><span>We come to your driveway, apartment lot or work.</span></li>
+        <li class="rv"><span class="num" aria-hidden="true">3</span><span>Look the car over, then pay.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== questions ===== -->
+  <section class="sec last" id="faq">
+    <div class="wrap pad">
+      <h2 class="h rv">Questions</h2>
+      <div class="faq rv">
+        <details><summary>Do you come to me?<span class="pm" aria-hidden="true"></span></summary><p class="a">Yes. Your driveway, apartment lot or work, in Elk Grove and south Sacramento. No travel charge within about <span data-cfg="freeMiles">10</span> miles of Elk Grove. Past <span data-cfg="freeMiles">10</span> miles it is <span data-cfg-m="mileRate">$1</span> a mile for the miles over ten. You can also drop the car off at <span data-cfg="dropoff">9280 Trout Way, Elk Grove</span>.</p></details>
+        <details><summary>What do you need from me?<span class="pm" aria-hidden="true"></span></summary><p class="a">A parking spot, an outside spigot and an outdoor outlet. We bring the equipment, and we take <span data-cfg-m="hookupOff">$5</span> off for using them. Not sure you have them? Say so when you book and we will text you before we drive over to sort it out.</p></details>
+        <details><summary>When do I pay?<span class="pm" aria-hidden="true"></span></summary><p class="a">When the car is done. There is no deposit. You look the car over, then you pay: cash, Zelle, Cash App, Venmo, Apple Pay or card.</p></details>
+        <details><summary>What if it rains, or I need to move it?<span class="pm" aria-hidden="true"></span></summary><p class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Rescheduling is free. Canceling within 12 hours of your appointment is a <span data-cfg-m="cancelFee">$20</span> fee.</p></details>
+        <details><summary>Is there a deal for two cars?<span class="pm" aria-hidden="true"></span></summary><p class="a">Yes. Two cars at the same address: <span data-cfg-m="secondCarOff">$25</span> off the second car.</p></details>
+      </div>
+    </div>
+  </section>
+ </div>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <img class="flogo" src="../assets/logo-900.png" width="900" height="412" loading="lazy" decoding="async" alt="Valley Details. Cleaner cars, brighter days.">
+        <p class="tagline">Cleaner cars. Brighter days.</p>
+        <p class="tiny">Mobile car detailing, Elk Grove, California.</p>
+      </div>
+      <div>
+        <div class="contact">
+          <a href="tel:+19162490631"><span>Call</span><span>(916) 249-0631</span></a>
+          <a href="sms:+19167537822"><span>Text</span><span>(916) 753-7822</span></a>
+          <a href="https://www.instagram.com/valleydetailsca/" target="_blank" rel="noopener"><span>Instagram</span><span>@valleydetailsca</span></a>
+          <div><span>Area</span><span>Elk Grove and south Sacramento</span></div>
+          <div><span>Hours</span><span>8am to 8pm, every day</span></div>
+        </div>
+        <p class="tiny">This page is a design preview. Booking is live at valleydetails.site.</p>
+      </div>
+    </div>
+  </footer>
+  <div class="end" aria-hidden="true"></div>
+</div>
+</main>
+
+<!-- the bar: price, Call, Book. On screen the whole time. -->
+<nav class="bar" id="bar" aria-label="Call or book">
+  <p class="bar-price"><span class="bar-label" id="barLabel">Starts at</span><b id="barPrice">$150</b></p>
+  <a class="btn-call" href="tel:+19162490631">Call</a>
+  <button type="button" class="book-btn" data-open="bar">Book</button>
+</nav>
+
+<!-- booking pop-up (a front-end mock, it sends nothing) -->
+<div class="modal" id="modal" hidden>
+  <div class="dim" id="dim"></div>
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shTitle" tabindex="-1">
+    <div class="sh-head">
+      <button type="button" class="ib" id="backBtn" aria-label="Back to pick a time" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <h2 id="shTitle">Pick a time</h2>
+      <span class="sh-step" id="shStep">1 of 2</span>
+      <button type="button" class="ib" id="closeBtn" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+
+    <div class="sh-body" id="shBody">
+      <!-- step 1: pick a time -->
+      <div class="step" id="step1">
+        <p class="lb" id="lbSvc"><span>Service</span><button type="button" id="svcBack" hidden>Back to Express and Full</button></p>
+        <div class="chips c2" role="group" aria-labelledby="lbSvc">
+          <button type="button" class="chip svc" data-svc="express" aria-pressed="true"><span>Express</span><b data-price="express">$150</b></button>
+          <button type="button" class="chip svc" data-svc="full" aria-pressed="false"><span>Full</span><b data-price="full">$250</b></button>
+          <button type="button" class="chip svc" data-svc="inside" aria-pressed="false" hidden><span>Inside only</span><b data-price="inside">$100</b></button>
+          <button type="button" class="chip svc" data-svc="outside" aria-pressed="false" hidden><span>Outside only</span><b data-price="outside">$75</b></button>
+        </div>
+        <p class="lb" id="lbSize"><span>Vehicle</span></p>
+        <div class="chips c3s" role="group" aria-labelledby="lbSize">
+          <button type="button" class="chip" data-size="sedan" aria-pressed="true">Sedan</button>
+          <button type="button" class="chip" data-size="suv" aria-pressed="false">SUV</button>
+          <button type="button" class="chip" data-size="truck" aria-pressed="false">Truck or 3-row</button>
+        </div>
+        <p class="lb" id="lbDay"><span>Day</span></p>
+        <div class="chips c7" id="days" role="group" aria-labelledby="lbDay"></div>
+        <p class="lb" id="lbTime"><span>Time</span></p>
+        <div class="chips c4" id="times" role="group" aria-labelledby="lbTime"></div>
+      </div>
+
+      <!-- step 2: where and who -->
+      <form class="step" id="step2" novalidate hidden>
+        <p class="recap" id="recap"></p>
+        <div class="f2">
+          <label class="field" id="fName"><span>Name</span><input class="inp" id="bName" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next"></label>
+          <label class="field" id="fPhone"><span>Mobile</span><input class="inp" id="bPhone" name="tel" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next"></label>
+        </div>
+        <div id="fAddr">
+          <p class="lb"><label for="bAddr" id="addrLabel">Address</label><button type="button" class="mini" id="dropSw" role="switch" aria-checked="false"><span>I'll drop it off instead</span><em></em></button></p>
+          <input class="inp" id="bAddr" name="address" type="text" autocomplete="street-address" placeholder="Street and city" enterkeyhint="done">
+          <p class="say" id="dropNote" hidden>Drop-off is <span data-cfg="dropoff">9280 Trout Way, Elk Grove</span>.</p>
+        </div>
+        <div id="fWater">
+          <p class="lb" id="lbWater"><span>Outside spigot and outdoor outlet we can use?</span></p>
+          <div class="chips c3" role="group" aria-labelledby="lbWater">
+            <button type="button" class="chip" data-water="yes" aria-pressed="false">Yes</button>
+            <button type="button" class="chip" data-water="unsure" aria-pressed="false">Not sure</button>
+            <button type="button" class="chip" data-water="no" aria-pressed="false">No</button>
+          </div>
+          <p class="say" id="waterNote" role="status" hidden>No problem. We will text you before we drive over to sort it out.</p>
+        </div>
+        <div id="addWrap">
+          <button type="button" class="addrow" id="addToggle" aria-expanded="false" aria-controls="addPanel"><span id="addLabel">Add pet hair or shampoo</span><span class="pm" aria-hidden="true"></span></button>
+          <div id="addPanel" hidden>
+            <button type="button" class="sw" role="switch" aria-checked="false" data-addon="pet"><span>Heavy pet hair <b data-addon-price="pet">$40</b></span><em></em></button>
+            <button type="button" class="sw" role="switch" aria-checked="false" data-addon="shampoo"><span>Seat or carpet shampoo <b data-addon-price="shampoo">$50</b></span><em></em></button>
+          </div>
+        </div>
+        <label class="check"><input type="checkbox" id="bOptin" name="optin"><span>Text me open-slot deals. Reply STOP anytime.</span></label>
+        <p class="fine">No deposit. Pay when the car is done. Rescheduling is free. Canceling within 12 hours of your appointment is a <span data-cfg-m="cancelFee">$20</span> fee.</p>
+      </form>
+
+      <!-- after the last tap -->
+      <div class="step done" id="step3" hidden>
+        <p class="done-h">This is a design preview. Booking is live at valleydetails.site.</p>
+        <p class="done-p">After you book, text us a few pics of your car if you can. If it needs extra time, we tell you the time and price before we come out.</p>
+        <p class="done-r" id="doneRecap"></p>
+      </div>
+    </div>
+
+    <div class="sh-foot">
+      <div class="f1" id="foot1">
+        <p class="f1-l" aria-live="polite"><span id="f1When">Pick a day and a time</span><b id="f1Total">$150</b></p>
+        <button type="button" class="btn btn-k next" id="nextBtn" disabled>Next</button>
+      </div>
+      <div id="foot2" hidden>
+        <ul class="rows" id="rows" aria-live="polite"></ul>
+        <p class="miss" id="miss" role="alert" hidden></p>
+        <button type="button" class="book-btn big" id="bookGo">Book, $150</button>
+      </div>
+      <div id="foot3" hidden>
+        <button type="button" class="btn btn-k" id="doneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Every price lives here. Change them in this one place. */
+var CFG = {
+  tiers: {
+    express: { name: 'Express',      price: { sedan: 150, suv: 170, truck: 190 } },
+    full:    { name: 'Full',         price: { sedan: 250, suv: 280, truck: 310 } },
+    inside:  { name: 'Inside only',  price: { sedan: 100, suv: 110, truck: 120 } },
+    outside: { name: 'Outside only', price: { sedan: 75,  suv: 85,  truck: 95 } }
+  },
+  sizes: { sedan: 'Sedan', suv: 'SUV', truck: 'Truck or 3-row' },
+  addons: {
+    pet:     { name: 'Heavy pet hair', price: 40 },
+    shampoo: { name: 'Seat or carpet shampoo', price: 50 }   /* Express only. Full already includes it. */
+  },
+  hookupOff: 5,          /* off for using the customer's spigot and outlet */
+  secondCarOff: 25,
+  cancelFee: 20,
+  freeMiles: 10,
+  mileRate: 1,
+  dropoff: '9280 Trout Way, Elk Grove',
+  firstHour: 8,          /* 8 AM */
+  lastHour: 18,          /* 6 PM */
+  daysShown: 7
+};
+
+(function () {
+  'use strict';
+  var d = document, root = d.documentElement, body = d.body;
+  root.classList.add('js');
+  var $ = function (s, c) { return (c || d).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var desktop = window.matchMedia('(min-width: 900px)');
+  var money = function (n) { return '$' + n; };
+  var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
+
+  /* ---------- state ---------- */
+  var S = { main: 'express', less: 'inside', mode: 'main', picked: false, size: 'sedan', day: null, time: null, drop: false, water: null, pet: false, shampoo: false, step: 1, tried: false };
+
+  function tierKey() { return S.mode === 'less' ? S.less : S.main; }
+  function sizeWord() { return S.size === 'sedan' ? 'sedan' : S.size === 'suv' ? 'SUV' : 'truck or 3-row'; }
+  function base() { return CFG.tiers[tierKey()].price[S.size]; }
+  function petOk() { return tierKey() !== 'outside'; }
+  function shOk() { return tierKey() === 'express'; }
+  function hookup() { return !S.drop && S.water === 'yes' ? CFG.hookupOff : 0; }
+  function total() { return base() + (S.pet && petOk() ? CFG.addons.pet.price : 0) + (S.shampoo && shOk() ? CFG.addons.shampoo.price : 0) - hookup(); }
+  function ready() { return S.day !== null && !!S.time; }
+
+  function put(el, text) {
+    if (!el || el.textContent === text) return;
+    el.textContent = text;
+    el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
+  }
+  function press(list, test) { list.forEach(function (b) { b.setAttribute('aria-pressed', String(!!test(b))); }); }
+
+  /* facts that come from CFG */
+  $$('[data-cfg]').forEach(function (el) { el.textContent = String(CFG[el.getAttribute('data-cfg')]); });
+  $$('[data-cfg-m]').forEach(function (el) { el.textContent = money(CFG[el.getAttribute('data-cfg-m')]); });
+  $$('[data-addon-price]').forEach(function (el) { el.textContent = money(CFG.addons[el.getAttribute('data-addon-price')].price); });
+
+  /* ---------- days and times (sample data) ---------- */
+  var DAYS = [];
+  (function () {
+    var wd = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var now = new Date(), html = '', i, h;
+    for (i = 1; i <= CFG.daysShown; i++) {
+      var x = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
+      var label = wd[x.getDay()] + ', ' + mo[x.getMonth()] + ' ' + x.getDate();
+      DAYS.push({ label: label });
+      html += '<button type="button" class="chip day" data-day="' + (i - 1) + '" aria-pressed="false" aria-label="' + label + '"><span>' + wd[x.getDay()] + '</span><b>' + x.getDate() + '</b></button>';
+    }
+    $('#days').innerHTML = html;
+    html = '';
+    for (h = CFG.firstHour; h <= CFG.lastHour; h++) {
+      var t = (h % 12 === 0 ? 12 : h % 12) + ' ' + (h < 12 ? 'AM' : 'PM');
+      html += '<button type="button" class="chip time" data-time="' + t + '" aria-pressed="false">' + t + '</button>';
+    }
+    $('#times').innerHTML = html;
+  })();
+  function whenText() { return DAYS[S.day].label + ' at ' + S.time; }
+
+  /* ---------- render everything that shows a price or a choice ---------- */
+  function render() {
+    var T = CFG.tiers, k = tierKey(), name = T[k].name + ', ' + sizeWord();
+    $$('[data-price]').forEach(function (el) { put(el, money(T[el.getAttribute('data-price')].price[S.size])); });
+    $$('[data-size-name]').forEach(function (el) { el.textContent = sizeWord(); });
+    press($$('[data-seg="size"] button'), function (b) { return b.getAttribute('data-v') === S.size; });
+
+    /* bar */
+    $('#barLabel').textContent = S.picked ? name : 'Starts at';
+    put($('#barPrice'), money(S.picked ? base() : T.express.price[S.size]));
+
+    /* step 1 */
+    var less = S.mode === 'less';
+    $$('[data-svc]').forEach(function (b) {
+      var v = b.getAttribute('data-svc'), isLess = v === 'inside' || v === 'outside';
+      b.hidden = isLess !== less;
+      b.setAttribute('aria-pressed', String(v === k));
+    });
+    $('#svcBack').hidden = !less;
+    press($$('[data-size]'), function (b) { return b.getAttribute('data-size') === S.size; });
+    press($$('[data-day]'), function (b) { return S.day === +b.getAttribute('data-day'); });
+    press($$('[data-time]'), function (b) { return S.time === b.getAttribute('data-time'); });
+    $('#nextBtn').disabled = !ready();
+    $('#f1When').textContent = ready() ? whenText() : 'Pick a day and a time';
+    put($('#f1Total'), money(total()));
+
+    /* step 2 */
+    $('#recap').textContent = name + '. ' + (ready() ? whenText() + '.' : '');
+    $('#dropSw').setAttribute('aria-checked', String(S.drop));
+    $('#bAddr').hidden = S.drop;
+    $('#dropNote').hidden = !S.drop;
+    $('#addrLabel').textContent = S.drop ? 'Drop-off' : 'Address';
+    $('#fWater').hidden = S.drop;
+    press($$('[data-water]'), function (b) { return S.water === b.getAttribute('data-water'); });
+    $('#waterNote').hidden = !(S.water === 'unsure' || S.water === 'no');
+    $('#addWrap').hidden = !petOk();
+    $('#addLabel').textContent = shOk() ? 'Add pet hair or shampoo' : 'Add heavy pet hair';
+    var swPet = $('[data-addon="pet"]'), swSh = $('[data-addon="shampoo"]');
+    swSh.hidden = !shOk();
+    swPet.setAttribute('aria-checked', String(S.pet && petOk()));
+    swSh.setAttribute('aria-checked', String(S.shampoo && shOk()));
+
+    var rows = [[name, money(base())]];
+    if (S.pet && petOk()) rows.push([CFG.addons.pet.name, money(CFG.addons.pet.price)]);
+    if (S.shampoo && shOk()) rows.push([CFG.addons.shampoo.name, money(CFG.addons.shampoo.price)]);
+    if (hookup()) rows.push(['Using your spigot and outlet', money(hookup()) + ' off']);
+    $('#rows').innerHTML = rows.map(function (r) { return '<li><span>' + r[0] + '</span><span>' + r[1] + '</span></li>'; }).join('');
+    $('#bookGo').textContent = 'Book, ' + money(total());
+    if (S.tried) missing(false);
+  }
+
+  /* ---------- the pop-up ---------- */
+  var modal = $('#modal'), sheet = $('#sheet'), shBody = $('#shBody'), lastFocus = null, closing = false, lockY = 0;
+  var behind = [$('#main'), $('#top'), $('#bar')];
+
+  function lock() {
+    lockY = window.pageYOffset;
+    root.classList.add('locked');
+    root.style.scrollSnapType = 'none';
+    root.style.scrollBehavior = 'auto';
+    body.style.position = 'fixed';
+    body.style.top = (-lockY) + 'px';
+    body.style.left = '0'; body.style.right = '0'; body.style.width = '100%';
+  }
+  function unlock() {
+    body.style.position = ''; body.style.top = ''; body.style.left = ''; body.style.right = ''; body.style.width = '';
+    root.classList.remove('locked');
+    window.scrollTo(0, lockY);
+    requestAnimationFrame(function () { root.style.scrollSnapType = ''; root.style.scrollBehavior = ''; });
+  }
+  function showStep(n, dir) {
+    S.step = n;
+    [1, 2, 3].forEach(function (i) { $('#step' + i).hidden = i !== n; $('#foot' + i).hidden = i !== n; });
+    $('#shTitle').textContent = n === 1 ? 'Pick a time' : n === 2 ? 'Where and who' : 'Preview only';
+    $('#shStep').hidden = n === 3;
+    $('#shStep').textContent = n + ' of 2';
+    $('#backBtn').hidden = n !== 2;
+    shBody.scrollTop = 0;
+    var el = $('#step' + n);
+    el.classList.remove('enter', 'back');
+    if (dir) { void el.offsetWidth; el.classList.add('enter'); if (dir < 0) el.classList.add('back'); }
+  }
+  function openSheet(src, opener) {
+    if (!modal.hidden) return;
+    if (src === 'express' || src === 'full') { S.mode = 'main'; S.main = src; S.picked = true; S.step = 1; }
+    else if (src === 'less') { S.mode = 'less'; S.picked = true; S.step = 1; }
+    else if (S.step === 3 || (S.step === 2 && !ready())) S.step = 1;
+    lastFocus = opener || d.activeElement;
+    render();
+    showStep(S.step, 0);
+    modal.hidden = false;
+    lock();
+    behind.forEach(function (el) { el.setAttribute('inert', ''); });
+    void modal.offsetWidth;
+    modal.classList.add('open');
+    sheet.focus({ preventScroll: true });
+  }
+  function closeSheet() {
+    if (modal.hidden || closing) return;
+    closing = true;
+    modal.classList.remove('open');
+    behind.forEach(function (el) { el.removeAttribute('inert'); });
+    unlock();
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    setTimeout(function () {
+      modal.hidden = true; closing = false;
+      if (S.step === 3) S.step = 1;
+    }, reduce ? 0 : 260);
+  }
+  $('#dim').addEventListener('click', closeSheet);
+  $('#dim').addEventListener('touchmove', function (e) { e.preventDefault(); }, { passive: false });
+  d.addEventListener('keydown', function (e) {
+    if (modal.hidden) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeSheet(); return; }
+    if (e.key === 'Tab') {
+      var f = $$('button,input,a[href],[tabindex="0"]', sheet).filter(function (el) { return !el.disabled && el.getClientRects().length; });
+      if (!f.length) { e.preventDefault(); return; }
+      var first = f[0], last = f[f.length - 1], a = d.activeElement;
+      if (e.shiftKey && (a === first || a === sheet || !sheet.contains(a))) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && (a === last || !sheet.contains(a))) { e.preventDefault(); first.focus(); }
+    }
+    if (e.key === 'Enter' && e.target.classList && e.target.classList.contains('inp')) {
+      e.preventDefault();
+      var inputs = $$('.inp', sheet).filter(function (el) { return el.getClientRects().length; });
+      var nx = inputs[inputs.indexOf(e.target) + 1];
+      if (nx) nx.focus(); else e.target.blur();
+    }
+  });
+  d.addEventListener('focusin', function (e) {
+    if (!modal.hidden && !closing && !sheet.contains(e.target)) sheet.focus({ preventScroll: true });
+  });
+  $('#step2').addEventListener('submit', function (e) { e.preventDefault(); });
+
+  /* what is still missing on step 2, in plain words */
+  function missing(mark) {
+    var miss = [];
+    function need(el, word, bad) { if (mark || !bad) el.classList.toggle('need', bad); if (bad) miss.push(word); }
+    need($('#fName'), 'your name', !$('#bName').value.trim());
+    need($('#fPhone'), 'your mobile number', $('#bPhone').value.replace(/\D/g, '').length < 10);
+    need($('#fAddr'), 'your address', !S.drop && !$('#bAddr').value.trim());
+    need($('#fWater'), 'an answer on the spigot and outlet', !S.drop && !S.water);
+    var m = $('#miss');
+    if (miss.length) {
+      var list = miss.length > 1 ? miss.slice(0, -1).join(', ') + ' and ' + miss[miss.length - 1] : miss[0];
+      m.textContent = 'Still needed: ' + list + '.';
+      m.hidden = false;
+    } else { m.hidden = true; }
+    return miss;
+  }
+  $$('.inp', sheet).forEach(function (i) { i.addEventListener('input', function () { if (S.tried) missing(false); }); });
+
+  /* ---------- smooth jumps (skip to prices) ---------- */
+  function go(id) {
+    var el = d.getElementById(id);
+    if (!el) return;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - (desktop.matches ? 68 : 0);
+    window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+  }
+
+  /* ---------- every tap ---------- */
+  d.addEventListener('click', function (e) {
+    var t = e.target, b;
+    if ((b = t.closest('[data-goto]'))) { e.preventDefault(); go(b.getAttribute('data-goto')); return; }
+    if (t.closest('.logo')) { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); return; }
+    if ((b = t.closest('[data-open]'))) { e.preventDefault(); openSheet(b.getAttribute('data-open'), b); return; }
+
+    if ((b = t.closest('[data-seg="size"] button'))) { S.size = b.getAttribute('data-v'); render(); return; }
+    if ((b = t.closest('[data-size]'))) { S.size = b.getAttribute('data-size'); render(); return; }
+    if ((b = t.closest('[data-svc]'))) {
+      var v = b.getAttribute('data-svc');
+      if (v === 'inside' || v === 'outside') S.less = v; else S.main = v;
+      S.picked = true; render(); return;
+    }
+    if (t.closest('#svcBack')) { S.mode = 'main'; render(); $('[data-svc="' + S.main + '"]').focus({ preventScroll: true }); return; }
+    if ((b = t.closest('[data-day]'))) { S.day = +b.getAttribute('data-day'); render(); return; }
+    if ((b = t.closest('[data-time]'))) { S.time = b.getAttribute('data-time'); render(); return; }
+    if (t.closest('#nextBtn')) { if (ready()) { showStep(2, 1); sheet.focus({ preventScroll: true }); } return; }
+    if (t.closest('#backBtn')) { showStep(1, -1); sheet.focus({ preventScroll: true }); return; }
+    if (t.closest('#closeBtn') || t.closest('#doneBtn')) { closeSheet(); return; }
+
+    if (t.closest('#dropSw')) { S.drop = !S.drop; render(); return; }
+    if ((b = t.closest('[data-water]'))) { S.water = b.getAttribute('data-water'); render(); return; }
+    if ((b = t.closest('#addToggle'))) {
+      var p = $('#addPanel'), open = p.hidden;
+      p.hidden = !open; b.setAttribute('aria-expanded', String(open));
+      return;
+    }
+    if ((b = t.closest('[data-addon]'))) { var k = b.getAttribute('data-addon'); S[k] = !S[k]; render(); return; }
+
+    /* the last Book: a mock. Nothing is sent anywhere. */
+    if (t.closest('#bookGo')) {
+      S.tried = true;
+      if (missing(true).length) return;
+      $('#doneRecap').textContent = CFG.tiers[tierKey()].name + ', ' + sizeWord() + '. ' + whenText() + '. ' + money(total()) + ', paid when the car is done.';
+      showStep(3, 1);
+      sheet.focus({ preventScroll: true });
+      return;
+    }
+
+    /* what's included */
+    if ((b = t.closest('[data-inc]'))) {
+      var panel = d.getElementById(b.getAttribute('data-inc')), on = panel.hidden;
+      panel.hidden = !on; b.setAttribute('aria-expanded', String(on));
+      if (on) panel.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+      return;
+    }
+    /* more jobs */
+    if ((b = t.closest('#moreBtn'))) {
+      var wrap = $('#moreJobs'), show = wrap.hidden;
+      wrap.hidden = !show;
+      b.setAttribute('aria-expanded', String(show));
+      b.textContent = show ? 'Fewer jobs' : 'More jobs';
+      if (show) cmps.forEach(function (c) { c.resize(); });
+      else b.scrollIntoView({ block: 'center' });
+      return;
+    }
+  });
+
+  /* ---------- before and after: drag, tap, or let it wipe once ---------- */
+  var cmps = [];
+  function Cmp(el) {
+    var type = el.getAttribute('data-type');
+    var img = $('.cmp-b', el), b = d.createElement('div'), line = $('.cmp-line', el), ta = $('.tag-a', el), tb = $('.tag-b', el);
+    b.className = 'cmp-clip'; img.parentNode.insertBefore(b, img); b.appendChild(img);   /* the wipe clips a wrapper, so a nudged photo keeps a straight edge */
+    var btns = $$('.toggle button', el), knob = $('.cmp-knob', el);
+    var p = 100, v = 0, raf = 0, w = el.clientWidth || 1, touched = false, played = false, timer = 0;
+
+    function set(n) {
+      p = n;
+      var c = clamp(n, 0, 100), clip = 'inset(0 0 0 ' + c.toFixed(2) + '%)';
+      b.style.webkitClipPath = clip; b.style.clipPath = clip;
+      line.style.transform = 'translate3d(' + (c / 100 * w).toFixed(1) + 'px,0,0)';
+      if (type === 'switch') line.style.opacity = (c > 0.6 && c < 99.4) ? 1 : 0;
+      if (ta && tb) { ta.style.opacity = c > 12 ? 1 : 0; tb.style.opacity = c < 88 ? 1 : 0; }
+      if (btns.length) { btns[0].setAttribute('aria-pressed', String(c >= 50)); btns[1].setAttribute('aria-pressed', String(c < 50)); }
+      if (knob) knob.setAttribute('aria-valuenow', String(Math.round(c)));
+    }
+    function to(target, k, damp) {
+      cancelAnimationFrame(raf);
+      if (reduce) { v = 0; set(target); return; }
+      k = k || 170; damp = damp || 19;
+      var last = performance.now();
+      (function step(now) {
+        var dt = Math.min(0.032, (now - last) / 1000); last = now;
+        v += (-k * (p - target) - damp * v) * dt;
+        p += v * dt;
+        set(p);
+        if (Math.abs(p - target) < 0.06 && Math.abs(v) < 0.6) { v = 0; set(target); return; }
+        raf = requestAnimationFrame(step);
+      })(last);
+    }
+    function play() {
+      if (played || touched) return;
+      played = true;
+      if (type === 'drag') {
+        if (reduce) { set(50); return; }
+        timer = setTimeout(function () { if (!touched) to(50, 150, 16); }, 420);
+      } else if (!reduce) {
+        timer = setTimeout(function () { if (!touched) to(0, 55, 14.8); }, 1150);
+      }
+    }
+    function touch() { touched = true; clearTimeout(timer); }
+
+    var id = null, sx = 0, sy = 0, sp = 0, st = 0, drag = false;
+    el.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('button')) return;
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      id = e.pointerId; sx = e.clientX; sy = e.clientY; sp = clamp(p, 0, 100); st = performance.now(); drag = false; w = el.clientWidth || 1;
+    });
+    el.addEventListener('pointermove', function (e) {
+      if (e.pointerId !== id) return;
+      var dx = e.clientX - sx, dy = e.clientY - sy;
+      if (!drag) {
+        if (Math.abs(dx) > 6 && Math.abs(dx) > Math.abs(dy)) {
+          drag = true; touch(); cancelAnimationFrame(raf); v = 0;
+          try { el.setPointerCapture(id); } catch (_) {}
+        } else return;
+      }
+      set(clamp(sp + dx / w * 100, 0, 100));
+    });
+    function end(e, cancelled) {
+      if (e.pointerId !== id) return;
+      id = null;
+      if (drag) {
+        drag = false;
+        if (type === 'switch') { var moved = p - sp; to(Math.abs(moved) > 16 ? (moved < 0 ? 0 : 100) : (sp >= 50 ? 100 : 0), 120, 21); }
+        return;
+      }
+      if (cancelled) return;
+      if (Math.abs(e.clientX - sx) < 8 && Math.abs(e.clientY - sy) < 8 && performance.now() - st < 600) {
+        touch();
+        if (type === 'switch') to(p >= 50 ? 0 : 100, 70, 16.5);
+        else { var r = el.getBoundingClientRect(); to(clamp((e.clientX - r.left) / r.width * 100, 4, 96), 150, 19); }   /* a tap on a drag photo moves the handle there */
+      }
+    }
+    el.addEventListener('pointerup', function (e) { end(e, false); });
+    el.addEventListener('pointercancel', function (e) { end(e, true); });
+    btns.forEach(function (bt, i) { bt.addEventListener('click', function () { touch(); to(i === 0 ? 100 : 0, 70, 16.5); }); });
+    if (knob) knob.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); touch(); to(clamp(clamp(p, 0, 100) + (e.key === 'ArrowLeft' ? -10 : 10), 0, 100), 200, 26); }
+    });
+
+    set(100);
+    return { el: el, play: play, resize: function () { w = el.clientWidth || 1; set(p); } };
+  }
+  $$('.cmp').forEach(function (el) { cmps.push(Cmp(el)); });
+  window.addEventListener('resize', function () { cmps.forEach(function (c) { c.resize(); }); });
+
+  if ('IntersectionObserver' in window) {
+    var seen = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var job = en.target.closest('.job');
+        if (job) job.classList.add('on');
+        for (var i = 0; i < cmps.length; i++) if (cmps[i].el === en.target) cmps[i].play();
+      });
+    }, { threshold: 0.55 });
+    cmps.forEach(function (c) { seen.observe(c.el); });
+
+    var rv = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); rv.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    $$('.rv').forEach(function (el) { rv.observe(el); });
+  } else {
+    $$('.rv').forEach(function (el) { el.classList.add('in'); });
+    $$('.job').forEach(function (el) { el.classList.add('on'); });
+    cmps.forEach(function (c) { c.play(); });
+  }
+
+  /* ---------- story progress follows the scroll ---------- */
+  var jobs = $$('.job'), fills = $$('#segs b'), top = $('#top'), rest = $('#rest'), ticking = false;
+  function progress() {
+    ticking = false;
+    var anchor = desktop.matches ? 108 : 0;
+    for (var i = 0; i < jobs.length; i++) {
+      var r = jobs[i].getBoundingClientRect();
+      var f = clamp(1 - (r.top - anchor) / (r.height + (desktop.matches ? 28 : 0)), 0, 1);
+      fills[i].style.transform = 'scaleX(' + f.toFixed(3) + ')';
+    }
+    if (!desktop.matches) top.classList.toggle('away', rest.getBoundingClientRect().top <= 61);
+    else { top.classList.remove('away'); top.classList.toggle('done', rest.getBoundingClientRect().top <= 68); }
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(progress); } }, { passive: true });
+  window.addEventListener('resize', progress);
+  progress();
+
+  render();
+})();
+</script>
+</body>
+</html>
