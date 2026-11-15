@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#06080b">
+<meta name="format-detection" content="telephone=no">
+<title>Valley Details, mobile car detailing in Elk Grove</title>
+<script>document.documentElement.className='js'</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Saira+Expanded:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="bg/bmw-front.jpg">
+<style>
+@property --m{syntax:'<percentage>';inherits:false;initial-value:140%}
+:root{
+  --ink:#06080b;--ink2:#0d1116;
+  --ivory:#f4f1ea;
+  --t2:rgba(244,241,234,.76);--t3:rgba(244,241,234,.54);
+  --line:rgba(244,241,234,.15);--line2:rgba(244,241,234,.3);
+  --glass:rgba(9,12,17,.5);
+  --red:#e0161e;
+  --out:cubic-bezier(.16,1,.3,1);--in:cubic-bezier(.6,0,.9,.35);--spring:cubic-bezier(.34,1.56,.64,1);
+  --hf:"Saira Expanded","Saira","Arial Black",system-ui,sans-serif;
+  --bf:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --gut:16px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{overflow-x:hidden;scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--ink)}
+body{margin:0;overflow-x:hidden;font-family:var(--bf);font-size:16px;line-height:1.55;color:var(--ivory);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+@supports (overflow:clip){body{overflow-x:clip}}
+::selection{background:var(--ivory);color:var(--ink)}
+img{max-width:100%;display:block}
+a{color:inherit}
+p{margin:0}
+h1,h2,h3{font-family:var(--hf);margin:0;line-height:1.08;letter-spacing:-.012em;text-wrap:balance}
+h1{font-weight:800;font-size:clamp(28px,7.7vw,58px)}
+h2{font-weight:700;font-size:clamp(24px,6.3vw,42px)}
+h3{font-weight:700;font-size:20px}
+button{font:inherit;color:inherit;-webkit-appearance:none;appearance:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--ivory);outline-offset:3px}
+.nb{white-space:nowrap}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- living backdrop: their own job photos, pre-blurred, drifting and crossfading ---------- */
+.bd{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;overflow:hidden;z-index:0;background:var(--ink);pointer-events:none}
+.bd-l{position:absolute;inset:0;opacity:0;visibility:hidden}
+.bd-l.on{visibility:visible}
+.bd-l:first-child{opacity:1}
+.bd-l img{position:absolute;left:-14%;top:-14%;width:128%;height:128%;max-width:none;object-fit:cover;animation:drift 44s cubic-bezier(.45,.05,.55,.95) infinite alternate;animation-play-state:paused;will-change:transform}
+.bd-l:nth-child(even) img{animation-name:drift2;animation-duration:52s}
+.bd-l.on img{animation-play-state:running}
+@keyframes drift{from{transform:translate3d(-3.5%,-2.5%,0) scale(1)}to{transform:translate3d(3.5%,3%,0) scale(1.1)}}
+@keyframes drift2{from{transform:translate3d(3%,2.5%,0) scale(1.09)}to{transform:translate3d(-3.5%,-3%,0) scale(1)}}
+.bd-wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,8,11,.24) 0%,rgba(6,8,11,.42) 45%,rgba(6,8,11,.6) 100%)}
+/* headlights coming on: the page starts dark and lifts once */
+.bd-wash::after{content:"";position:absolute;inset:0;background:var(--ink);opacity:0}
+.js .bd-wash::after{animation:lightsOn 2.4s var(--out) .05s both}
+@keyframes lightsOn{from{opacity:1}to{opacity:0}}
+
+.page{position:relative;z-index:1}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 var(--gut)}
+section{padding:60px 0;scroll-margin-top:8px}
+.sec-head{margin-bottom:22px}
+.sec-head p{margin-top:12px;color:var(--t2);max-width:560px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.34em;min-height:54px;padding:0 22px;border-radius:14px;border:1px solid transparent;font:600 15px/1.1 var(--hf);letter-spacing:.005em;text-decoration:none;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .55s var(--spring),background-color .25s var(--out),border-color .25s var(--out)}
+.btn:active{transform:scale(.955);transition-duration:.09s}
+.btn-red{background:var(--red);color:#fff}
+.btn-ghost{background:rgba(244,241,234,.07);border-color:var(--line2);color:var(--ivory)}
+.btn-dark{background:var(--ink);color:var(--ivory)}
+.btn-sm{min-height:42px;padding:0 18px;font-size:14px;border-radius:12px}
+.btn-block{display:flex;width:100%}
+
+/* ---------- glass ---------- */
+.glass{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:22px;-webkit-backdrop-filter:blur(18px) saturate(1.25);backdrop-filter:blur(18px) saturate(1.25);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 24px 60px -34px rgba(0,0,0,.8)}
+.glass-lite{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(9,12,17,.56)}
+/* water sheeting off the panel once, when it arrives */
+.sheet{overflow:hidden}
+.sheet::before{content:"";position:absolute;left:0;right:0;top:0;height:46%;pointer-events:none;z-index:2;opacity:0;transform:translate3d(0,-110%,0);
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.03) 55%,rgba(255,255,255,.1) 94%,rgba(255,255,255,0) 100%);
+  border-radius:0 0 48% 52%/0 0 16px 26px}
+.js .sheet.in::before{animation:sheet 1.7s cubic-bezier(.45,0,.2,1) .25s 1 both}
+@keyframes sheet{0%{transform:translate3d(0,-110%,0);opacity:1}82%{opacity:1}100%{transform:translate3d(0,230%,0);opacity:0}}
+
+/* ---------- arrivals ---------- */
+.js .rv{opacity:0;transform:translate3d(0,22px,0)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .7s var(--out) var(--d,0s),transform .95s var(--out) var(--d,0s)}
+/* a clean wipe across each photo */
+.js .wipe img{clip-path:inset(0 100% 0 0)}
+.js .wipe.in img{clip-path:inset(0 0 0 0);transition:clip-path 1.2s var(--out) var(--d,0s)}
+.js .wipe .tag{opacity:0}
+.js .wipe.in .tag{opacity:1;transition:opacity .5s var(--out) calc(var(--d,0s) + .7s)}
+
+/* ---------- header ---------- */
+.top{position:relative;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px var(--gut) 0;max-width:1120px;margin:0 auto}
+.brand{display:block;width:172px;flex:none}
+.brand img{width:100%;height:auto}
+
+/* ---------- first screen ---------- */
+.hero{padding:22px 0 30px}
+.js .hero h1{-webkit-mask-image:linear-gradient(180deg,#000 calc(var(--m) - 40%),transparent var(--m));mask-image:linear-gradient(180deg,#000 calc(var(--m) - 40%),transparent var(--m));animation:rinse 1.5s var(--out) .3s both}
+@keyframes rinse{from{--m:0%}to{--m:140%}}
+.lede{margin-top:14px;color:var(--t2);font-size:16px;max-width:520px}
+.from{display:grid;grid-template-columns:1fr 1fr;margin-top:18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.from a{display:block;padding:12px 0 12px;text-decoration:none}
+.from a+a{padding-left:16px;border-left:1px solid var(--line)}
+.from-n{display:block;font:700 15px/1.2 var(--hf)}
+.from-d{display:block;font-size:13px;color:var(--t3);margin-top:3px}
+.from-p{display:block;margin-top:6px;font-size:13px;color:var(--t2)}
+.from-p b{font:800 24px/1 var(--hf);color:var(--ivory);margin-left:2px}
+.hero-cta{margin-top:18px}
+.trust{margin-top:14px;display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13.5px;color:var(--t2)}
+.trust a{text-underline-offset:3px;text-decoration-color:var(--line2)}
+.hero .ba{margin-top:24px}
+.hero .ba-stage{aspect-ratio:1/1}
+.hero .ba-stage img{object-position:50% 100%}
+.trust span{display:none}
+
+/* ---------- before and after drag slider ---------- */
+.ba{margin:0}
+.ba-stage{position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--ink2);touch-action:pan-y;-webkit-user-select:none;user-select:none;cursor:ew-resize;--x:50%}
+.ba-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.ba-after{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--x)) 0 0)}
+.ba-bar{position:absolute;top:0;bottom:0;left:var(--x);width:2px;margin-left:-1px;background:var(--ivory)}
+.ba-bar::before{content:"";position:absolute;top:0;bottom:0;right:2px;width:22px;background:linear-gradient(270deg,rgba(255,255,255,.2),rgba(255,255,255,0))}
+.ba-grip{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:15px;background:var(--ivory);color:var(--ink);display:grid;place-items:center;box-shadow:0 8px 22px rgba(0,0,0,.5);transition:transform .5s var(--spring)}
+.ba-stage.drag .ba-grip{transform:scale(1.12)}
+.ba-grip svg{width:22px;height:22px}
+.tag{position:absolute;padding:5px 9px;border-radius:6px;background:rgba(6,8,11,.74);font:600 12px/1.2 var(--bf);color:var(--ivory);pointer-events:none}
+.ba-tag{top:12px;transition:opacity .3s var(--out)}
+.ba-tag-a{left:12px}.ba-tag-b{right:12px}
+.ba-stage.lo .ba-tag-a,.ba-stage.hi .ba-tag-b{opacity:0}
+.cap{margin-top:10px;font-size:14px;color:var(--t2)}
+.cap b{color:var(--ivory);font-weight:600}
+.cap .hint{display:block;color:var(--t3);margin-top:2px}
+
+/* ---------- segmented control ---------- */
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:5px;padding:5px;border:1px solid var(--line);border-radius:16px;background:rgba(9,12,17,.5)}
+.seg button{min-height:46px;padding:4px 6px;border:0;border-radius:11px;background:transparent;color:var(--t2);font:600 13.5px/1.15 var(--bf);cursor:pointer;transition:background-color .25s var(--out),color .25s var(--out)}
+.seg button[aria-pressed="true"]{background:var(--ivory);color:var(--ink);animation:pop .5s var(--spring)}
+@keyframes pop{from{transform:scale(.93)}to{transform:scale(1)}}
+
+/* ---------- the two tiers ---------- */
+.tiers-seg{max-width:440px;margin-bottom:14px}
+.tier-grid{display:grid;gap:14px}
+.tier{padding:22px 20px 20px;border-radius:22px}
+.tier-for{font-size:13.5px;color:var(--t3);margin-bottom:6px}
+.tier-top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.tier-top h3{font-size:26px;font-weight:800}
+.price{display:inline-block;font:800 40px/1 var(--hf);letter-spacing:-.02em}
+.price.tick{animation:tick .55s var(--spring)}
+@keyframes tick{from{transform:translate3d(0,-38%,0);opacity:0}to{transform:none;opacity:1}}
+.tier-time{margin-top:6px;font-size:14px;color:var(--t2)}
+.tier-body{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:12px;font-size:14.5px;color:var(--t2)}
+.tier-body b{color:var(--ivory);font-weight:600}
+.tier .btn{margin-top:18px}
+.tier-f{background:var(--ivory);color:var(--ink);box-shadow:0 30px 70px -30px rgba(0,0,0,.85)}
+.tier-f .tier-for{color:rgba(6,8,11,.62)}
+.tier-f .tier-time{color:rgba(6,8,11,.72)}
+.tier-f .tier-body{border-top-color:rgba(6,8,11,.14);color:rgba(6,8,11,.82)}
+.tier-f .tier-body b{color:var(--ink)}
+.plus{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.plus li{position:relative;padding-left:22px}
+.plus li::before{content:"";position:absolute;left:0;top:.72em;width:12px;height:2px;background:currentColor}
+.plus li::after{content:"";position:absolute;left:5px;top:calc(.72em - 5px);width:2px;height:12px;background:currentColor}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ph{position:relative;margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/5;background:var(--ink2)}
+.ph img{width:100%;height:100%;object-fit:cover}
+.ph .tag{left:8px;bottom:8px}
+.tier-f .cap{color:rgba(6,8,11,.72);font-size:13.5px;margin-top:0}
+.diff{font-size:14.5px;padding:12px 14px;border-radius:12px;background:rgba(6,8,11,.06);color:var(--ink)}
+.diff b{font-weight:700}
+
+.less{margin-top:18px}
+.less-q{display:inline;padding:6px 0;border:0;background:none;color:var(--t2);font-size:15px;text-align:left;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line2)}
+.less-panel{margin-top:12px;padding:16px;border-radius:18px;display:grid;gap:10px;max-width:440px;transform-origin:top center}
+.less-panel[hidden]{display:none}
+.js .less-panel{animation:drop .6s var(--spring)}
+@keyframes drop{from{opacity:0;transform:translate3d(0,-10px,0) scale(.97)}to{opacity:1;transform:none}}
+.less-out{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:4px 2px 0}
+.less-out span{font-size:14.5px;color:var(--t2)}
+.less-out .price{font-size:32px}
+
+/* ---------- proof ---------- */
+.jobs{display:grid;gap:34px}
+.job .pairs+.pairs{margin-top:8px}
+.done-h{margin:44px 0 14px}
+.mosaic{columns:2;column-gap:8px}
+.mosaic figure{margin:0 0 8px;break-inside:avoid}
+.mosaic .shot{border-radius:14px;overflow:hidden;background:var(--ink2)}
+.mosaic img{width:100%;height:auto}
+.mosaic figcaption{font-size:12.5px;color:var(--t2);padding:6px 2px 4px}
+
+/* ---------- reviews ---------- */
+.rating{display:flex;align-items:flex-end;gap:14px}
+.rating-n{font:800 92px/.82 var(--hf);letter-spacing:-.04em}
+.rating-t{font:600 15px/1.3 var(--hf);padding-bottom:4px}
+.rating-t a{text-underline-offset:4px;text-decoration-color:var(--line2)}
+.quotes{margin-top:26px;display:grid;gap:0}
+.quotes blockquote{margin:0;padding:18px 0;border-top:1px solid var(--line)}
+.quotes blockquote:last-child{border-bottom:1px solid var(--line)}
+.quotes p{font-size:18px;line-height:1.42;font-weight:500}
+.quotes cite{display:block;margin-top:8px;font-style:normal;font-size:13.5px;color:var(--t3)}
+.owner{margin-top:20px;color:var(--t2);max-width:520px}
+
+/* ---------- how it works ---------- */
+.how-card{overflow:hidden}
+.dusk{margin:0;aspect-ratio:4/3;overflow:hidden;background:var(--ink)}
+.dusk img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.js .dusk img{filter:brightness(.3) saturate(.6);transform:scale(1.06);transition:filter 2.2s var(--out) .15s,transform 2.6s var(--out) .15s}
+.js .how-card.in .dusk img{filter:none;transform:none}
+.steps{margin:0;padding:22px 20px 24px;list-style:none;counter-reset:s;display:grid;gap:22px}
+.steps li{position:relative;padding-left:52px;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-3px;width:36px;font:800 30px/1 var(--hf);color:var(--ivory)}
+.steps li:not(:last-child)::after{content:"";position:absolute;left:10px;top:36px;bottom:-16px;width:1px;background:var(--line2)}
+.steps h3{font-size:17px}
+.steps p{margin-top:6px;font-size:14.5px;color:var(--t2)}
+
+/* ---------- booking ---------- */
+.book-card{padding:6px 18px 22px}
+.step{padding:20px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0}
+.step>h3,.step>legend{font:600 15.5px/1.3 var(--bf);letter-spacing:0;margin-bottom:12px;padding:0;text-wrap:pretty}
+fieldset{border:0;margin:0;min-width:0}
+.opts{display:grid;gap:8px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;padding:13px 16px;border-radius:14px;border:1px solid var(--line2);background:rgba(244,241,234,.045);cursor:pointer;transition:background-color .25s var(--out),color .25s var(--out),border-color .25s var(--out),transform .5s var(--spring)}
+.opt:active{transform:scale(.98);transition-duration:.09s}
+.opt b{display:block;font:700 16px/1.2 var(--hf)}
+.opt small{display:block;margin-top:3px;font-size:13px;line-height:1.35;opacity:.74}
+.opt .pr{flex:none;font:800 20px/1 var(--hf)}
+.opt[aria-pressed="true"]{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.opts-2{grid-template-columns:1fr 1fr}
+.opts-2 .opt{flex-direction:column;align-items:flex-start;gap:4px;padding:12px 14px}
+.opts-2 .opt b{font-size:14.5px}
+.linkbtn{margin-top:12px;padding:6px 0;border:0;background:none;color:var(--t2);font-size:14.5px;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line2)}
+.less-opts{margin-top:8px}
+.less-opts[hidden]{display:none}
+.chips{display:grid;gap:6px}
+.days{grid-template-columns:repeat(7,1fr);gap:5px}
+.times{grid-template-columns:repeat(4,1fr);margin-top:10px}
+.chip{min-height:46px;padding:4px 2px;border-radius:12px;border:1px solid var(--line2);background:rgba(244,241,234,.045);font:600 14px/1.15 var(--bf);cursor:pointer;transition:background-color .2s var(--out),color .2s var(--out),border-color .2s var(--out)}
+.chip small{display:block;font-size:11px;font-weight:500;opacity:.7;margin-bottom:2px}
+.days .chip{min-height:56px;font:700 16px/1.1 var(--hf)}
+.days .chip small{font-family:var(--bf)}
+.chip[aria-pressed="true"]{background:var(--ivory);color:var(--ink);border-color:var(--ivory);animation:pop .5s var(--spring)}
+.note{margin-top:10px;font-size:14px;color:var(--t2)}
+.note[hidden]{display:none}
+.js .note:not([hidden]){animation:drop .55s var(--spring)}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:12px 0;border:0;background:none;text-align:left;cursor:pointer}
+.sw+.sw{border-top:1px solid var(--line)}
+.sw[hidden]{display:none}
+.sw-l b{display:block;font-weight:600;font-size:15px}
+.sw-l small{display:block;font-size:13px;color:var(--t3)}
+.sw-r{display:flex;align-items:center;gap:12px;flex:none;font:700 15px var(--hf)}
+.track{position:relative;width:48px;height:28px;border-radius:14px;border:1px solid var(--line2);background:rgba(244,241,234,.06);transition:background-color .25s var(--out)}
+.track::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:var(--t2);transition:transform .5s var(--spring),background-color .25s}
+.sw[aria-checked="true"] .track{background:var(--ivory);border-color:var(--ivory)}
+.sw[aria-checked="true"] .track::after{transform:translateX(20px);background:var(--ink)}
+.fields{display:grid;gap:12px}
+.field label{display:block;font-size:13px;color:var(--t2);margin-bottom:6px}
+.field input{width:100%;height:50px;padding:0 14px;border-radius:12px;border:1px solid var(--line2);background:rgba(244,241,234,.05);color:var(--ivory);font:500 16px var(--bf);-webkit-appearance:none;appearance:none;transition:border-color .2s,background-color .2s}
+.field input::placeholder{color:var(--t3);opacity:1}
+.field input:focus{outline:none;border-color:var(--ivory);background:rgba(244,241,234,.09)}
+.field input:-webkit-autofill{-webkit-text-fill-color:var(--ivory);-webkit-box-shadow:0 0 0 1000px #141a22 inset;caret-color:var(--ivory)}
+.field[hidden]{display:none}
+.fieldnote{margin-top:6px;font-size:12.5px;color:var(--t3)}
+.need{box-shadow:0 0 0 1px var(--ivory);border-radius:14px}
+.optin{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--t2);cursor:pointer;padding:4px 0}
+.optin input{position:absolute;opacity:0;width:1px;height:1px}
+.box{flex:none;width:22px;height:22px;border-radius:6px;border:1px solid var(--line2);background:rgba(244,241,234,.05);display:grid;place-items:center;margin-top:1px;transition:background-color .2s}
+.box svg{width:14px;height:14px;opacity:0;transform:scale(.4);transition:transform .45s var(--spring),opacity .15s;color:var(--ink)}
+.optin input:checked+.box{background:var(--ivory);border-color:var(--ivory)}
+.optin input:checked+.box svg{opacity:1;transform:none}
+.optin input:focus-visible+.box{outline:2px solid var(--ivory);outline-offset:3px}
+.sum{display:grid;gap:8px;font-size:15px}
+.sum-row{display:flex;justify-content:space-between;gap:14px;color:var(--t2)}
+.sum-row span:last-child{flex:none;color:var(--ivory);font-weight:600}
+.sum-when{color:var(--t2);font-size:14.5px}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-top:12px;border-top:1px solid var(--line);font:700 16px var(--hf)}
+.sum-total .price{font-size:34px}
+.book-go{margin-top:16px}
+.msg{margin-top:12px;padding:13px 15px;border-radius:12px;border:1px solid var(--line2);background:rgba(244,241,234,.07);font-size:14.5px;font-weight:500}
+.msg[hidden]{display:none}
+.js .msg:not([hidden]){animation:drop .55s var(--spring)}
+.fine{margin-top:14px;display:grid;gap:10px;font-size:13.5px;color:var(--t2)}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font:600 16px/1.35 var(--bf);cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.pm{position:relative;flex:none;width:16px;height:16px}
+.pm::before,.pm::after{content:"";position:absolute;left:0;top:7px;width:16px;height:2px;background:var(--ivory);transition:transform .5s var(--spring)}
+.pm::after{transform:rotate(90deg)}
+details[open] .pm::after{transform:rotate(0deg)}
+.faq .a{padding:0 30px 20px 0;color:var(--t2);font-size:15px}
+.js details[open] .a{animation:faqIn .6s var(--out)}
+@keyframes faqIn{from{opacity:0;transform:translate3d(0,-8px,0)}to{opacity:1;transform:none}}
+
+/* ---------- footer ---------- */
+footer{position:relative;z-index:1;padding:36px 0 calc(120px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+.foot-logo{width:230px;height:auto}
+.foot-links{margin-top:26px;display:grid;gap:0;border-top:1px solid var(--line)}
+.foot-links a{display:flex;justify-content:space-between;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);text-decoration:none;font-weight:600}
+.foot-links a span:first-child{color:var(--t2);font-weight:500}
+.foot-info{margin-top:22px;display:grid;gap:8px;font-size:14.5px;color:var(--t2)}
+
+/* ---------- sticky bar ---------- */
+.bar{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:30;display:grid;grid-template-columns:auto 1fr;gap:8px;padding:8px;border-radius:20px;background:rgba(9,12,17,.86);border:1px solid var(--line);-webkit-backdrop-filter:blur(18px) saturate(1.25);backdrop-filter:blur(18px) saturate(1.25);box-shadow:0 18px 40px -12px rgba(0,0,0,.7);transform:translate3d(0,calc(100% + 40px),0);visibility:hidden;transition:transform .32s var(--in),visibility 0s linear .32s}
+.bar.on{transform:none;visibility:visible;transition:transform .7s var(--spring),visibility 0s}
+.bar .btn{min-height:50px}
+.bar .btn-ghost{padding:0 24px}
+
+/* ---------- wider screens ---------- */
+@media (min-width:900px){
+  :root{--gut:32px}
+  section{padding:96px 0}
+  .top{padding-top:22px}
+  .brand{width:210px}
+  .hero{padding:44px 0 80px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .hero .ba{margin-top:0;max-width:440px;justify-self:end;width:100%}
+  .hero .ba-stage{aspect-ratio:4/5}
+  .trust span{display:inline}
+  .tier-grid>.glass{position:sticky;top:24px}
+  .hero-cta{display:inline-flex;width:auto;min-width:260px}
+  .tier-grid{grid-template-columns:5fr 7fr;align-items:start;gap:20px}
+  .tier{padding:30px 30px 28px}
+  .jobs{grid-template-columns:1fr 1fr;gap:44px 28px;align-items:start}
+  .mosaic{columns:4}
+  .rev-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+  .quotes{margin-top:0}
+  .how-card{display:grid;grid-template-columns:1fr 1fr}
+  .dusk{aspect-ratio:auto;min-height:420px}
+  .steps{padding:40px 40px;align-content:center}
+  .book-wrap,.faq-wrap{max-width:780px}
+  .book-card{padding:10px 30px 30px}
+  .times{grid-template-columns:repeat(6,1fr)}
+  .foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .foot-links{margin-top:0}
+  .bar{left:auto;right:24px;bottom:24px;width:380px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .bd-l img{animation:none}
+  .js .bd-wash::after,.js .hero h1,.js .sheet.in::before,.js .less-panel,.js .note:not([hidden]),.js .msg:not([hidden]),.js details[open] .a,.price.tick,.seg button[aria-pressed="true"],.chip[aria-pressed="true"]{animation:none}
+  .js .hero h1{-webkit-mask-image:none;mask-image:none}
+  .js .rv,.js .rv.in{opacity:1;transform:none;transition:none}
+  .js .wipe img,.js .wipe.in img{clip-path:none;transition:none}
+  .js .wipe .tag{opacity:1}
+  .js .dusk img{filter:none;transform:none;transition:none}
+  .btn,.bar,.bar.on,.ba-grip,.track::after,.pm::before,.pm::after{transition-duration:.01s}
+}
+</style>
+</head>
+<body>
+
+<div class="bd" aria-hidden="true" id="bd">
+  <div class="bd-l on"><img src="bg/bmw-front.jpg" width="576" height="720" alt=""></div>
+  <div class="bd-l"><img src="bg/scat-side.jpg" width="540" height="720" alt="" decoding="async"></div>
+  <div class="bd-l"><img src="bg/lexus-dusk.jpg" width="720" height="540" alt="" decoding="async"></div>
+  <div class="bd-l"><img src="bg/merc-wheel.jpg" width="540" height="720" alt="" decoding="async"></div>
+  <div class="bd-l"><img src="bg/eclass.jpg" width="720" height="540" alt="" decoding="async"></div>
+  <div class="bd-l"><img src="bg/tesla-rear.jpg" width="540" height="720" alt="" decoding="async"></div>
+  <div class="bd-wash"></div>
+</div>
+
+<div class="page" id="top">
+
+<header class="top">
+  <a class="brand" href="#top" aria-label="Valley Details, top of page"><img src="../assets/logo-420.png" width="420" height="192" alt="Valley Details. Cleaner cars, brighter days."></a>
+  <a class="btn btn-ghost btn-sm" href="#book">Book</a>
+</header>
+
+<main>
+
+<!-- first screen -->
+<section class="hero" data-bd="0">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>We detail your car in your driveway.</h1>
+      <p class="lede">Mobile detailing in Elk Grove and south Sacramento. No deposit. You look the car over, then you pay.</p>
+      <div class="from">
+        <a href="#tiers"><span class="from-n">Express</span><span class="from-d">Inside and out</span><span class="from-p">from <b data-p="express.sedan"></b></span></a>
+        <a href="#tiers"><span class="from-n">Full</span><span class="from-d">Plus the deep interior</span><span class="from-p">from <b data-p="full.sedan"></b></span></a>
+      </div>
+      <a class="btn btn-red btn-block hero-cta" id="heroCta" href="#book">Book a detail</a>
+      <p class="trust"><a href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener">5.0 on Google from 15 reviews</a><span>Owner-operated since 2024</span></p>
+    </div>
+    <figure class="ba" data-hero>
+      <div class="ba-stage" data-start="30" role="slider" tabindex="0" aria-label="Before and after. Drag, or use the arrow keys, to wipe the carpet clean." aria-valuemin="0" aria-valuemax="100" aria-valuenow="30">
+        <img src="../assets/jobs/tesla-model-y/01.jpg" width="864" height="1080" alt="Before: Tesla Model Y driver floor with hair worked into the carpet" fetchpriority="high">
+        <div class="ba-after"><img src="img/tesla-after.jpg" width="864" height="1080" alt="After: the same Tesla Model Y floor, carpet cleared"></div>
+        <span class="tag ba-tag ba-tag-a">After</span><span class="tag ba-tag ba-tag-b">Before</span>
+        <div class="ba-bar"><span class="ba-grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+      </div>
+      <figcaption class="cap"><b>Tesla Model Y.</b> Hair worked into the carpet, then cleared.<span class="hint">Drag the bar to wipe it clean.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- the two tiers -->
+<section id="tiers" data-bd="1">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>How dirty is the inside?</h2>
+      <p>Both do the whole car, inside and out. Full goes deep on the interior. Pick your vehicle and every price on this page updates.</p>
+    </div>
+    <div class="seg tiers-seg rv" data-seg="size" role="group" aria-label="Vehicle size"></div>
+
+    <div class="tier-grid">
+      <article class="tier glass sheet rv">
+        <p class="tier-for">The whole car, inside and out</p>
+        <div class="tier-top"><h3>Express</h3><span class="price" data-p="express"></span></div>
+        <p class="tier-time">About 2 hours</p>
+        <div class="tier-body">
+          <p><b>Inside.</b> Vacuumed from the seats to the trunk. Pet hair and grit lifted out. Leather cleaned and conditioned. Dash, console, doors and vents wiped down. Glass and mirrors.</p>
+          <p><b>Outside.</b> Hand washed from the roof to the rockers. Wheels, wells and tires degreased. Bugs and tar taken off. Tires dressed. Glass, trim and door jambs.</p>
+        </div>
+        <a class="btn btn-ghost btn-block" href="#book" data-book="express">Book Express, <span data-p="express"></span></a>
+      </article>
+
+      <article class="tier tier-f rv" style="--d:.08s">
+        <p class="tier-for">For an interior that is actually dirty</p>
+        <div class="tier-top"><h3>Full</h3><span class="price" data-p="full"></span></div>
+        <p class="tier-time">About 3.5 to 4 hours</p>
+        <div class="tier-body">
+          <p><b>Everything in Express, plus the deep interior.</b></p>
+          <ul class="plus">
+            <li>Carpets, mats and cloth seats shampooed with a hot water extractor.</li>
+            <li>Steam on the vents, cupholders, console, seat rails and door pockets.</li>
+            <li>Set-in stains worked on. If one will not come out, we tell you before we start.</li>
+          </ul>
+          <div class="pairs">
+            <figure class="ph wipe"><img src="../assets/jobs/camry/01.jpg" width="864" height="1080" loading="lazy" alt="Before: stains set into the cloth front seat of a 2013 Toyota Camry"><span class="tag">Before</span></figure>
+            <figure class="ph wipe" style="--d:.18s"><img src="../assets/jobs/camry/05.jpg" width="864" height="1080" loading="lazy" alt="After: the Camry front seat cleaned"><span class="tag">After</span></figure>
+            <figure class="ph wipe"><img src="../assets/jobs/camry/02.jpg" width="864" height="1080" loading="lazy" alt="Before: stains set into the Camry back seat"><span class="tag">Before</span></figure>
+            <figure class="ph wipe" style="--d:.18s"><img src="../assets/jobs/camry/06.jpg" width="864" height="1080" loading="lazy" alt="After: the Camry back seat cleaned"><span class="tag">After</span></figure>
+          </div>
+          <p class="cap"><b>2013 Toyota Camry.</b> Stains set into the cloth seats front and back, then cleaned.</p>
+          <p class="diff"><b><span data-diff></span> more than Express</b> for a <span data-size-word></span>. That is about 1.5 to 2 more hours of work on your interior.</p>
+        </div>
+        <a class="btn btn-red btn-block" href="#book" data-book="full" data-inline-red>Book Full, <span data-p="full"></span></a>
+      </article>
+    </div>
+
+    <div class="less rv">
+      <button type="button" class="less-q" id="lessQ" aria-expanded="false" aria-controls="lessPanel">Need something less? Get a quick price.</button>
+      <div class="less-panel glass" id="lessPanel" hidden>
+        <div class="seg" data-seg="less" role="group" aria-label="Inside only or outside only"></div>
+        <div class="seg" data-seg="size" role="group" aria-label="Vehicle size"></div>
+        <div class="less-out"><span id="lessLabel"></span><span class="price" id="lessPrice"></span></div>
+        <a class="btn btn-ghost btn-block" href="#book" id="lessBook">Book this</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- proof -->
+<section id="proof" data-bd="2">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <h2>Before and after</h2>
+      <p>Every photo on this page is one of our own jobs, shot on a phone in the customer's driveway.</p>
+    </div>
+
+    <div class="jobs">
+      <figure class="ba job rv">
+        <div class="ba-stage" data-start="50" role="slider" tabindex="0" aria-label="Before and after. Drag, or use the arrow keys, to compare." aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img src="../assets/jobs/pacifica/02.jpg" width="864" height="1080" loading="lazy" alt="Before: crumbs on the cargo floor of a 2023 Chrysler Pacifica">
+          <div class="ba-after"><img src="img/pacifica-after.jpg" width="864" height="1080" loading="lazy" alt="After: the Pacifica cargo floor vacuumed"></div>
+          <span class="tag ba-tag ba-tag-a">After</span><span class="tag ba-tag ba-tag-b">Before</span>
+          <div class="ba-bar"><span class="ba-grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+        </div>
+        <figcaption class="cap"><b>2023 Chrysler Pacifica.</b> Crumbs on the cargo floor, then vacuumed.</figcaption>
+      </figure>
+
+      <div class="job rv">
+        <div class="pairs">
+          <figure class="ph wipe"><img src="../assets/jobs/kia-soul/01.jpg" width="864" height="1080" loading="lazy" alt="Before: dirt and hair ground into the back seat and mats of a 2018 Kia Soul"><span class="tag">Before</span></figure>
+          <figure class="ph wipe" style="--d:.18s"><img src="../assets/jobs/kia-soul/08.jpg" width="864" height="1080" loading="lazy" alt="After: the Kia Soul back seat cleaned"><span class="tag">After</span></figure>
+        </div>
+        <p class="cap"><b>2018 Kia Soul.</b> Dirt and hair ground into the mats and seats. This is what Full is for.</p>
+      </div>
+
+      <figure class="ba job rv">
+        <div class="ba-stage" data-start="50" role="slider" tabindex="0" aria-label="Before and after. Drag, or use the arrow keys, to compare." aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img src="img/rav4-wheel-before.jpg" width="864" height="1080" loading="lazy" alt="Before: a 2016 Toyota RAV4 wheel">
+          <div class="ba-after"><img src="../assets/jobs/rav4/03.jpg" width="864" height="1080" loading="lazy" alt="After: the RAV4 wheel cleaned and the tire dressed"></div>
+          <span class="tag ba-tag ba-tag-a">After</span><span class="tag ba-tag ba-tag-b">Before</span>
+          <div class="ba-bar"><span class="ba-grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+        </div>
+        <figcaption class="cap"><b>2016 Toyota RAV4.</b> The wheel, before and after.</figcaption>
+      </figure>
+
+      <div class="job rv">
+        <div class="pairs">
+          <figure class="ph wipe"><img src="../assets/work/merc-trunk-before.jpg" width="904" height="1200" loading="lazy" alt="Before: water spots on a Mercedes trunk lid"><span class="tag">Before</span></figure>
+          <figure class="ph wipe" style="--d:.18s"><img src="../assets/work/merc-trunk-after.jpg" width="904" height="1200" loading="lazy" alt="After: the Mercedes trunk lid with the water spots off"><span class="tag">After</span></figure>
+        </div>
+        <p class="cap"><b>Mercedes trunk lid.</b> Water spots, before and after.</p>
+      </div>
+    </div>
+
+    <h3 class="done-h rv">Finished cars</h3>
+    <div class="mosaic">
+      <figure class="rv"><div class="shot"><img src="img/mustang-driveway.jpg" width="900" height="1200" loading="lazy" alt="A finished black Mustang in a driveway"></div></figure>
+      <figure class="rv"><div class="shot"><img src="../assets/work/scat-side.jpg" width="900" height="1200" loading="lazy" alt="Blue Dodge Charger Scat Pack, finished"></div><figcaption>Dodge Charger Scat Pack</figcaption></figure>
+      <figure class="rv"><div class="shot"><img src="../assets/jobs/bmw-5-series/03.jpg" width="864" height="1080" loading="lazy" alt="Tan leather seats in a white BMW 530e, finished"></div><figcaption>BMW 530e, tan leather</figcaption></figure>
+      <figure class="rv"><div class="shot"><img src="../assets/work/lexus-dusk.jpg" width="1200" height="900" loading="lazy" alt="A finished Lexus at dusk"></div></figure>
+      <figure class="rv"><div class="shot"><img src="../assets/jobs/cadillac/04.jpg" width="864" height="1080" loading="lazy" alt="Wire wheel on a 1995 Cadillac DeVille, finished"></div><figcaption>1995 Cadillac DeVille, wire wheels</figcaption></figure>
+      <figure class="rv"><div class="shot"><img src="../assets/work/tesla-white.jpg" width="900" height="1200" loading="lazy" alt="A finished white Tesla in a driveway"></div></figure>
+      <figure class="rv"><div class="shot"><img src="../assets/work/taycan.jpg" width="1200" height="900" loading="lazy" alt="A finished black car, front corner"></div></figure>
+    </div>
+  </div>
+</section>
+
+<!-- reviews -->
+<section id="reviews" data-bd="3">
+  <div class="wrap rev-grid">
+    <div class="rv">
+      <div class="rating">
+        <span class="rating-n">5.0</span>
+        <span class="rating-t">on Google<br>from 15 reviews</span>
+      </div>
+      <p class="owner">Owner-operated since 2024. The people who run it are the ones doing your car.</p>
+      <p class="owner"><a href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener" style="text-underline-offset:4px;text-decoration-color:var(--line2)">Read the reviews on Google</a></p>
+    </div>
+    <div class="quotes rv" style="--d:.1s">
+      <blockquote><p>"Much needed and well appreciated and fast service !! Quality service and lasting detail !"</p><cite>Jeffrey G., Google</cite></blockquote>
+      <blockquote><p>"Arrived on time friendly faces and great service"</p><cite>Mason A., Google</cite></blockquote>
+      <blockquote><p>"Professional Service, cleaned everything well."</p><cite>Jose P., Google</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- how it works -->
+<section id="how" data-bd="3">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>How it works</h2></div>
+    <div class="how-card glass glass-lite rv">
+      <figure class="dusk"><img src="../assets/work/bmw-tail.jpg" width="960" height="1200" loading="lazy" alt="A finished white sedan in a driveway at dusk with its tail lights on"></figure>
+      <ol class="steps">
+        <li><h3>Pick a time</h3><p>Choose what you want done, then a day and a time. No account to make and no deposit.</p></li>
+        <li><h3>We pull up</h3><p>Your driveway, your apartment lot or your work. We bring the equipment. We need a parking spot, an outside spigot and an outdoor outlet, and we take <span data-c="utilityOff"></span> off for using them.</p></li>
+        <li><h3>Look it over, then pay</h3><p>Walk around the car when we are done. You pay once you have seen it: cash, Zelle, Cash App, Venmo, Apple Pay or card.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- booking (front-end mock, sends nothing) -->
+<section id="book" data-bd="4">
+  <div class="wrap book-wrap">
+    <div class="sec-head rv">
+      <h2>Book a detail</h2>
+      <p>No account and no deposit. Open 8am to 8pm every day.</p>
+    </div>
+    <form class="book-card glass glass-lite sheet rv" id="bookForm" novalidate autocomplete="on">
+      <div class="step" id="stSvc">
+        <h3>What are we doing?</h3>
+        <div class="opts" id="svcOpts"></div>
+        <button type="button" class="linkbtn" id="lessToggle" aria-expanded="false">Need something less?</button>
+        <div class="opts opts-2 less-opts" id="lessOpts" hidden></div>
+      </div>
+      <div class="step" id="stSize">
+        <h3>What do you drive?</h3>
+        <div class="seg" data-seg="size" role="group" aria-label="Vehicle size"></div>
+      </div>
+      <div class="step" id="stWhen">
+        <h3>Pick a day and a time</h3>
+        <div class="chips days" id="days" role="group" aria-label="Day"></div>
+        <div class="chips times" id="times" role="group" aria-label="Time"></div>
+      </div>
+      <div class="step" id="stWhere">
+        <h3>Where should we do it?</h3>
+        <div class="opts opts-2" id="modeOpts">
+          <button type="button" class="opt" data-mode="mobile"><b>We come to you</b><small>Your driveway, lot or work</small></button>
+          <button type="button" class="opt" data-mode="dropoff"><b>I'll drop it off</b><small>9280 Trout Way, Elk Grove</small></button>
+        </div>
+        <p class="note" id="dropNote" hidden>Bring the car to 9280 Trout Way, Elk Grove at your booked time.</p>
+      </div>
+      <div class="step" id="stSpigot">
+        <h3>Is there an outside spigot and an outdoor outlet we can use?</h3>
+        <div class="seg" id="spigotSeg" role="group" aria-label="Spigot and outlet">
+          <button type="button" data-spigot="yes" aria-pressed="false">Yes</button>
+          <button type="button" data-spigot="unsure" aria-pressed="false">Not sure</button>
+          <button type="button" data-spigot="no" aria-pressed="false">No</button>
+        </div>
+        <p class="note" id="spigotYes" hidden>Good. That takes <span data-c="utilityOff"></span> off.</p>
+        <p class="note" id="spigotNote" hidden>No problem. We will text you before we drive over to sort it out.</p>
+      </div>
+      <div class="step" id="stAdd">
+        <h3>Anything extra?</h3>
+        <button type="button" class="sw" role="switch" aria-checked="false" data-add="pet"><span class="sw-l"><b>Heavy pet hair</b></span><span class="sw-r"><span data-a="pet"></span><span class="track"></span></span></button>
+        <button type="button" class="sw" role="switch" aria-checked="false" data-add="shampoo"><span class="sw-l"><b>Seat or carpet shampoo</b><small>Added to an Express</small></span><span class="sw-r"><span data-a="shampoo"></span><span class="track"></span></span></button>
+        <p class="note" id="shampooNote" hidden>Seat and carpet shampoo is already part of Full.</p>
+      </div>
+      <div class="step" id="stYou">
+        <h3>Your details</h3>
+        <div class="fields">
+          <div class="field"><label for="bName">Name</label><input id="bName" name="name" autocomplete="name" placeholder="Your name"></div>
+          <div class="field"><label for="bPhone">Mobile</label><input id="bPhone" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(916) 555-0123"></div>
+          <div class="field"><label for="bVehicle">Vehicle, year and model</label><input id="bVehicle" name="vehicle" autocomplete="off" placeholder="2019 Dodge Challenger"></div>
+          <div class="field" id="addrField"><label for="bAddr">Address</label><input id="bAddr" name="address" autocomplete="street-address" placeholder="Street address">
+            <p class="fieldnote">No travel charge within about <span data-c="freeMiles" data-plain></span> miles of Elk Grove. Past that it is <span data-c="perMile"></span> a mile for the miles over ten.</p></div>
+          <label class="optin"><input type="checkbox" id="bOptin"><span class="box"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span><span>Text me open-slot deals. Reply STOP anytime.</span></label>
+        </div>
+      </div>
+      <div class="step" id="stSum">
+        <div class="sum" id="sum" aria-live="polite"></div>
+        <button type="button" class="btn btn-red btn-block book-go" id="bookGo">Book this detail</button>
+        <p class="msg" id="bookMsg" role="status" hidden></p>
+        <div class="fine">
+          <p>No deposit. You pay when the car is done. Rescheduling is free. Canceling within <span data-c="cancelHours" data-plain></span> hours of your appointment is a <span data-c="cancelFee"></span> fee.</p>
+          <p>After you book, text us a few pics of your car if you can. If it needs extra time, we tell you the time and price before we come out.</p>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- faq -->
+<section id="faq" data-bd="5">
+  <div class="wrap faq-wrap">
+    <div class="sec-head rv"><h2>Common questions</h2></div>
+    <div class="faq rv">
+      <details><summary>Do you come to me?<span class="pm"></span></summary><div class="a">Yes. Your driveway, apartment lot or work, in Elk Grove and south Sacramento. There is no travel charge within about <span data-c="freeMiles" data-plain></span> miles of Elk Grove. Past that it is <span data-c="perMile"></span> a mile for the miles over ten. If you would rather drop the car off, bring it to 9280 Trout Way in Elk Grove.</div></details>
+      <details><summary>Express or Full, which one do I need?<span class="pm"></span></summary><div class="a">Both do the whole car, inside and out. Express takes about 2 hours. Full takes about 3.5 to 4 hours and adds the hot water extractor on carpets, mats and cloth seats, steam in the tight spots and work on set-in stains. If the seats or carpet are stained, book Full.</div></details>
+      <details><summary>What do you need from me?<span class="pm"></span></summary><div class="a">A parking spot, an outside spigot and an outdoor outlet. We bring the equipment, and we take <span data-c="utilityOff"></span> off for using your water and power. Not sure what you have? Say so when you book and we will text you before we drive over to sort it out.</div></details>
+      <details><summary>When do I pay?<span class="pm"></span></summary><div class="a">When the car is done. There is no deposit. You look the car over, then you pay with cash, Zelle, Cash App, Venmo, Apple Pay or card.</div></details>
+      <details><summary>What if it rains, or I need to move my appointment?<span class="pm"></span></summary><div class="a">If the forecast looks bad we text you the day before and move you to the next open slot for free. Rescheduling is free. Canceling within <span data-c="cancelHours" data-plain></span> hours of your appointment is a <span data-c="cancelFee"></span> fee.</div></details>
+      <details><summary>Is there a deal for two cars?<span class="pm"></span></summary><div class="a">Yes. Two cars at the same address takes <span data-c="secondCarOff"></span> off the second car.</div></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer data-bd="5">
+  <div class="wrap foot-grid">
+    <div>
+      <img class="foot-logo" src="../assets/logo-900.png" width="900" height="412" loading="lazy" alt="Valley Details. Cleaner cars, brighter days.">
+      <div class="foot-info">
+        <p>Mobile car detailing in Elk Grove, California. Owner-operated since 2024.</p>
+        <p>We come to you in Elk Grove and south Sacramento. No travel charge within about <span data-c="freeMiles" data-plain></span> miles of Elk Grove.</p>
+        <p>Open 8am to 8pm every day.</p>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="tel:+19162490631"><span>Call</span><span>(916) 249-0631</span></a>
+      <a href="sms:+19167537822"><span>Text</span><span>(916) 753-7822</span></a>
+      <a href="https://www.instagram.com/valleydetailsca/" target="_blank" rel="noopener"><span>Instagram</span><span>@valleydetailsca</span></a>
+      <a href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener"><span>Google</span><span>5.0 from 15 reviews</span></a>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<div class="bar" id="bar" inert>
+  <a class="btn btn-ghost" href="tel:+19162490631">Call</a>
+  <a class="btn btn-red" href="#book">Book a detail</a>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Every price and fee on the page comes from here. Change it once. */
+  var CFG = {
+    sizes: {
+      sedan: { label: 'Sedan', word: 'sedan' },
+      suv: { label: 'SUV', word: 'SUV' },
+      truck: { label: 'Truck or 3-row', word: 'truck or 3-row' }
+    },
+    services: {
+      express: { name: 'Express', blurb: 'Inside and out, about 2 hours', price: { sedan: 150, suv: 170, truck: 190 } },
+      full: { name: 'Full', blurb: 'Express plus the deep interior, about 3.5 to 4 hours', price: { sedan: 250, suv: 280, truck: 310 } },
+      inside: { name: 'Inside only', price: { sedan: 100, suv: 110, truck: 120 } },
+      outside: { name: 'Outside only', price: { sedan: 75, suv: 85, truck: 95 } }
+    },
+    addons: {
+      pet: { name: 'Heavy pet hair', price: 40 },
+      shampoo: { name: 'Seat or carpet shampoo', price: 50, onlyWith: 'express' }
+    },
+    utilityOff: 5,        // off for using the customer's spigot and outlet
+    secondCarOff: 25,
+    cancelFee: 20,
+    cancelHours: 12,
+    perMile: 1,
+    freeMiles: 10,
+    defaultService: 'full',
+    firstHour: 8,
+    lastHour: 18,
+    daysShown: 7
+  };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var money = function (n) { return '$' + n; };
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var state = { svc: CFG.defaultService, size: 'sedan', less: 'inside', day: null, time: null, mode: 'mobile', spigot: null, pet: false, shampoo: false };
+
+  /* ---------- build the pickers ---------- */
+  $$('[data-seg="size"]').forEach(function (seg) {
+    Object.keys(CFG.sizes).forEach(function (id) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.dataset.size = id; b.innerHTML = CFG.sizes[id].label.replace('3-row', '<span class="nb">3-row</span>');
+      b.addEventListener('click', function () { state.size = id; render(); });
+      seg.appendChild(b);
+    });
+  });
+  $$('[data-seg="less"]').forEach(function (seg) {
+    ['inside', 'outside'].forEach(function (id) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.dataset.less = id; b.textContent = CFG.services[id].name;
+      b.addEventListener('click', function () { state.less = id; render(); });
+      seg.appendChild(b);
+    });
+  });
+
+  function svcButton(id, compact) {
+    var s = CFG.services[id], b = document.createElement('button');
+    b.type = 'button'; b.className = 'opt'; b.dataset.svc = id;
+    b.innerHTML = '<span><b></b>' + (s.blurb && !compact ? '<small></small>' : '') + '</span><span class="pr" data-p="' + id + '"></span>';
+    $('b', b).textContent = s.name;
+    if (s.blurb && !compact) $('small', b).textContent = s.blurb;
+    b.addEventListener('click', function () { state.svc = id; clearMsg(); render(); });
+    return b;
+  }
+  $('#svcOpts').appendChild(svcButton('express'));
+  $('#svcOpts').appendChild(svcButton('full'));
+  $('#lessOpts').appendChild(svcButton('inside', true));
+  $('#lessOpts').appendChild(svcButton('outside', true));
+
+  var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var now = new Date(), dayList = [];
+  for (var i = 1; i <= CFG.daysShown; i++) {
+    var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
+    dayList.push({ id: 'd' + i, short: DOW[d.getDay()], num: d.getDate(), long: DOW[d.getDay()] + ', ' + MON[d.getMonth()] + ' ' + d.getDate() });
+  }
+  dayList.forEach(function (d) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.day = d.id;
+    b.setAttribute('aria-label', d.long);
+    b.innerHTML = '<small>' + d.short + '</small>' + d.num;
+    b.addEventListener('click', function () { state.day = d.id; clearMsg(); render(); });
+    $('#days').appendChild(b);
+  });
+  function hourLabel(h) { return h < 12 ? h + ' AM' : (h === 12 ? '12 PM' : (h - 12) + ' PM'); }
+  for (var h = CFG.firstHour; h <= CFG.lastHour; h++) (function (h) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.time = String(h); b.textContent = hourLabel(h);
+    b.addEventListener('click', function () { state.time = h; clearMsg(); render(); });
+    $('#times').appendChild(b);
+  })(h);
+
+  $$('#modeOpts .opt').forEach(function (b) { b.addEventListener('click', function () { state.mode = b.dataset.mode; clearMsg(); render(); }); });
+  $$('#spigotSeg button').forEach(function (b) { b.addEventListener('click', function () { state.spigot = b.dataset.spigot; clearMsg(); render(); }); });
+  $$('.sw').forEach(function (b) { b.addEventListener('click', function () { state[b.dataset.add] = !state[b.dataset.add]; render(); }); });
+
+  /* ---------- money ---------- */
+  function lines() {
+    var s = CFG.services[state.svc], out = [];
+    out.push({ label: s.name + ', ' + CFG.sizes[state.size].word, amt: s.price[state.size], text: money(s.price[state.size]) });
+    if (state.pet) out.push({ label: CFG.addons.pet.name, amt: CFG.addons.pet.price, text: money(CFG.addons.pet.price) });
+    if (state.shampoo && state.svc === CFG.addons.shampoo.onlyWith) out.push({ label: CFG.addons.shampoo.name, amt: CFG.addons.shampoo.price, text: money(CFG.addons.shampoo.price) });
+    if (state.mode === 'mobile' && state.spigot === 'yes') out.push({ label: 'Using your water and power', amt: -CFG.utilityOff, text: money(CFG.utilityOff) + ' off' });
+    return out;
+  }
+  function total() { return lines().reduce(function (a, l) { return a + l.amt; }, 0); }
+
+  function setText(el, txt) {
+    if (el.textContent === txt) return;
+    var had = el.textContent !== '';
+    el.textContent = txt;
+    if (had && el.classList.contains('price') && !RM) { el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); }
+  }
+  function press(list, test) { list.forEach(function (b) { b.setAttribute('aria-pressed', test(b) ? 'true' : 'false'); }); }
+
+  function render() {
+    $$('[data-p]').forEach(function (el) {
+      var k = el.dataset.p.split('.');
+      setText(el, money(CFG.services[k[0]].price[k[1] || state.size]));
+    });
+    $$('[data-c]').forEach(function (el) { var v = CFG[el.dataset.c]; setText(el, el.hasAttribute('data-plain') ? String(v) : money(v)); });
+    $$('[data-a]').forEach(function (el) { setText(el, money(CFG.addons[el.dataset.a].price)); });
+    $$('[data-diff]').forEach(function (el) { setText(el, money(CFG.services.full.price[state.size] - CFG.services.express.price[state.size])); });
+    $$('[data-size-word]').forEach(function (el) { setText(el, CFG.sizes[state.size].word); });
+
+    press($$('[data-size]'), function (b) { return b.dataset.size === state.size; });
+    press($$('[data-less]'), function (b) { return b.dataset.less === state.less; });
+    press($$('[data-svc]'), function (b) { return b.dataset.svc === state.svc; });
+    press($$('[data-day]'), function (b) { return b.dataset.day === state.day; });
+    press($$('[data-time]'), function (b) { return Number(b.dataset.time) === state.time; });
+    press($$('[data-mode]'), function (b) { return b.dataset.mode === state.mode; });
+    press($$('[data-spigot]'), function (b) { return b.dataset.spigot === state.spigot; });
+
+    /* quick price picker */
+    setText($('#lessLabel'), CFG.services[state.less].name + ', ' + CFG.sizes[state.size].word);
+    setText($('#lessPrice'), money(CFG.services[state.less].price[state.size]));
+    setText($('#lessBook'), 'Book ' + CFG.services[state.less].name.toLowerCase() + ', ' + money(CFG.services[state.less].price[state.size]));
+
+    /* booking details */
+    var isLess = state.svc === 'inside' || state.svc === 'outside';
+    if (isLess) openLess(true);
+    var mobile = state.mode === 'mobile';
+    $('#dropNote').hidden = mobile;
+    $('#stSpigot').hidden = !mobile;
+    $('#addrField').hidden = !mobile;
+    $('#spigotYes').hidden = !(mobile && state.spigot === 'yes');
+    $('#spigotNote').hidden = !(mobile && (state.spigot === 'unsure' || state.spigot === 'no'));
+    var shampooOk = state.svc === CFG.addons.shampoo.onlyWith;
+    $('[data-add="shampoo"]').hidden = !shampooOk;
+    $('#shampooNote').hidden = state.svc !== 'full';
+    $$('.sw').forEach(function (b) { b.setAttribute('aria-checked', state[b.dataset.add] ? 'true' : 'false'); });
+
+    /* summary */
+    var day = dayList.filter(function (d) { return d.id === state.day; })[0];
+    var when = (day && state.time != null) ? day.long + ' at ' + hourLabel(state.time)
+      : day ? day.long + '. Pick a time.' : (state.time != null ? hourLabel(state.time) + '. Pick a day.' : 'Pick a day and a time.');
+    var where = mobile ? 'We come to you.' : 'Drop-off at 9280 Trout Way, Elk Grove.';
+    var html = lines().map(function (l) { return '<div class="sum-row"><span>' + l.label + '</span><span>' + l.text + '</span></div>'; }).join('');
+    html += '<p class="sum-when">' + when + ' ' + where + '</p>';
+    html += '<div class="sum-total"><span>Total</span><span class="price" id="sumTotal">' + money(total()) + '</span></div>';
+    var sum = $('#sum'), old = $('#sumTotal'), oldTxt = old ? old.textContent : '';
+    sum.innerHTML = html;
+    if (oldTxt && oldTxt !== money(total()) && !RM) $('#sumTotal').classList.add('tick');
+    $('#bookGo').textContent = 'Book this detail, ' + money(total());
+  }
+
+  /* ---------- something less ---------- */
+  function openLess(open) {
+    $('#lessOpts').hidden = !open;
+    $('#lessToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  $('#lessToggle').addEventListener('click', function () { openLess($('#lessOpts').hidden); });
+  $('#lessQ').addEventListener('click', function () {
+    var p = $('#lessPanel'); p.hidden = !p.hidden;
+    this.setAttribute('aria-expanded', p.hidden ? 'false' : 'true');
+  });
+  $('#lessBook').addEventListener('click', function () { state.svc = state.less; render(); });
+  $$('[data-book]').forEach(function (a) { a.addEventListener('click', function () { state.svc = a.dataset.book; render(); }); });
+
+  /* ---------- final button: a design preview, nothing is sent anywhere ---------- */
+  function clearMsg() { $('#bookMsg').hidden = true; $$('.need').forEach(function (n) { n.classList.remove('need'); }); }
+  $('#bookForm').addEventListener('submit', function (e) { e.preventDefault(); });
+  $('#bookGo').addEventListener('click', function () {
+    clearMsg();
+    var miss = [], first = null;
+    function need(label, el) { miss.push(label); el.classList.add('need'); if (!first) first = el; }
+    if (!state.day) need('a day', $('#days'));
+    if (state.time == null) need('a time', $('#times'));
+    if (state.mode === 'mobile' && !state.spigot) need('the spigot and outlet question', $('#spigotSeg'));
+    if (!$('#bName').value.trim()) need('your name', $('#bName'));
+    if ($('#bPhone').value.replace(/\D/g, '').length < 10) need('your mobile number', $('#bPhone'));
+    if (!$('#bVehicle').value.trim()) need('your vehicle', $('#bVehicle'));
+    if (state.mode === 'mobile' && !$('#bAddr').value.trim()) need('your address', $('#bAddr'));
+    var msg = $('#bookMsg');
+    if (miss.length) {
+      var txt = miss.length === 1 ? miss[0] : miss.slice(0, -1).join(', ') + ' and ' + miss[miss.length - 1];
+      msg.textContent = 'Still needed: ' + txt + '.';
+      msg.hidden = false;
+      first.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'center' });
+      return;
+    }
+    msg.textContent = 'This is a design preview. Booking is live at valleydetails.site.';
+    msg.hidden = false;
+  });
+  $$('#bookForm input').forEach(function (i) { i.addEventListener('input', function () { i.classList.remove('need'); }); });
+
+  render();
+
+  /* ---------- before and after sliders ---------- */
+  function easeOut(k) { return 1 - Math.pow(1 - k, 3); }
+  function easeBack(k) { var c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); }
+
+  $$('.ba-stage').forEach(function (stage) {
+    var x = Number(stage.dataset.start) || 50, target = x, raf = 0, drag = null, touched = false, nudgeRun = 0;
+    function paint() {
+      stage.style.setProperty('--x', x.toFixed(2) + '%');
+      stage.setAttribute('aria-valuenow', String(Math.round(x)));
+      stage.classList.toggle('lo', x < 17);
+      stage.classList.toggle('hi', x > 83);
+    }
+    function clamp(v) { return Math.max(0, Math.min(100, v)); }
+    function follow() {
+      raf = 0;
+      x += (target - x) * 0.34;
+      if (Math.abs(target - x) < 0.15) x = target;
+      paint();
+      if (x !== target) raf = requestAnimationFrame(follow);
+    }
+    function go(v) { target = clamp(v); if (RM) { x = target; paint(); return; } if (!raf) raf = requestAnimationFrame(follow); }
+    function at(e) { var r = stage.getBoundingClientRect(); return (e.clientX - r.left) / r.width * 100; }
+    function take() { touched = true; nudgeRun++; }
+
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      take();
+      drag = { id: e.pointerId, sx: e.clientX, moved: e.pointerType === 'mouse' };
+      if (drag.moved) { e.preventDefault(); go(at(e)); stage.classList.add('drag'); }
+      try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    stage.addEventListener('pointermove', function (e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (!drag.moved) { if (Math.abs(e.clientX - drag.sx) < 4) return; drag.moved = true; stage.classList.add('drag'); }
+      go(at(e));
+    });
+    function end(e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (e.type === 'pointerup' && !drag.moved) go(at(e));   /* a tap moves the bar there */
+      drag = null; stage.classList.remove('drag');
+    }
+    stage.addEventListener('pointerup', end);
+    stage.addEventListener('pointercancel', end);
+    stage.addEventListener('keydown', function (e) {
+      var step = e.key === 'ArrowLeft' ? -5 : e.key === 'ArrowRight' ? 5 : 0;
+      if (e.key === 'Home') { take(); go(0); e.preventDefault(); }
+      else if (e.key === 'End') { take(); go(100); e.preventDefault(); }
+      else if (step) { take(); go(target + step); e.preventDefault(); }
+    });
+
+    /* the bar nudges itself once so people know it drags */
+    function tween(to, ms, ease, run) {
+      return new Promise(function (res) {
+        var from = x, t0 = 0;
+        function f(t) {
+          if (run !== nudgeRun) return res();
+          if (!t0) t0 = t;
+          var k = Math.min(1, (t - t0) / ms);
+          x = target = from + (to - from) * ease(k); paint();
+          if (k < 1) requestAnimationFrame(f); else res();
+        }
+        requestAnimationFrame(f);
+      });
+    }
+    function nudge() {
+      if (touched || RM) return;
+      var run = ++nudgeRun, home = Number(stage.dataset.start) || 50;
+      var far = home < 45 ? 66 : 30, rest = home < 45 ? home + 6 : home;
+      tween(far, 760, easeOut, run).then(function () { return tween(rest, 900, easeBack, run); });
+    }
+    paint();
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          io.disconnect();
+          setTimeout(nudge, stage.parentNode.hasAttribute('data-hero') ? 1500 : 350);
+        });
+      }, { threshold: 0.5 });
+      io.observe(stage);
+    }
+  });
+
+  /* ---------- arrivals ---------- */
+  var rvs = $$('.rv, .wipe');
+  if ('IntersectionObserver' in window && !RM) {
+    var rio = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); rio.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+    rvs.forEach(function (el) { rio.observe(el); });
+  } else { rvs.forEach(function (el) { el.classList.add('in'); }); }
+
+  /* ---------- backdrop crossfade and sticky bar, both read from scroll ---------- */
+  var layers = $$('.bd-l'), marks = $$('[data-bd]'), bar = $('#bar');
+  var heroCta = $('#heroCta'), bookSec = $('#book'), reds = $$('[data-inline-red]');
+  var lastOp = layers.map(function () { return -1; }), ticking = false, barOn = false;
+  function frame() {
+    ticking = false;
+    var vh = window.innerHeight, c = vh * 0.5, cur = 0, nextTop = null, nextIdx = null;
+    for (var i = 0; i < marks.length; i++) {
+      var top = marks[i].getBoundingClientRect().top, idx = Number(marks[i].dataset.bd);
+      if (top <= c) { cur = idx; }
+      else if (idx !== cur) { nextTop = top; nextIdx = idx; break; }
+    }
+    var t = nextIdx == null ? 0 : Math.max(0, Math.min(1, 1 - (nextTop - c) / (vh * 0.5)));
+    layers.forEach(function (l, i) {
+      var op = i === cur ? 1 : (i === nextIdx ? t : 0);
+      op = Math.round(op * 100) / 100;
+      if (op === lastOp[i]) return;
+      lastOp[i] = op;
+      l.style.opacity = op;
+      l.classList.toggle('on', op > 0);
+    });
+
+    var passed = heroCta.getBoundingClientRect().bottom < 0;
+    var b = bookSec.getBoundingClientRect(), inBook = b.top < vh - 40 && b.bottom > 40;
+    var redSeen = reds.some(function (r) { var q = r.getBoundingClientRect(); return q.top < vh && q.bottom > 0; });
+    var show = passed && !inBook && !redSeen;
+    if (show !== barOn) {
+      barOn = show; bar.classList.toggle('on', show);
+      if (show) bar.removeAttribute('inert'); else bar.setAttribute('inert', '');
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', onScroll);
+  frame();
+})();
+</script>
+</body>
+</html>

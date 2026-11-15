@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b1a2b">
+<title>Valley Details | Mobile car detailing in Elk Grove, CA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b1a2b;
+  --ink-2:#14273d;
+  --paper:#ffffff;
+  --snow:#f4f8fd;
+  --g1:#3b4756;
+  --g2:#657182;
+  --g3:#7f8c9c;
+  --line:#d3ddea;
+  --line-2:#e6ecf4;
+  --red:#e0161e;
+  --out:cubic-bezier(.16,1,.3,1);
+  --in:cubic-bezier(.7,0,.84,0);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --pad:20px;
+  --head:"Saira",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Saira",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html{background:var(--snow);-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:hidden}
+body{margin:0;overflow-x:hidden;color:var(--ink);font:400 17px/1.5 var(--body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+@supports (overflow:clip){html,body{overflow-x:clip}}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.dark :focus-visible,.top :focus-visible,.dawn :focus-visible,.dusk :focus-visible{outline-color:#fff}
+[id]{scroll-margin-top:16px}
+
+/* the sky: six fixed layers, only opacity changes while you scroll */
+.sky{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;z-index:-1;pointer-events:none;background:#f4f8fd}
+.sky i{position:absolute;inset:0;opacity:0;display:none;will-change:opacity}
+.sky i:nth-child(1){opacity:1;display:block;background:linear-gradient(#c3d6ee,#f1f6fc 78%)}
+.sky i:nth-child(2){background:linear-gradient(#dfebf9,#f9fbfe 78%)}
+.sky i:nth-child(3){background:linear-gradient(#eef4fc,#ffffff 78%)}
+.sky i:nth-child(4){background:linear-gradient(#e2ecf9,#f8fafd 78%)}
+.sky i:nth-child(5){background:linear-gradient(#cddcef,#eef3f9 78%)}
+.sky i:nth-child(6){background:linear-gradient(#9cb2d6,#6283b4 82%)}
+
+/* type */
+.h2{font:800 expanded 30px/1.04 var(--head);letter-spacing:-.01em}
+.sub{margin-top:10px;color:var(--g1);max-width:34em}
+.wrap{padding:0 var(--pad);max-width:1120px;margin:0 auto}
+section{position:relative}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:10px;font:700 17px/1 var(--body);text-decoration:none;text-align:center;transition:transform .5s var(--spring),background-color .2s var(--out),color .2s var(--out);touch-action:manipulation}
+.btn:active{transform:scale(.96);transition-duration:.09s}
+.btn-book{background:var(--red);color:#fff}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-line{background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-wide{width:100%}
+.textlink{font-weight:600;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+
+/* header: ink, because the logo only lives on dark */
+.top{background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px var(--pad) 6px}
+.top .brand{display:block;width:142px}
+.top nav{display:flex;align-items:center;gap:18px}
+.top-call{font-weight:600;font-size:16px;text-decoration:none;padding:12px 0}
+.top-call .num{display:none}
+.top .btn{min-height:42px;padding:0 18px;font-size:16px}
+
+/* first screen: night band that opens into daylight */
+.dawn{background:var(--ink);color:#fff}
+.dawn-copy{padding:12px var(--pad) 20px}
+.dawn h1{font:800 expanded clamp(30px,8.9vw,58px)/1.02 var(--head);letter-spacing:-.015em}
+.dawn .lede{margin-top:10px;font-size:17px;line-height:1.4;color:#dbe4ef;max-width:30em}
+.dawn-cta{margin-top:16px}
+.dawn-cta .btn{width:100%;min-height:58px;font-size:19px}
+.from{margin-top:11px;font-size:16px;line-height:1.35;color:#dbe4ef}
+.from b{color:#fff;font-weight:700}
+.dawn-photo{position:relative;height:min(124vw,560px);overflow:hidden;background:var(--ink)}
+.dawn-photo .px{top:0;bottom:0;transform-origin:50% 22%}
+.dawn-photo .px img{object-position:50% 0}
+.px{position:absolute;left:0;right:0;top:-8%;bottom:-8%;will-change:transform}
+.px img{width:100%;height:100%;object-fit:cover}
+.veil{position:absolute;left:0;right:0;top:-1px;height:100%;transform-origin:50% 0;transform:scaleY(.3);pointer-events:none}
+.veil-in{position:absolute;inset:0;transform-origin:50% 0;background:linear-gradient(#0b1a2b 0,#0b1a2b 8%,rgba(14,34,62,.86) 30%,rgba(28,58,104,.5) 58%,rgba(70,110,170,.16) 84%,rgba(98,140,196,0) 100%)}
+.cap{position:absolute;left:12px;bottom:12px;background:#fff;color:var(--ink);font:600 13px/1 var(--body);padding:7px 9px;border-radius:5px}
+
+/* load: dawn breaks */
+.js .veil{animation:dawn 2.1s var(--out) .15s both}
+.js .dawn-photo .px img{animation:settle 2.6s var(--out) both}
+.js .rise{animation:rise .9s var(--out) both}
+.js .rise.r2{animation-delay:.08s}.js .rise.r3{animation-delay:.16s}.js .rise.r4{animation-delay:.24s}
+@keyframes dawn{from{transform:scaleY(4.2)}to{transform:scaleY(.3)}}
+@keyframes settle{from{transform:scale(1.09)}to{transform:scale(1)}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* plain facts under the hero */
+.facts{padding:30px 0 8px}
+.facts li{display:grid;grid-template-columns:1fr;gap:2px;padding:14px 0;border-top:1.5px solid rgba(11,26,43,.2)}
+.facts li:last-child{border-bottom:1.5px solid rgba(11,26,43,.2)}
+.facts b{font:700 expanded 18px/1.2 var(--head)}
+.facts span{color:var(--g1);font-size:16px}
+
+/* sheets of paper on the sky */
+.sheet{background:var(--paper);border-radius:8px;box-shadow:0 0 0 1px rgba(11,26,43,.09),0 18px 40px -24px rgba(11,26,43,.5)}
+.block{padding:56px 0 0}
+.block-head{padding:0 var(--pad) 20px;max-width:1120px;margin:0 auto}
+
+/* menu */
+.menu{margin:0 12px;padding:22px 20px 20px}
+.guide{font-size:16px;color:var(--g1);padding-bottom:16px}
+.guide b{color:var(--ink);font-weight:700}
+.seg{position:relative;display:flex;background:#e9eff6;border-radius:10px;padding:4px}
+.seg button{position:relative;z-index:1;flex:1 1 auto;min-height:44px;padding:0 8px;font:600 15px/1 var(--body);color:var(--g1);border-radius:7px;white-space:nowrap;transition:color .25s var(--out)}
+.seg button[aria-pressed="true"]{color:#fff}
+.seg-thumb{position:absolute;z-index:0;top:4px;bottom:4px;left:0;width:60px;background:var(--ink);border-radius:7px;transition:transform .5s var(--spring),width .5s var(--spring)}
+.tier{padding:22px 0 4px}
+.tier + .tier{margin-top:8px}
+.tier-row{display:flex;align-items:baseline}
+.tier-name{font:800 expanded 26px/1 var(--head)}
+.dots{flex:1;margin:0 10px;border-bottom:2px dotted #9aa7b6;transform:translateY(-5px)}
+.tier-price{font:800 expanded 30px/1 var(--head);font-variant-numeric:tabular-nums}
+.tier-meta{margin-top:8px;color:var(--g1);font-size:16px}
+.tier dl{margin:14px 0 0}
+.tier dt{font:700 expanded 14px/1 var(--head);padding-top:12px;border-top:1.5px solid var(--line)}
+.tier dd{margin:6px 0 14px;font-size:16px;line-height:1.5}
+.tier .btn{margin:6px 0 18px}
+.tier-full{margin:14px -8px 0;padding:0 14px 0;border:2.5px solid var(--ink);border-radius:8px;position:relative}
+.tier-flag{display:inline-block;margin:0 0 16px -16.5px;padding:9px 14px;background:var(--ink);color:#fff;font:700 expanded 14px/1.15 var(--head);border-radius:6px 0 6px 0}
+.plus li{position:relative;padding:12px 0 12px 22px;border-top:1.5px solid var(--line);font-size:16px;line-height:1.45}
+.plus li::before{content:"+";position:absolute;left:0;top:10px;font:800 expanded 18px/1.4 var(--head)}
+.plus{margin-top:14px}
+.proofpair{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0 10px}
+.shot{position:relative;overflow:hidden;border-radius:5px;background:#dfe6ee}
+.shot img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+.tag{position:absolute;top:8px;left:8px;background:#fff;color:var(--ink);font:700 12.5px/1 var(--body);padding:6px 8px;border-radius:4px}
+.tag.after{left:auto;right:8px;background:var(--ink);color:#fff}
+.proofnote{font-size:14.5px;color:var(--g1);line-height:1.4;margin-bottom:14px}
+.less{margin-top:18px;padding-top:16px;border-top:1.5px solid var(--line);font-size:16px;color:var(--g1)}
+.less button{color:var(--ink)}
+.fold{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--in)}
+.fold.open{grid-template-rows:1fr;transition:grid-template-rows .6s var(--out)}
+.fold > div{overflow:hidden;min-height:0}
+.quick{padding-top:14px}
+.quick .seg{margin-bottom:8px}
+.quick-out{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 4px}
+.quick-price{font:800 expanded 34px/1 var(--head);font-variant-numeric:tabular-nums}
+.quick-what{font-size:14.5px;color:var(--g1);margin-top:4px}
+
+/* full-bleed daylight photos */
+.band{margin-top:56px;display:grid;gap:4px}
+.band figure{position:relative;height:min(118vw,560px);overflow:hidden;background:#cfd9e6}
+.band figure.wide{height:min(78vw,520px)}
+.band .x2{display:none}
+.live .px img{animation:drift 24s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1) translate3d(0,0,0)}to{transform:scale(1.07) translate3d(-1.2%,0,0)}}
+
+/* job log */
+.log{display:grid;gap:14px;margin:0 12px}
+.entry{padding:20px 20px 20px;position:relative}
+.entry h3{font:800 expanded 23px/1.08 var(--head)}
+.fields{margin:14px 0 16px;display:grid;grid-template-columns:auto 1fr;font-size:16px;line-height:1.4}
+.fields dt,.fields dd{margin:0;padding:10px 0;border-top:1.5px solid var(--line)}
+.fields dt{padding-right:16px;font:600 14px/1.6 var(--body);color:var(--g2);white-space:nowrap}
+.fields dd{font-weight:500}
+.entry .media{margin:0 -8px;display:grid;gap:8px}
+.stack{display:grid;gap:4px}
+.stack .shot img{aspect-ratio:1/1}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.ba{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:5px;touch-action:pan-y;user-select:none;-webkit-user-select:none;background:#dfe6ee;--p:50%;cursor:ew-resize}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.ba .b4{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.ba-h{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 0 1px rgba(11,26,43,.25)}
+.ba-k{position:absolute;top:50%;left:50%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;background:var(--ink);border:3px solid #fff;display:grid;place-items:center;transition:transform .5s var(--spring)}
+.ba.dragging .ba-k{transform:scale(1.12)}
+.ba-k svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ba-hint{margin:8px 8px 0;font-size:14px;color:var(--g2)}
+.more-wrap{margin:14px 12px 0}
+.more-wrap .log{margin:0;padding-bottom:2px}
+.more-btn{margin:14px 12px 0;width:calc(100% - 24px)}
+
+/* reviews */
+.reviews{padding-top:64px}
+.score{display:flex;align-items:flex-end;gap:14px}
+.score b{font:800 expanded 84px/.82 var(--head);letter-spacing:-.03em}
+.score span{font:700 expanded 18px/1.2 var(--head);padding-bottom:2px}
+.quotes{margin-top:26px}
+.quotes li{padding:20px 0;border-top:1.5px solid rgba(11,26,43,.22)}
+.quotes blockquote{margin:0;font:500 22px/1.32 var(--body)}
+.quotes cite{display:block;margin-top:8px;font-style:normal;font-size:15px;color:var(--g1)}
+.reviews .textlink{display:inline-block;margin-top:6px;padding:10px 0}
+
+/* how it works */
+.steps{counter-reset:s;margin-top:22px}
+.steps li{counter-increment:s;position:relative;padding:18px 0 18px 62px;border-top:1.5px solid rgba(11,26,43,.22)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:12px;font:800 expanded 46px/1 var(--head)}
+.steps b{display:block;font:700 expanded 19px/1.2 var(--head)}
+.steps span{display:block;margin-top:4px;color:var(--g1);font-size:16px}
+
+/* booking slip */
+.book-sheet{margin:0 12px;padding:6px 20px 24px}
+.q{padding:20px 0;border-bottom:1.5px solid var(--line)}
+.q:last-of-type{border-bottom:0}
+.q-t{display:flex;gap:10px;font:700 expanded 17px/1.25 var(--head);margin-bottom:12px}
+.q-t i{font-style:normal;color:var(--g2);font-variant-numeric:tabular-nums}
+.q-t small{font:500 14px/1.6 var(--body);color:var(--g2)}
+.opt{display:block;width:100%;text-align:left;padding:14px 16px;border-radius:8px;box-shadow:inset 0 0 0 1.5px var(--g3);background:var(--paper);transition:transform .5s var(--spring),background-color .2s var(--out),color .2s var(--out),box-shadow .2s var(--out);touch-action:manipulation}
+.opt + .opt{margin-top:8px}
+.opt:active{transform:scale(.97);transition-duration:.09s}
+.opt[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.opt-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:700 expanded 18px/1.2 var(--head)}
+.opt-row span:last-child{font-variant-numeric:tabular-nums}
+.opt small{display:block;margin-top:4px;font:400 14.5px/1.35 var(--body);color:var(--g1)}
+.opt[aria-pressed="true"] small{color:#d5deea}
+.opt[disabled]{opacity:1;box-shadow:inset 0 0 0 1.5px var(--line);cursor:default}
+.opt[disabled] .opt-row{color:var(--g2)}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.chips.c3{grid-template-columns:repeat(3,1fr)}
+.chips.csize{grid-template-columns:1fr 1fr 1.55fr}
+.chip{min-height:48px;padding:6px 4px;border-radius:8px;box-shadow:inset 0 0 0 1.5px var(--g3);font:600 15px/1.15 var(--body);text-align:center;background:var(--paper);transition:transform .5s var(--spring),background-color .2s var(--out),color .2s var(--out);touch-action:manipulation}
+.chip:active{transform:scale(.94);transition-duration:.09s}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.chip small{display:block;font:500 12.5px/1.2 var(--body);color:var(--g2)}
+.chip[aria-pressed="true"] small{color:#d5deea}
+.chip b{display:block;font:800 expanded 18px/1.1 var(--head)}
+.sublabel{font:600 14px/1 var(--body);color:var(--g2);margin:16px 0 8px}
+.note{margin-top:10px;font-size:15px;line-height:1.4;color:var(--g1)}
+.note.say{padding:11px 13px;background:#e9eff6;border-radius:8px;color:var(--ink);font-weight:500}
+.field{display:block;margin-top:12px}
+.field span{display:block;font:600 14px/1 var(--body);color:var(--g1);margin-bottom:7px}
+.field input{width:100%;height:52px;padding:0 14px;border:1.5px solid var(--g3);border-radius:8px;font:500 17px/1 var(--body);color:var(--ink);background:var(--paper);-webkit-appearance:none;appearance:none}
+.field input:focus{outline:0;border-color:var(--ink);box-shadow:0 0 0 3px rgba(11,26,43,.16)}
+.check{display:flex;gap:12px;align-items:flex-start;margin-top:16px;font-size:15.5px;line-height:1.35;color:var(--g1);cursor:pointer}
+.check input{flex:none;width:24px;height:24px;margin:0;accent-color:var(--ink)}
+.sum{margin-top:6px;padding:18px 0 0;border-top:2.5px solid var(--ink)}
+.sum-lines li{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:16px}
+.sum-lines li span:last-child{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:12px;border-top:1.5px solid var(--line)}
+.sum-total span{font:700 expanded 17px/1 var(--head)}
+.sum-total b{font:800 expanded 34px/1 var(--head);font-variant-numeric:tabular-nums}
+.sum-line{margin:10px 0 16px;font-size:16px;font-weight:500}
+.msg{margin-top:12px;padding:13px 14px;border-radius:8px;background:var(--ink);color:#fff;font-weight:600;font-size:16px;line-height:1.35}
+.msg.need{background:#e9eff6;color:var(--ink)}
+.msg[hidden]{display:none}
+.msg.pop{animation:pop .55s var(--spring) both}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.fine{margin-top:14px;font-size:14.5px;line-height:1.45;color:var(--g1)}
+.fine + .fine{margin-top:8px}
+
+/* faq */
+.faq-sheet{margin:0 12px;padding:4px 20px}
+.fq{border-bottom:1.5px solid var(--line)}
+.fq:last-child{border-bottom:0}
+.fq button{display:flex;width:100%;justify-content:space-between;align-items:center;gap:14px;text-align:left;padding:18px 0;font:700 expanded 16.5px/1.25 var(--head)}
+.pm{flex:none;position:relative;width:18px;height:18px}
+.pm::before,.pm::after{content:"";position:absolute;left:0;top:8px;width:18px;height:2.5px;background:var(--ink);border-radius:2px;transition:transform .5s var(--spring)}
+.pm::after{transform:rotate(90deg)}
+.fq button[aria-expanded="true"] .pm::after{transform:rotate(0deg)}
+.fq p{padding:0 0 18px;font-size:16px;color:var(--g1)}
+
+/* dusk: the page sky runs into the real one */
+.dusk{margin-top:64px;color:#fff}
+.dusk-sky{height:150px;background:linear-gradient(rgba(98,131,180,0),#6283b4)}
+.dusk-photo{position:relative;height:min(104vw,620px);overflow:hidden;background:#3a2a33}
+.dusk-photo .px{top:-6%;bottom:-6%}
+.dusk-photo .px img{object-position:50% 12%}
+.dusk-photo::before{content:"";position:absolute;z-index:1;left:0;right:0;top:-1px;height:16%;background:linear-gradient(#6283b4,rgba(98,131,180,0))}
+.dusk-photo::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:-1px;height:52%;background:linear-gradient(rgba(11,26,43,0),rgba(11,26,43,.86) 62%,var(--ink))}
+.dusk-logo{position:absolute;z-index:2;left:50%;bottom:6px;width:min(74vw,330px);transform:translateX(-50%)}
+.foot{background:var(--ink);padding:14px var(--pad) calc(120px + env(safe-area-inset-bottom))}
+.foot-grid{display:grid;gap:0;max-width:1120px;margin:0 auto}
+.foot-grid > div{padding:16px 0;border-top:1.5px solid rgba(255,255,255,.2)}
+.foot h3{font:700 expanded 14px/1 var(--head);color:#b9c6d6;margin-bottom:8px}
+.foot p,.foot a{font-size:17px;line-height:1.5}
+.foot a{display:inline-block;padding:4px 0;font-weight:600;text-underline-offset:4px}
+.foot .small{font-size:14.5px;color:#b9c6d6;padding-top:16px;border-top:1.5px solid rgba(255,255,255,.2)}
+
+/* sticky bar */
+.bar{position:fixed;z-index:20;left:0;right:0;bottom:0;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -1px 0 var(--line),0 -14px 30px -18px rgba(11,26,43,.5);transform:translateY(115%);transition:transform .32s var(--in);visibility:hidden}
+.bar.on{transform:none;visibility:visible;transition:transform .6s var(--spring)}
+.bar .btn{min-height:54px}
+.bar .btn-line{flex:0 0 30%}
+.bar .btn-book{flex:1;flex-direction:column;gap:3px;padding:0 10px}
+.bar .btn-book small{font:500 13px/1 var(--body);color:#fff}
+
+/* scroll entrances */
+.js .rv{opacity:0;transform:translateY(24px)}
+.js .rv.in{opacity:1;transform:none;transition:opacity .7s var(--out),transform 1s var(--out)}
+
+@media (min-width:900px){
+  :root{--pad:40px}
+  body{font-size:18px}
+  .h2{font-size:46px}
+  .top{padding:14px 40px 8px}
+  .top .brand{width:190px}
+  .top-call .num{display:inline}.top-call .word{display:none}
+  .dawn{display:grid;grid-template-columns:1.05fr .95fr;align-items:stretch}
+  .dawn-copy{padding:70px 48px 70px 40px;align-self:center}
+  .dawn .lede{font-size:21px}
+  .dawn-cta .btn{width:auto;padding:0 44px}
+  .dawn-photo{height:auto;min-height:640px}
+  .facts ul{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  .facts li,.facts li:last-child{border-bottom:0}
+  .block{padding-top:96px}
+  .menu{max-width:1040px;margin:0 auto;padding:34px 40px 32px}
+  .menu .seg{max-width:460px}
+  .tiers{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .tier-full{margin:22px 0 0;padding:0 22px}
+  .tier-flag{margin-left:-24.5px}
+  .tier + .tier{margin-top:22px}
+  .band{grid-template-columns:repeat(3,1fr);margin-top:96px}
+  .band .x2{display:block}
+  .band figure,.band figure.wide{height:44vw;max-height:620px}
+  .log{display:block;columns:2;column-gap:20px;max-width:1040px;margin:0 auto}
+  .log .entry{break-inside:avoid;margin-bottom:20px}
+  .more-wrap{max-width:1040px;margin:20px auto 0}
+  .more-btn{display:flex;width:300px;margin:20px auto 0}
+  .entry{padding:26px}
+  .reviews .wrap,.how .wrap{max-width:820px}
+  .quotes blockquote{font-size:28px}
+  .book-sheet,.faq-sheet{max-width:720px;margin:0 auto;padding-left:36px;padding-right:36px}
+  .dusk-photo{height:76vh;min-height:520px}
+  .dusk-photo .px img{object-position:50% 30%}
+  .foot-grid{grid-template-columns:repeat(4,1fr);gap:28px}
+  .foot .small{grid-column:1/-1}
+  .bar{left:50%;right:auto;bottom:16px;width:440px;margin-left:-220px;border-radius:14px;padding:10px;box-shadow:0 0 0 1px var(--line),0 18px 40px -16px rgba(11,26,43,.55)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+
+<div class="sky" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<header class="top">
+  <a class="brand" href="#top" aria-label="Valley Details"><img src="../assets/logo-420.png" width="420" height="192" alt="Valley Details"></a>
+  <nav>
+    <a class="top-call" href="tel:+19162490631"><span class="word">Call</span><span class="num">(916) 249-0631</span></a>
+    <a class="btn btn-white" href="#book">Book</a>
+  </nav>
+</header>
+
+<main>
+<section class="dawn" id="top">
+  <div class="dawn-copy">
+    <h1 class="rise">Cleaner cars.<br>Brighter days.</h1>
+    <p class="lede rise r2">Mobile detailing in Elk Grove. We pull up to your driveway and do the car by hand.</p>
+    <div class="dawn-cta rise r3">
+      <a class="btn btn-book" id="heroBook" href="#book">Book a detail</a>
+      <p class="from"><b>From <span data-from>$150</span></b> inside and out. No deposit.<br>5.0 on Google from 15 reviews.</p>
+    </div>
+  </div>
+  <figure class="dawn-photo">
+    <div class="px" data-px="hero"><img src="../assets/work/scat-front.jpg" width="900" height="1200" alt="Blue Dodge Charger Scat Pack, clean, in a sunny driveway" fetchpriority="high"></div>
+    <div class="veil"><div class="veil-in" id="veil"></div></div>
+    <figcaption class="cap">Dodge Charger Scat Pack</figcaption>
+  </figure>
+</section>
+
+<section class="facts" data-sky="0">
+  <div class="wrap">
+    <ul>
+      <li class="rv"><b>We come to you</b><span>Your driveway, apartment lot or work. Elk Grove and south Sacramento.</span></li>
+      <li class="rv"><b>The owners do your car</b><span>Owner-operated since 2024. The people who run it are the ones doing your car.</span></li>
+      <li class="rv"><b>You pay after</b><span>No deposit. You look the car over when we are done, then you pay.</span></li>
+      <li class="rv"><b>Open 8am to 8pm</b><span>Every day.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block" id="menu" data-sky="1">
+  <div class="block-head rv">
+    <h2 class="h2">The menu</h2>
+    <p class="sub">Two details. Both are inside and out, done at your place.</p>
+  </div>
+  <div class="menu sheet rv">
+    <p class="guide"><b>Inside dusty and lived in?</b> Express.<br><b>Stains or ground-in dirt?</b> Full.</p>
+    <div class="seg" data-seg="size" role="group" aria-label="Vehicle size">
+      <span class="seg-thumb"></span>
+      <button type="button" data-size="sedan">Sedan</button>
+      <button type="button" data-size="suv">SUV</button>
+      <button type="button" data-size="truck">Truck or 3-row</button>
+    </div>
+
+    <div class="tiers">
+      <article class="tier">
+        <div class="tier-row"><h3 class="tier-name">Express</h3><span class="dots"></span><span class="tier-price" data-price="express">$150</span></div>
+        <p class="tier-meta">Inside and out. About 2 hours.</p>
+        <dl>
+          <dt>Inside</dt>
+          <dd>Vacuumed from the seats to the trunk. Pet hair and grit lifted out. Leather cleaned and conditioned. Dash, console, doors and vents wiped down. Glass and mirrors.</dd>
+          <dt>Outside</dt>
+          <dd>Hand washed from the roof to the rockers. Wheels, wells and tires degreased. Bugs and tar taken off. Tires dressed. Glass, trim and door jambs.</dd>
+        </dl>
+        <button type="button" class="btn btn-line btn-wide" data-choose="express">Choose Express</button>
+      </article>
+
+      <article class="tier tier-full">
+        <p class="tier-flag">The one for a dirty interior</p>
+        <div class="tier-row"><h3 class="tier-name">Full</h3><span class="dots"></span><span class="tier-price" data-price="full">$250</span></div>
+        <p class="tier-meta">Everything in Express, plus the deep interior. About 3.5 to 4 hours.</p>
+        <ul class="plus">
+          <li>Carpets, mats and cloth seats shampooed with a hot water extractor.</li>
+          <li>Steam on the vents, cupholders, console, seat rails and door pockets.</li>
+          <li>Set-in stains worked on. If one will not come out, we tell you before we start.</li>
+        </ul>
+        <div class="proofpair">
+          <div class="shot"><img src="../assets/jobs/camry/03.jpg" width="864" height="1080" loading="lazy" alt="Before: stained cloth seat in a 2013 Toyota Camry"><span class="tag">Before</span></div>
+          <div class="shot"><img src="../assets/jobs/camry/04.jpg" width="864" height="1080" loading="lazy" alt="After: the Camry front seats, cleaned"><span class="tag after">After</span></div>
+        </div>
+        <p class="proofnote">2013 Toyota Camry. Stains set into the cloth seats, then cleaned.</p>
+        <button type="button" class="btn btn-ink btn-wide" data-choose="full">Choose Full</button>
+      </article>
+    </div>
+
+    <p class="less">Need something less? <button type="button" class="textlink" id="lessBtn" aria-expanded="false" aria-controls="quick">Get a quick price.</button></p>
+    <div class="fold" id="quick"><div>
+      <div class="quick">
+        <div class="seg" data-seg="less" role="group" aria-label="Inside only or outside only">
+          <span class="seg-thumb"></span>
+          <button type="button" data-less="inside">Inside only</button>
+          <button type="button" data-less="outside">Outside only</button>
+        </div>
+        <div class="seg" data-seg="size" role="group" aria-label="Vehicle size">
+          <span class="seg-thumb"></span>
+          <button type="button" data-size="sedan">Sedan</button>
+          <button type="button" data-size="suv">SUV</button>
+          <button type="button" data-size="truck">Truck or 3-row</button>
+        </div>
+        <div class="quick-out">
+          <div><div class="quick-price" id="quickPrice">$100</div><div class="quick-what" id="quickWhat">Inside only, sedan</div></div>
+          <button type="button" class="btn btn-ink" id="quickBook">Book this</button>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<div class="band" data-sky="2">
+  <figure><div class="px" data-px><img src="../assets/work/tesla-white.jpg" width="900" height="1200" loading="lazy" alt="White Tesla, clean, in a driveway under trees"></div><figcaption class="cap">Tesla</figcaption></figure>
+  <figure class="x2"><div class="px" data-px><img src="../assets/jobs/bmw-5-series/01.jpg" width="864" height="1080" loading="lazy" alt="White BMW 530e in a driveway"></div><figcaption class="cap">BMW 530e</figcaption></figure>
+  <figure class="x2"><div class="px" data-px><img src="../assets/jobs/cadillac/02.jpg" width="864" height="1080" loading="lazy" alt="1995 Cadillac DeVille under trees"></div><figcaption class="cap">1995 Cadillac DeVille</figcaption></figure>
+</div>
+
+<section class="block" id="log" data-sky="2">
+  <div class="block-head rv">
+    <h2 class="h2">The job log</h2>
+    <p class="sub">Real jobs in customers' driveways. What came in and what we did, with the photos.</p>
+  </div>
+  <div class="log" id="logMain"></div>
+  <div class="fold more-wrap" id="logMoreFold"><div><div class="log" id="logMore"></div></div></div>
+  <button type="button" class="btn btn-line more-btn" id="moreBtn" aria-expanded="false" aria-controls="logMoreFold">Show 3 more entries</button>
+</section>
+
+<div class="band" data-sky="3">
+  <figure><div class="px" data-px><img src="../assets/work/merc-wheel.jpg" width="900" height="1200" loading="lazy" alt="Silver Mercedes-Benz in the sun, palm trees behind"></div><figcaption class="cap">Mercedes-Benz</figcaption></figure>
+  <figure class="x2"><div class="px" data-px><img src="../assets/work/scat-side.jpg" width="900" height="1200" loading="lazy" alt="Blue Dodge Charger Scat Pack from the side"></div><figcaption class="cap">Dodge Charger Scat Pack</figcaption></figure>
+  <figure class="x2"><div class="px" data-px><img src="../assets/jobs/rav4/01.jpg" width="864" height="1080" loading="lazy" alt="Black 2016 Toyota RAV4 in a driveway"></div><figcaption class="cap">2016 Toyota RAV4</figcaption></figure>
+</div>
+
+<section class="block reviews" id="reviews" data-sky="3">
+  <div class="wrap">
+    <div class="score rv"><b>5.0</b><span>on Google<br>from 15 reviews</span></div>
+    <ul class="quotes">
+      <li class="rv"><blockquote>Much needed and well appreciated and fast service !! Quality service and lasting detail !</blockquote><cite>Jeffrey G., Google</cite></li>
+      <li class="rv"><blockquote>Arrived on time friendly faces and great service</blockquote><cite>Mason A., Google</cite></li>
+      <li class="rv"><blockquote>Professional Service, cleaned everything well.</blockquote><cite>Jose P., Google</cite></li>
+    </ul>
+    <a class="textlink" href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener">Read all 15 on Google</a>
+  </div>
+</section>
+
+<section class="block how" id="how" data-sky="3.5">
+  <div class="wrap">
+    <h2 class="h2 rv">How it works</h2>
+    <ol class="steps">
+      <li class="rv"><b>Pick a time</b><span>Choose your detail, then a day and a time. No deposit.</span></li>
+      <li class="rv"><b>We pull up</b><span>Your driveway, apartment lot or work. We bring the equipment. We need a parking spot, an outside spigot and an outdoor outlet, and we take $5 off for using them.</span></li>
+      <li class="rv"><b>Look it over, then pay</b><span>Walk around the car when we are done. Then you pay: cash, Zelle, Cash App, Venmo, Apple Pay or card.</span></li>
+    </ol>
+  </div>
+</section>
+
+<div class="band" data-sky="4">
+  <figure class="wide"><div class="px" data-px><img src="../assets/work/eclass.jpg" width="1200" height="900" loading="lazy" alt="Grey Mercedes-Benz E-Class in late sun"></div><figcaption class="cap">Mercedes-Benz E-Class</figcaption></figure>
+  <figure class="wide x2"><div class="px" data-px><img src="../assets/work/audi.jpg" width="1200" height="900" loading="lazy" alt="Blue Audi S4"></div><figcaption class="cap">Audi S4</figcaption></figure>
+  <figure class="wide x2"><div class="px" data-px><img src="../assets/work/bmw540.jpg" width="1200" height="900" loading="lazy" alt="White BMW 540i"></div><figcaption class="cap">BMW 540i</figcaption></figure>
+</div>
+
+<section class="block" id="book" data-sky="4">
+  <div class="block-head rv">
+    <h2 class="h2">Book your detail</h2>
+    <p class="sub">No deposit. You pay when the car is done.</p>
+  </div>
+  <form class="book-sheet sheet rv" id="bookForm" novalidate onsubmit="return false">
+    <div class="q" id="q-svc">
+      <div class="q-t"><i>1</i>Which detail?</div>
+      <button type="button" class="opt" data-svc="express"><span class="opt-row"><span>Express</span><span data-price="express">$150</span></span><small>Inside and out. About 2 hours.</small></button>
+      <button type="button" class="opt" data-svc="full"><span class="opt-row"><span>Full</span><span data-price="full">$250</span></span><small>Everything in Express, plus the deep interior. Pick this one for stains or ground-in dirt.</small></button>
+      <button type="button" class="opt" data-svc="less" id="lessOpt" hidden><span class="opt-row"><span id="lessOptName">Inside only</span><span id="lessOptPrice">$100</span></span><small>From the quick price picker.</small></button>
+    </div>
+
+    <div class="q" id="q-size">
+      <div class="q-t"><i>2</i>Vehicle size</div>
+      <div class="chips c3 csize" data-chips="size">
+        <button type="button" class="chip" data-size="sedan">Sedan</button>
+        <button type="button" class="chip" data-size="suv">SUV</button>
+        <button type="button" class="chip" data-size="truck">Truck or 3-row</button>
+      </div>
+    </div>
+
+    <div class="q" id="q-when">
+      <div class="q-t"><i>3</i>Day and time</div>
+      <div class="chips" id="days"></div>
+      <p class="sublabel">Start time</p>
+      <div class="chips" id="times"></div>
+    </div>
+
+    <div class="q" id="q-where">
+      <div class="q-t"><i>4</i>Where?</div>
+      <button type="button" class="opt" data-where="mobile"><span class="opt-row"><span>We come to you</span></span><small>Your driveway, apartment lot or work.</small></button>
+      <button type="button" class="opt" data-where="drop"><span class="opt-row"><span>I'll drop it off</span></span><small>9280 Trout Way, Elk Grove.</small></button>
+      <div id="addrWrap">
+        <label class="field"><span>Address</span><input type="text" id="f-addr" name="address" autocomplete="street-address"></label>
+        <p class="note">No travel charge within about 10 miles of Elk Grove. Past 10 miles it is $1 a mile for the miles over ten.</p>
+      </div>
+    </div>
+
+    <div class="q" id="q-util">
+      <div class="q-t"><i>5</i>Is there an outside spigot and an outdoor outlet we can use?</div>
+      <div class="chips c3">
+        <button type="button" class="chip" data-util="yes">Yes</button>
+        <button type="button" class="chip" data-util="unsure">Not sure</button>
+        <button type="button" class="chip" data-util="no">No</button>
+      </div>
+      <p class="note say" id="utilNote" hidden></p>
+    </div>
+
+    <div class="q" id="q-add">
+      <div class="q-t"><i>6</i>Add-ons <small>Optional</small></div>
+      <button type="button" class="opt" data-addon="pet" aria-pressed="false"><span class="opt-row"><span>Heavy pet hair</span><span data-addon-price="pet">+$40</span></span><small id="petNote">For hair that is matted into the carpet and seats.</small></button>
+      <button type="button" class="opt" data-addon="shampoo" aria-pressed="false"><span class="opt-row"><span>Seat or carpet shampoo</span><span data-addon-price="shampoo">+$50</span></span><small id="shampooNote">On an Express.</small></button>
+    </div>
+
+    <div class="q" id="q-you">
+      <div class="q-t"><i>7</i>Your details</div>
+      <label class="field"><span>Name</span><input type="text" id="f-name" name="name" autocomplete="name"></label>
+      <label class="field"><span>Mobile</span><input type="tel" id="f-mobile" name="mobile" autocomplete="tel" inputmode="tel"></label>
+      <label class="field"><span>Vehicle, year and model</span><input type="text" id="f-car" name="vehicle" autocomplete="off"></label>
+      <label class="check"><input type="checkbox" id="f-opt" name="optin"><span>Text me open-slot deals. Reply STOP anytime.</span></label>
+    </div>
+
+    <div class="sum" id="summary">
+      <ul class="sum-lines" id="sumLines"></ul>
+      <div class="sum-total"><span>Total</span><b id="sumTotal">$150</b></div>
+      <p class="sum-line" id="sumLine"></p>
+      <button type="button" class="btn btn-book btn-wide" id="finalBook">Book</button>
+      <p class="msg need" id="needMsg" role="status" hidden></p>
+      <p class="msg" id="previewMsg" role="status" hidden>This is a design preview. Booking is live at valleydetails.site.</p>
+      <p class="fine">No deposit. You pay when the car is done. Rescheduling is free. Canceling within 12 hours of your appointment is a $20 fee.</p>
+      <p class="fine">After you book, text us a few pics of your car if you can. If it needs extra time, we tell you the time and price before we come out.</p>
+    </div>
+  </form>
+</section>
+
+<section class="block" id="faq" data-sky="4.4">
+  <div class="block-head rv">
+    <h2 class="h2">Questions</h2>
+  </div>
+  <div class="faq-sheet sheet rv" id="faqList">
+    <div class="fq"><button type="button" aria-expanded="false">Do you come to me?<span class="pm"></span></button><div class="fold"><div><p>Yes. Your driveway, apartment lot or work, in Elk Grove and south Sacramento. No travel charge within about 10 miles of Elk Grove. Past 10 miles it is $1 a mile for the miles over ten. You can also drop the car off at 9280 Trout Way, Elk Grove.</p></div></div></div>
+    <div class="fq"><button type="button" aria-expanded="false">What do you need from me?<span class="pm"></span></button><div class="fold"><div><p>A parking spot, an outside spigot and an outdoor outlet. We bring the equipment, and we take $5 off for using your water and power. Not sure you have them? Say so when you book and we will text you before we drive over to sort it out.</p></div></div></div>
+    <div class="fq"><button type="button" aria-expanded="false">Express or Full?<span class="pm"></span></button><div class="fold"><div><p>If the inside is dusty and lived in, Express covers it. If there are stains, or dirt ground into the carpet and seats, book the Full. That is when the hot water extractor and the steamer come out. Not sure? Text us a few pics of your car.</p></div></div></div>
+    <div class="fq"><button type="button" aria-expanded="false">When and how do I pay?<span class="pm"></span></button><div class="fold"><div><p>No deposit. You look the car over when we are done, then you pay: cash, Zelle, Cash App, Venmo, Apple Pay or card.</p></div></div></div>
+    <div class="fq"><button type="button" aria-expanded="false">What if it rains, or I need to move it?<span class="pm"></span></button><div class="fold"><div><p>If the forecast looks bad we text you the day before and move you to the next open slot for free. Rescheduling is free. Canceling within 12 hours of your appointment is a $20 fee.</p></div></div></div>
+    <div class="fq"><button type="button" aria-expanded="false">Is there a deal for two cars?<span class="pm"></span></button><div class="fold"><div><p>Yes. Two cars at the same address: $25 off the second car.</p></div></div></div>
+  </div>
+</section>
+</main>
+
+<footer class="dusk" data-sky="5">
+  <div class="dusk-sky"></div>
+  <div class="dusk-photo">
+    <div class="px" data-px><img src="../assets/work/bmw-tail2.jpg" width="960" height="1200" loading="lazy" alt="White BMW at dusk on a neighborhood street, tail lights on"></div>
+    <img class="dusk-logo" src="../assets/logo-900.png" width="900" height="412" loading="lazy" alt="Valley Details. Cleaner cars, brighter days.">
+  </div>
+  <div class="foot">
+    <div class="foot-grid">
+      <div><h3>Call or text</h3><p><a href="tel:+19162490631">Call (916) 249-0631</a><br><a href="sms:+19167537822">Text (916) 753-7822</a></p></div>
+      <div><h3>Hours</h3><p>Open 8am to 8pm every day.</p></div>
+      <div><h3>Where we work</h3><p>Elk Grove and south Sacramento. Drop-off at 9280 Trout Way, Elk Grove.</p></div>
+      <div><h3>More</h3><p><a href="https://www.instagram.com/valleydetailsca/" target="_blank" rel="noopener">Instagram @valleydetailsca</a><br><a href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener">Google reviews</a></p></div>
+      <p class="small">Valley Details. Mobile car detailing, Elk Grove, California. Owner-operated since 2024.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="bar" id="bar">
+  <a class="btn btn-line" href="tel:+19162490631">Call</a>
+  <a class="btn btn-book" href="#book" id="barBook"><span>Book</span><small id="barSmall">Express, sedan, $150</small></a>
+</div>
+
+<script>
+/* Every price lives here. Change a number and the whole page follows. */
+const CFG = {
+  sizes: { sedan: 'Sedan', suv: 'SUV', truck: 'Truck or 3-row' },
+  services: {
+    express: { name: 'Express',      prices: { sedan: 150, suv: 170, truck: 190 } },
+    full:    { name: 'Full',         prices: { sedan: 250, suv: 280, truck: 310 } },
+    inside:  { name: 'Inside only',  prices: { sedan: 100, suv: 110, truck: 120 } },
+    outside: { name: 'Outside only', prices: { sedan: 75,  suv: 85,  truck: 95 } }
+  },
+  addons: {
+    pet:     { name: 'Heavy pet hair',         price: 40 },
+    shampoo: { name: 'Seat or carpet shampoo', price: 50 }
+  },
+  utilityDiscount: 5,
+  firstHour: 8,
+  lastHour: 18,
+  daysShown: 7
+};
+
+/* The job log. Captions are the only facts stated about each job. */
+const A = '../assets/';
+const LOG = [
+  { car: '2013 Toyota Camry', rows: [['Came in', 'Stains set into the cloth seats, front and back.'], ['Done', 'Seats cleaned, front and back.']],
+    media: [{ t: 'stack', b: 'jobs/camry/01.jpg', a: 'jobs/camry/05.jpg', what: 'front seat' }, { t: 'pair', b: 'jobs/camry/02.jpg', a: 'jobs/camry/06.jpg', what: 'back seat' }] },
+  { car: 'Tesla Model Y', rows: [['Came in', 'Hair worked into the carpet.'], ['Done', 'Cleared.']],
+    media: [{ t: 'slide', b: 'jobs/tesla-model-y/01.jpg', a: 'jobs/tesla-model-y/04.jpg', what: 'front carpet' }] },
+  { car: '2018 Kia Soul', rows: [['Came in', 'Dirt and hair ground into the mats and seats.'], ['Done', 'Interior cleaned.']],
+    media: [{ t: 'pair', b: 'jobs/kia-soul/02.jpg', a: 'jobs/kia-soul/08.jpg', what: 'back seat floor' }, { t: 'pair', b: 'jobs/kia-soul/04.jpg', a: 'jobs/kia-soul/07.jpg', what: 'cargo area' }] },
+  { car: '2023 Chrysler Pacifica', rows: [['Came in', 'Crumbs across the cargo floor.'], ['Done', 'Vacuumed.']],
+    media: [{ t: 'slide', b: 'jobs/pacifica/02.jpg', a: 'jobs/pacifica/05.jpg', what: 'cargo floor' }] }
+];
+const LOG_MORE = [
+  { car: '2016 Toyota RAV4', rows: [['Photos', 'The cargo area and a wheel, before and after.']],
+    media: [{ t: 'slide', b: 'jobs/rav4/04.jpg', a: 'jobs/rav4/05.jpg', what: 'cargo area' }, { t: 'slide', b: 'jobs/rav4/02.jpg', a: 'jobs/rav4/03.jpg', what: 'wheel' }] },
+  { car: 'Mercedes', rows: [['Came in', 'Water spots on the trunk lid.'], ['Done', 'Cleared.']],
+    media: [{ t: 'slide', b: 'work/merc-trunk-before.jpg', a: 'work/merc-trunk-after.jpg', what: 'trunk lid', w: 904, h: 1200 }] },
+  { car: 'Tesla', rows: [['Came in', 'Tree sap on the paint.'], ['Done', 'Taken off.']],
+    media: [{ t: 'pair', b: 'work/tesla-sap-before.jpg', a: 'work/tesla-sap-after.jpg', what: 'paint', w: 900, h: 1200 }] }
+];
+
+(function () {
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const money = n => '$' + n;
+
+  const state = { svc: 'express', less: 'inside', size: 'sedan', day: null, time: null, where: 'mobile', util: null, pet: false, shampoo: false };
+
+  /* ---------- job log markup ---------- */
+  function img(src, alt, w, h) {
+    return '<img src="' + A + src + '" width="' + (w || 864) + '" height="' + (h || 1080) + '" loading="lazy" decoding="async" alt="' + alt + '">';
+  }
+  function mediaHTML(car, m) {
+    const bAlt = 'Before: ' + car + ' ' + m.what, aAlt = 'After: ' + car + ' ' + m.what;
+    if (m.t === 'slide') {
+      return '<div><div class="ba" role="slider" tabindex="0" aria-label="Before and after, ' + car + ' ' + m.what + '. Drag to compare." aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">' +
+        img(m.a, aAlt, m.w, m.h) + '<div class="b4" style="position:absolute;inset:0">' + img(m.b, bAlt, m.w, m.h) + '</div>' +
+        '<span class="tag">Before</span><span class="tag after">After</span>' +
+        '<div class="ba-h"><span class="ba-k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></span></div></div>' +
+        '<p class="ba-hint">Drag the handle. ' + m.what.charAt(0).toUpperCase() + m.what.slice(1) + '.</p></div>';
+    }
+    const cls = m.t === 'stack' ? 'stack' : 'pair';
+    return '<div class="' + cls + '"><div class="shot">' + img(m.b, bAlt, m.w, m.h) + '<span class="tag">Before</span></div><div class="shot">' + img(m.a, aAlt, m.w, m.h) + '<span class="tag after">After</span></div></div>';
+  }
+  function entryHTML(e) {
+    return '<article class="entry sheet rv"><h3>' + e.car + '</h3><dl class="fields">' +
+      e.rows.map(r => '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>').join('') + '</dl><div class="media">' +
+      e.media.map(m => mediaHTML(e.car, m)).join('') + '</div></article>';
+  }
+  $('#logMain').innerHTML = LOG.map(entryHTML).join('');
+  $('#logMore').innerHTML = LOG_MORE.map(entryHTML).join('');
+
+  /* ---------- before and after sliders ---------- */
+  $$('.ba').forEach(function (el) {
+    let p = 50, drag = false, startX = 0, startP = 50, raf = 0;
+    function set(v) { p = Math.max(3, Math.min(97, v)); el.style.setProperty('--p', p + '%'); el.setAttribute('aria-valuenow', Math.round(p)); }
+    el.addEventListener('pointerdown', function (e) {
+      cancelAnimationFrame(raf); el._touched = true; drag = true; el.classList.add('dragging');
+      const r = el.getBoundingClientRect();
+      if (e.pointerType === 'mouse') set((e.clientX - r.left) / r.width * 100);
+      startX = e.clientX; startP = p;
+      try { el.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    el.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      const r = el.getBoundingClientRect();
+      set(startP + (e.clientX - startX) / r.width * 100);
+    });
+    function end() { drag = false; el.classList.remove('dragging'); }
+    el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end); el.addEventListener('lostpointercapture', end);
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { set(p - 6); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { set(p + 6); e.preventDefault(); }
+    });
+    /* one sweep the first time it is seen, so it reads as draggable */
+    el._nudge = function () {
+      if (el._touched || el._nudged || reduce) return; el._nudged = true;
+      const keys = [[0, 50], [.42, 76], [1, 34], [1.6, 50]], t0 = performance.now(), dur = 1500;
+      const back = x => { const c1 = 1.4, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+      (function step(now) {
+        if (el._touched) return;
+        const t = (now - t0) / dur * 1.6; let i = 0;
+        while (i < keys.length - 2 && t > keys[i + 1][0]) i++;
+        const a = keys[i], b = keys[i + 1], k = Math.max(0, Math.min(1, (t - a[0]) / (b[0] - a[0])));
+        set(a[1] + (b[1] - a[1]) * back(k));
+        if (t < 1.6) raf = requestAnimationFrame(step); else set(50);
+      })(t0);
+    };
+  });
+
+  /* ---------- booking chips ---------- */
+  const days = [];
+  (function () {
+    const now = new Date();
+    for (let i = 1; i <= CFG.daysShown; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
+      days.push({ wd: d.toLocaleDateString('en-US', { weekday: 'short' }), n: d.getDate(), mo: d.toLocaleDateString('en-US', { month: 'short' }) });
+    }
+    $('#days').innerHTML = days.map((d, i) => '<button type="button" class="chip" data-day="' + i + '"><small>' + d.wd + '</small><b>' + d.n + '</b><small>' + d.mo + '</small></button>').join('');
+    let t = '';
+    for (let h = CFG.firstHour; h <= CFG.lastHour; h++) {
+      const label = (h % 12 === 0 ? 12 : h % 12) + ' ' + (h < 12 ? 'AM' : 'PM');
+      t += '<button type="button" class="chip" data-time="' + label + '">' + label + '</button>';
+    }
+    $('#times').innerHTML = t;
+  })();
+
+  /* ---------- pricing ---------- */
+  function svcKey() { return state.svc === 'less' ? state.less : state.svc; }
+  function calc() {
+    const key = svcKey(), base = CFG.services[key].prices[state.size];
+    const lines = [[CFG.services[key].name + ', ' + CFG.sizes[state.size].toLowerCase().replace('suv', 'SUV'), base]];
+    let total = base;
+    if (state.pet && key !== 'outside') { lines.push([CFG.addons.pet.name, CFG.addons.pet.price]); total += CFG.addons.pet.price; }
+    if (state.shampoo && key === 'express') { lines.push([CFG.addons.shampoo.name, CFG.addons.shampoo.price]); total += CFG.addons.shampoo.price; }
+    if (state.util === 'yes') { lines.push(['Using your spigot and outlet', -CFG.utilityDiscount]); total -= CFG.utilityDiscount; }
+    return { key: key, base: base, lines: lines, total: total };
+  }
+  function sizeWord() { return CFG.sizes[state.size].toLowerCase().replace('suv', 'SUV'); }
+
+  function press(list, test) { list.forEach(b => b.setAttribute('aria-pressed', test(b) ? 'true' : 'false')); }
+  function thumbs() {
+    $$('.seg').forEach(function (seg) {
+      const on = $('button[aria-pressed="true"]', seg), th = $('.seg-thumb', seg);
+      if (!on || !th) return;
+      th.style.width = on.offsetWidth + 'px';
+      th.style.transform = 'translateX(' + on.offsetLeft + 'px)';
+    });
+  }
+
+  function render() {
+    const c = calc(), key = c.key;
+    $$('[data-price]').forEach(el => { el.textContent = money(CFG.services[el.dataset.price].prices[state.size]); });
+    $$('[data-from]').forEach(el => { el.textContent = money(CFG.services.express.prices.sedan); });
+    $$('[data-addon-price]').forEach(el => { el.textContent = '+' + money(CFG.addons[el.dataset.addonPrice].price); });
+    press($$('[data-size]'), b => b.dataset.size === state.size);
+    press($$('[data-less]'), b => b.dataset.less === state.less);
+    press($$('[data-svc]'), b => b.dataset.svc === state.svc);
+    press($$('[data-day]'), b => +b.dataset.day === state.day);
+    press($$('[data-time]'), b => b.dataset.time === state.time);
+    press($$('[data-where]'), b => b.dataset.where === state.where);
+    press($$('[data-util]'), b => b.dataset.util === state.util);
+
+    /* quick price picker */
+    $('#quickPrice').textContent = money(CFG.services[state.less].prices[state.size]);
+    $('#quickWhat').textContent = CFG.services[state.less].name + ', ' + sizeWord();
+    $('#lessOptName').textContent = CFG.services[state.less].name;
+    $('#lessOptPrice').textContent = money(CFG.services[state.less].prices[state.size]);
+    $('#lessOpt').hidden = state.svc !== 'less';
+
+    /* where */
+    $('#addrWrap').hidden = state.where !== 'mobile';
+
+    /* spigot and outlet */
+    const un = $('#utilNote');
+    if (state.util === 'yes') { un.hidden = false; un.textContent = 'Thanks. That is $' + CFG.utilityDiscount + ' off for letting us use them.'; }
+    else if (state.util) { un.hidden = false; un.textContent = 'No problem. We will text you before we drive over to sort it out.'; }
+    else un.hidden = true;
+
+    /* add-ons */
+    const pet = $('[data-addon="pet"]'), sh = $('[data-addon="shampoo"]');
+    const petOK = key !== 'outside', shOK = key === 'express';
+    pet.disabled = !petOK; sh.disabled = !shOK;
+    pet.setAttribute('aria-pressed', state.pet && petOK ? 'true' : 'false');
+    sh.setAttribute('aria-pressed', state.shampoo && shOK ? 'true' : 'false');
+    $('#petNote').textContent = petOK ? 'For hair that is matted into the carpet and seats.' : 'Not needed on an outside only.';
+    $('#shampooNote').textContent = shOK ? 'On an Express.' : (key === 'full' ? 'Already part of the Full.' : 'Offered on an Express.');
+
+    /* summary */
+    $('#sumLines').innerHTML = c.lines.map(l => '<li><span>' + l[0] + '</span><span>' + (l[1] < 0 ? '$' + (-l[1]) + ' off' : money(l[1])) + '</span></li>').join('');
+    $('#sumTotal').textContent = money(c.total);
+    const when = (state.day !== null && state.time) ? days[state.day].wd + ', ' + days[state.day].mo + ' ' + days[state.day].n + ' at ' + state.time
+      : 'Pick a day and a time above';
+    $('#sumLine').textContent = CFG.services[key].name + ', ' + sizeWord() + '. ' + when + '. Total ' + money(c.total) + '.';
+    $('#finalBook').textContent = 'Book, ' + money(c.total) + ' due when it is done';
+    $('#barSmall').textContent = CFG.services[key].name + ', ' + sizeWord() + ', ' + money(c.total);
+    thumbs();
+  }
+
+  function goBook(focusStep) {
+    const t = $(focusStep || '#book');
+    t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
+  function clearMsgs() { $('#needMsg').hidden = true; $('#previewMsg').hidden = true; }
+
+  document.addEventListener('click', function (e) {
+    const b = e.target.closest('button,a');
+    if (!b) return;
+    const d = b.dataset;
+    if (d.size) { state.size = d.size; clearMsgs(); render(); }
+    else if (d.less) { state.less = d.less; render(); }
+    else if (d.choose) { state.svc = d.choose; clearMsgs(); render(); goBook('#book'); }
+    else if (d.svc) { state.svc = d.svc; clearMsgs(); render(); }
+    else if (d.day) { state.day = +d.day; clearMsgs(); render(); }
+    else if (d.time) { state.time = d.time; clearMsgs(); render(); }
+    else if (d.where) { state.where = d.where; clearMsgs(); render(); }
+    else if (d.util) { state.util = d.util; clearMsgs(); render(); }
+    else if (d.addon) { if (!b.disabled) { state[d.addon] = !state[d.addon]; clearMsgs(); render(); } }
+    else if (b.id === 'quickBook') { state.svc = 'less'; clearMsgs(); render(); goBook('#book'); }
+    else if (b.id === 'lessBtn' || b.id === 'moreBtn') {
+      const fold = $('#' + b.getAttribute('aria-controls')), open = !fold.classList.contains('open');
+      fold.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+      if (b.id === 'moreBtn') { b.textContent = open ? 'Show fewer entries' : 'Show 3 more entries'; if (open) $$('.rv', fold).forEach(x => x.classList.add('in')); }
+      if (open) requestAnimationFrame(thumbs);
+    }
+    else if (b.parentElement && b.parentElement.classList.contains('fq')) {
+      const fold = b.nextElementSibling, open = !fold.classList.contains('open');
+      fold.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+    }
+    else if (b.id === 'finalBook') { finalBook(); }
+  });
+
+  /* The final button never sends anything. It checks the slip, then says this is a preview. */
+  function finalBook() {
+    const need = [];
+    if (state.day === null) need.push(['a day', '#q-when']);
+    if (!state.time) need.push(['a start time', '#q-when']);
+    if (state.where === 'mobile' && !$('#f-addr').value.trim()) need.push(['your address', '#q-where']);
+    if (!state.util) need.push(['the spigot and outlet question', '#q-util']);
+    if (!$('#f-name').value.trim()) need.push(['your name', '#q-you']);
+    if ($('#f-mobile').value.replace(/\D/g, '').length < 10) need.push(['your mobile number', '#q-you']);
+    if (!$('#f-car').value.trim()) need.push(['your vehicle', '#q-you']);
+    const nm = $('#needMsg'), pm = $('#previewMsg');
+    nm.classList.remove('pop'); pm.classList.remove('pop');
+    if (need.length) {
+      const names = need.map(n => n[0]);
+      const list = names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0];
+      nm.textContent = 'Still needed: ' + list + '.';
+      nm.hidden = false; pm.hidden = true; void nm.offsetWidth; nm.classList.add('pop');
+      $(need[0][1]).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
+    nm.hidden = true; pm.hidden = false; void pm.offsetWidth; pm.classList.add('pop');
+  }
+  $$('#bookForm input').forEach(i => i.addEventListener('input', clearMsgs));
+
+  render();
+  window.addEventListener('resize', thumbs);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(thumbs);
+
+  /* ---------- scroll: sky, parallax, dawn veil ---------- */
+  const skyLayers = $$('.sky i'), veil = $('#veil');
+  const pxEls = $$('[data-px]');
+  let anchors = [], ticking = false;
+  function measure() {
+    anchors = $$('[data-sky]').map(el => ({ y: el.getBoundingClientRect().top + window.scrollY, v: parseFloat(el.dataset.sky) }));
+  }
+  function frame() {
+    ticking = false;
+    const y = window.scrollY, vh = window.innerHeight, mid = y + vh * .5;
+    /* sky position: interpolate between the sections around the middle of the screen */
+    let v = anchors.length ? anchors[0].v : 0;
+    for (let i = 0; i < anchors.length; i++) {
+      const a = anchors[i], b = anchors[i + 1];
+      if (!b) { if (mid >= a.y) v = a.v; break; }
+      if (mid >= a.y && mid < b.y) { v = a.v + (b.v - a.v) * ((mid - a.y) / (b.y - a.y)); break; }
+    }
+    const base = Math.floor(v), f = v - base;
+    skyLayers.forEach(function (l, i) {
+      const o = i <= base ? 1 : (i === base + 1 ? f : 0);
+      const show = i === base || (i === base + 1 && f > 0);
+      if (l._s !== show) { l._s = show; l.style.display = show ? 'block' : 'none'; }
+      if (l._o !== o) { l._o = o; l.style.opacity = o.toFixed(3); }
+    });
+    if (reduce) return;
+    /* the night band keeps lifting off the photo as you start to scroll */
+    if (veil) veil.style.transform = 'scaleY(' + Math.max(0, 1 - y / 260).toFixed(3) + ')';
+    for (let i = 0; i < pxEls.length; i++) {
+      const el = pxEls[i], r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < -80 || r.top > vh + 80) continue;
+      if (el.dataset.px === 'hero') { el.style.transform = 'scale(' + (1 + Math.min(y, 700) / 700 * .09).toFixed(4) + ')'; continue; }
+      const t = ((r.top + r.height / 2) - vh / 2) / (vh / 2 + r.height / 2);
+      el.style.transform = 'translate3d(0,' + (-t * r.height * .07).toFixed(1) + 'px,0)';
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { measure(); onScroll(); });
+  window.addEventListener('load', function () { measure(); frame(); });
+  measure(); frame();
+  if ('ResizeObserver' in window) new ResizeObserver(function () { measure(); onScroll(); }).observe(document.body);
+
+  /* ---------- entrances, drift, slider nudge ---------- */
+  if ('IntersectionObserver' in window) {
+    const rv = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rv.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    $$('.rv').forEach(el => rv.observe(el));
+    const live = new IntersectionObserver(function (es) {
+      es.forEach(e => e.target.classList.toggle('live', e.isIntersecting));
+    }, { rootMargin: '10% 0px' });
+    $$('.band figure, .dusk-photo').forEach(el => live.observe(el));
+    const nudge = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { setTimeout(e.target._nudge, 250); nudge.unobserve(e.target); } });
+    }, { threshold: .7 });
+    $$('.ba').forEach(el => nudge.observe(el));
+
+    /* sticky bar: on once the hero button is gone, off while the booking slip is on screen */
+    const bar = $('#bar'); let heroGone = false, bookOn = false;
+    function barState() { bar.classList.toggle('on', heroGone && !bookOn); }
+    new IntersectionObserver(function (es) { heroGone = !es[0].isIntersecting && es[0].boundingClientRect.top < 0; barState(); }).observe($('#heroBook'));
+    new IntersectionObserver(function (es) { bookOn = es[0].isIntersecting; barState(); }, { rootMargin: '-12% 0px -12% 0px' }).observe($('#bookForm'));
+  } else {
+    $$('.rv').forEach(el => el.classList.add('in'));
+    $('#bar').classList.add('on');
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<title>Valley Site Concepts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Expanded:wght@600;800&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+/* Layout: one dark column, the logo, then three tall phone-shaped cards you tap to open a concept. */
+:root{
+  --bg:#0b0b0c; --panel:#151517; --line:rgba(255,255,255,.14); --ink:#f3f1ed; --soft:#b4b1ab; --dim:#85827c;
+  --display:"Saira Expanded","Arial Black",system-ui,sans-serif; --body:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.logo{display:block;width:210px;height:auto}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(26px,6vw,40px);line-height:1.08;letter-spacing:-.01em;margin:26px 0 10px;text-wrap:balance}
+.lede{color:var(--soft);max-width:60ch;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;color:inherit;text-decoration:none;transition:transform .25s cubic-bezier(.16,1,.3,1),border-color .25s}
+.card:hover,.card:focus-visible{transform:translateY(-3px);border-color:rgba(255,255,255,.4)}
+.card:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.card img{display:block;width:100%;height:auto;aspect-ratio:375/640;object-fit:cover;object-position:top;border-bottom:1px solid var(--line);background:#000}
+.txt{padding:16px 18px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.k{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+h2{font-family:var(--display);font-weight:800;font-size:21px;line-height:1.15;margin:0}
+.txt p{margin:0;color:var(--soft);font-size:15px}
+.open{margin-top:auto;padding-top:12px;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(255,255,255,.4)}
+.notes{margin-top:34px;border-top:1px solid var(--line);padding-top:22px;display:grid;gap:10px;max-width:68ch}
+.notes h3{font-family:var(--display);font-weight:600;font-size:15px;margin:0}
+.notes ul{margin:0;padding-left:20px;color:var(--soft);font-size:15px;display:grid;gap:6px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}.card img{aspect-ratio:375/420}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+
+<div class="wrap">
+  <img class="logo" src="assets/logo-420.png" alt="Valley Details" width="420" height="192">
+  <h1>Three directions for the new site</h1>
+  <p class="lede">Same photos, same prices, same booking steps. Only the look and the structure change. Open each one on your phone and scroll it like a customer coming from an ad.</p>
+
+  <div class="grid">
+    <a class="card" href="a/index.html">
+      <img src="thumbs/a.jpg" alt="Concept A first screen" width="750" height="1280">
+      <div class="txt">
+        <span class="k">Concept A</span>
+        <h2>Night driveway</h2>
+        <p>Dark and calm. Your own job photos drift behind the page, and the before and after is something you drag with your thumb.</p>
+        <span class="open">Open concept A</span>
+      </div>
+    </a>
+    <a class="card" href="b/index.html">
+      <img src="thumbs/b.jpg" alt="Concept B first screen" width="750" height="1280">
+      <div class="txt">
+        <span class="k">Concept B</span>
+        <h2>Brighter days</h2>
+        <p>A daylight site, because nearly every other detailer is black. Real jobs listed like a logbook.</p>
+        <span class="open">Open concept B</span>
+      </div>
+    </a>
+    <a class="card" href="c/index.html">
+      <img src="thumbs/c.jpg" alt="Concept C first screen" width="750" height="1280">
+      <div class="txt">
+        <span class="k">Concept C</span>
+        <h2>The feed</h2>
+        <p>Opens like the ads people come from. One real job per screen, then prices and booking.</p>
+        <span class="open">Open concept C</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="notes">
+    <h3>Before you judge them</h3>
+    <ul>
+      <li>Booking is a mock. Pressing the last Book button sends nothing. Real booking stays on valleydetails.site.</li>
+      <li>Prices are the proposed menu: Express $150, $170, $190 and Full $250, $280, $310. They change in one place.</li>
+      <li>Call and text links may not open from inside this preview. They will on the real site.</li>
+      <li>There are no crew photos or video yet. Those go in once they are shot.</li>
+      <li>To come back here from a concept, use the back button.</li>
+    </ul>
+  </div>
+</div>
