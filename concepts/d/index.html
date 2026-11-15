@@ -11,10 +11,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<script>
+/* the logo's entrance plays once, on a fresh load at the top, and never with reduced motion */
+(function(){try{var r=document.documentElement;if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!location.hash)r.className+=' opening hold';}catch(e){}})();
+</script>
 <style>
 :root{
-  --top:60px;
+  --hd:calc(env(safe-area-inset-top,0px) + 82px);   /* height of the header while it floats on a story photo */
   --barh:calc(73px + env(safe-area-inset-bottom));
+  --mask:url("data:image/png;base64,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");      /* the logo's own shapes (logo-mask.png, made from logo-900.png), for the shine */
   --g1:#141414;--g2:#1f1f1f;--g3:#2c2c2c;--g5:#8f8f8f;--g6:#b9b9b9;
   --ink:#111;--mid:#555;--soft:#6b6b6b;--line:#dcdcdc;--fill:#f1f1f1;
   --out:cubic-bezier(.16,1,.3,1);
@@ -24,7 +29,7 @@
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0}
 [hidden]{display:none!important}
-html{background:#000;color:#fff;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{background:#000;color:#fff;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{font-family:'Saira',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.45;background:#000;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -34,25 +39,65 @@ ul,ol{list-style:none;padding:0}
 ::selection{background:#111;color:#fff}
 :focus-visible{outline:2px solid currentColor;outline-offset:3px}
 
-/* ---------- top bar: story progress, logo ---------- */
-.top{position:fixed;left:0;right:0;top:0;z-index:30;height:var(--top);padding:8px 12px 0;background:#000;transition:transform .5s var(--out)}
-.top.away{transform:translateY(-102%);transition:transform .26s var(--in)}
-.segs{display:flex;gap:4px}
-.segs i{flex:1;height:3px;border-radius:2px;background:#3d3d3d;overflow:hidden}
+/* ---------- header: the logo floats on the story photo, then a slim black bar on the white page ---------- */
+.top{position:fixed;left:0;right:0;top:0;z-index:30;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 0;pointer-events:none;transition:transform .5s var(--out),background-color .3s var(--out),padding .4s var(--out)}
+.top::before{content:"";position:absolute;left:0;right:0;top:0;height:calc(var(--hd) + 46px);background:linear-gradient(to bottom,rgba(0,0,0,.64),rgba(0,0,0,.46) 42%,rgba(0,0,0,.17) 76%,rgba(0,0,0,0));pointer-events:none;transition:opacity .5s var(--out)}
+.top.away{transform:translateY(-102%);transition:transform .26s var(--in),background-color .3s var(--out),padding .4s var(--out)}
+.top.solid{padding-top:calc(env(safe-area-inset-top,0px) + 6px);padding-bottom:6px;background:#000;pointer-events:auto}
+.top.solid::before{opacity:0}
+.top-row{position:relative;display:flex;align-items:center;justify-content:space-between}
+.logo{display:block;pointer-events:auto}
+.logo img{width:132px;height:auto;filter:drop-shadow(0 1px 5px rgba(0,0,0,.5));transition:width .4s var(--out)}
+.top.solid .logo img{width:70px;filter:none}
+.segs{position:relative;display:flex;gap:4px;height:3px;margin-top:9px;transition:opacity .5s var(--out),height .4s var(--out),margin .4s var(--out)}
+.segs i{flex:1;height:100%;border-radius:2px;background:rgba(255,255,255,.36);overflow:hidden}
 .segs b{display:block;height:100%;background:#fff;transform-origin:0 50%;transform:scaleX(0)}
-.top-row{display:flex;align-items:center;justify-content:space-between;height:46px;margin-top:3px}
-.logo img{height:36px;width:auto}
-.top-meta{text-align:right;font-size:12.5px;line-height:1.28;font-weight:600}
-.top-meta span{display:block}
-.top-meta span+span{color:var(--g6);font-weight:500}
+.top.solid .segs{opacity:0;height:0;margin-top:0}
 .top-nav{display:none}
+.hold .segs,.hold .top::before{opacity:0}
+.opening .logo img{visibility:hidden}
+
+/* ---------- the logo's entrance: large on a dimmed first photo, one sweep of light, then up into the corner ---------- */
+.splash{display:none}
+.opening .splash{display:grid;place-items:center;position:fixed;left:0;right:0;top:0;bottom:var(--barh);z-index:45;overflow:hidden;pointer-events:none}
+.splash-dim{position:absolute;inset:0;background:rgba(0,0,0,.72);transition:opacity .5s var(--out)}
+.splash-fly{position:relative;width:min(78vw,340px);transform-origin:0 0;will-change:transform}
+.splash-logo{position:relative;opacity:0}
+.splash-logo img{width:100%;height:auto}
+.splash-logo>img{filter:brightness(.5)}                                  /* the logo before the light reaches it */
+/* the lit logo, shown through a slanted window that slides across. The inner span undoes the window's move, so the logo holds still. */
+.lit{position:absolute;top:0;bottom:0;left:-40%;width:180%;overflow:hidden;transform:translateX(-92.78%) skewX(-22deg)}
+.lit>span{position:absolute;inset:0;transform:skewX(22deg) translateX(92.78%)}
+.lit img{position:absolute;top:0;left:22.222%;width:55.556%}
+/* the band of light on the window's edge, cut to the logo's own shapes by the mask */
+.shine{position:absolute;inset:0;overflow:hidden;-webkit-mask:var(--mask) center/100% 100% no-repeat;mask:var(--mask) center/100% 100% no-repeat}
+.shine i{position:absolute;top:-12%;bottom:-12%;left:0;width:30%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.85) 40%,#fff 50%,rgba(255,255,255,.85) 60%,rgba(255,255,255,0));transform:translateX(-140%) skewX(-22deg)}
+.splash.go .splash-logo{animation:sIn .42s var(--out) both}
+.splash.go .lit{animation:litA .8s .14s cubic-bezier(.3,.3,.5,1) both}
+.splash.go .lit>span{animation:litB .8s .14s cubic-bezier(.3,.3,.5,1) both}
+.splash.go .shine i{animation:sweep .8s .14s cubic-bezier(.3,.3,.5,1) both}
+.splash.fly .splash-dim{opacity:0}
+.splash.fly .splash-fly{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+/* if the script never ends the entrance, CSS ends it at 3s so nothing stays dimmed or hidden */
+.opening .splash{animation:safeHide 0s 3s forwards}
+.opening .logo img,.hold .segs,.hold .top::before,.js.hold .job .cap>*{animation:safeShow 0s 3s forwards}
+@keyframes safeHide{to{visibility:hidden}}
+@keyframes safeShow{to{visibility:visible;opacity:1;transform:none}}
+@keyframes sIn{from{opacity:0;transform:scale(1.07)}to{opacity:1;transform:none}}
+@keyframes litA{to{transform:translateX(-5.556%) skewX(-22deg)}}
+@keyframes litB{to{transform:skewX(22deg) translateX(5.556%)}}
+@keyframes sweep{to{transform:translateX(383.3%) skewX(-22deg)}}
 
 /* ---------- the five story slides (on black) ---------- */
 .intro{display:none}
 .job{position:relative;height:100vh;height:100svh;scroll-snap-align:start;background:#000;overflow:hidden}
-.job .cmp{position:absolute;left:0;right:0;top:var(--top);bottom:var(--barh)}
+.job .cmp{position:absolute;left:0;right:0;top:0;bottom:var(--barh)}
+.job .toggle,.job .tag{top:calc(var(--hd) + 12px)}
+.job .toggle{left:16px}.job .tag-a{left:16px}.job .tag-b{right:16px}
 .cap{position:absolute;left:0;right:0;bottom:var(--barh);padding:64px 16px 16px;background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.6) 48%,rgba(0,0,0,0));pointer-events:none}
 .cap-h{font-size:34px;font-weight:800;font-stretch:112%;line-height:1.03;letter-spacing:-.012em;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.cap-q{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:7px;font-size:13.5px;font-weight:500;line-height:1.3;color:#d9d9d9;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.cap-q a{pointer-events:auto;flex:none;margin:-12px 0;padding:12px 0;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 .cap-p{margin-top:8px;font-size:17px;font-weight:500;line-height:1.3;max-width:31ch;text-shadow:0 1px 3px rgba(0,0,0,.75)}
 .cap-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
 .skip{pointer-events:auto;flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 12px 0 15px;border-radius:19px;background:#000;border:1px solid #5a5a5a;font-size:14.5px;font-weight:600;transition:transform .4s var(--spring)}
@@ -65,6 +110,7 @@ ul,ol{list-style:none;padding:0}
 .js .job.on .cap>*:nth-child(2){transition-delay:.06s}
 .js .job.on .cap>*:nth-child(3){transition-delay:.12s}
 .js .job.on .cap>*:nth-child(4){transition-delay:.18s}
+.js.hold .job .cap>*{opacity:0;transform:translateY(14px);transition:none}
 
 /* ---------- before and after ---------- */
 .cmp{position:relative;overflow:hidden;background:var(--g1);touch-action:pan-y;-webkit-user-select:none;user-select:none;cursor:ew-resize}
@@ -129,7 +175,7 @@ ul,ol{list-style:none;padding:0}
 .pm::before,.pm::after{content:"";position:absolute;left:0;top:5px;width:12px;height:2px;background:currentColor;transition:transform .45s var(--spring)}
 .pm::after{transform:rotate(90deg)}
 [aria-expanded="true"]>.pm::after{transform:rotate(0)}
-.inc{grid-column:1/-1;scroll-margin:16px 0 calc(var(--barh) + 16px);padding:16px;border-radius:14px;background:var(--fill);animation:drop .45s var(--out)}
+.inc{grid-column:1/-1;scroll-margin:64px 0 calc(var(--barh) + 16px);padding:16px;border-radius:14px;background:var(--fill);animation:drop .45s var(--out)}
 .inc h3{font-size:17px;font-weight:800;font-stretch:108%}
 .inc-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
 .inc h4{font-size:13.5px;font-weight:700;color:var(--mid)}
@@ -153,14 +199,11 @@ ul,ol{list-style:none;padding:0}
 #moreBtn{margin-top:22px}
 
 /* reviews */
-.score{display:flex;align-items:flex-end;gap:12px}
-.score b{font-size:76px;font-weight:800;font-stretch:120%;line-height:.8;letter-spacing:-.035em}
-.score span{font-size:16px;font-weight:600;line-height:1.25}
-.quotes{margin-top:22px}
+.quotes{margin-top:16px}
 .quotes li{padding:14px 0 15px;border-top:1px solid var(--line)}
 .quotes blockquote{font-size:19px;font-weight:600;line-height:1.28}
 .quotes cite{display:block;margin-top:5px;font-size:14px;font-style:normal;color:var(--soft)}
-.link{display:inline-block;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.link{display:inline-block;font-weight:600;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
 .after-q{padding-top:14px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.4;color:#444}
 .after-q .link{margin-bottom:10px;color:var(--ink)}
 
@@ -259,6 +302,14 @@ footer .flogo{width:200px;height:auto}
 .rows li span:last-child{font-weight:600;white-space:nowrap}
 .miss{margin-top:6px;font-size:14px;font-weight:600;line-height:1.35}
 .book-btn.big{width:100%;height:56px;margin-top:8px;font-size:20px}
+/* quote: one step, no price */
+.chip.wide{grid-column:1/-1}
+.q-line{padding:2px 0 0;font-size:15.5px;line-height:1.35;color:#333}
+#qMiss{margin:0 0 8px}
+.q-go{height:54px;font-size:17.5px;font-weight:800}
+.q-or{margin-top:10px;text-align:center}
+.q-or,.q-or a{-webkit-user-select:text;user-select:text}
+.q-or a{color:var(--ink);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 .done{padding:6px 0 10px}
 .done-h{font-size:21px;font-weight:800;font-stretch:106%;line-height:1.2}
 .done-p{margin-top:12px;font-size:16px;line-height:1.45;color:#333}
@@ -267,7 +318,7 @@ footer .flogo{width:200px;height:auto}
 
 @media (max-width:359px){
   .cap-h{font-size:30px}.h{font-size:30px}
-  .top-meta{font-size:11.5px}
+  .cap-q{font-size:12.5px;gap:8px}
   .btn-call{padding:0 14px}.book-btn{min-width:104px;padding:0 18px}
   .seg button,.chip{font-size:13.5px}
   .t-price{font-size:30px}.t-body .btn{font-size:14px}
@@ -277,15 +328,17 @@ footer .flogo{width:200px;height:auto}
 
 /* ---------- desktop: the stories in a phone-width column, the rest centered ---------- */
 @media (min-width:900px){
-  :root{--top:68px;--barh:0px}
+  :root{--hd:0px;--barh:0px}
   html{scroll-snap-type:none;scrollbar-gutter:stable}
-  .top{padding:0 32px;display:block}
+  .top{height:68px;padding:0 32px;display:block;background:#000;pointer-events:auto}
+  .top::before{display:none}
   .top.away{transform:none}
-  .segs{position:absolute;left:0;right:0;bottom:0;gap:6px;padding:0 32px;transition:opacity .3s var(--out)}
+  .segs{position:absolute;left:0;right:0;bottom:0;height:3px;margin:0;gap:6px;padding:0 32px;transition:opacity .3s var(--out)}
+  .segs i{background:#3d3d3d}
   .top.done .segs{opacity:0}
   .top-row{height:65px;margin:0;max-width:1120px;margin:0 auto}
-  .logo img{height:42px}
-  .top-meta{display:none}
+  .logo img{width:auto;height:42px}
+  .intro-note a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
   .top-nav{display:flex;align-items:center;gap:28px;font-size:15.5px;font-weight:600}
   .top-nav .book-btn{height:42px;min-width:0;padding:0 22px;font-size:16px}
   .bar{display:none}
@@ -331,22 +384,28 @@ footer .flogo{width:200px;height:auto}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .js .rv,.js .job .cap>*{opacity:1;transform:none}
+  .splash{display:none!important}
 }
 </style>
 </head>
 <body>
 
+<!-- the logo's entrance, once. It never takes a tap: everything under it works the whole time. -->
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-dim"></div>
+  <div class="splash-fly" id="splashFly"><div class="splash-logo"><img src="../assets/logo-900.png" width="900" height="412" alt=""><span class="lit"><span><img src="../assets/logo-900.png" width="900" height="412" alt=""></span></span><span class="shine"><i></i></span></div></div>
+</div>
+
 <header class="top" id="top">
-  <div class="segs" id="segs" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
   <div class="top-row">
     <a class="logo" href="#feed" aria-label="Valley Details, back to the top"><img src="../assets/logo-420.png" width="420" height="192" alt="Valley Details"></a>
-    <p class="top-meta"><span>Mobile detailing, Elk Grove</span><span>5.0 on Google, 15 reviews</span></p>
     <nav class="top-nav" aria-label="Main">
       <a href="#prices" data-goto="prices">Prices</a>
       <a href="tel:+19162490631">(916) 249-0631</a>
       <button type="button" class="book-btn" data-open="bar">Book</button>
     </nav>
   </div>
+  <div class="segs" id="segs" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
 </header>
 
 <main id="main">
@@ -357,7 +416,7 @@ footer .flogo{width:200px;height:auto}
     <p class="intro-p">Mobile car detailing in Elk Grove and south Sacramento. Your driveway, apartment lot or work.</p>
     <p class="intro-price"><b data-price="express">$150</b><span>Express, inside and out, <span data-size-name>sedan</span></span></p>
     <p class="intro-cta"><a class="btn btn-w" href="#prices" data-goto="prices">See prices</a><a href="tel:+19162490631">Call (916) 249-0631</a></p>
-    <p class="intro-note">5.0 on Google from 15 reviews. Owner-operated since 2024.<br>These are our jobs. Drag or tap a photo to compare.</p>
+    <p class="intro-note"><a href="#reviews" data-goto="reviews">5.0 on Google</a>. Owner-operated since 2024.<br>These are our jobs. Drag or tap a photo to compare.</p>
   </div>
 
   <div class="jobs">
@@ -371,6 +430,7 @@ footer .flogo{width:200px;height:auto}
       </div>
       <div class="cap">
         <h1 class="cap-h ph">We come to you.</h1>
+        <p class="cap-q ph"><span>Elk Grove and south Sacramento</span><a href="#reviews" data-goto="reviews">5.0 on Google</a></p>
         <p class="cap-p ph">Tesla Model Y. Hair worked into the carpet, then cleared.</p>
         <h2 class="cap-h dk">Tesla Model Y</h2>
         <p class="cap-p dk">Hair worked into the carpet, then cleared.</p>
@@ -510,7 +570,7 @@ footer .flogo{width:200px;height:auto}
         </div>
       </div>
 
-      <button type="button" class="less-line" data-open="less">Need something less? <u>Get a quick price.</u></button>
+      <button type="button" class="less-line" data-open="quote">Need something less? <u>Get a quote.</u></button>
     </div>
   </section>
 
@@ -603,13 +663,13 @@ footer .flogo{width:200px;height:auto}
   <!-- ===== reviews ===== -->
   <section class="sec" id="reviews">
     <div class="wrap pad">
-      <h2 class="score rv"><b>5.0</b><span>on Google,<br>from 15 reviews</span></h2>
+      <h2 class="h rv">What customers said</h2>
       <ul class="quotes">
         <li class="rv"><blockquote>"Much needed and well appreciated and fast service !! Quality service and lasting detail !"</blockquote><cite>Jeffrey G., Google</cite></li>
         <li class="rv"><blockquote>"Arrived on time friendly faces and great service"</blockquote><cite>Mason A., Google</cite></li>
         <li class="rv"><blockquote>"Professional Service, cleaned everything well."</blockquote><cite>Jose P., Google</cite></li>
       </ul>
-      <p class="after-q rv"><a class="link" href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener">Read the reviews on Google</a><br>Owner-operated since 2024. The people who run it are the ones doing your car.</p>
+      <p class="after-q rv"><a class="link" href="https://g.page/r/CVoDC0vKzixlEBM" target="_blank" rel="noopener">5.0 on Google. Read the reviews.</a><br>Owner-operated since 2024. The people who run it are the ones doing your car.</p>
     </div>
   </section>
 
@@ -685,12 +745,10 @@ footer .flogo{width:200px;height:auto}
     <div class="sh-body" id="shBody">
       <!-- step 1: pick a time -->
       <div class="step" id="step1">
-        <p class="lb" id="lbSvc"><span>Service</span><button type="button" id="svcBack" hidden>Back to Express and Full</button></p>
+        <p class="lb" id="lbSvc"><span>Service</span></p>
         <div class="chips c2" role="group" aria-labelledby="lbSvc">
           <button type="button" class="chip svc" data-svc="express" aria-pressed="true"><span>Express</span><b data-price="express">$150</b></button>
           <button type="button" class="chip svc" data-svc="full" aria-pressed="false"><span>Full</span><b data-price="full">$250</b></button>
-          <button type="button" class="chip svc" data-svc="inside" aria-pressed="false" hidden><span>Inside only</span><b data-price="inside">$100</b></button>
-          <button type="button" class="chip svc" data-svc="outside" aria-pressed="false" hidden><span>Outside only</span><b data-price="outside">$75</b></button>
         </div>
         <p class="lb" id="lbSize"><span>Vehicle</span></p>
         <div class="chips c3s" role="group" aria-labelledby="lbSize">
@@ -742,6 +800,37 @@ footer .flogo{width:200px;height:auto}
         <p class="done-p">After you book, text us a few pics of your car if you can. If it needs extra time, we tell you the time and price before we come out.</p>
         <p class="done-r" id="doneRecap"></p>
       </div>
+
+      <!-- quote: for something less than Express. One step, no price, we text one back. -->
+      <form class="step" id="stepQ" novalidate hidden>
+        <p class="q-line">Tell us what you need and we will text you a price.</p>
+        <div id="fNeed">
+          <p class="lb" id="lbNeed"><span>What do you need?</span></p>
+          <div class="chips c2" role="group" aria-labelledby="lbNeed">
+            <button type="button" class="chip" data-need="inside" aria-pressed="false">Just the inside</button>
+            <button type="button" class="chip" data-need="outside" aria-pressed="false">Just the outside</button>
+            <button type="button" class="chip wide" data-need="quick" aria-pressed="false">A quick clean, inside and out</button>
+            <button type="button" class="chip" data-need="spot" aria-pressed="false">One spot or stain</button>
+            <button type="button" class="chip" data-need="else" aria-pressed="false">Something else</button>
+          </div>
+        </div>
+        <p class="lb" id="lbQSize"><span>Vehicle</span></p>
+        <div class="chips c3s" role="group" aria-labelledby="lbQSize">
+          <button type="button" class="chip" data-size="sedan" aria-pressed="true">Sedan</button>
+          <button type="button" class="chip" data-size="suv" aria-pressed="false">SUV</button>
+          <button type="button" class="chip" data-size="truck" aria-pressed="false">Truck or 3-row</button>
+        </div>
+        <label class="field"><span>Anything we should know? (optional)</span><input class="inp" id="qNote" name="note" type="text" autocomplete="off" enterkeyhint="next"></label>
+        <div class="f2">
+          <label class="field" id="fQName"><span>Name</span><input class="inp" id="qName" name="name" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next"></label>
+          <label class="field" id="fQPhone"><span>Mobile</span><input class="inp" id="qPhone" name="tel" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="done"></label>
+        </div>
+      </form>
+
+      <!-- after Send for a quote -->
+      <div class="step done" id="stepQd" hidden>
+        <p class="done-h">This is a design preview. On the real site this sends your request and we text you a price.</p>
+      </div>
     </div>
 
     <div class="sh-foot">
@@ -757,6 +846,11 @@ footer .flogo{width:200px;height:auto}
       <div id="foot3" hidden>
         <button type="button" class="btn btn-k" id="doneBtn">Done</button>
       </div>
+      <div id="footQ" hidden>
+        <p class="miss" id="qMiss" role="alert" hidden></p>
+        <button type="button" class="btn btn-k q-go" id="quoteGo">Send for a quote</button>
+        <p class="fine q-or">Or text a photo of your car to <a href="sms:+19167537822">(916) 753-7822</a>.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -765,11 +859,9 @@ footer .flogo{width:200px;height:auto}
 /* Every price lives here. Change them in this one place. */
 var CFG = {
   tiers: {
-    express: { name: 'Express',      price: { sedan: 150, suv: 170, truck: 190 } },
-    full:    { name: 'Full',         price: { sedan: 250, suv: 280, truck: 310 } },
-    inside:  { name: 'Inside only',  price: { sedan: 100, suv: 110, truck: 120 } },
-    outside: { name: 'Outside only', price: { sedan: 75,  suv: 85,  truck: 95 } }
-  },
+    express: { name: 'Express', price: { sedan: 150, suv: 170, truck: 190 } },
+    full:    { name: 'Full',    price: { sedan: 250, suv: 280, truck: 310 } }
+  },                     /* anything less than Express is a quote, so it has no price here */
   sizes: { sedan: 'Sedan', suv: 'SUV', truck: 'Truck or 3-row' },
   addons: {
     pet:     { name: 'Heavy pet hair', price: 40 },
@@ -798,12 +890,12 @@ var CFG = {
   var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
 
   /* ---------- state ---------- */
-  var S = { main: 'express', less: 'inside', mode: 'main', picked: false, size: 'sedan', day: null, time: null, drop: false, water: null, pet: false, shampoo: false, step: 1, tried: false };
+  var S = { main: 'express', picked: false, size: 'sedan', day: null, time: null, drop: false, water: null, pet: false, shampoo: false, step: 1, view: 1, tried: false, need: null, qTried: false };
 
-  function tierKey() { return S.mode === 'less' ? S.less : S.main; }
+  function tierKey() { return S.main; }
   function sizeWord() { return S.size === 'sedan' ? 'sedan' : S.size === 'suv' ? 'SUV' : 'truck or 3-row'; }
   function base() { return CFG.tiers[tierKey()].price[S.size]; }
-  function petOk() { return tierKey() !== 'outside'; }
+  function petOk() { return true; }
   function shOk() { return tierKey() === 'express'; }
   function hookup() { return !S.drop && S.water === 'yes' ? CFG.hookupOff : 0; }
   function total() { return base() + (S.pet && petOk() ? CFG.addons.pet.price : 0) + (S.shampoo && shOk() ? CFG.addons.shampoo.price : 0) - hookup(); }
@@ -854,13 +946,7 @@ var CFG = {
     put($('#barPrice'), money(S.picked ? base() : T.express.price[S.size]));
 
     /* step 1 */
-    var less = S.mode === 'less';
-    $$('[data-svc]').forEach(function (b) {
-      var v = b.getAttribute('data-svc'), isLess = v === 'inside' || v === 'outside';
-      b.hidden = isLess !== less;
-      b.setAttribute('aria-pressed', String(v === k));
-    });
-    $('#svcBack').hidden = !less;
+    press($$('[data-svc]'), function (b) { return b.getAttribute('data-svc') === k; });
     press($$('[data-size]'), function (b) { return b.getAttribute('data-size') === S.size; });
     press($$('[data-day]'), function (b) { return S.day === +b.getAttribute('data-day'); });
     press($$('[data-time]'), function (b) { return S.time === b.getAttribute('data-time'); });
@@ -891,6 +977,10 @@ var CFG = {
     $('#rows').innerHTML = rows.map(function (r) { return '<li><span>' + r[0] + '</span><span>' + r[1] + '</span></li>'; }).join('');
     $('#bookGo').textContent = 'Book, ' + money(total());
     if (S.tried) missing(false);
+
+    /* quote */
+    press($$('[data-need]'), function (b) { return S.need === b.getAttribute('data-need'); });
+    if (S.qTried) qMissing(false);
   }
 
   /* ---------- the pop-up ---------- */
@@ -912,26 +1002,41 @@ var CFG = {
     window.scrollTo(0, lockY);
     requestAnimationFrame(function () { root.style.scrollSnapType = ''; root.style.scrollBehavior = ''; });
   }
+  /* the pop-up's views: booking is 1, 2, 3. A quote is q, then qd. */
+  var VIEWS = {
+    1:  { step: 'step1',  foot: 'foot1', title: 'Pick a time' },
+    2:  { step: 'step2',  foot: 'foot2', title: 'Where and who' },
+    3:  { step: 'step3',  foot: 'foot3', title: 'Preview only' },
+    q:  { step: 'stepQ',  foot: 'footQ', title: 'Get a quote' },
+    qd: { step: 'stepQd', foot: 'foot3', title: 'Preview only' }
+  };
   function showStep(n, dir) {
-    S.step = n;
-    [1, 2, 3].forEach(function (i) { $('#step' + i).hidden = i !== n; $('#foot' + i).hidden = i !== n; });
-    $('#shTitle').textContent = n === 1 ? 'Pick a time' : n === 2 ? 'Where and who' : 'Preview only';
-    $('#shStep').hidden = n === 3;
+    var v = VIEWS[n], booking = n === 1 || n === 2 || n === 3;
+    S.view = n;
+    if (booking) S.step = n;
+    $$('.step', sheet).forEach(function (el) { el.hidden = el.id !== v.step; });
+    $$('.sh-foot > div', sheet).forEach(function (el) { el.hidden = el.id !== v.foot; });
+    $('#shTitle').textContent = v.title;
+    $('#shStep').hidden = !(n === 1 || n === 2);
     $('#shStep').textContent = n + ' of 2';
     $('#backBtn').hidden = n !== 2;
     shBody.scrollTop = 0;
-    var el = $('#step' + n);
+    var el = $('#' + v.step);
     el.classList.remove('enter', 'back');
     if (dir) { void el.offsetWidth; el.classList.add('enter'); if (dir < 0) el.classList.add('back'); }
   }
   function openSheet(src, opener) {
     if (!modal.hidden) return;
-    if (src === 'express' || src === 'full') { S.mode = 'main'; S.main = src; S.picked = true; S.step = 1; }
-    else if (src === 'less') { S.mode = 'less'; S.picked = true; S.step = 1; }
-    else if (S.step === 3 || (S.step === 2 && !ready())) S.step = 1;
+    var view;
+    if (src === 'quote') view = 'q';
+    else {
+      if (src === 'express' || src === 'full') { S.main = src; S.picked = true; S.step = 1; }
+      else if (S.step === 3 || (S.step === 2 && !ready())) S.step = 1;
+      view = S.step;
+    }
     lastFocus = opener || d.activeElement;
     render();
-    showStep(S.step, 0);
+    showStep(view, 0);
     modal.hidden = false;
     lock();
     behind.forEach(function (el) { el.setAttribute('inert', ''); });
@@ -949,6 +1054,7 @@ var CFG = {
     setTimeout(function () {
       modal.hidden = true; closing = false;
       if (S.step === 3) S.step = 1;
+      if (S.view === 'qd') { S.need = null; S.qTried = false; $('#qNote').value = ''; render(); }   /* a sent quote starts fresh next time */
     }, reduce ? 0 : 260);
   }
   $('#dim').addEventListener('click', closeSheet);
@@ -974,16 +1080,12 @@ var CFG = {
     if (!modal.hidden && !closing && !sheet.contains(e.target)) sheet.focus({ preventScroll: true });
   });
   $('#step2').addEventListener('submit', function (e) { e.preventDefault(); });
+  $('#stepQ').addEventListener('submit', function (e) { e.preventDefault(); });
 
-  /* what is still missing on step 2, in plain words */
-  function missing(mark) {
+  /* what is still missing, in plain words */
+  function check(m, mark, items) {
     var miss = [];
-    function need(el, word, bad) { if (mark || !bad) el.classList.toggle('need', bad); if (bad) miss.push(word); }
-    need($('#fName'), 'your name', !$('#bName').value.trim());
-    need($('#fPhone'), 'your mobile number', $('#bPhone').value.replace(/\D/g, '').length < 10);
-    need($('#fAddr'), 'your address', !S.drop && !$('#bAddr').value.trim());
-    need($('#fWater'), 'an answer on the spigot and outlet', !S.drop && !S.water);
-    var m = $('#miss');
+    items.forEach(function (it) { if (mark || !it[2]) it[0].classList.toggle('need', it[2]); if (it[2]) miss.push(it[1]); });
     if (miss.length) {
       var list = miss.length > 1 ? miss.slice(0, -1).join(', ') + ' and ' + miss[miss.length - 1] : miss[0];
       m.textContent = 'Still needed: ' + list + '.';
@@ -991,7 +1093,22 @@ var CFG = {
     } else { m.hidden = true; }
     return miss;
   }
-  $$('.inp', sheet).forEach(function (i) { i.addEventListener('input', function () { if (S.tried) missing(false); }); });
+  function missing(mark) {
+    return check($('#miss'), mark, [
+      [$('#fName'), 'your name', !$('#bName').value.trim()],
+      [$('#fPhone'), 'your mobile number', $('#bPhone').value.replace(/\D/g, '').length < 10],
+      [$('#fAddr'), 'your address', !S.drop && !$('#bAddr').value.trim()],
+      [$('#fWater'), 'an answer on the spigot and outlet', !S.drop && !S.water]
+    ]);
+  }
+  function qMissing(mark) {
+    return check($('#qMiss'), mark, [
+      [$('#fNeed'), 'what you need', !S.need],
+      [$('#fQName'), 'your name', !$('#qName').value.trim()],
+      [$('#fQPhone'), 'your mobile number', $('#qPhone').value.replace(/\D/g, '').length < 10]
+    ]);
+  }
+  $$('.inp', sheet).forEach(function (i) { i.addEventListener('input', function () { if (S.tried) missing(false); if (S.qTried) qMissing(false); }); });
 
   /* ---------- smooth jumps (skip to prices) ---------- */
   function go(id) {
@@ -1010,12 +1127,16 @@ var CFG = {
 
     if ((b = t.closest('[data-seg="size"] button'))) { S.size = b.getAttribute('data-v'); render(); return; }
     if ((b = t.closest('[data-size]'))) { S.size = b.getAttribute('data-size'); render(); return; }
-    if ((b = t.closest('[data-svc]'))) {
-      var v = b.getAttribute('data-svc');
-      if (v === 'inside' || v === 'outside') S.less = v; else S.main = v;
-      S.picked = true; render(); return;
+    if ((b = t.closest('[data-svc]'))) { S.main = b.getAttribute('data-svc'); S.picked = true; render(); return; }
+    if ((b = t.closest('[data-need]'))) { S.need = b.getAttribute('data-need'); render(); return; }
+    /* Send for a quote: a mock. Nothing is sent anywhere. */
+    if (t.closest('#quoteGo')) {
+      S.qTried = true;
+      if (qMissing(true).length) return;
+      showStep('qd', 1);
+      sheet.focus({ preventScroll: true });
+      return;
     }
-    if (t.closest('#svcBack')) { S.mode = 'main'; render(); $('[data-svc="' + S.main + '"]').focus({ preventScroll: true }); return; }
     if ((b = t.closest('[data-day]'))) { S.day = +b.getAttribute('data-day'); render(); return; }
     if ((b = t.closest('[data-time]'))) { S.time = b.getAttribute('data-time'); render(); return; }
     if (t.closest('#nextBtn')) { if (ready()) { showStep(2, 1); sheet.focus({ preventScroll: true }); } return; }
@@ -1093,14 +1214,14 @@ var CFG = {
         raf = requestAnimationFrame(step);
       })(last);
     }
-    function play() {
+    function play(wait) {
       if (played || touched) return;
       played = true;
       if (type === 'drag') {
         if (reduce) { set(50); return; }
         timer = setTimeout(function () { if (!touched) to(50, 150, 16); }, 420);
       } else if (!reduce) {
-        timer = setTimeout(function () { if (!touched) to(0, 55, 14.8); }, 1150);
+        timer = setTimeout(function () { if (!touched) to(0, 55, 14.8); }, wait == null ? 1150 : wait);
       }
     }
     function touch() { touched = true; clearTimeout(timer); }
@@ -1150,13 +1271,53 @@ var CFG = {
   $$('.cmp').forEach(function (el) { cmps.push(Cmp(el)); });
   window.addEventListener('resize', function () { cmps.forEach(function (c) { c.resize(); }); });
 
+  /* ---------- the logo's entrance, once: large on the dimmed first photo, one sweep of light, then up into the corner ---------- */
+  var splash = $('#splash'), flyEl = $('#splashFly'), opening = root.classList.contains('opening'), openT = [];
+  var ENDERS = ['pointerdown', 'touchstart', 'wheel', 'keydown', 'scroll'];
+  function openEnd() {                       /* runs at the natural end, and at once on any tap, key or scroll */
+    if (!opening) return;
+    opening = false;
+    openT.forEach(clearTimeout);
+    ENDERS.forEach(function (ev) { window.removeEventListener(ev, openEnd, true); });
+    root.classList.remove('opening', 'hold');
+    if (splash) splash.hidden = true;
+    cmps[0].play();
+  }
+  function openFly() {                       /* the logo eases to where the header logo sits, and the first wipe begins */
+    if (!opening) return;
+    var a = flyEl.getBoundingClientRect(), b = $('.logo img').getBoundingClientRect();
+    if (!a.width || !b.width) { openEnd(); return; }
+    flyEl.style.transform = 'translate(' + (b.left - a.left).toFixed(2) + 'px,' + (b.top - a.top).toFixed(2) + 'px) scale(' + (b.width / a.width).toFixed(4) + ')';
+    splash.classList.add('fly');
+    root.classList.remove('hold');
+    cmps[0].play(160);
+  }
+  function openGo() {
+    if (!opening || splash.classList.contains('go')) return;
+    splash.classList.add('go');
+    openT.push(setTimeout(openFly, 900), setTimeout(openEnd, 1420));
+  }
+  if (opening) {
+    if (!splash || reduce || window.pageYOffset > 4) openEnd();
+    else {
+      ENDERS.forEach(function (ev) { window.addEventListener(ev, openEnd, { capture: true, passive: true }); });
+      var simg = $('img', splash);
+      if (simg.complete && simg.naturalWidth) openGo();
+      else {
+        simg.addEventListener('load', openGo);
+        simg.addEventListener('error', openEnd);
+        openT.push(setTimeout(function () { if (!splash.classList.contains('go')) openEnd(); }, 1500));   /* a slow logo never holds the page */
+      }
+    }
+  }
+
   if ('IntersectionObserver' in window) {
     var seen = new IntersectionObserver(function (es) {
       es.forEach(function (en) {
         if (!en.isIntersecting) return;
         var job = en.target.closest('.job');
         if (job) job.classList.add('on');
-        for (var i = 0; i < cmps.length; i++) if (cmps[i].el === en.target) cmps[i].play();
+        for (var i = 0; i < cmps.length; i++) if (cmps[i].el === en.target && !(opening && i === 0)) cmps[i].play();
       });
     }, { threshold: 0.55 });
     cmps.forEach(function (c) { seen.observe(c.el); });
@@ -1172,7 +1333,11 @@ var CFG = {
   }
 
   /* ---------- story progress follows the scroll ---------- */
-  var jobs = $$('.job'), fills = $$('#segs b'), top = $('#top'), rest = $('#rest'), ticking = false;
+  var jobs = $$('.job'), fills = $$('#segs b'), caps = jobs.map(function (j) { return $('.cap', j); }), top = $('#top'), rest = $('#rest'), ticking = false;
+  /* how tall the floating header is, safe area included */
+  var probe = d.createElement('div'), lastT = null, away = false;
+  probe.style.cssText = 'position:fixed;left:0;top:0;width:0;height:var(--hd);visibility:hidden;pointer-events:none';
+  body.appendChild(probe);
   function progress() {
     ticking = false;
     var anchor = desktop.matches ? 108 : 0;
@@ -1180,9 +1345,22 @@ var CFG = {
       var r = jobs[i].getBoundingClientRect();
       var f = clamp(1 - (r.top - anchor) / (r.height + (desktop.matches ? 28 : 0)), 0, 1);
       fills[i].style.transform = 'scaleX(' + f.toFixed(3) + ')';
+      /* a story on its way out lets go of its caption early, so no words slide up under the floating logo */
+      caps[i].style.opacity = desktop.matches || r.top >= 0 ? '' : clamp(1 + r.top / (r.height * 0.3), 0, 1).toFixed(3);
     }
-    if (!desktop.matches) top.classList.toggle('away', rest.getBoundingClientRect().top <= 61);
-    else { top.classList.remove('away'); top.classList.toggle('done', rest.getBoundingClientRect().top <= 68); }
+    var t = rest.getBoundingClientRect().top;
+    if (desktop.matches) { top.classList.remove('away', 'solid'); top.classList.toggle('done', t <= 68); lastT = null; return; }
+    if (root.classList.contains('locked')) return;
+    /* over the stories the logo floats on the photo. On the white page it is a slim black bar: gone on the way down, back on the way up. */
+    var onPage = t <= (probe.offsetHeight || 82) + 2;
+    var atEnd = window.pageYOffset + window.innerHeight >= root.scrollHeight - 2;   /* ignore the bounce at the very bottom */
+    if (!onPage) away = false;
+    else if (lastT === null) away = true;
+    else if (t < lastT - 2) away = true;
+    else if (t > lastT + 2 && !atEnd) away = false;
+    lastT = t;
+    top.classList.toggle('solid', onPage);
+    top.classList.toggle('away', away);
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(progress); } }, { passive: true });
   window.addEventListener('resize', progress);
