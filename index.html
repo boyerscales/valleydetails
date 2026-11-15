@@ -652,7 +652,7 @@ footer .flogo{width:200px;height:auto}
             <li>Quick vacuum, seats and floors.</li>
             <li>Dash, console and doors wiped down.</li>
             <li>Hand wash outside.</li>
-            <li>For a car that is already in decent shape. Stains, pet hair and ground-in dirt need the Full.</li>
+            <li>For a car that is already in decent shape. A dirtier car needs the Full or Showroom.</li>
           </ul>
         </div>
       </article>
@@ -1467,7 +1467,7 @@ const UTM = (() => {
     /* a longer job, or a second car, no longer fits where the shorter one did: say why instead of dropping the pick silently */
     var el = $('#fitNote');
     if (had && !S.time && cal.state === 'ready') {
-      el.textContent = 'That time does not have ' + (serviceMinutes() / 60) + ' open hours' + (S.cars === 2 ? ' for 2 cars' : '') + '. Pick another time.';
+      el.textContent = 'That time does not have ' + (serviceMinutes() / 60) + (serviceMinutes() === 60 ? ' open hour' : ' open hours') + (S.cars === 2 ? ' for 2 cars' : '') + '. Pick another time.';
       el.hidden = false;
     } else if (S.time) el.hidden = true;
   }
@@ -1535,6 +1535,10 @@ const UTM = (() => {
     swSh.setAttribute('aria-checked', String(S.shampoo && shOk()));
     $('#rows').innerHTML = rowsNow().map(function (r) { return '<li><span>' + esc(r[0]) + '</span><span>' + esc(r[1]) + '</span></li>'; }).join('');
     if (!sending) $('#bookGo').textContent = 'Book, ' + money(total());
+    /* a thank-you link's note says what it comes off, so it never reads as applied on an Express */
+    if (GIFT_OFF) $('#giftNote').innerHTML = t.gift === false
+      ? '<b>Your $' + GIFT_OFF + ' thank-you is for a Full or Showroom.</b> It does not come off an Express.'
+      : '<b>Your $' + GIFT_OFF + ' thank-you is applied.</b> It comes off a Full or Showroom you book' + (GIFT_UNTIL ? ' by ' + esc(GIFT_UNTIL) : '') + '.';
     if (S.tried) missing(false);
   }
 
@@ -1823,7 +1827,7 @@ const UTM = (() => {
       GIFT = ''; GIFT_OFF = 0;
       $('#giftNote').hidden = true;
     } else if (GIFT_OFF) {
-      g.innerHTML = '<b>Your $' + GIFT_OFF + ' thank-you is still good</b> for a detail' + (GIFT_UNTIL ? ' by ' + esc(GIFT_UNTIL) : '') + '.';
+      g.innerHTML = '<b>Your $' + GIFT_OFF + ' thank-you is still good</b> for a Full or Showroom' + (GIFT_UNTIL ? ' by ' + esc(GIFT_UNTIL) : '') + '.';
       g.hidden = false;
     }
     /* the time is theirs now: grey it here, clear the pick, and fetch the calendar again behind the confirmation */
