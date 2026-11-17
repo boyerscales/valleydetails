@@ -324,6 +324,12 @@ footer .flogo{width:200px;height:auto}
 /* three services across: the name over the price */
 .svc3 .chip.svc{flex-direction:column;justify-content:center;gap:3px;height:60px;padding:0 4px;font-size:14.5px}
 .svc3 .chip.svc b{font-size:18px}
+/* five services: the three packages across the top, the two single-side jobs under them, so both rows fill the width */
+.svc3{grid-template-columns:repeat(6,1fr)}
+.svc3 .chip.svc{grid-column:span 2}
+.svc3 .chip.svc.half{grid-column:span 3}
+/* from 370px up the three vehicle sizes are equal thirds, so their gaps line up with the packages above; narrower phones keep the wide last chip so "Truck or 3-row" fits */
+@media (min-width:370px){.c3s{grid-template-columns:1fr 1fr 1fr}.c3s .chip{font-size:14.5px}}
 .done{padding:6px 0 10px}
 .done-h{font-size:21px;font-weight:800;font-stretch:106%;line-height:1.2}
 .done-p{margin-top:12px;font-size:16px;line-height:1.45;color:#333}
@@ -344,7 +350,7 @@ footer .flogo{width:200px;height:auto}
 .days .chip.day{flex:0 0 calc((100% - 30px)/7);scroll-snap-align:start}
 .chip:disabled{cursor:default;transform:none}
 .chip.day:disabled{background:#f4f4f4;color:#b3b3b3}
-.chip.time:disabled{background:#f4f4f4;color:#a9a9a9;text-decoration:line-through}
+.chip.time:disabled{background:none;box-shadow:inset 0 0 0 1px #ececec;color:#b4b4b4;font-weight:500;text-decoration:line-through}
 .chip.skel{background:#f1f1f1}
 .lb-r{display:flex;gap:16px}
 .lb-r button{min-height:20px}
@@ -847,12 +853,12 @@ footer .flogo{width:200px;height:auto}
       <div class="step" id="step1">
         <p class="note" id="slotNote" role="alert" hidden></p>
         <p class="lb" id="lbSvc"><span>Service</span></p>
-        <div class="chips c3 svc3" role="group" aria-labelledby="lbSvc">
+        <div class="chips svc3" role="group" aria-labelledby="lbSvc">
           <button type="button" class="chip svc" data-svc="express" aria-pressed="false"><span>Express</span><b data-price="express">$60</b></button>
           <button type="button" class="chip svc" data-svc="full" aria-pressed="true"><span>Full</span><b data-price="full">$150</b></button>
           <button type="button" class="chip svc" data-svc="showroom" aria-pressed="false"><span>Showroom</span><b data-price="showroom">$250</b></button>
-          <button type="button" class="chip svc" data-svc="interior" aria-pressed="false"><span>Interior</span><b data-price="interior">$100</b></button>
-          <button type="button" class="chip svc" data-svc="exterior" aria-pressed="false"><span>Exterior</span><b data-price="exterior">$75</b></button>
+          <button type="button" class="chip svc half" data-svc="interior" aria-pressed="false"><span>Interior only</span><b data-price="interior">$100</b></button>
+          <button type="button" class="chip svc half" data-svc="exterior" aria-pressed="false"><span>Exterior only</span><b data-price="exterior">$75</b></button>
         </div>
         <p class="lb" id="lbSize"><span id="lbSizeText">Vehicle</span></p>
         <div class="chips c3s" role="group" aria-labelledby="lbSize">
