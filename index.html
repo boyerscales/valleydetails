@@ -42,6 +42,7 @@
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0}
 [hidden]{display:none!important}
+html.framed,html.framed body{overscroll-behavior:none}
 html{background:#000;color:#fff;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
 body{font-family:'Saira',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.45;background:#000;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 img{display:block;max-width:100%}
@@ -1165,6 +1166,9 @@ try { if (new URLSearchParams(location.search).get('test') === '1') sessionStora
    other detailers to try. Everything works, but Book never reaches the calendar and
    nothing reaches the pixel. The confirmation says it was a demo. */
 const DEMO = (function () { try { return new URLSearchParams(location.search).get('demo') === '1'; } catch (_) { return false; } })();
+/* Inside that phone the page must not rubber-band past its top or bottom: the gap shows the frame behind it and
+   the Book bar lifts off the bottom. Only in the demo and only when framed; the real page scrolls as it always has. */
+if (DEMO) { try { if (window.self !== window.top) document.documentElement.classList.add('framed'); } catch (_) { document.documentElement.classList.add('framed'); } }
 const isTest = () => { if (DEMO) return true; try { return sessionStorage.getItem('vdTest') === '1'; } catch (_) { return false; } };
 const track = (name, data) => { try { if (isTest()) return; if (window.fbq) fbq('track', name, data || {}); } catch (_) {} };
 (function pixel(){
