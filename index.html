@@ -1161,7 +1161,11 @@ let GIFT_OFF = 0, GIFT_UNTIL = '';
    pixel (no PageView, no Schedule with a dollar value) and the booking is marked
    test. Remembered for the tab, so the booking flow stays in test mode. */
 try { if (new URLSearchParams(location.search).get('test') === '1') sessionStorage.setItem('vdTest', '1'); } catch (_) {}
-const isTest = () => { try { return sessionStorage.getItem('vdTest') === '1'; } catch (_) { return false; } };
+/* Demo mode: ?demo=1 is this page shown inside the phone on boyerscales.com, for
+   other detailers to try. Everything works, but Book never reaches the calendar and
+   nothing reaches the pixel. The confirmation says it was a demo. */
+const DEMO = (function () { try { return new URLSearchParams(location.search).get('demo') === '1'; } catch (_) { return false; } })();
+const isTest = () => { if (DEMO) return true; try { return sessionStorage.getItem('vdTest') === '1'; } catch (_) { return false; } };
 const track = (name, data) => { try { if (isTest()) return; if (window.fbq) fbq('track', name, data || {}); } catch (_) {} };
 (function pixel(){
   if (!CFG.META_PIXEL_ID || isTest()) return;
@@ -1757,6 +1761,10 @@ const UTM = (() => {
     var snap = { serviceId: sent.service_id, base: baseTotal(), listed: listed(), extras: extras(), inc: inc, job: jobName(), drop: S.drop,
                  name: sent.name, phone: sent.phone, slot: slot };
     sending = true; btn.disabled = true; btn.textContent = 'Sending';
+    if (DEMO) {
+      setTimeout(function () { sending = false; btn.disabled = false; booked(snap, {}); }, 900);
+      return;
+    }
     var ctl = 'AbortController' in window ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 60000);
     var status = 0;
@@ -1826,7 +1834,8 @@ const UTM = (() => {
     $('#okSub').textContent = (snap.drop ? 'Drop off at ' + CFG.dropoff : 'We come to you') + '. ' + snap.job + '.';
     var incText = snap.inc.length ? 'That includes ' + (snap.inc.length > 1 ? snap.inc.slice(0, -1).join(', ') + ' and ' + snap.inc[snap.inc.length - 1] : snap.inc[0]) + '. ' : '';
     $('#okText').innerHTML = (price == null ? '' : 'Your price is <b>' + money(price) + '</b>, paid when the car is done. ' + esc(incText)) +
-      'We will text ' + esc(snap.phone) + ' shortly to confirm. Nothing has been charged.';
+      (DEMO ? 'This is a demo, so nothing was booked and nobody will text you. On a real page this job is now on the owner\'s calendar.'
+            : 'We will text ' + esc(snap.phone) + ' shortly to confirm. Nothing has been charged.');
     var o = $('#okOffer'); o.textContent = offerNote + (offerNote && snap.extras ? ' That is before the add-ons and the spigot and outlet discount in the price above.' : ''); o.hidden = !offerNote;
     var promoBooked = (PROMO && CFG.PROMOS && CFG.PROMOS[PROMO] && CFG.PROMOS[PROMO].booked) || '';
     var pr = $('#okPromo'); pr.innerHTML = promoBooked; pr.hidden = !promoBooked;
